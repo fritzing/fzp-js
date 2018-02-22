@@ -1,0 +1,39 @@
+{
+  "name": "fzp-js",
+  "version": "0.1.0",
+  "description": "fritzing fzp javascript library",
+  "scripts": {
+    "pretest": "make lint",
+    "test": "make test"
+  },
+  "main": "index.js",
+  "keywords": [
+    "fritzing",
+    "fzp"
+  ],
+  "author": "Paul Vollmer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulvollmer/fzp-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paulvollmer/fzp-js/issues"
+  },
+  "homepage": "https://github.com/paulvollmer/fzp-js#readme",
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true
+  },
+  "devDependencies": {
+    "esdoc": "^1.0.4",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^4.18.0",
+    "eslint-config-google": "^0.9.1",
+    "jest": "^22.0.6"
+  },
+  "dependencies": {
+    "xml2js": "^0.4.19"
+  }
+}
