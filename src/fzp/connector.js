@@ -1,28 +1,30 @@
-class Connector {
+/**
+ *
+ */
+class FZPConnector {
   constructor() {
     this.id = ""
     this.name = ""
     this.type = ""
     this.description = ''
     this.views = {
-      breadboard: {
-        layer: '',
-        svgId: '',
-        legId: '',
-        terminalId: ''
-      },
-      schematic: {
-        layer: '',
-        svgId: '',
-        terminalId: ''
-      },
-      pcb: {
-        layer: '',
-        svgId: '',
-        terminalId: ''
-      }
+      breadboard: new FZPConnectorView(),
+      schematic: new FZPConnectorView(),
+      pcb: new FZPConnectorView()
     }
   }
 }
 
-module.exports = Connector
+/**
+ *
+ */
+class FZPConnectorView {
+  constructor() {
+    this.layer = ''
+    this.svgId = ''
+    this.legId = ''
+    this.terminalId = ''
+  }
+}
+
+module.exports = { FZPConnector, FZPConnectorView }

@@ -1,6 +1,6 @@
 const parseXml = require('xml2js').parseString;
 const FZP = require('./fzp/fzp');
-const Connector = require('./fzp/connector');
+const {FZPConnector} = require('./fzp/connector');
 
 function parseFZP(data, cb) {
   let fzp = new FZP()
@@ -9,7 +9,7 @@ function parseFZP(data, cb) {
       if (err) {
         cb(err);
       }
-      console.log(xmlDoc.module.connectors[0].connector[0].views[0].breadboardView[0].p);
+      // console.log(xmlDoc.module.connectors[0].connector[0].views[0].breadboardView[0].p);
 
       fzp.moduleId = xmlDoc.module.$.moduleId
       fzp.fritzingVersion = xmlDoc.module.$.fritzingVersion
@@ -25,24 +25,25 @@ function parseFZP(data, cb) {
       if(xmlDoc.module.language) fzp.language = xmlDoc.module.language
       if(xmlDoc.module.family) fzp.family = xmlDoc.module.family
       if(xmlDoc.module.variant) fzp.variant = xmlDoc.module.variant
-      if(xmlDoc.module.properties) fzp.properties = xmlDoc.module.properties
+      if(xmlDoc.module.properties) fzp.properties = parseProperties(xmlDoc.module.properties[0].property)
 
+      // console.log(JSON.stringify(xmlDoc.module.properties, '', '  '));
       if(xmlDoc.module.views) {
         if(xmlDoc.module.views[0].iconView) {
-          fzp.views.icon.image = xmlDoc.module.views[0].iconView[0].layers[0].$.image
-          fzp.views.icon.layerId = xmlDoc.module.views[0].iconView[0].layers[0].layer[0].$.layerId
+          fzp.views.icon.setImage(xmlDoc.module.views[0].iconView[0].layers[0].$.image)
+          fzp.views.icon.addLayerId(xmlDoc.module.views[0].iconView[0].layers[0].layer[0].$.layerId)
         }
         if(xmlDoc.module.views[0].breadboardView) {
-          fzp.views.breadboard.image = xmlDoc.module.views[0].breadboardView[0].layers[0].$.image
-          fzp.views.breadboard.layerId = xmlDoc.module.views[0].breadboardView[0].layers[0].layer[0].$.layerId
+          fzp.views.breadboard.setImage(xmlDoc.module.views[0].breadboardView[0].layers[0].$.image)
+          fzp.views.breadboard.addLayerId(xmlDoc.module.views[0].breadboardView[0].layers[0].layer[0].$.layerId)
         }
         if(xmlDoc.module.views[0].pcbView) {
-          fzp.views.pcb.image = xmlDoc.module.views[0].pcbView[0].layers[0].$.image
-          fzp.views.pcb.layerId = xmlDoc.module.views[0].pcbView[0].layers[0].layer[0].$.layerId
+          fzp.views.pcb.setImage(xmlDoc.module.views[0].pcbView[0].layers[0].$.image)
+          fzp.views.pcb.addLayerId(xmlDoc.module.views[0].pcbView[0].layers[0].layer[0].$.layerId)
         }
         if(xmlDoc.module.views[0].schematicView) {
-          fzp.views.schematic.image = xmlDoc.module.views[0].schematicView[0].layers[0].$.image
-          fzp.views.schematic.layerId = xmlDoc.module.views[0].schematicView[0].layers[0].layer[0].$.layerId
+          fzp.views.schematic.setImage(xmlDoc.module.views[0].schematicView[0].layers[0].$.image)
+          fzp.views.schematic.addLayerId(xmlDoc.module.views[0].schematicView[0].layers[0].layer[0].$.layerId)
         }
       }
 
@@ -51,7 +52,7 @@ function parseFZP(data, cb) {
           for (var i = 0; i < xmlDoc.module.connectors[0].connector.length; i++) {
             const connector = xmlDoc.module.connectors[0].connector[i]
 
-            let c = new Connector()
+            let c = new FZPConnector()
             c.id = connector.$.id
             c.name = connector.$.name
             c.type = connector.$.type
@@ -69,6 +70,17 @@ function parseFZP(data, cb) {
       cb(null, fzp)
     })
   }
+}
+
+function parseProperties(xml) {
+  let data = {}
+  for (var i = 0; i < xml.length; i++) {
+    data[xml[i].$.name] = {
+      value: xml[i]._,
+      showInLabel: xml[i].$.showInLabel
+    }
+  }
+  return data
 }
 
 module.exports = {

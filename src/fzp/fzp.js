@@ -1,3 +1,8 @@
+const FZPView = require('./view')
+
+/**
+ *
+ */
 class FZP {
   constructor() {
     this.moduleId = '12345678'
@@ -14,72 +19,15 @@ class FZP {
     this.language = ''
     this.family = ''
     this.variant = ''
-    this.properties = []
+    this.properties = {}
     this.views = {
-      icon: {
-        image: '',
-        layerId: ''
-      },
-      schematic: {
-        image: '',
-        layerId: ''
-      },
-      breadboard: {
-        image: '',
-        layerId: ''
-      },
-      pcb: {
-        image: '',
-        layerId: ''
-      }
+      icon: new FZPView(),
+      schematic: new FZPView(),
+      breadboard: new FZPView(),
+      pcb: new FZPView()
     }
     this.connectors = {}
-      // {
-      //   attr: {
-      //     id: "connector15",
-      //     name: "B1",
-      //     type: "male"
-      //   },
-      //   connector: {
-      //     description: 'foo',
-      //     views: {
-      //       icon: {
-      //         attr: {
-      //           layer: 'l',
-      //           svgId: 'svg1',
-      //           terminalId: 't'
-      //         },
-      //         p: ''
-      //       },
-      //       schematic: {
-      //         attr: {
-      //           layer: 'l',
-      //           svgId: 'svg1',
-      //           terminalId: 't'
-      //         },
-      //         p: ''
-      //       },
-      //       breadboard: {
-      //         attr: {
-      //           layer: 'l',
-      //           svgId: 'svg1',
-      //           terminalId: 't'
-      //         },
-      //         p: ''
-      //       },
-      //       pcb: {
-      //         attr: {
-      //           layer: 'l',
-      //           svgId: 'svg1',
-      //           terminalId: 't'
-      //         },
-      //         p: ''
-      //       }
-      //     }
-      //   }
-      // }
-
-    this.buses = []
+    this.buses = {}
   }
 }
 

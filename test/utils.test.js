@@ -3,15 +3,12 @@ const fs = require('fs');
 
 test( 'Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
-
   parseFZP(data, (err, fzp) => {
     if (err) {
       console.log('ERROR', err);
       throw err;
     }
-    // console.log(fzp);
-    // console.log(JSON.stringify(fzp, '', '  '));
-
+    console.log(JSON.stringify(fzp, '', '  '));
     expect(fzp.moduleId).toEqual('3mmColorLEDModuleID')
     expect(fzp.fritzingVersion).toEqual('0.1.beta.1396')
     expect(fzp.version).toEqual('4')
@@ -26,20 +23,25 @@ test( 'Test parseFZP', (done) => {
     expect(fzp.language).toEqual('')
     expect(fzp.family).toEqual('')
     expect(fzp.variant).toEqual('')
-    // expect(fzp.properties).toEqual('')
-    // expect(fzp.views).toEqual('')
-    //
+    expect(fzp.properties).toEqual({
+        package: { value: "3 mm [THT]" },
+        family: { value: "LED" },
+        color: { value: "Red (633nm)", showInLabel: "yes" },
+        current: { showInLabel: "yes" },
+        leg: { value: "yes" }
+      })
+
     expect(fzp.views.icon.image).toEqual('icon/LED-red-5mmicon.svg')
-    expect(fzp.views.icon.layerId).toEqual('icon')
+    expect(fzp.views.icon.layerIds).toEqual(['icon'])
+    //
+    // expect(fzp.views.breadboard.image).toEqual('breadboard/LED-3mm-red-leg.svg')
+    // expect(fzp.views.breadboard.layerIds).toEqual(['breadboard'])
 
-    expect(fzp.views.breadboard.image).toEqual('icon/LED-red-5mmicon.svg')
-    expect(fzp.views.breadboard.layerId).toEqual('breadboard')
+    // expect(fzp.views.pcb).toEqual('pcb/LED-red-5mmicon.svg')
+    // expect(fzp.views.pcb.layerIds).toEqual('pcb')
 
-    expect(fzp.views.pcb).toEqual('icon/LED-red-5mmicon.svg')
-    expect(fzp.views.pcb.layerId).toEqual('pcb')
-
-    expect(fzp.views.schematic).toEqual('icon/LED-red-5mmicon.svg')
-    expect(fzp.views.schematic.layerId).toEqual('schematic')
+    // expect(fzp.views.schematic).toEqual('schematic/led.svg')
+    // expect(fzp.views.schematic.layerIds).toEqual(['schematic'])
     done();
   });
 });
