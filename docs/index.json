@@ -1857,7 +1857,7 @@
   },
   {
     "kind": "index",
-    "content": "# fzp-js",
+    "content": "# fzp-js  ![](https://paulvollmer.net/fzp-js/badge.svg)\n\nfritzing fzp javascript library\n\n## Development\n```\nyarn install\nmake test\n```\n\nand lint your files before you commit\n```\nmake lint\n```\n\n## License\n[MIT-LICENSE](LICENSE)\n",
     "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/README.md",
     "name": "./README.md",
     "static": true,
