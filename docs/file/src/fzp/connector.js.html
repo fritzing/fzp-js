@@ -42,13 +42,14 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/connector.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- *
+ * FZPConnector class
  */
 class FZPConnector {
   /**
    * FZPConnector constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
     /**
      * the FZP connector id
      */
@@ -86,27 +87,30 @@ class FZPConnector {
 class FZPConnectorView {
   /**
    * FZPConnectorView constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * the FZP connector view layer
      */
-    this.layer = &apos;&apos;;
+    this.layer = opt.layer || &apos;&apos;;
 
     /**
      * the FZP connector view svg
      */
-    this.svgId = &apos;&apos;;
+    this.svgId = opt.svgId || &apos;&apos;;
 
     /**
      * the FZP connector view leg
      */
-    this.legId = &apos;&apos;;
+    this.legId = opt.legId || &apos;&apos;;
 
     /**
      * the FZP connector view terminal
      */
-    this.terminalId = &apos;&apos;;
+    this.terminalId = opt.terminalId || &apos;&apos;;
   }
 }
 

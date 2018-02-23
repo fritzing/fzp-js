@@ -49,31 +49,105 @@
 class FZP {
   /**
    * FZP constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    /** the module id */
     this.moduleId = &apos;12345678&apos;;
+    /** the fritzing version */
     this.fritzingVersion = &apos;1.0.0&apos;;
+    /** the FZP version */
     this.version = &apos;&apos;;
+    /** the FZP title */
     this.title = &apos;&apos;;
+    /** the description */
     this.description = &apos;&apos;;
+    /** the author */
     this.author = &apos;&apos;;
+    /** the date */
     this.date = &apos;&apos;;
+    /** the url */
     this.url = &apos;&apos;;
+    /** the label */
     this.label = &apos;&apos;;
+    /** the tags */
     this.tags = [];
+    /** the taxonomy */
     this.taxonomy = &apos;&apos;;
+    /** the language */
     this.language = &apos;&apos;;
+    /** the family */
     this.family = &apos;&apos;;
+    /** the variant */
     this.variant = &apos;&apos;;
+    /** the properties */
     this.properties = {};
+    /** the views */
     this.views = {
       icon: new FZPView(),
       schematic: new FZPView(),
       breadboard: new FZPView(),
       pcb: new FZPView(),
     };
+    /** the connectors */
     this.connectors = {};
+    /**
+     * the buses
+     * A bus is a instance of the Bus class
+     */
     this.buses = {};
+  }
+
+  /**
+   * totalTags
+   * @return {Number}
+   */
+  totalTags() {
+    console.log(&apos;not jet implemented&apos;);
+    return 0;
+  }
+
+  /**
+   * setProperty
+   * @param {String} name
+   * @return {FZP}
+   */
+  setProperty(name) {
+    console.log(&apos;not jet implemented&apos;);
+    return this;
+  }
+
+  /**
+   * setView
+   * @param {String} name
+   * @param {FZPView} view
+   * @return {FZP}
+   */
+  setView(name, view) {
+    console.log(&apos;not jet implemented&apos;);
+    return this;
+  }
+
+  /**
+   * setConnector
+   * @param {String} name
+   * @param {FZPConnector} connector
+   * @return {FZP}
+   */
+  setConnector(name, connector) {
+    console.log(&apos;not jet implemented&apos;);
+    return this;
+  }
+
+  /**
+   * setBus
+   * @param {String} name
+   * @param {FZPBus} bus
+   * @return {FZP}
+   */
+  setBus(name, bus) {
+    console.log(&apos;not jet implemented&apos;);
+    return this;
   }
 }
 

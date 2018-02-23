@@ -42,13 +42,16 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- *
+ * FZPView class
  */
 class FZPView {
   /**
    * FZPView constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * The FZPView image
      */

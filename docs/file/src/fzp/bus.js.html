@@ -42,22 +42,27 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/bus.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
- * FZP Bus
+ * FZP Bus class
  */
 class FZPBus {
   /**
    * FZPBus constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * Store the FZP bus id
+     * @type {String}
      */
-    this.id = &apos;&apos;;
+    this.id = opt.id || &apos;&apos;;
 
     /**
      * Store the FZP node members as an array
+     * @type {Array}
      */
-    this.nodeMembers = [];
+    this.nodeMembers = opt.nodeMembers || [];
   }
 
   /**
