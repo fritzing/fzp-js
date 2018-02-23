@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/utils.test.js | fzp-js</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const {parseFZP} = require(&apos;../src/utils&apos;);
+const fs = require(&apos;fs&apos;);
+
+test( &apos;Test parseFZP&apos;, (done) =&gt; {
+  const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
+  parseFZP(data, (err, fzp) =&gt; {
+    if (err) {
+      console.log(&apos;ERROR&apos;, err);
+      throw err;
+    }
+    console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
+    expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
+    expect(fzp.fritzingVersion).toEqual(&apos;0.1.beta.1396&apos;);
+    expect(fzp.version).toEqual(&apos;4&apos;);
+    expect(fzp.title).toEqual(&apos;Red LED - 3mm&apos;);
+    expect(fzp.description).toEqual(&apos;A generic red LED (~1.8V)&apos;);
+    expect(fzp.author).toEqual(&apos;Stefan Hermann&apos;);
+    expect(fzp.date).toEqual(&apos;2008-10-10&apos;);
+    expect(fzp.url).toEqual(&apos;&apos;);
+    expect(fzp.label).toEqual(&apos;LED&apos;);
+    expect(fzp.tags).toEqual([&apos;LED&apos;, &apos;Red LED&apos;, &apos;indicator&apos;, &apos;fritzing core&apos;]);
+    expect(fzp.taxonomy).toEqual(&apos;&apos;);
+    expect(fzp.language).toEqual(&apos;&apos;);
+    expect(fzp.family).toEqual(&apos;&apos;);
+    expect(fzp.variant).toEqual(&apos;&apos;);
+    expect(fzp.properties).toEqual({
+        package: {value: &apos;3 mm [THT]&apos;},
+        family: {value: &apos;LED&apos;},
+        color: {value: &apos;Red (633nm)&apos;, showInLabel: &apos;yes&apos;},
+        current: {showInLabel: &apos;yes&apos;},
+        leg: {value: &apos;yes&apos;},
+      });
+
+    expect(fzp.views.icon.image).toEqual(&apos;icon/LED-red-5mmicon.svg&apos;);
+    expect(fzp.views.icon.layerIds).toEqual([&apos;icon&apos;]);
+    //
+    // expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;)
+    // expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;])
+
+    // expect(fzp.views.pcb).toEqual(&apos;pcb/LED-red-5mmicon.svg&apos;)
+    // expect(fzp.views.pcb.layerIds).toEqual(&apos;pcb&apos;)
+
+    // expect(fzp.views.schematic).toEqual(&apos;schematic/led.svg&apos;)
+    // expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;])
+    done();
+  });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
