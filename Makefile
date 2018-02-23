@@ -13,4 +13,6 @@ docs:
 	@$(BIN)/esdoc
 docs-open: docs
 	@open docs/index.html
-.PHONY: docs docs-open
+clean:
+	@rm -rf docs
+.PHONY: docs docs-open clean

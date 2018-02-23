@@ -1,11 +1,14 @@
 /**
- *
+ * FZPView class
  */
 class FZPView {
   /**
    * FZPView constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * The FZPView image
      */

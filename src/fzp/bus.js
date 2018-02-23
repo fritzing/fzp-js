@@ -1,20 +1,25 @@
 /**
- * FZP Bus
+ * FZP Bus class
  */
 class FZPBus {
   /**
    * FZPBus constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * Store the FZP bus id
+     * @type {String}
      */
-    this.id = '';
+    this.id = opt.id || '';
 
     /**
      * Store the FZP node members as an array
+     * @type {Array}
      */
-    this.nodeMembers = [];
+    this.nodeMembers = opt.nodeMembers || [];
   }
 
   /**

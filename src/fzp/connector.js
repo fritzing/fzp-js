@@ -1,11 +1,12 @@
 /**
- *
+ * FZPConnector class
  */
 class FZPConnector {
   /**
    * FZPConnector constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
     /**
      * the FZP connector id
      */
@@ -43,27 +44,30 @@ class FZPConnector {
 class FZPConnectorView {
   /**
    * FZPConnectorView constructor
+   * @param {Object} opt
    */
-  constructor() {
+  constructor(opt) {
+    opt = opt || {};
+
     /**
      * the FZP connector view layer
      */
-    this.layer = '';
+    this.layer = opt.layer || '';
 
     /**
      * the FZP connector view svg
      */
-    this.svgId = '';
+    this.svgId = opt.svgId || '';
 
     /**
      * the FZP connector view leg
      */
-    this.legId = '';
+    this.legId = opt.legId || '';
 
     /**
      * the FZP connector view terminal
      */
-    this.terminalId = '';
+    this.terminalId = opt.terminalId || '';
   }
 }
 
