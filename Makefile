@@ -13,6 +13,9 @@ docs:
 	@$(BIN)/esdoc
 docs-open: docs
 	@open docs/index.html
+docs-commit: docs
+	git add docs
+	git commit -m "Updated docs artifact"
 clean:
 	@rm -rf docs
 .PHONY: docs docs-open clean
