@@ -1,34 +1,37 @@
-const FZPView = require('./view')
+const FZPView = require('./view');
 
 /**
- *
+ * The FZP class
  */
 class FZP {
+  /**
+   * FZP constructor
+   */
   constructor() {
-    this.moduleId = '12345678'
-    this.fritzingVersion = '1.0.0'
-    this.version = ''
-    this.title = ''
-    this.description = ''
-    this.author = ''
-    this.date = ''
-    this.url = ''
-    this.label = ''
-    this.tags = []
-    this.taxonomy = ''
-    this.language = ''
-    this.family = ''
-    this.variant = ''
-    this.properties = {}
+    this.moduleId = '12345678';
+    this.fritzingVersion = '1.0.0';
+    this.version = '';
+    this.title = '';
+    this.description = '';
+    this.author = '';
+    this.date = '';
+    this.url = '';
+    this.label = '';
+    this.tags = [];
+    this.taxonomy = '';
+    this.language = '';
+    this.family = '';
+    this.variant = '';
+    this.properties = {};
     this.views = {
       icon: new FZPView(),
       schematic: new FZPView(),
       breadboard: new FZPView(),
-      pcb: new FZPView()
-    }
-    this.connectors = {}
-    this.buses = {}
+      pcb: new FZPView(),
+    };
+    this.connectors = {};
+    this.buses = {};
   }
 }
 
-module.exports = FZP
+module.exports = FZP;

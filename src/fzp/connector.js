@@ -2,16 +2,38 @@
  *
  */
 class FZPConnector {
+  /**
+   * FZPConnector constructor
+   */
   constructor() {
-    this.id = ""
-    this.name = ""
-    this.type = ""
-    this.description = ''
+    /**
+     * the FZP connector id
+     */
+    this.id = '';
+
+    /**
+     * the FZP connector name
+     */
+    this.name = '';
+
+    /**
+     * the FZP connector type
+     */
+    this.type = '';
+
+    /**
+     * the FZP connector description
+     */
+    this.description = '';
+
+    /**
+     * the FZP connector views fro breadboard, schematic and pcb
+     */
     this.views = {
       breadboard: new FZPConnectorView(),
       schematic: new FZPConnectorView(),
-      pcb: new FZPConnectorView()
-    }
+      pcb: new FZPConnectorView(),
+    };
   }
 }
 
@@ -19,12 +41,30 @@ class FZPConnector {
  *
  */
 class FZPConnectorView {
+  /**
+   * FZPConnectorView constructor
+   */
   constructor() {
-    this.layer = ''
-    this.svgId = ''
-    this.legId = ''
-    this.terminalId = ''
+    /**
+     * the FZP connector view layer
+     */
+    this.layer = '';
+
+    /**
+     * the FZP connector view svg
+     */
+    this.svgId = '';
+
+    /**
+     * the FZP connector view leg
+     */
+    this.legId = '';
+
+    /**
+     * the FZP connector view terminal
+     */
+    this.terminalId = '';
   }
 }
 
-module.exports = { FZPConnector, FZPConnectorView }
+module.exports = {FZPConnector, FZPConnectorView};
