@@ -30,6 +30,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "fzp-js/src/utils.js~loadfzp",
+    "function/index.html#static-function-loadFZP",
+    "<span>loadFZP</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
     "fzp-js/src/utils.js~parsefzp",
     "function/index.html#static-function-parseFZP",
     "<span>parseFZP</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
@@ -40,6 +46,12 @@ window.esdocSearchIndex = [
     "function/index.html#static-function-parseProperties",
     "<span>parseProperties</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
     "function"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber49",
+    "Test loadFZP and loadSVG",
+    "test"
   ],
   [
     "",
@@ -630,10 +642,28 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/fzp/view.js~fzpview#loadsvg",
+    "class/src/fzp/view.js~FZPView.html#instance-method-loadSVG",
+    "src/fzp/view.js~FZPView#loadSVG",
+    "method"
+  ],
+  [
     "src/fzp/view.js~fzpview#setimage",
     "class/src/fzp/view.js~FZPView.html#instance-method-setImage",
     "src/fzp/view.js~FZPView#setImage",
     "method"
+  ],
+  [
+    "src/fzp/view.js~fzpview#setsvg",
+    "class/src/fzp/view.js~FZPView.html#instance-method-setSVG",
+    "src/fzp/view.js~FZPView#setSVG",
+    "method"
+  ],
+  [
+    "src/fzp/view.js~fzpview#svg",
+    "class/src/fzp/view.js~FZPView.html#instance-member-svg",
+    "src/fzp/view.js~FZPView#svg",
+    "member"
   ],
   [
     "src/fzp/view.js~fzpview#totallayerid",

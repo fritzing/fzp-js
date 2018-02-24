@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
@@ -41,17 +42,14 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const {parseFZP} = require(&apos;../src/utils&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const {parseFZP, loadFZP} = require(&apos;../src/utils&apos;);
 const fs = require(&apos;fs&apos;);
 
 test( &apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
-  parseFZP(data, (err, fzp) =&gt; {
-    if (err) {
-      console.log(&apos;ERROR&apos;, err);
-      throw err;
-    }
-    console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
+  parseFZP(data)
+  .then((fzp) =&gt; {
+    // console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
     expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
     expect(fzp.fritzingVersion).toEqual(&apos;0.1.beta.1396&apos;);
     expect(fzp.version).toEqual(&apos;4&apos;);
@@ -86,6 +84,27 @@ test( &apos;Test parseFZP&apos;, (done) =&gt; {
     // expect(fzp.views.schematic).toEqual(&apos;schematic/led.svg&apos;)
     // expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;])
     done();
+  })
+  .catch((err) =&gt; {
+    done(err);
+  });
+});
+
+test( &apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
+  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
+  .then((fzp) =&gt; {
+    // load the svg of the breadboard view
+    fzp.views.breadboard.loadSVG(&apos;foo&apos;)
+    .then((d) =&gt; {
+        // console.log(&apos;SVG&apos;, d);
+        done();
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
+  })
+  .catch((e) =&gt; {
+    done(e);
   });
 });
 </code></pre>

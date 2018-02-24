@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
@@ -41,7 +42,9 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/view.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const axios = require(&apos;axios&apos;);
+
+/**
  * FZPView class
  */
 class FZPView {
@@ -61,6 +64,11 @@ class FZPView {
      * The FZPView layer id&apos;s
      */
     this.layerIds = [];
+
+    /**
+     * The FZPView svg data
+     */
+    this.svg = &apos;&apos;;
   }
 
   /**
@@ -101,6 +109,27 @@ class FZPView {
       }
     }
     return false;
+  }
+
+  /**
+   * Set the svg data
+   * @param {String} data
+   */
+  setSVG(data) {
+    this.svg = data;
+  }
+
+  /**
+   * load the svg of the image path from the fritzing-parts api
+   * @return {Promise}
+   */
+  loadSVG() {
+    let self = this;
+    return axios.get(&apos;https://fritzing.github.io/fritzing-parts/svg/core/&apos;+this.image, {responseType: &apos;xml&apos;})
+    .then((res) =&gt; {
+      self.setSVG(res.data);
+      return res.data;
+    });
   }
 }
 
