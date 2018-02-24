@@ -11,7 +11,10 @@ test:
 
 build:
 	@$(BIN)/babel -d lib src
-.PHONY: build
+build-commit: build
+	git add lib
+	git commit -m "Updated lib artifact"
+.PHONY: build build-commit
 
 docs:
 	@$(BIN)/esdoc
