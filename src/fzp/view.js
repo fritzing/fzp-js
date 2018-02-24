@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 /**
  * FZPView class
  */
@@ -18,6 +20,11 @@ class FZPView {
      * The FZPView layer id's
      */
     this.layerIds = [];
+
+    /**
+     * The FZPView svg data
+     */
+    this.svg = '';
   }
 
   /**
@@ -58,6 +65,27 @@ class FZPView {
       }
     }
     return false;
+  }
+
+  /**
+   * Set the svg data
+   * @param {String} data
+   */
+  setSVG(data) {
+    this.svg = data;
+  }
+
+  /**
+   * load the svg of the image path from the fritzing-parts api
+   * @return {Promise}
+   */
+  loadSVG() {
+    let self = this;
+    return axios.get('https://fritzing.github.io/fritzing-parts/svg/core/'+this.image, {responseType: 'xml'})
+    .then((res) => {
+      self.setSVG(res.data);
+      return res.data;
+    });
   }
 }
 

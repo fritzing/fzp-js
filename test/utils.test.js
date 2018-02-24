@@ -1,14 +1,11 @@
-const {parseFZP} = require('../src/utils');
+const {parseFZP, loadFZP} = require('../src/utils');
 const fs = require('fs');
 
 test( 'Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
-  parseFZP(data, (err, fzp) => {
-    if (err) {
-      console.log('ERROR', err);
-      throw err;
-    }
-    console.log(JSON.stringify(fzp, '', '  '));
+  parseFZP(data)
+  .then((fzp) => {
+    // console.log(JSON.stringify(fzp, '', '  '));
     expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');
     expect(fzp.fritzingVersion).toEqual('0.1.beta.1396');
     expect(fzp.version).toEqual('4');
@@ -43,5 +40,26 @@ test( 'Test parseFZP', (done) => {
     // expect(fzp.views.schematic).toEqual('schematic/led.svg')
     // expect(fzp.views.schematic.layerIds).toEqual(['schematic'])
     done();
+  })
+  .catch((err) => {
+    done(err);
+  });
+});
+
+test( 'Test loadFZP and loadSVG', (done) => {
+  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
+  .then((fzp) => {
+    // load the svg of the breadboard view
+    fzp.views.breadboard.loadSVG('foo')
+    .then((d) => {
+        // console.log('SVG', d);
+        done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  })
+  .catch((e) => {
+    done(e);
   });
 });
