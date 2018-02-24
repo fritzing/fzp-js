@@ -41,12 +41,34 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js---img-src--https---paulvollmer-net-fzp-js-badge-svg--alt----">fzp-js  <img src="https://paulvollmer.net/fzp-js/badge.svg" alt=""></h1><p>fritzing fzp javascript library</p>
-<h2 id="development">Development</h2><pre><code><code class="source-code prettyprint">yarn install
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js--a-href--https---paulvollmer-net-fzp-js----img-src--https---paulvollmer-net-fzp-js-badge-svg--alt------a-">fzp-js <a href="https://paulvollmer.net/fzp-js/"><img src="https://paulvollmer.net/fzp-js/badge.svg" alt=""></a></h1><p>fritzing fzp javascript library</p>
+<h2 id="development">Development</h2><pre><code class="lang-sh"><code class="source-code prettyprint">yarn install
 make test</code>
-</code></pre><p>and lint your files before you commit</p>
-<pre><code><code class="source-code prettyprint">make lint</code>
-</code></pre><h2 id="license">License</h2><p><a href="LICENSE">MIT-LICENSE</a></p>
+</code></pre>
+<p>and lint your files before you commit</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make lint</code>
+</code></pre>
+<p>to build an es5 compatible version run</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make build</code>
+</code></pre>
+<h2 id="usage">Usage</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">const {FZPUtils} = require(&apos;fzp-js&apos;)
+
+const url = &apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;
+FZPUtils.loadFZP(url).then((fzp) =&gt; {
+  console.log(&apos;FZP&apos;, fzp);
+
+  // load the svg of the breadboard view
+  fzp.views.breadboard.loadSVG(&apos;foo&apos;).then((d) =&gt; {
+    console.log(&apos;SVG&apos;, d);
+  }).catch((err) =&gt; {
+    throw new Error(err)
+  })
+
+}).catch((e) =&gt; {
+  throw new Error(err)
+})</code>
+</code></pre>
+<h2 id="license">License</h2><p><a href="LICENSE">MIT-LICENSE</a></p>
 </div>
 </div>
 

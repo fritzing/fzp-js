@@ -1996,7 +1996,7 @@
   },
   {
     "kind": "index",
-    "content": "# fzp-js  ![](https://paulvollmer.net/fzp-js/badge.svg)\n\nfritzing fzp javascript library\n\n## Development\n```\nyarn install\nmake test\n```\n\nand lint your files before you commit\n```\nmake lint\n```\n\n## License\n[MIT-LICENSE](LICENSE)\n",
+    "content": "# fzp-js [![](https://paulvollmer.net/fzp-js/badge.svg)](https://paulvollmer.net/fzp-js/)\n\nfritzing fzp javascript library\n\n## Development\n```sh\nyarn install\nmake test\n```\n\nand lint your files before you commit\n```sh\nmake lint\n```\n\nto build an es5 compatible version run\n```sh\nmake build\n```\n\n## Usage\n\n```javascript\nconst {FZPUtils} = require('fzp-js')\n\nconst url = 'https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp'\nFZPUtils.loadFZP(url).then((fzp) => {\n  console.log('FZP', fzp);\n\n  // load the svg of the breadboard view\n  fzp.views.breadboard.loadSVG('foo').then((d) => {\n    console.log('SVG', d);\n  }).catch((err) => {\n    throw new Error(err)\n  })\n\n}).catch((e) => {\n  throw new Error(err)\n})\n```\n\n## License\n[MIT-LICENSE](LICENSE)\n",
     "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/README.md",
     "name": "./README.md",
     "static": true,
