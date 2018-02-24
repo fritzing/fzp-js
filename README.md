@@ -1,4 +1,4 @@
-# fzp-js  ![](https://paulvollmer.net/fzp-js/badge.svg)
+# fzp-js [![](https://paulvollmer.net/fzp-js/badge.svg)](https://paulvollmer.net/fzp-js/)
 
 fritzing fzp javascript library
 
