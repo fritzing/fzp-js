@@ -106,6 +106,23 @@ class FZP {
     console.log('not jet implemented');
     return this;
   }
+
+  /**
+   * ;oad all svg sources
+   * @return {Promise}
+   */
+  loadSVGs() {
+    return this.views.breadboard.loadSVG()
+    .then((d) => {
+      return this.views.schematic.loadSVG()
+      .then((d) => {
+        return this.views.pcb.loadSVG()
+        .then((d) => {
+          return d;
+        });
+      });
+    });
+  }
 }
 
 module.exports = FZP;

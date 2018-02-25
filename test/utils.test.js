@@ -63,3 +63,22 @@ test( 'Test loadFZP and loadSVG', (done) => {
     done(e);
   });
 });
+
+test( 'Test loadFZP all SVGs', (done) => {
+  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
+  .then((fzp) => {
+    fzp.loadSVGs()
+    .then((d) => {
+      expect(fzp.views.breadboard.svg).not.toBe('');
+      expect(fzp.views.pcb.svg).not.toBe('');
+      expect(fzp.views.schematic.svg).not.toBe('');
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
+  })
+  .catch((e) => {
+    done(e);
+  });
+});
