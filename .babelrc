@@ -1,3 +1,8 @@
 {
-  "presets": ["env"]
+  "presets": ["env"],
+  "plugins": [
+    ["add-header-comment", {
+      "header": ["BUILD ARTIFACT, DO NOT EDIT BY HAND"]
+    }]
+  ]
 }
