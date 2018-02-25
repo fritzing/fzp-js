@@ -49,6 +49,12 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/test/utils.test.js.html#lineNumber67",
+    "Test loadFZP all SVGs",
+    "test"
+  ],
+  [
+    "",
     "test-file/test/utils.test.js.html#lineNumber49",
     "Test loadFZP and loadSVG",
     "test"
@@ -520,6 +526,12 @@ window.esdocSearchIndex = [
     "class/src/fzp/fzp.js~FZP.html#instance-member-language",
     "src/fzp/fzp.js~FZP#language",
     "member"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#loadsvgs",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-loadSVGs",
+    "src/fzp/fzp.js~FZP#loadSVGs",
+    "method"
   ],
   [
     "src/fzp/fzp.js~fzp#moduleid",

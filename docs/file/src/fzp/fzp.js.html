@@ -150,6 +150,23 @@ class FZP {
     console.log(&apos;not jet implemented&apos;);
     return this;
   }
+
+  /**
+   * ;oad all svg sources
+   * @return {Promise}
+   */
+  loadSVGs() {
+    return this.views.breadboard.loadSVG()
+    .then((d) =&gt; {
+      return this.views.schematic.loadSVG()
+      .then((d) =&gt; {
+        return this.views.pcb.loadSVG()
+        .then((d) =&gt; {
+          return d;
+        });
+      });
+    });
+  }
 }
 
 module.exports = FZP;

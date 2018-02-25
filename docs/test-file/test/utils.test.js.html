@@ -107,6 +107,25 @@ test( &apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
     done(e);
   });
 });
+
+test( &apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
+  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
+  .then((fzp) =&gt; {
+    fzp.loadSVGs()
+    .then((d) =&gt; {
+      expect(fzp.views.breadboard.svg).not.toBe(&apos;&apos;);
+      expect(fzp.views.pcb.svg).not.toBe(&apos;&apos;);
+      expect(fzp.views.schematic.svg).not.toBe(&apos;&apos;);
+      done();
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
+  })
+  .catch((e) =&gt; {
+    done(e);
+  });
+});
 </code></pre>
 
 </div>
