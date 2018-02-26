@@ -1,6 +1,6 @@
 {
   "name": "fzp-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "fritzing fzp javascript library",
   "author": "Paul Vollmer",
   "license": "MIT",
@@ -25,7 +25,11 @@
   },
   "jest": {
     "verbose": true,
-    "collectCoverage": true
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
