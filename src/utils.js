@@ -1,5 +1,6 @@
 const axios = require('axios');
-const parseXml = require('xml2js').parseString;
+const xml2js = require('xml2js');
+const parseXml = xml2js.parseString;
 const FZP = require('./fzp/fzp');
 const {FZPConnector} = require('./fzp/connector');
 
@@ -114,4 +115,33 @@ function parseProperties(xml) {
   return data;
 }
 
-module.exports = {loadFZP, parseFZP, parseProperties};
+/**
+ * Create a xml string of a fzp instance
+ * @param {FZP} fzp
+ * @return {String}
+ */
+function marshalToXML(fzp) {
+  let builder = new xml2js.Builder();
+  let data = {
+    module: Object.assign({}, fzp),
+  };
+  data.module.$ = {
+    moduleId: fzp.moduleId,
+    fritzingVersion: fzp.fritzingVersion,
+  };
+  delete data.moduleId;
+  delete data.fritzingVersion;
+  delete data.module.views.icon.svg;
+  delete data.module.views.breadboard.svg;
+  delete data.module.views.schematic.svg;
+  delete data.module.views.pcb.svg;
+
+  return builder.buildObject(data);
+}
+
+module.exports = {
+  loadFZP,
+  parseFZP,
+  parseProperties,
+  marshalToXML,
+};

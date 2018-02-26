@@ -1,7 +1,8 @@
-const {parseFZP, loadFZP} = require('../src/utils');
+const {parseFZP, loadFZP, marshalToXML} = require('../src/utils');
+const FZP = require('../src/fzp/fzp');
 const fs = require('fs');
 
-test( 'Test parseFZP', (done) => {
+test('Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
   parseFZP(data)
   .then((fzp) => {
@@ -46,13 +47,12 @@ test( 'Test parseFZP', (done) => {
   });
 });
 
-test( 'Test loadFZP and loadSVG', (done) => {
+test('Test loadFZP and loadSVG', (done) => {
   loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
   .then((fzp) => {
     // load the svg of the breadboard view
     fzp.views.breadboard.loadSVG('foo')
     .then((d) => {
-        // console.log('SVG', d);
         done();
     })
     .catch((err) => {
@@ -64,7 +64,7 @@ test( 'Test loadFZP and loadSVG', (done) => {
   });
 });
 
-test( 'Test loadFZP all SVGs', (done) => {
+test('Test loadFZP all SVGs', (done) => {
   loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
   .then((fzp) => {
     fzp.loadSVGs()
@@ -81,4 +81,31 @@ test( 'Test loadFZP all SVGs', (done) => {
   .catch((e) => {
     done(e);
   });
+});
+
+
+test('Test marshalToXML', (done) => {
+  let fzp = new FZP();
+  fzp.moduleId = 'test-moduleId';
+  fzp.fritzingVersion = 'test-fritzingVersion';
+  fzp.version = 'test-version';
+  fzp.title = 'test-title';
+  fzp.description = 'test-description';
+  fzp.author = 'test-author';
+  fzp.date = 'test-date';
+  fzp.url = 'test-url';
+  fzp.label = 'test-label';
+  fzp.taxonomy = 'test-taxonomy';
+  fzp.language = 'test-language';
+  fzp.family = 'test-family';
+  fzp.variant = 'test-variant';
+  fzp.properties = 'test-properties';
+  fzp.views.icon.image = 'test-views-icon-image';
+  fzp.views.breadboard.image = 'test-views-breadboard-image';
+  fzp.views.schematic.image = 'test-views-schematic-image';
+  fzp.views.pcb.image = 'test-views-pcb-image';
+  let xml = marshalToXML(fzp);
+  expect(xml).not.toEqual('');
+  // console.log(xml);
+  done();
 });
