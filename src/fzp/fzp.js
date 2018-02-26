@@ -1,4 +1,5 @@
 const FZPView = require('./view');
+const FZPProperty = require('./property');
 
 /**
  * The FZP class
@@ -9,12 +10,13 @@ class FZP {
    * @param {Object} opt
    */
   constructor(opt) {
+    opt = opt || {};
     /** the module id */
-    this.moduleId = '12345678';
+    this.moduleId = opt.module || '';
     /** the fritzing version */
-    this.fritzingVersion = '1.0.0';
+    this.fritzingVersion = opt.fritzingVersion || '';
     /** the FZP version */
-    this.version = '';
+    this.version = opt.version || '';
     /** the FZP title */
     this.title = '';
     /** the description */
@@ -56,22 +58,42 @@ class FZP {
   }
 
   /**
-   * totalTags
+   * Get the total number of tags.
    * @return {Number}
    */
   totalTags() {
-    console.log('not jet implemented');
-    return 0;
+    return this.tags.length;
   }
 
   /**
-   * setProperty
-   * @param {String} name
+   * setTag
+   * @param {String} tag
    * @return {FZP}
    */
-  setProperty(name) {
-    console.log('not jet implemented');
+  addTag(tag) {
+    this.tags.push(tag);
     return this;
+  }
+
+  /**
+   * Add a property to the fzp instance.
+   * @param {String} name
+   * @param {String} value
+   * @param {String} showInLabel
+   * @return {FZP}
+   */
+  addProperty(name, value, showInLabel) {
+    this.properties[name] = new FZPProperty(value, showInLabel);
+    return this;
+  }
+
+  /**
+   * Get a fzp property by the name.
+   * @param {String} name
+   * @return {FZPProperty}
+   */
+  getProperty(name) {
+    return this.properties[name];
   }
 
   /**

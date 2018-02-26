@@ -6,24 +6,15 @@ const axios = require('axios');
 class FZPView {
   /**
    * FZPView constructor
-   * @param {Object} opt
+   * @param {String} image
+   * @param {Array} ids
    */
-  constructor(opt) {
-    opt = opt || {};
-
-    /**
-     * The FZPView image
-     */
-    this.image = '';
-
-    /**
-     * The FZPView layer id's
-     */
-    this.layerIds = [];
-
-    /**
-     * The FZPView svg data
-     */
+  constructor(image, ids) {
+    /** The FZPView image */
+    this.image = image || '';
+    /** The FZPView layer id's */
+    this.layerIds = ids || [];
+    /** The FZPView svg data */
     this.svg = '';
   }
 

@@ -71,4 +71,7 @@ class FZPConnectorView {
   }
 }
 
-module.exports = {FZPConnector, FZPConnectorView};
+module.exports = {
+  FZPConnector,
+  FZPConnectorView,
+};
