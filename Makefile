@@ -7,7 +7,9 @@ lint-fix:
 	@$(BIN)/eslint . --fix
 test:
 	@$(BIN)/jest
-.PHONY: all lint lint-fix test
+open-coverage: test
+	@open coverage/lcov-report/index.html
+.PHONY: all lint lint-fix test open-coverage
 
 build:
 	@$(BIN)/babel -d lib src
