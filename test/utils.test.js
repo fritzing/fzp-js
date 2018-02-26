@@ -2,6 +2,9 @@ const {parseFZP, loadFZP, marshalToXML} = require('../src/utils');
 const FZP = require('../src/fzp/fzp');
 const fs = require('fs');
 
+const FritzingAPI = 'https://fritzing.github.io/fritzing-parts';
+const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
+
 test('Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
   parseFZP(data)
@@ -48,10 +51,10 @@ test('Test parseFZP', (done) => {
 });
 
 test('Test loadFZP and loadSVG', (done) => {
-  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
+  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
   .then((fzp) => {
     // load the svg of the breadboard view
-    fzp.views.breadboard.loadSVG('foo')
+    fzp.views.breadboard.loadSVG(FritzingAPISVGCore)
     .then((d) => {
         done();
     })
@@ -65,9 +68,9 @@ test('Test loadFZP and loadSVG', (done) => {
 });
 
 test('Test loadFZP all SVGs', (done) => {
-  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')
+  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
   .then((fzp) => {
-    fzp.loadSVGs()
+    fzp.loadSVGs(FritzingAPISVGCore)
     .then((d) => {
       expect(fzp.views.breadboard.svg).not.toBe('');
       expect(fzp.views.pcb.svg).not.toBe('');
@@ -82,7 +85,6 @@ test('Test loadFZP all SVGs', (done) => {
     done(e);
   });
 });
-
 
 test('Test marshalToXML', (done) => {
   let fzp = new FZP();

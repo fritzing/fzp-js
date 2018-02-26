@@ -131,14 +131,15 @@ class FZP {
 
   /**
    * ;oad all svg sources
+   * @param {String} baseurl
    * @return {Promise}
    */
-  loadSVGs() {
-    return this.views.breadboard.loadSVG()
+  loadSVGs(baseurl) {
+    return this.views.breadboard.loadSVG(baseurl)
     .then((d) => {
-      return this.views.schematic.loadSVG()
+      return this.views.schematic.loadSVG(baseurl)
       .then((d) => {
-        return this.views.pcb.loadSVG()
+        return this.views.pcb.loadSVG(baseurl)
         .then((d) => {
           return d;
         });

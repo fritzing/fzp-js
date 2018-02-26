@@ -68,11 +68,12 @@ class FZPView {
 
   /**
    * load the svg of the image path from the fritzing-parts api
+   * @param {String} baseurl
    * @return {Promise}
    */
-  loadSVG() {
+  loadSVG(baseurl) {
     let self = this;
-    return axios.get('https://fritzing.github.io/fritzing-parts/svg/core/'+this.image, {responseType: 'xml'})
+    return axios.get(baseurl+this.image, {responseType: 'xml'})
     .then((res) => {
       self.setSVG(res.data);
       return res.data;

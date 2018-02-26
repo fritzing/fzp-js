@@ -1,15 +1,18 @@
 BIN = ./node_modules/.bin
 
 all: lint test build
+
 lint:
 	@$(BIN)/eslint .
 lint-fix:
 	@$(BIN)/eslint . --fix
+.PHONY: lint lint-fix
+
 test:
 	@$(BIN)/jest
 open-coverage: test
 	@open coverage/lcov-report/index.html
-.PHONY: all lint lint-fix test open-coverage
+.PHONY: test open-coverage
 
 build:
 	@$(BIN)/babel -d lib src
