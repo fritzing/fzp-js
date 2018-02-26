@@ -30,12 +30,14 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
 </ul>
 </div>
@@ -43,6 +45,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/fzp.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const FZPView = require(&apos;./view&apos;);
+const FZPProperty = require(&apos;./property&apos;);
 
 /**
  * The FZP class
@@ -53,12 +56,13 @@ class FZP {
    * @param {Object} opt
    */
   constructor(opt) {
+    opt = opt || {};
     /** the module id */
-    this.moduleId = &apos;12345678&apos;;
+    this.moduleId = opt.module || &apos;&apos;;
     /** the fritzing version */
-    this.fritzingVersion = &apos;1.0.0&apos;;
+    this.fritzingVersion = opt.fritzingVersion || &apos;&apos;;
     /** the FZP version */
-    this.version = &apos;&apos;;
+    this.version = opt.version || &apos;&apos;;
     /** the FZP title */
     this.title = &apos;&apos;;
     /** the description */
@@ -100,22 +104,42 @@ class FZP {
   }
 
   /**
-   * totalTags
+   * Get the total number of tags.
    * @return {Number}
    */
   totalTags() {
-    console.log(&apos;not jet implemented&apos;);
-    return 0;
+    return this.tags.length;
   }
 
   /**
-   * setProperty
-   * @param {String} name
+   * setTag
+   * @param {String} tag
    * @return {FZP}
    */
-  setProperty(name) {
-    console.log(&apos;not jet implemented&apos;);
+  addTag(tag) {
+    this.tags.push(tag);
     return this;
+  }
+
+  /**
+   * Add a property to the fzp instance.
+   * @param {String} name
+   * @param {String} value
+   * @param {String} showInLabel
+   * @return {FZP}
+   */
+  addProperty(name, value, showInLabel) {
+    this.properties[name] = new FZPProperty(value, showInLabel);
+    return this;
+  }
+
+  /**
+   * Get a fzp property by the name.
+   * @param {String} name
+   * @return {FZPProperty}
+   */
+  getProperty(name) {
+    return this.properties[name];
   }
 
   /**

@@ -30,12 +30,14 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
 </ul>
 </div>
@@ -43,7 +45,8 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/utils.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const axios = require(&apos;axios&apos;);
-const parseXml = require(&apos;xml2js&apos;).parseString;
+const xml2js = require(&apos;xml2js&apos;);
+const parseXml = xml2js.parseString;
 const FZP = require(&apos;./fzp/fzp&apos;);
 const {FZPConnector} = require(&apos;./fzp/connector&apos;);
 
@@ -158,7 +161,36 @@ function parseProperties(xml) {
   return data;
 }
 
-module.exports = {loadFZP, parseFZP, parseProperties};
+/**
+ * Create a xml string of a fzp instance
+ * @param {FZP} fzp
+ * @return {String}
+ */
+function marshalToXML(fzp) {
+  let builder = new xml2js.Builder();
+  let data = {
+    module: Object.assign({}, fzp),
+  };
+  data.module.$ = {
+    moduleId: fzp.moduleId,
+    fritzingVersion: fzp.fritzingVersion,
+  };
+  delete data.moduleId;
+  delete data.fritzingVersion;
+  delete data.module.views.icon.svg;
+  delete data.module.views.breadboard.svg;
+  delete data.module.views.schematic.svg;
+  delete data.module.views.pcb.svg;
+
+  return builder.buildObject(data);
+}
+
+module.exports = {
+  loadFZP,
+  parseFZP,
+  parseProperties,
+  marshalToXML,
+};
 </code></pre>
 
 </div>

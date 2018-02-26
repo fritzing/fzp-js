@@ -24,6 +24,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "fzp-js/src/fzp/property.js~fzpproperty",
+    "class/src/fzp/property.js~FZPProperty.html",
+    "<span>FZPProperty</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/property.js</span>",
+    "class"
+  ],
+  [
     "fzp-js/src/fzp/view.js~fzpview",
     "class/src/fzp/view.js~FZPView.html",
     "<span>FZPView</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/view.js</span>",
@@ -33,6 +39,12 @@ window.esdocSearchIndex = [
     "fzp-js/src/utils.js~loadfzp",
     "function/index.html#static-function-loadFZP",
     "<span>loadFZP</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
+    "fzp-js/src/utils.js~marshaltoxml",
+    "function/index.html#static-function-marshalToXML",
+    "<span>marshalToXML</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
     "function"
   ],
   [
@@ -49,19 +61,43 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber16",
+    "Test FZP properties",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber8",
+    "Test FZP tags",
+    "test"
+  ],
+  [
+    "",
     "test-file/test/utils.test.js.html#lineNumber67",
     "Test loadFZP all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber49",
+    "test-file/test/utils.test.js.html#lineNumber50",
     "Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber4",
+    "test-file/test/utils.test.js.html#lineNumber87",
+    "Test marshalToXML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber3",
+    "Test new FZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber5",
     "Test parseFZP",
     "test"
   ],
@@ -468,6 +504,18 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/fzp/fzp.js~fzp#addproperty",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-addProperty",
+    "src/fzp/fzp.js~FZP#addProperty",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#addtag",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-addTag",
+    "src/fzp/fzp.js~FZP#addTag",
+    "method"
+  ],
+  [
     "src/fzp/fzp.js~fzp#author",
     "class/src/fzp/fzp.js~FZP.html#instance-member-author",
     "src/fzp/fzp.js~FZP#author",
@@ -516,6 +564,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/fzp/fzp.js~fzp#getproperty",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-getProperty",
+    "src/fzp/fzp.js~FZP#getProperty",
+    "method"
+  ],
+  [
     "src/fzp/fzp.js~fzp#label",
     "class/src/fzp/fzp.js~FZP.html#instance-member-label",
     "src/fzp/fzp.js~FZP#label",
@@ -555,12 +609,6 @@ window.esdocSearchIndex = [
     "src/fzp/fzp.js~fzp#setconnector",
     "class/src/fzp/fzp.js~FZP.html#instance-method-setConnector",
     "src/fzp/fzp.js~FZP#setConnector",
-    "method"
-  ],
-  [
-    "src/fzp/fzp.js~fzp#setproperty",
-    "class/src/fzp/fzp.js~FZP.html#instance-method-setProperty",
-    "src/fzp/fzp.js~FZP#setProperty",
     "method"
   ],
   [
@@ -615,6 +663,30 @@ window.esdocSearchIndex = [
     "src/fzp/fzp.js~fzp#views",
     "class/src/fzp/fzp.js~FZP.html#instance-member-views",
     "src/fzp/fzp.js~FZP#views",
+    "member"
+  ],
+  [
+    "src/fzp/property.js",
+    "file/src/fzp/property.js.html",
+    "src/fzp/property.js",
+    "file"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#constructor",
+    "class/src/fzp/property.js~FZPProperty.html#instance-constructor-constructor",
+    "src/fzp/property.js~FZPProperty#constructor",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#showinlabel",
+    "class/src/fzp/property.js~FZPProperty.html#instance-member-showInLabel",
+    "src/fzp/property.js~FZPProperty#showInLabel",
+    "member"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#value",
+    "class/src/fzp/property.js~FZPProperty.html#instance-member-value",
+    "src/fzp/property.js~FZPProperty#value",
     "member"
   ],
   [
@@ -688,6 +760,12 @@ window.esdocSearchIndex = [
     "file/src/utils.js.html",
     "src/utils.js",
     "file"
+  ],
+  [
+    "test/fzp.fzp.test.js",
+    "test-file/test/fzp.fzp.test.js.html",
+    "test/fzp.fzp.test.js",
+    "testFile"
   ],
   [
     "test/utils.test.js",

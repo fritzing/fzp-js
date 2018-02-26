@@ -1,7 +1,7 @@
 {
-  "coverage": "90.9%",
-  "expectCount": 66,
-  "actualCount": 60,
+  "coverage": "89.33%",
+  "expectCount": 75,
+  "actualCount": 67,
   "files": {
     "src/fzp/bus.js": {
       "expectCount": 7,
@@ -14,11 +14,17 @@
       "undocumentLines": []
     },
     "src/fzp/fzp.js": {
-      "expectCount": 27,
-      "actualCount": 26,
+      "expectCount": 30,
+      "actualCount": 28,
       "undocumentLines": [
-        1
+        1,
+        2
       ]
+    },
+    "src/fzp/property.js": {
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
     },
     "src/fzp/view.js": {
       "expectCount": 12,
@@ -28,13 +34,14 @@
       ]
     },
     "src/utils.js": {
-      "expectCount": 7,
-      "actualCount": 3,
+      "expectCount": 9,
+      "actualCount": 4,
       "undocumentLines": [
         1,
         2,
         3,
-        4
+        4,
+        5
       ]
     }
   }
