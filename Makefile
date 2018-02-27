@@ -14,6 +14,10 @@ open-coverage: test
 	@open coverage/lcov-report/index.html
 .PHONY: test open-coverage
 
+test-load-data:
+	git clone git@github.com:fritzing/fritzing-parts.git test/fixtures/fritzing-parts
+test-load:
+	node test/partstest.js
 build:
 	@$(BIN)/babel -d lib src
 build-commit: build
