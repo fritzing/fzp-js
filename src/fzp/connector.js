@@ -7,39 +7,39 @@ class FZPConnector {
    * @param {Object} opt
    */
   constructor(opt) {
-    /**
-     * the FZP connector id
-     */
+    /** The id of the FZP connector. */
     this.id = '';
 
-    /**
-     * the FZP connector name
-     */
+    /** The name of the FZP connector. */
     this.name = '';
 
-    /**
-     * the FZP connector type
-     */
+    /** The type of the FZP connector */
     this.type = '';
 
-    /**
-     * the FZP connector description
-     */
+    /** The description of the FZP connector */
     this.description = '';
 
     /**
-     * the FZP connector views fro breadboard, schematic and pcb
+     * The FZP connector views for breadboard, schematic and pcb.
+     * Note that the pcb view has an object for copper0, copper1 etc.
      */
     this.views = {
       breadboard: new FZPConnectorView(),
       schematic: new FZPConnectorView(),
-      pcb: new FZPConnectorView(),
+      pcb: {
+        copper0: new FZPConnectorView(),
+        copper1: new FZPConnectorView(),
+        // keepout: new FZPConnectorView(), TODO: check what kind of layers we needs
+        // outline: new FZPConnectorView(),
+        // silkscreen: new FZPConnectorView(),
+        // soldermask: new FZPConnectorView(),
+      },
     };
   }
 }
 
 /**
- *
+ * FZPConnectorView class
  */
 class FZPConnectorView {
   /**
@@ -49,29 +49,21 @@ class FZPConnectorView {
   constructor(opt) {
     opt = opt || {};
 
-    /**
-     * the FZP connector view layer
-     */
+    /** the FZP connector view layer */
     this.layer = opt.layer || '';
 
-    /**
-     * the FZP connector view svg
-     */
+    /** the FZP connector view svg */
     this.svgId = opt.svgId || '';
 
-    /**
-     * the FZP connector view leg
-     */
+    /** the FZP connector view leg */
     this.legId = opt.legId || '';
 
-    /**
-     * the FZP connector view terminal
-     */
+    /** the FZP connector view terminal */
     this.terminalId = opt.terminalId || '';
   }
 }
 
 module.exports = {
-  FZPConnector,
-  FZPConnectorView,
+  FZPConnector: FZPConnector,
+  FZPConnectorView: FZPConnectorView,
 };

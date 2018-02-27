@@ -2,7 +2,7 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 const parseXml = xml2js.parseString;
 const FZP = require('./fzp/fzp');
-const {FZPConnector} = require('./fzp/connector');
+const {FZPConnector, FZPConnectorView} = require('./fzp/connector');
 
 /**
  * @param {String} url
@@ -15,7 +15,6 @@ function loadFZP(url) {
   });
 }
 
-
 /**
  * parse a fzp xml string
  * @param {String} data
@@ -27,10 +26,8 @@ function parseFZP(data) {
     if (data) {
       parseXml(data, (err, xml) => {
         if (err) {
-          // cb(err);
           return reject(err);
         }
-        // console.log(xml.module.connectors[0]);
 
         fzp.moduleId = xml.module.$.moduleId;
         fzp.fritzingVersion = xml.module.$.fritzingVersion;
@@ -50,7 +47,6 @@ function parseFZP(data) {
           fzp.properties = parseProperties(xml.module.properties[0].property);
         }
 
-        // console.log(JSON.stringify(xml.module.properties, '', '  '));
         if (xml.module.views) {
           if (xml.module.views[0].iconView) {
             const iconViewLayer = xml.module.views[0].iconView[0].layers[0];
@@ -63,12 +59,16 @@ function parseFZP(data) {
             fzp.views.breadboard.addLayerId(breadboardLayer.layer[0].$.layerId);
           }
           if (xml.module.views[0].pcbView) {
-            fzp.views.pcb.setImage(xml.module.views[0].pcbView[0].layers[0].$.image);
-            fzp.views.pcb.addLayerId(xml.module.views[0].pcbView[0].layers[0].layer[0].$.layerId);
+            const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];
+            fzp.views.pcb.setImage(pcbViewLayer.$.image);
+            for (let iLayer = 0; iLayer < pcbViewLayer.layer.length; iLayer++) {
+              fzp.views.pcb.addLayerId(pcbViewLayer.layer[iLayer].$.layerId);
+            }
           }
           if (xml.module.views[0].schematicView) {
-            fzp.views.schematic.setImage(xml.module.views[0].schematicView[0].layers[0].$.image);
-            fzp.views.schematic.addLayerId(xml.module.views[0].schematicView[0].layers[0].layer[0].$.layerId);
+            const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];
+            fzp.views.schematic.setImage(schematicViewLayer.$.image);
+            fzp.views.schematic.addLayerId(schematicViewLayer.layer[0].$.layerId);
           }
         }
 
@@ -77,22 +77,31 @@ function parseFZP(data) {
             for (let i = 0; i < xml.module.connectors[0].connector.length; i++) {
               const connector = xml.module.connectors[0].connector[i];
 
+              // create the connector for the three views.
               let c = new FZPConnector();
               c.id = connector.$.id;
               c.name = connector.$.name;
               c.type = connector.$.type;
               c.description = connector.description[0];
-              c.views.breadboard.layer = connector.views[0].breadboardView[0].p[0].$.layer;
-              c.views.breadboard.svgId = connector.views[0].breadboardView[0].p[0].$.svgId;
-              c.views.breadboard.legId = connector.views[0].breadboardView[0].p[0].$.legId;
-              c.views.breadboard.terminalId = connector.views[0].breadboardView[0].p[0].$.terminalId;
 
+              c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);
+              c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);
+
+              for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {
+                switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {
+                  case 'copper0':
+                    c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
+                    break;
+                  case 'copper1':
+                    c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
+                    break;
+                }
+              }
               fzp.connectors[c.id] = c;
             }
           }
         }
 
-        // cb(null, fzp);
         return resolve(fzp);
       });
     }
@@ -115,6 +124,19 @@ function parseProperties(xml) {
   return data;
 }
 
+
+/**
+ * @param {Object} xml
+ * @return {FZPConnectorView}
+ */
+function parseConnectorView(xml) {
+  let conView = new FZPConnectorView();
+  conView.layer = xml.$.layer || null;
+  conView.svgId = xml.$.svgId || null;
+  conView.legId = xml.$.legId || null;
+  conView.terminalId = xml.$.terminalId || null;
+  return conView;
+}
 /**
  * Create a xml string of a fzp instance
  * @param {FZP} fzp
