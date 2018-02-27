@@ -48,6 +48,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "fzp-js/src/utils.js~parseconnectorview",
+    "function/index.html#static-function-parseConnectorView",
+    "<span>parseConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
     "fzp-js/src/utils.js~parsefzp",
     "function/index.html#static-function-parseFZP",
     "<span>parseFZP</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
@@ -73,19 +79,19 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber67",
+    "test-file/test/utils.test.js.html#lineNumber93",
     "Test loadFZP all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber50",
+    "test-file/test/utils.test.js.html#lineNumber76",
     "Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber87",
+    "test-file/test/utils.test.js.html#lineNumber113",
     "Test marshalToXML",
     "test"
   ],
@@ -93,12 +99,6 @@ window.esdocSearchIndex = [
     "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber3",
     "Test new FZP",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber5",
-    "Test parseFZP",
     "test"
   ],
   [
@@ -714,6 +714,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/view.js~fzpview#fliphorizontal",
+    "class/src/fzp/view.js~FZPView.html#instance-member-fliphorizontal",
+    "src/fzp/view.js~FZPView#fliphorizontal",
+    "member"
+  ],
+  [
+    "src/fzp/view.js~fzpview#flipvertical",
+    "class/src/fzp/view.js~FZPView.html#instance-member-flipvertical",
+    "src/fzp/view.js~FZPView#flipvertical",
+    "member"
+  ],
+  [
     "src/fzp/view.js~fzpview#image",
     "class/src/fzp/view.js~FZPView.html#instance-member-image",
     "src/fzp/view.js~FZPView#image",
@@ -765,6 +777,12 @@ window.esdocSearchIndex = [
     "test/fzp.fzp.test.js",
     "test-file/test/fzp.fzp.test.js.html",
     "test/fzp.fzp.test.js",
+    "testFile"
+  ],
+  [
+    "test/partstest.js",
+    "test-file/test/partstest.js.html",
+    "test/partstest.js",
     "testFile"
   ],
   [

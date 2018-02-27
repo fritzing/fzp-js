@@ -1,7 +1,7 @@
 {
-  "coverage": "89.33%",
-  "expectCount": 75,
-  "actualCount": 67,
+  "coverage": "89.74%",
+  "expectCount": 78,
+  "actualCount": 70,
   "files": {
     "src/fzp/bus.js": {
       "expectCount": 7,
@@ -27,15 +27,15 @@
       "undocumentLines": []
     },
     "src/fzp/view.js": {
-      "expectCount": 12,
-      "actualCount": 11,
+      "expectCount": 14,
+      "actualCount": 13,
       "undocumentLines": [
         1
       ]
     },
     "src/utils.js": {
-      "expectCount": 9,
-      "actualCount": 4,
+      "expectCount": 10,
+      "actualCount": 5,
       "undocumentLines": [
         1,
         2,

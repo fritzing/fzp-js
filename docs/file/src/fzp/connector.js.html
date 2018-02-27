@@ -31,6 +31,7 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
@@ -53,39 +54,39 @@ class FZPConnector {
    * @param {Object} opt
    */
   constructor(opt) {
-    /**
-     * the FZP connector id
-     */
+    /** The id of the FZP connector. */
     this.id = &apos;&apos;;
 
-    /**
-     * the FZP connector name
-     */
+    /** The name of the FZP connector. */
     this.name = &apos;&apos;;
 
-    /**
-     * the FZP connector type
-     */
+    /** The type of the FZP connector */
     this.type = &apos;&apos;;
 
-    /**
-     * the FZP connector description
-     */
+    /** The description of the FZP connector */
     this.description = &apos;&apos;;
 
     /**
-     * the FZP connector views fro breadboard, schematic and pcb
+     * The FZP connector views for breadboard, schematic and pcb.
+     * Note that the pcb view has an object for copper0, copper1 etc.
      */
     this.views = {
       breadboard: new FZPConnectorView(),
       schematic: new FZPConnectorView(),
-      pcb: new FZPConnectorView(),
+      pcb: {
+        copper0: new FZPConnectorView(),
+        copper1: new FZPConnectorView(),
+        // keepout: new FZPConnectorView(), TODO: check what kind of layers we needs
+        // outline: new FZPConnectorView(),
+        // silkscreen: new FZPConnectorView(),
+        // soldermask: new FZPConnectorView(),
+      },
     };
   }
 }
 
 /**
- *
+ * FZPConnectorView class
  */
 class FZPConnectorView {
   /**
@@ -95,31 +96,23 @@ class FZPConnectorView {
   constructor(opt) {
     opt = opt || {};
 
-    /**
-     * the FZP connector view layer
-     */
+    /** the FZP connector view layer */
     this.layer = opt.layer || &apos;&apos;;
 
-    /**
-     * the FZP connector view svg
-     */
+    /** the FZP connector view svg */
     this.svgId = opt.svgId || &apos;&apos;;
 
-    /**
-     * the FZP connector view leg
-     */
+    /** the FZP connector view leg */
     this.legId = opt.legId || &apos;&apos;;
 
-    /**
-     * the FZP connector view terminal
-     */
+    /** the FZP connector view terminal */
     this.terminalId = opt.terminalId || &apos;&apos;;
   }
 }
 
 module.exports = {
-  FZPConnector,
-  FZPConnectorView,
+  FZPConnector: FZPConnector,
+  FZPConnectorView: FZPConnectorView,
 };
 </code></pre>
 

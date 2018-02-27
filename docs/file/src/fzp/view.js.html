@@ -31,6 +31,7 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
@@ -54,12 +55,22 @@ class FZPView {
    * FZPView constructor
    * @param {String} image
    * @param {Array} ids
+   * @param {Boolean} flipH
+   * @param {Boolean} flipV
    */
-  constructor(image, ids) {
+  constructor(image, ids, flipH, flipV) {
     /** The FZPView image */
     this.image = image || &apos;&apos;;
+
     /** The FZPView layer id&apos;s */
     this.layerIds = ids || [];
+
+    /** FZPView flip horizontal */
+    this.fliphorizontal = flipH || false;
+
+    /** FZPView flip vertical */
+    this.flipvertical = flipV || false;
+
     /** The FZPView svg data */
     this.svg = &apos;&apos;;
   }
@@ -114,11 +125,12 @@ class FZPView {
 
   /**
    * load the svg of the image path from the fritzing-parts api
+   * @param {String} baseurl
    * @return {Promise}
    */
-  loadSVG() {
+  loadSVG(baseurl) {
     let self = this;
-    return axios.get(&apos;https://fritzing.github.io/fritzing-parts/svg/core/&apos;+this.image, {responseType: &apos;xml&apos;})
+    return axios.get(baseurl+this.image, {responseType: &apos;xml&apos;})
     .then((res) =&gt; {
       self.setSVG(res.data);
       return res.data;

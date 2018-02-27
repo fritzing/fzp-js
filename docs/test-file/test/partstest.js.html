@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/fzp/fzp.js | fzp-js</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/partstest.js | fzp-js</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -44,158 +44,9 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/fzp/fzp.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const FZPView = require(&apos;./view&apos;);
-const FZPProperty = require(&apos;./property&apos;);
-
-/**
- * The FZP class
- */
-class FZP {
-  /**
-   * FZP constructor
-   * @param {Object} opt
-   */
-  constructor(opt) {
-    opt = opt || {};
-    /** the module id */
-    this.moduleId = opt.module || &apos;&apos;;
-    /** the fritzing version */
-    this.fritzingVersion = opt.fritzingVersion || &apos;&apos;;
-    /** the FZP version */
-    this.version = opt.version || &apos;&apos;;
-    /** the FZP title */
-    this.title = &apos;&apos;;
-    /** the description */
-    this.description = &apos;&apos;;
-    /** the author */
-    this.author = &apos;&apos;;
-    /** the date */
-    this.date = &apos;&apos;;
-    /** the url */
-    this.url = &apos;&apos;;
-    /** the label */
-    this.label = &apos;&apos;;
-    /** the tags */
-    this.tags = [];
-    /** the taxonomy */
-    this.taxonomy = &apos;&apos;;
-    /** the language */
-    this.language = &apos;&apos;;
-    /** the family */
-    this.family = &apos;&apos;;
-    /** the variant */
-    this.variant = &apos;&apos;;
-    /** the properties */
-    this.properties = {};
-    /** the views */
-    this.views = {
-      icon: new FZPView(),
-      schematic: new FZPView(),
-      breadboard: new FZPView(),
-      pcb: new FZPView(),
-    };
-    /** the connectors */
-    this.connectors = {};
-    /**
-     * the buses
-     * A bus is a instance of the Bus class
-     */
-    this.buses = {};
-  }
-
-  /**
-   * Get the total number of tags.
-   * @return {Number}
-   */
-  totalTags() {
-    return this.tags.length;
-  }
-
-  /**
-   * setTag
-   * @param {String} tag
-   * @return {FZP}
-   */
-  addTag(tag) {
-    this.tags.push(tag);
-    return this;
-  }
-
-  /**
-   * Add a property to the fzp instance.
-   * @param {String} name
-   * @param {String} value
-   * @param {String} showInLabel
-   * @return {FZP}
-   */
-  addProperty(name, value, showInLabel) {
-    this.properties[name] = new FZPProperty(value, showInLabel);
-    return this;
-  }
-
-  /**
-   * Get a fzp property by the name.
-   * @param {String} name
-   * @return {FZPProperty}
-   */
-  getProperty(name) {
-    return this.properties[name];
-  }
-
-  /**
-   * setView
-   * @param {String} name
-   * @param {FZPView} view
-   * @return {FZP}
-   */
-  setView(name, view) {
-    console.log(&apos;not jet implemented&apos;);
-    return this;
-  }
-
-  /**
-   * setConnector
-   * @param {String} name
-   * @param {FZPConnector} connector
-   * @return {FZP}
-   */
-  setConnector(name, connector) {
-    console.log(&apos;not jet implemented&apos;);
-    return this;
-  }
-
-  /**
-   * setBus
-   * @param {String} name
-   * @param {FZPBus} bus
-   * @return {FZP}
-   */
-  setBus(name, bus) {
-    console.log(&apos;not jet implemented&apos;);
-    return this;
-  }
-
-  /**
-   * ;oad all svg sources
-   * @param {String} baseurl
-   * @return {Promise}
-   */
-  loadSVGs(baseurl) {
-    return this.views.breadboard.loadSVG(baseurl)
-    .then((d) =&gt; {
-      return this.views.schematic.loadSVG(baseurl)
-      .then((d) =&gt; {
-        return this.views.pcb.loadSVG(baseurl)
-        .then((d) =&gt; {
-          return d;
-        });
-      });
-    });
-  }
-}
-
-module.exports = FZP;
+<div class="content" data-ice="content"><h1 data-ice="title">test/partstest.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+console.log(&apos;partstest&apos;);
 </code></pre>
 
 </div>

@@ -31,6 +31,7 @@
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
@@ -48,44 +49,70 @@
 const FZP = require(&apos;../src/fzp/fzp&apos;);
 const fs = require(&apos;fs&apos;);
 
-test(&apos;Test parseFZP&apos;, (done) =&gt; {
+const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
+const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
+
+test.only(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
   parseFZP(data)
   .then((fzp) =&gt; {
     // console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
+
     expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
     expect(fzp.fritzingVersion).toEqual(&apos;0.1.beta.1396&apos;);
     expect(fzp.version).toEqual(&apos;4&apos;);
-    expect(fzp.title).toEqual(&apos;Red LED - 3mm&apos;);
-    expect(fzp.description).toEqual(&apos;A generic red LED (~1.8V)&apos;);
     expect(fzp.author).toEqual(&apos;Stefan Hermann&apos;);
-    expect(fzp.date).toEqual(&apos;2008-10-10&apos;);
-    expect(fzp.url).toEqual(&apos;&apos;);
+    expect(fzp.title).toEqual(&apos;Red LED - 3mm&apos;);
     expect(fzp.label).toEqual(&apos;LED&apos;);
+    expect(fzp.date).toEqual(&apos;2008-10-10&apos;);
     expect(fzp.tags).toEqual([&apos;LED&apos;, &apos;Red LED&apos;, &apos;indicator&apos;, &apos;fritzing core&apos;]);
+    expect(fzp.description).toEqual(&apos;A generic red LED (~1.8V)&apos;);
+    expect(fzp.url).toEqual(&apos;&apos;);
     expect(fzp.taxonomy).toEqual(&apos;&apos;);
     expect(fzp.language).toEqual(&apos;&apos;);
     expect(fzp.family).toEqual(&apos;&apos;);
     expect(fzp.variant).toEqual(&apos;&apos;);
-    expect(fzp.properties).toEqual({
-        package: {value: &apos;3 mm [THT]&apos;},
-        family: {value: &apos;LED&apos;},
-        color: {value: &apos;Red (633nm)&apos;, showInLabel: &apos;yes&apos;},
-        current: {showInLabel: &apos;yes&apos;},
-        leg: {value: &apos;yes&apos;},
-      });
 
+    expect(fzp.properties).toEqual({
+      package: {value: &apos;3 mm [THT]&apos;},
+      family: {value: &apos;LED&apos;},
+      color: {value: &apos;Red (633nm)&apos;, showInLabel: &apos;yes&apos;},
+      current: {showInLabel: &apos;yes&apos;},
+      leg: {value: &apos;yes&apos;},
+    });
+
+    // testing the views
     expect(fzp.views.icon.image).toEqual(&apos;icon/LED-red-5mmicon.svg&apos;);
     expect(fzp.views.icon.layerIds).toEqual([&apos;icon&apos;]);
-    //
-    // expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;)
-    // expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;])
 
-    // expect(fzp.views.pcb).toEqual(&apos;pcb/LED-red-5mmicon.svg&apos;)
-    // expect(fzp.views.pcb.layerIds).toEqual(&apos;pcb&apos;)
+    expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;);
+    expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;]);
 
-    // expect(fzp.views.schematic).toEqual(&apos;schematic/led.svg&apos;)
-    // expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;])
+    expect(fzp.views.pcb.image).toEqual(&apos;pcb/3mm_LED.svg&apos;);
+    expect(fzp.views.pcb.layerIds).toEqual([&apos;copper0&apos;, &apos;copper1&apos;, &apos;keepout&apos;, &apos;outline&apos;, &apos;silkscreen&apos;, &apos;soldermask&apos;]);
+
+    expect(fzp.views.schematic.image).toEqual(&apos;schematic/led.svg&apos;);
+    expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;]);
+
+    // testing the connertor
+    expect(fzp.connectors[&apos;connector0&apos;].name).toEqual(&apos;cathode&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].type).toEqual(&apos;male&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].description).toEqual(&apos;cathode pin&apos;);
+
+    // console.log(&apos;-------------&apos;, fzp.connectors[&apos;connector0&apos;].views.breadboard);
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.layer).toEqual(&apos;breadboard&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.svgId).toEqual(&apos;connector0pin&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.legId).toEqual(&apos;connector0leg&apos;);
+
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.layer).toEqual(&apos;schematic&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.svgId).toEqual(&apos;connector0pin&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.terminalId).toEqual(&apos;connector0terminal&apos;);
+
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper0.layer).toEqual(&apos;copper0&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper0.svgId).toEqual(&apos;connector0pad&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.layer).toEqual(&apos;copper1&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.svgId).toEqual(&apos;connector0pad&apos;);
+
     done();
   })
   .catch((err) =&gt; {
@@ -94,10 +121,10 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
 });
 
 test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
-  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
+  loadFZP(FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;)
   .then((fzp) =&gt; {
     // load the svg of the breadboard view
-    fzp.views.breadboard.loadSVG(&apos;foo&apos;)
+    fzp.views.breadboard.loadSVG(FritzingAPISVGCore)
     .then((d) =&gt; {
         done();
     })
@@ -111,10 +138,11 @@ test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
 });
 
 test(&apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
-  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
+  loadFZP(FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;)
   .then((fzp) =&gt; {
-    fzp.loadSVGs()
+    fzp.loadSVGs(FritzingAPISVGCore)
     .then((d) =&gt; {
+      // check if the svg string is not empty
       expect(fzp.views.breadboard.svg).not.toBe(&apos;&apos;);
       expect(fzp.views.pcb.svg).not.toBe(&apos;&apos;);
       expect(fzp.views.schematic.svg).not.toBe(&apos;&apos;);
@@ -128,7 +156,6 @@ test(&apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
     done(e);
   });
 });
-
 
 test(&apos;Test marshalToXML&apos;, (done) =&gt; {
   let fzp = new FZP();
@@ -151,8 +178,13 @@ test(&apos;Test marshalToXML&apos;, (done) =&gt; {
   fzp.views.schematic.image = &apos;test-views-schematic-image&apos;;
   fzp.views.pcb.image = &apos;test-views-pcb-image&apos;;
   let xml = marshalToXML(fzp);
+
+  // check if the generated xml is not empty
   expect(xml).not.toEqual(&apos;&apos;);
   // console.log(xml);
+
+  // TODO: call &apos;parseFZP&apos;
+  // TODO: check if data is equal to the fzp from above
   done();
 });
 </code></pre>
