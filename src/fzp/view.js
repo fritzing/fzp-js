@@ -8,12 +8,22 @@ class FZPView {
    * FZPView constructor
    * @param {String} image
    * @param {Array} ids
+   * @param {Boolean} flipH
+   * @param {Boolean} flipV
    */
-  constructor(image, ids) {
+  constructor(image, ids, flipH, flipV) {
     /** The FZPView image */
     this.image = image || '';
+
     /** The FZPView layer id's */
     this.layerIds = ids || [];
+
+    /** FZPView flip horizontal */
+    this.fliphorizontal = flipH || false;
+
+    /** FZPView flip vertical */
+    this.flipvertical = flipV || false;
+
     /** The FZPView svg data */
     this.svg = '';
   }
