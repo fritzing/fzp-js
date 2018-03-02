@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * FZPProperty class
  */
@@ -8,10 +10,17 @@ class FZPProperty {
    * @param {String} showInLabel
    */
   constructor(value, showInLabel) {
-    /** the property value */
+    /**
+     * the property value
+     * @type {String}
+     */
     this.value = value || null;
-    /** the property showInLabel */
-    this.showInLabel = showInLabel || null;
+
+    /**
+     * the property showInLabel
+     * @type {Boolean}
+     */
+    this.showInLabel = showInLabel || false;
   }
 }
 

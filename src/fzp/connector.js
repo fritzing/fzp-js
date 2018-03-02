@@ -1,23 +1,37 @@
+'use strict';
+
 /**
  * FZPConnector class
  */
 class FZPConnector {
   /**
    * FZPConnector constructor
-   * @param {Object} opt
+   * @param {Object} opt - the options
    */
   constructor(opt) {
-    /** The id of the FZP connector. */
-    this.id = '';
+    /**
+     * The id of the FZP connector.
+     * @type {String}
+     */
+    this.id = null;
 
-    /** The name of the FZP connector. */
-    this.name = '';
+    /**
+     * The name of the FZP connector.
+     * @type {String}
+     */
+    this.name = null;
 
-    /** The type of the FZP connector */
-    this.type = '';
+    /**
+     * The type of the FZP connector
+     * @type {String}
+     */
+    this.type = null;
 
-    /** The description of the FZP connector */
-    this.description = '';
+    /**
+     * The description of the FZP connector
+     * @type {String}
+     */
+    this.description = null;
 
     /**
      * The FZP connector views for breadboard, schematic and pcb.
@@ -49,17 +63,29 @@ class FZPConnectorView {
   constructor(opt) {
     opt = opt || {};
 
-    /** the FZP connector view layer */
-    this.layer = opt.layer || '';
+    /**
+     * the FZP connector view layer
+     * @type {String}
+     */
+    this.layer = opt.layer || null;
 
-    /** the FZP connector view svg */
-    this.svgId = opt.svgId || '';
+    /**
+     * the FZP connector view svg
+     * @type {String}
+     */
+    this.svgId = opt.svgId || null;
 
-    /** the FZP connector view leg */
-    this.legId = opt.legId || '';
+    /**
+     * the FZP connector view leg
+     * @type {String}
+     */
+    this.legId = opt.legId || null;
 
-    /** the FZP connector view terminal */
-    this.terminalId = opt.terminalId || '';
+    /**
+     * the FZP connector view terminal
+     * @type {String}
+     */
+    this.terminalId = opt.terminalId || null;
   }
 }
 

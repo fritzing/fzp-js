@@ -1,3 +1,5 @@
+'use strict';
+
 const FZPView = require('./view');
 const FZPProperty = require('./property');
 
@@ -11,50 +13,119 @@ class FZP {
    */
   constructor(opt) {
     opt = opt || {};
-    /** the module id */
+
+    /**
+     * the module id
+     * @type {String}
+     */
     this.moduleId = opt.module || '';
-    /** the fritzing version */
+
+    /**
+     * the fritzing version
+     * @type {String}
+     */
     this.fritzingVersion = opt.fritzingVersion || '';
-    /** the FZP version */
+
+    /**
+     * the FZP version
+     * @type {String}
+     */
     this.version = opt.version || '';
-    /** the FZP title */
-    this.title = '';
-    /** the description */
-    this.description = '';
-    /** the author */
-    this.author = '';
-    /** the date */
-    this.date = '';
-    /** the url */
-    this.url = '';
-    /** the label */
-    this.label = '';
-    /** the tags */
-    this.tags = [];
-    /** the taxonomy */
-    this.taxonomy = '';
-    /** the language */
-    this.language = '';
-    /** the family */
-    this.family = '';
-    /** the variant */
-    this.variant = '';
-    /** the properties */
-    this.properties = {};
-    /** the views */
+
+    /**
+     * the FZP title
+     * @type {String}
+     */
+    this.title = opt.title || '';
+
+    /**
+     * the description
+     * @type {String}
+     */
+    this.description = opt.description || '';
+
+    /**
+     * the author
+     * @type {String}
+     */
+    this.author = opt.author || '';
+
+    /**
+     * the date
+     * @type {String}
+     */
+    this.date = opt.date || '';
+
+    /**
+     * the url
+     * @type {String}
+     */
+    this.url = opt.url || '';
+
+    /**
+     * the label
+     * @type {String}
+     */
+    this.label = opt.label || '';
+
+    /**
+     * the tags
+     * @type {Array}
+     */
+    this.tags = opt.tags || [];
+
+    /**
+     * the taxonomy
+     * @type {String}
+     */
+    this.taxonomy = opt.taxonomy || '';
+
+    /**
+     * the language
+     * @type {String}
+     */
+    this.language = opt.language || '';
+
+    /**
+     * the family
+     * @type {String}
+     */
+    this.family = opt.family || '';
+
+    /**
+     * the variant
+     * @type {String}
+     */
+    this.variant = opt.variant || '';
+
+    /**
+     * the properties
+     * @type {Object}
+     */
+    this.properties = opt.properties || {};
+
+    /**
+     * the four views (icon, breadboard, schematic, pcb)
+     * @type {Object}
+     */
     this.views = {
       icon: new FZPView(),
       schematic: new FZPView(),
       breadboard: new FZPView(),
       pcb: new FZPView(),
     };
-    /** the connectors */
-    this.connectors = {};
+
+    /**
+     * the connectors
+     * @type {Object}
+     */
+    this.connectors = opt.connectors || {};
     /**
      * the buses
      * A bus is a instance of the Bus class
+     * @type {Object}
      */
-    this.buses = {};
+    this.buses = opt.buses || {};
   }
 
   /**
@@ -70,25 +141,25 @@ class FZP {
    * @param {String} tag
    * @return {FZP}
    */
-  addTag(tag) {
+  setTag(tag) {
     this.tags.push(tag);
     return this;
   }
 
   /**
-   * Add a property to the fzp instance.
+   * Create or update a FZPProperty instance to the FZP.
    * @param {String} name
    * @param {String} value
    * @param {String} showInLabel
    * @return {FZP}
    */
-  addProperty(name, value, showInLabel) {
+  setProperty(name, value, showInLabel) {
     this.properties[name] = new FZPProperty(value, showInLabel);
     return this;
   }
 
   /**
-   * Get a fzp property by the name.
+   * Get a FZP property by the given name.
    * @param {String} name
    * @return {FZPProperty}
    */
@@ -130,7 +201,7 @@ class FZP {
   }
 
   /**
-   * ;oad all svg sources
+   * Load all SVG sources.
    * @param {String} baseurl
    * @return {Promise}
    */

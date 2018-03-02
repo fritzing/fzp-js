@@ -1,3 +1,5 @@
+'use strict';
+
 const axios = require('axios');
 const xml2js = require('xml2js');
 const parseXml = xml2js.parseString;
@@ -5,7 +7,8 @@ const FZP = require('./fzp/fzp');
 const {FZPConnector, FZPConnectorView} = require('./fzp/connector');
 
 /**
- * @param {String} url
+ * Load a FZP file from the given URL.
+ * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
 function loadFZP(url) {
@@ -124,7 +127,6 @@ function parseProperties(xml) {
   return data;
 }
 
-
 /**
  * @param {Object} xml
  * @return {FZPConnectorView}
@@ -137,8 +139,9 @@ function parseConnectorView(xml) {
   conView.terminalId = xml.$.terminalId || null;
   return conView;
 }
+
 /**
- * Create a xml string of a fzp instance
+ * Create a xml string of a FZP instance.
  * @param {FZP} fzp
  * @return {String}
  */
@@ -157,7 +160,6 @@ function marshalToXML(fzp) {
   delete data.module.views.breadboard.svg;
   delete data.module.views.schematic.svg;
   delete data.module.views.pcb.svg;
-
   return builder.buildObject(data);
 }
 

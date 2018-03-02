@@ -1,3 +1,5 @@
+'use strict';
+
 const {parseFZP, loadFZP, marshalToXML} = require('../src/utils');
 const FZP = require('../src/fzp/fzp');
 const fs = require('fs');
@@ -5,7 +7,7 @@ const fs = require('fs');
 const FritzingAPI = 'https://fritzing.github.io/fritzing-parts';
 const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
 
-test.only('Test parseFZP', (done) => {
+test('Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
   parseFZP(data)
   .then((fzp) => {

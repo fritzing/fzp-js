@@ -1,3 +1,5 @@
+'use strict';
+
 const axios = require('axios');
 
 /**
@@ -12,28 +14,45 @@ class FZPView {
    * @param {Boolean} flipV
    */
   constructor(image, ids, flipH, flipV) {
-    /** The FZPView image */
-    this.image = image || '';
+    /**
+     * The FZPView image
+     * @type {String}
+     */
+    this.image = image || null;
 
-    /** The FZPView layer id's */
+    /**
+     * The FZPView layer id's
+     * @type {Array}
+     */
     this.layerIds = ids || [];
 
-    /** FZPView flip horizontal */
+    /**
+     * FZPView flip horizontal
+     * @type {Boolean}
+     */
     this.fliphorizontal = flipH || false;
 
-    /** FZPView flip vertical */
+    /**
+     * FZPView flip vertical
+     * @type {Boolean}
+     */
     this.flipvertical = flipV || false;
 
-    /** The FZPView svg data */
-    this.svg = '';
+    /**
+     * The FZPView svg data
+     * @type {String}
+     */
+    this.svg = null;
   }
 
   /**
    * Set the FZPView image source
    * @param {String} src
+   * @return {FZPView}
    */
   setImage(src) {
     this.image = src;
+    return this;
   }
 
   /**
@@ -47,11 +66,13 @@ class FZPView {
   /**
    * Add a layer id to the FZPView
    * @param {String} name
+   * @return {FZPView}
    */
   addLayerId(name) {
     if (!this.existLayerId(name)) {
       this.layerIds.push(name);
     }
+    return this;
   }
 
   /**
@@ -71,9 +92,11 @@ class FZPView {
   /**
    * Set the svg data
    * @param {String} data
+   * @return {FZPView}
    */
   setSVG(data) {
     this.svg = data;
+    return this;
   }
 
   /**
