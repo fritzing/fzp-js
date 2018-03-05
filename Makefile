@@ -1,6 +1,6 @@
 BIN = ./node_modules/.bin
 
-all: lint test build
+all: lint test build docs
 
 lint:
 	@$(BIN)/eslint .
@@ -36,5 +36,5 @@ docs-commit: docs
 .PHONY: docs docs-open docs-commit
 
 clean:
-	@rm -rf docs
+	@rm -rf coverage
 .PHONY: clean

@@ -30,13 +30,13 @@ class FZPView {
      * FZPView flip horizontal
      * @type {Boolean}
      */
-    this.fliphorizontal = flipH || false;
+    this.flipHorizontal = flipH || false;
 
     /**
      * FZPView flip vertical
      * @type {Boolean}
      */
-    this.flipvertical = flipV || false;
+    this.flipVertical = flipV || false;
 
     /**
      * The FZPView svg data
@@ -68,7 +68,7 @@ class FZPView {
    * @param {String} name
    * @return {FZPView}
    */
-  addLayerId(name) {
+  setLayerId(name) {
     if (!this.existLayerId(name)) {
       this.layerIds.push(name);
     }

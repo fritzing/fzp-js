@@ -54,24 +54,24 @@ function parseFZP(data) {
           if (xml.module.views[0].iconView) {
             const iconViewLayer = xml.module.views[0].iconView[0].layers[0];
             fzp.views.icon.setImage(iconViewLayer.$.image);
-            fzp.views.icon.addLayerId(iconViewLayer.layer[0].$.layerId);
+            fzp.views.icon.setLayerId(iconViewLayer.layer[0].$.layerId);
           }
           if (xml.module.views[0].breadboardView) {
             const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];
             fzp.views.breadboard.setImage(breadboardLayer.$.image);
-            fzp.views.breadboard.addLayerId(breadboardLayer.layer[0].$.layerId);
+            fzp.views.breadboard.setLayerId(breadboardLayer.layer[0].$.layerId);
           }
           if (xml.module.views[0].pcbView) {
             const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];
             fzp.views.pcb.setImage(pcbViewLayer.$.image);
             for (let iLayer = 0; iLayer < pcbViewLayer.layer.length; iLayer++) {
-              fzp.views.pcb.addLayerId(pcbViewLayer.layer[iLayer].$.layerId);
+              fzp.views.pcb.setLayerId(pcbViewLayer.layer[iLayer].$.layerId);
             }
           }
           if (xml.module.views[0].schematicView) {
             const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];
             fzp.views.schematic.setImage(schematicViewLayer.$.image);
-            fzp.views.schematic.addLayerId(schematicViewLayer.layer[0].$.layerId);
+            fzp.views.schematic.setLayerId(schematicViewLayer.layer[0].$.layerId);
           }
         }
 
