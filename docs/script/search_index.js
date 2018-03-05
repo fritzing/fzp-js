@@ -79,19 +79,19 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber95",
+    "test-file/test/utils.test.js.html#lineNumber93",
     "Test loadFZP all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber78",
+    "test-file/test/utils.test.js.html#lineNumber76",
     "Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber115",
+    "test-file/test/utils.test.js.html#lineNumber113",
     "Test marshalToXML",
     "test"
   ],
@@ -99,6 +99,30 @@ window.esdocSearchIndex = [
     "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber5",
     "Test new FZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber15",
+    "Test new FZPView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber5",
+    "Test new FZPView (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber10",
+    "Test new FZPView (image name)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber26",
+    "Test new FZPView loadSVG",
     "test"
   ],
   [
@@ -702,12 +726,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/fzp/view.js~fzpview#addlayerid",
-    "class/src/fzp/view.js~FZPView.html#instance-method-addLayerId",
-    "src/fzp/view.js~FZPView#addLayerId",
-    "method"
-  ],
-  [
     "src/fzp/view.js~fzpview#constructor",
     "class/src/fzp/view.js~FZPView.html#instance-constructor-constructor",
     "src/fzp/view.js~FZPView#constructor",
@@ -721,14 +739,14 @@ window.esdocSearchIndex = [
   ],
   [
     "src/fzp/view.js~fzpview#fliphorizontal",
-    "class/src/fzp/view.js~FZPView.html#instance-member-fliphorizontal",
-    "src/fzp/view.js~FZPView#fliphorizontal",
+    "class/src/fzp/view.js~FZPView.html#instance-member-flipHorizontal",
+    "src/fzp/view.js~FZPView#flipHorizontal",
     "member"
   ],
   [
     "src/fzp/view.js~fzpview#flipvertical",
-    "class/src/fzp/view.js~FZPView.html#instance-member-flipvertical",
-    "src/fzp/view.js~FZPView#flipvertical",
+    "class/src/fzp/view.js~FZPView.html#instance-member-flipVertical",
+    "src/fzp/view.js~FZPView#flipVertical",
     "member"
   ],
   [
@@ -753,6 +771,12 @@ window.esdocSearchIndex = [
     "src/fzp/view.js~fzpview#setimage",
     "class/src/fzp/view.js~FZPView.html#instance-method-setImage",
     "src/fzp/view.js~FZPView#setImage",
+    "method"
+  ],
+  [
+    "src/fzp/view.js~fzpview#setlayerid",
+    "class/src/fzp/view.js~FZPView.html#instance-method-setLayerId",
+    "src/fzp/view.js~FZPView#setLayerId",
     "method"
   ],
   [
@@ -783,6 +807,12 @@ window.esdocSearchIndex = [
     "test/fzp.fzp.test.js",
     "test-file/test/fzp.fzp.test.js.html",
     "test/fzp.fzp.test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.view.test.js",
+    "test-file/test/fzp.view.test.js.html",
+    "test/fzp.view.test.js",
     "testFile"
   ],
   [

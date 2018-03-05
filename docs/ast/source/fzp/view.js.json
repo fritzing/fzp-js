@@ -727,9 +727,9 @@
                               "line": 33,
                               "column": 23
                             },
-                            "identifierName": "fliphorizontal"
+                            "identifierName": "flipHorizontal"
                           },
-                          "name": "fliphorizontal"
+                          "name": "flipHorizontal"
                         },
                         "computed": false,
                         "leadingComments": null
@@ -894,9 +894,9 @@
                               "line": 39,
                               "column": 21
                             },
-                            "identifierName": "flipvertical"
+                            "identifierName": "flipVertical"
                           },
-                          "name": "flipvertical"
+                          "name": "flipVertical"
                         },
                         "computed": false,
                         "leadingComments": null
@@ -1606,9 +1606,9 @@
                     "line": 71,
                     "column": 12
                   },
-                  "identifierName": "addLayerId"
+                  "identifierName": "setLayerId"
                 },
-                "name": "addLayerId",
+                "name": "setLayerId",
                 "leadingComments": null
               },
               "kind": "method",
@@ -5092,7 +5092,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "fliphorizontal",
+      "value": "flipHorizontal",
       "start": 549,
       "end": 563,
       "loc": {
@@ -5322,7 +5322,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "flipvertical",
+      "value": "flipVertical",
       "start": 660,
       "end": 672,
       "loc": {
@@ -6437,7 +6437,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addLayerId",
+      "value": "setLayerId",
       "start": 1177,
       "end": 1187,
       "loc": {

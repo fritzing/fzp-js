@@ -47,7 +47,12 @@
 <div class="content" data-ice="content"><h1 data-ice="title">test/partstest.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
+const fs = require(&apos;fs&apos;);
 console.log(&apos;partstest&apos;);
+
+let fzpDir = fs.readdirSync(&apos;./fixtures/fritzing-parts/core&apos;);
+
+console.log(fzpDir);
 </code></pre>
 
 </div>

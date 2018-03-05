@@ -6944,9 +6944,9 @@
                                                                   "line": 57,
                                                                   "column": 37
                                                                 },
-                                                                "identifierName": "addLayerId"
+                                                                "identifierName": "setLayerId"
                                                               },
-                                                              "name": "addLayerId"
+                                                              "name": "setLayerId"
                                                             },
                                                             "computed": false
                                                           },
@@ -7968,9 +7968,9 @@
                                                                   "line": 62,
                                                                   "column": 43
                                                                 },
-                                                                "identifierName": "addLayerId"
+                                                                "identifierName": "setLayerId"
                                                               },
-                                                              "name": "addLayerId"
+                                                              "name": "setLayerId"
                                                             },
                                                             "computed": false
                                                           },
@@ -9241,9 +9241,9 @@
                                                                         "line": 68,
                                                                         "column": 38
                                                                       },
-                                                                      "identifierName": "addLayerId"
+                                                                      "identifierName": "setLayerId"
                                                                     },
-                                                                    "name": "addLayerId"
+                                                                    "name": "setLayerId"
                                                                   },
                                                                   "computed": false
                                                                 },
@@ -10266,9 +10266,9 @@
                                                                   "line": 74,
                                                                   "column": 42
                                                                 },
-                                                                "identifierName": "addLayerId"
+                                                                "identifierName": "setLayerId"
                                                               },
-                                                              "name": "addLayerId"
+                                                              "name": "setLayerId"
                                                             },
                                                             "computed": false
                                                           },
@@ -31804,7 +31804,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addLayerId",
+      "value": "setLayerId",
       "start": 2021,
       "end": 2031,
       "loc": {
@@ -33678,7 +33678,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addLayerId",
+      "value": "setLayerId",
       "start": 2317,
       "end": 2327,
       "loc": {
@@ -36050,7 +36050,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addLayerId",
+      "value": "setLayerId",
       "start": 2664,
       "end": 2674,
       "loc": {
@@ -37948,7 +37948,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addLayerId",
+      "value": "setLayerId",
       "start": 2980,
       "end": 2990,
       "loc": {

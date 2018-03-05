@@ -58,8 +58,6 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
   parseFZP(data)
   .then((fzp) =&gt; {
-    // console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
-
     expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
     expect(fzp.fritzingVersion).toEqual(&apos;0.1.beta.1396&apos;);
     expect(fzp.version).toEqual(&apos;4&apos;);
