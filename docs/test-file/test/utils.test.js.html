@@ -45,14 +45,16 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const {parseFZP, loadFZP, marshalToXML} = require(&apos;../src/utils&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const {parseFZP, loadFZP, marshalToXML} = require(&apos;../src/utils&apos;);
 const FZP = require(&apos;../src/fzp/fzp&apos;);
 const fs = require(&apos;fs&apos;);
 
 const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
 const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
 
-test.only(&apos;Test parseFZP&apos;, (done) =&gt; {
+test(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
   parseFZP(data)
   .then((fzp) =&gt; {

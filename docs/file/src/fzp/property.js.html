@@ -45,7 +45,9 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/property.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+/**
  * FZPProperty class
  */
 class FZPProperty {
@@ -55,10 +57,17 @@ class FZPProperty {
    * @param {String} showInLabel
    */
   constructor(value, showInLabel) {
-    /** the property value */
+    /**
+     * the property value
+     * @type {String}
+     */
     this.value = value || null;
-    /** the property showInLabel */
-    this.showInLabel = showInLabel || null;
+
+    /**
+     * the property showInLabel
+     * @type {Boolean}
+     */
+    this.showInLabel = showInLabel || false;
   }
 }
 

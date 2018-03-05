@@ -67,38 +67,44 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber16",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber18",
     "Test FZP properties",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber8",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber10",
     "Test FZP tags",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber93",
+    "test-file/test/utils.test.js.html#lineNumber95",
     "Test loadFZP all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber76",
+    "test-file/test/utils.test.js.html#lineNumber78",
     "Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber113",
+    "test-file/test/utils.test.js.html#lineNumber115",
     "Test marshalToXML",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber3",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber5",
     "Test new FZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber10",
+    "Test parseFZP",
     "test"
   ],
   [
@@ -504,18 +510,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/fzp/fzp.js~fzp#addproperty",
-    "class/src/fzp/fzp.js~FZP.html#instance-method-addProperty",
-    "src/fzp/fzp.js~FZP#addProperty",
-    "method"
-  ],
-  [
-    "src/fzp/fzp.js~fzp#addtag",
-    "class/src/fzp/fzp.js~FZP.html#instance-method-addTag",
-    "src/fzp/fzp.js~FZP#addTag",
-    "method"
-  ],
-  [
     "src/fzp/fzp.js~fzp#author",
     "class/src/fzp/fzp.js~FZP.html#instance-member-author",
     "src/fzp/fzp.js~FZP#author",
@@ -609,6 +603,18 @@ window.esdocSearchIndex = [
     "src/fzp/fzp.js~fzp#setconnector",
     "class/src/fzp/fzp.js~FZP.html#instance-method-setConnector",
     "src/fzp/fzp.js~FZP#setConnector",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#setproperty",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-setProperty",
+    "src/fzp/fzp.js~FZP#setProperty",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#settag",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-setTag",
+    "src/fzp/fzp.js~FZP#setTag",
     "method"
   ],
   [

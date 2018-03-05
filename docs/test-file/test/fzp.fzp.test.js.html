@@ -45,7 +45,9 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">test/fzp.fzp.test.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const FZP = require(&apos;../src/fzp/fzp&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const FZP = require(&apos;../src/fzp/fzp&apos;);
 
 test(&apos;Test new FZP&apos;, () =&gt; {
   let fzp = new FZP({version: &apos;test&apos;});
@@ -54,15 +56,15 @@ test(&apos;Test new FZP&apos;, () =&gt; {
 
 test(&apos;Test FZP tags&apos;, () =&gt; {
   let fzp = new FZP();
-  fzp.addTag(&apos;test-tag-1&apos;);
-  fzp.addTag(&apos;test-tag-2&apos;);
+  fzp.setTag(&apos;test-tag-1&apos;);
+  fzp.setTag(&apos;test-tag-2&apos;);
   expect(fzp.totalTags()).toEqual(2);
   expect(fzp.tags).toEqual([&apos;test-tag-1&apos;, &apos;test-tag-2&apos;]);
 });
 
 test(&apos;Test FZP properties&apos;, () =&gt; {
   let fzp = new FZP();
-  fzp.addProperty(&apos;test-prop-1&apos;, 123, true);
+  fzp.setProperty(&apos;test-prop-1&apos;, 123, true);
   expect(fzp.properties).toEqual({
     &apos;test-prop-1&apos;: {value: 123, showInLabel: true},
   });

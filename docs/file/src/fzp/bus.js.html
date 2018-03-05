@@ -45,7 +45,9 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/bus.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+/**
  * FZP Bus class
  */
 class FZPBus {
@@ -60,7 +62,7 @@ class FZPBus {
      * Store the FZP bus id
      * @type {String}
      */
-    this.id = opt.id || &apos;&apos;;
+    this.id = opt.id || null;
 
     /**
      * Store the FZP node members as an array
@@ -72,19 +74,23 @@ class FZPBus {
   /**
    * Set the FZP bus id
    * @param {String} id
+   * @return {FZPBus}
    */
   setid(id) {
     this.id = id;
+    return this;
   }
 
   /**
    * add a new node member if not exist
    * @param {String} m
+   * @return {FZPBus}
    */
   addModeMember(m) {
     if (!this.existModeMember(m)) {
       this.nodeMembers.push(m);
     }
+    return this;
   }
 
   /**

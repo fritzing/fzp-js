@@ -45,14 +45,17 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/utils.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const axios = require(&apos;axios&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const axios = require(&apos;axios&apos;);
 const xml2js = require(&apos;xml2js&apos;);
 const parseXml = xml2js.parseString;
 const FZP = require(&apos;./fzp/fzp&apos;);
 const {FZPConnector, FZPConnectorView} = require(&apos;./fzp/connector&apos;);
 
 /**
- * @param {String} url
+ * Load a FZP file from the given URL.
+ * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
 function loadFZP(url) {
@@ -171,7 +174,6 @@ function parseProperties(xml) {
   return data;
 }
 
-
 /**
  * @param {Object} xml
  * @return {FZPConnectorView}
@@ -184,8 +186,9 @@ function parseConnectorView(xml) {
   conView.terminalId = xml.$.terminalId || null;
   return conView;
 }
+
 /**
- * Create a xml string of a fzp instance
+ * Create a xml string of a FZP instance.
  * @param {FZP} fzp
  * @return {String}
  */
@@ -204,7 +207,6 @@ function marshalToXML(fzp) {
   delete data.module.views.breadboard.svg;
   delete data.module.views.schematic.svg;
   delete data.module.views.pcb.svg;
-
   return builder.buildObject(data);
 }
 
