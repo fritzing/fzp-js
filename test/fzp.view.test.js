@@ -17,8 +17,11 @@ test('Test new FZPView', () => {
   expect(fzp.image).toEqual('test');
   fzp.setLayerId('foo');
   expect(fzp.layerIds).toEqual(['breadboard', 'foo']);
+  expect(fzp.existLayerId('foo')).toEqual(true);
   expect(fzp.flipHorizontal).toEqual(true);
   expect(fzp.flipVertical).toEqual(true);
+  fzp.setLayerId('foo');
+  expect(fzp.totalLayerId()).toEqual(2);
   fzp.setSVG('hello-svg');
   expect(fzp.svg).toEqual('hello-svg');
 });
