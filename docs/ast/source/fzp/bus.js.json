@@ -955,9 +955,9 @@
                     "line": 42,
                     "column": 15
                   },
-                  "identifierName": "addModeMember"
+                  "identifierName": "setModeMember"
                 },
-                "name": "addModeMember",
+                "name": "setModeMember",
                 "leadingComments": null
               },
               "kind": "method",
@@ -3707,7 +3707,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "addModeMember",
+      "value": "setModeMember",
       "start": 625,
       "end": 638,
       "loc": {

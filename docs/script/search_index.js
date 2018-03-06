@@ -67,6 +67,42 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber87",
+    "SafeBuffer.alloc() throws with non-number types",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber31",
+    "SafeBuffer.alloc(number) returns zeroed-out memory",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber71",
+    "SafeBuffer.allocUnsafe() throws with non-number types",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber44",
+    "SafeBuffer.allocUnsafe(number)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber52",
+    "SafeBuffer.from() throws with number types",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber21",
+    "SafeBuffer.from(value) converts to a Buffer",
+    "test"
+  ],
+  [
+    "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber18",
     "Test FZP properties",
     "test"
@@ -129,6 +165,18 @@ window.esdocSearchIndex = [
     "",
     "test-file/test/utils.test.js.html#lineNumber10",
     "Test parseFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/isarray/test.js.html#lineNumber4",
+    "is array",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber6",
+    "new SafeBuffer(value) works just like Buffer",
     "test"
   ],
   [
@@ -420,12 +468,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/fzp/bus.js~fzpbus#addmodemember",
-    "class/src/fzp/bus.js~FZPBus.html#instance-method-addModeMember",
-    "src/fzp/bus.js~FZPBus#addModeMember",
-    "method"
-  ],
-  [
     "src/fzp/bus.js~fzpbus#constructor",
     "class/src/fzp/bus.js~FZPBus.html#instance-constructor-constructor",
     "src/fzp/bus.js~FZPBus#constructor",
@@ -448,6 +490,12 @@ window.esdocSearchIndex = [
     "class/src/fzp/bus.js~FZPBus.html#instance-member-nodeMembers",
     "src/fzp/bus.js~FZPBus#nodeMembers",
     "member"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#setmodemember",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-setModeMember",
+    "src/fzp/bus.js~FZPBus#setModeMember",
+    "method"
   ],
   [
     "src/fzp/bus.js~fzpbus#setid",
@@ -802,6 +850,24 @@ window.esdocSearchIndex = [
     "file/src/utils.js.html",
     "src/utils.js",
     "file"
+  ],
+  [
+    "test/fixtures/fritzing-parts/node_modules/core-util-is/test.js",
+    "test-file/test/fixtures/fritzing-parts/node_modules/core-util-is/test.js.html",
+    "test/fixtures/fritzing-parts/node_modules/core-util-is/test.js",
+    "testFile"
+  ],
+  [
+    "test/fixtures/fritzing-parts/node_modules/isarray/test.js",
+    "test-file/test/fixtures/fritzing-parts/node_modules/isarray/test.js.html",
+    "test/fixtures/fritzing-parts/node_modules/isarray/test.js",
+    "testFile"
+  ],
+  [
+    "test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js",
+    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html",
+    "test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js",
+    "testFile"
   ],
   [
     "test/fzp.fzp.test.js",
