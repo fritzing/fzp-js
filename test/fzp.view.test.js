@@ -30,6 +30,7 @@ test('Test new FZPView loadSVG', (done) => {
   const baseurl = 'https://fritzing.github.io/fritzing-parts/svg/core/breadboard/';
   fzp.loadSVG(baseurl).then((d) => {
     // console.log('SVG-DATA', d);
+    expect(d).not.toEqual('');
     done();
   })
   .catch((e) => {

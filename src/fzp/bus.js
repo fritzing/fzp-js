@@ -39,7 +39,7 @@ class FZPBus {
    * @param {String} m
    * @return {FZPBus}
    */
-  addModeMember(m) {
+  setModeMember(m) {
     if (!this.existModeMember(m)) {
       this.nodeMembers.push(m);
     }
