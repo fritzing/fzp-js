@@ -156,10 +156,23 @@ function marshalToXML(fzp) {
   };
   delete data.moduleId;
   delete data.fritzingVersion;
-  delete data.module.views.icon.svg;
-  delete data.module.views.breadboard.svg;
-  delete data.module.views.schematic.svg;
-  delete data.module.views.pcb.svg;
+
+  if (data.module) {
+    if (data.module.views) {
+      if (data.module.icon) {
+        delete data.module.views.icon.svg;
+      }
+      if (data.module.breadboard) {
+        delete data.module.views.breadboard.svg;
+      }
+      if (data.module.schematic) {
+        delete data.module.views.schematic.svg;
+      }
+      if (data.module.pcb) {
+        delete data.module.views.pcb.svg;
+      }
+    }
+  }
   return builder.buildObject(data);
 }
 

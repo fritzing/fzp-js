@@ -140,3 +140,16 @@ test('Test marshalToXML', (done) => {
   // TODO: check if data is equal to the fzp from above
   done();
 });
+
+test('Test marshalToXML from loaded part', (done) => {
+  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
+  .then((fzp) => {
+    let xml = marshalToXML(fzp);
+    expect(xml).not.toEqual('');
+    // console.log(xml);
+    done();
+  })
+  .catch((e) => {
+    done(e);
+  });
+});
