@@ -1,5 +1,7 @@
 'use strict';
 
+const FZPConnectorView = require('./connector-view');
+
 /**
  * FZPConnector class
  */
@@ -9,87 +11,45 @@ class FZPConnector {
    * @param {Object} opt - the options
    */
   constructor(opt) {
+    opt = opt || {views: {pcb: {}}};
+
     /**
      * The id of the FZP connector.
      * @type {String}
      */
-    this.id = null;
+    this.id = opt.id || null;
 
     /**
      * The name of the FZP connector.
      * @type {String}
      */
-    this.name = null;
+    this.name = opt.name || null;
 
     /**
      * The type of the FZP connector
      * @type {String}
      */
-    this.type = null;
+    this.type = opt.type || null;
 
     /**
      * The description of the FZP connector
      * @type {String}
      */
-    this.description = null;
+    this.description = opt.description || null;
 
     /**
      * The FZP connector views for breadboard, schematic and pcb.
      * Note that the pcb view has an object for copper0, copper1 etc.
      */
     this.views = {
-      breadboard: new FZPConnectorView(),
-      schematic: new FZPConnectorView(),
+      breadboard: new FZPConnectorView(opt.views.breadboard),
+      schematic: new FZPConnectorView(opt.views.schematic),
       pcb: {
-        copper0: new FZPConnectorView(),
-        copper1: new FZPConnectorView(),
-        // keepout: new FZPConnectorView(), TODO: check what kind of layers we needs
-        // outline: new FZPConnectorView(),
-        // silkscreen: new FZPConnectorView(),
-        // soldermask: new FZPConnectorView(),
+        copper0: new FZPConnectorView(opt.views.pcb.copper0),
+        copper1: new FZPConnectorView(opt.views.pcb.copper1),
       },
     };
   }
 }
 
-/**
- * FZPConnectorView class
- */
-class FZPConnectorView {
-  /**
-   * FZPConnectorView constructor
-   * @param {Object} opt
-   */
-  constructor(opt) {
-    opt = opt || {};
-
-    /**
-     * the FZP connector view layer
-     * @type {String}
-     */
-    this.layer = opt.layer || null;
-
-    /**
-     * the FZP connector view svg
-     * @type {String}
-     */
-    this.svgId = opt.svgId || null;
-
-    /**
-     * the FZP connector view leg
-     * @type {String}
-     */
-    this.legId = opt.legId || null;
-
-    /**
-     * the FZP connector view terminal
-     * @type {String}
-     */
-    this.terminalId = opt.terminalId || null;
-  }
-}
-
-module.exports = {
-  FZPConnector: FZPConnector,
-  FZPConnectorView: FZPConnectorView,
-};
+module.exports = FZPConnector;
