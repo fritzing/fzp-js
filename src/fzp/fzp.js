@@ -30,7 +30,7 @@ class FZP {
      * the FZP version
      * @type {String}
      */
-    this.version = opt.version || '';
+    this.version = opt.version || '0.0.0';
 
     /**
      * the FZP title

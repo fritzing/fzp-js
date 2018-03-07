@@ -3,7 +3,7 @@
 const axios = require('axios');
 
 /**
- * FZPView class
+ * FZPView class is used by the fzp breadboard, pcb and schematics view.
  */
 class FZPView {
   /**
@@ -47,7 +47,7 @@ class FZPView {
 
   /**
    * Set the FZPView image source
-   * @param {String} src
+   * @param {String} src The image source
    * @return {FZPView}
    */
   setImage(src) {
@@ -65,7 +65,7 @@ class FZPView {
 
   /**
    * Add a layer id to the FZPView
-   * @param {String} name
+   * @param {String} name The layer name
    * @return {FZPView}
    */
   setLayerId(name) {
@@ -91,7 +91,7 @@ class FZPView {
 
   /**
    * Set the svg data
-   * @param {String} data
+   * @param {String} data The SVG data
    * @return {FZPView}
    */
   setSVG(data) {
@@ -101,7 +101,7 @@ class FZPView {
 
   /**
    * load the svg of the image path from the fritzing-parts api
-   * @param {String} baseurl
+   * @param {String} baseurl the url to the fritzing-parts/core directory
    * @return {Promise}
    */
   loadSVG(baseurl) {

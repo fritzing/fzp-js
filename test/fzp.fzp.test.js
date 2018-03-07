@@ -2,12 +2,17 @@
 
 const FZP = require('../src/fzp/fzp');
 
-test('Test new FZP', () => {
+test('Test new FZP (empty)', () => {
+  let fzp = new FZP();
+  expect(fzp.version).toEqual('0.0.0');
+});
+
+test('Test new FZP (version)', () => {
   let fzp = new FZP({version: 'test'});
   expect(fzp.version).toEqual('test');
 });
 
-test('Test FZP tags', () => {
+test('Test FZP setTag, totalTags', () => {
   let fzp = new FZP();
   fzp.setTag('test-tag-1');
   fzp.setTag('test-tag-2');
@@ -15,7 +20,7 @@ test('Test FZP tags', () => {
   expect(fzp.tags).toEqual(['test-tag-1', 'test-tag-2']);
 });
 
-test('Test FZP properties', () => {
+test('Test FZP setProperty, getProperty', () => {
   let fzp = new FZP();
   fzp.setProperty('test-prop-1', 123, true);
   expect(fzp.properties).toEqual({

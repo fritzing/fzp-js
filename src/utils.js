@@ -4,7 +4,8 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 const parseXml = xml2js.parseString;
 const FZP = require('./fzp/fzp');
-const {FZPConnector, FZPConnectorView} = require('./fzp/connector');
+const FZPConnector = require('./fzp/connector');
+const FZPConnectorView = require('./fzp/connector-view');
 
 /**
  * Load a FZP file from the given URL.
