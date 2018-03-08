@@ -2,3 +2,4 @@ coverage
 docs
 lib
 test/fixtures
+test/_*.js
