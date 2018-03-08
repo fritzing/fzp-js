@@ -1,8 +1,8 @@
-const FZP = require('./lib/fzp/fzp');
-const FZPBus = require('./lib/fzp/bus');
-const connector = require('./lib/fzp/connector');
-const FZPView = require('./lib/fzp/view');
-const FZPUtils = require('./lib/utils');
+const FZP = require('./fzp/fzp');
+const FZPBus = require('./fzp/bus');
+const connector = require('./fzp/connector');
+const FZPView = require('./fzp/view');
+const FZPUtils = require('./utils');
 
 module.exports = {
   FZP: FZP,

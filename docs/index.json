@@ -2267,7 +2267,7 @@
     "__docId__": 126,
     "kind": "file",
     "name": "src/index.js",
-    "content": "const FZP = require('./lib/fzp/fzp');\nconst FZPBus = require('./lib/fzp/bus');\nconst connector = require('./lib/fzp/connector');\nconst FZPView = require('./lib/fzp/view');\nconst FZPUtils = require('./lib/utils');\n\nmodule.exports = {\n  FZP: FZP,\n  FZPBus: FZPBus,\n  FZPConnector: connector.FZPConnector,\n  FZPConnectorView: connector.FZPConnectorView,\n  FZPView: FZPView,\n  FZPUtils: FZPUtils,\n};\n",
+    "content": "const FZP = require('./fzp/fzp');\nconst FZPBus = require('./fzp/bus');\nconst connector = require('./fzp/connector');\nconst FZPView = require('./fzp/view');\nconst FZPUtils = require('./utils');\n\nmodule.exports = {\n  FZP: FZP,\n  FZPBus: FZPBus,\n  FZPConnector: connector.FZPConnector,\n  FZPConnectorView: connector.FZPConnectorView,\n  FZPView: FZPView,\n  FZPUtils: FZPUtils,\n};\n",
     "static": true,
     "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/index.js",
     "access": "public",
