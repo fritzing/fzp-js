@@ -18,9 +18,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "fzp-js/src/fzp/connector.js~fzpconnectorview",
-    "class/src/fzp/connector.js~FZPConnectorView.html",
-    "<span>FZPConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/connector.js</span>",
+    "fzp-js/src/fzp/connector-view.js~fzpconnectorview",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html",
+    "<span>FZPConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/connector-view.js</span>",
     "class"
   ],
   [
@@ -67,50 +67,14 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber87",
-    "SafeBuffer.alloc() throws with non-number types",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber23",
+    "Test FZP setProperty, getProperty",
     "test"
   ],
   [
     "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber31",
-    "SafeBuffer.alloc(number) returns zeroed-out memory",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber71",
-    "SafeBuffer.allocUnsafe() throws with non-number types",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber44",
-    "SafeBuffer.allocUnsafe(number)",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber52",
-    "SafeBuffer.from() throws with number types",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber21",
-    "SafeBuffer.from(value) converts to a Buffer",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber18",
-    "Test FZP properties",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber10",
-    "Test FZP tags",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber15",
+    "Test FZP setTag, totalTags",
     "test"
   ],
   [
@@ -133,13 +97,61 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber5",
-    "Test new FZP",
+    "test-file/test/utils.test.js.html#lineNumber144",
+    "Test marshalToXML from loaded part",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber15",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber5",
+    "Test new FZP (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber10",
+    "Test new FZP (version)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber13",
+    "Test new FZPConnector",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber5",
+    "Test new FZPConnector (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber13",
+    "Test new FZPConnectorView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber5",
+    "Test new FZPConnectorView (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber11",
+    "Test new FZPProperty",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber5",
+    "Test new FZPProperty (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber23",
     "Test new FZPView",
     "test"
   ],
@@ -151,13 +163,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber10",
+    "test-file/test/fzp.view.test.js.html#lineNumber14",
     "Test new FZPView (image name)",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber26",
+    "test-file/test/fzp.view.test.js.html#lineNumber40",
     "Test new FZPView loadSVG",
     "test"
   ],
@@ -165,18 +177,6 @@ window.esdocSearchIndex = [
     "",
     "test-file/test/utils.test.js.html#lineNumber10",
     "Test parseFZP",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/isarray/test.js.html#lineNumber4",
-    "is array",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html#lineNumber6",
-    "new SafeBuffer(value) works just like Buffer",
     "test"
   ],
   [
@@ -504,6 +504,42 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/connector-view.js",
+    "file/src/fzp/connector-view.js.html",
+    "src/fzp/connector-view.js",
+    "file"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#constructor",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-constructor-constructor",
+    "src/fzp/connector-view.js~FZPConnectorView#constructor",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#layer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-layer",
+    "src/fzp/connector-view.js~FZPConnectorView#layer",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#legid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-legId",
+    "src/fzp/connector-view.js~FZPConnectorView#legId",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#svgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-svgId",
+    "src/fzp/connector-view.js~FZPConnectorView#svgId",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#terminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-terminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#terminalId",
+    "member"
+  ],
+  [
     "src/fzp/connector.js",
     "file/src/fzp/connector.js.html",
     "src/fzp/connector.js",
@@ -543,36 +579,6 @@ window.esdocSearchIndex = [
     "src/fzp/connector.js~fzpconnector#views",
     "class/src/fzp/connector.js~FZPConnector.html#instance-member-views",
     "src/fzp/connector.js~FZPConnector#views",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#constructor",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-constructor-constructor",
-    "src/fzp/connector.js~FZPConnectorView#constructor",
-    "method"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#layer",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-layer",
-    "src/fzp/connector.js~FZPConnectorView#layer",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#legid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-legId",
-    "src/fzp/connector.js~FZPConnectorView#legId",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#svgid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-svgId",
-    "src/fzp/connector.js~FZPConnectorView#svgId",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#terminalid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-terminalId",
-    "src/fzp/connector.js~FZPConnectorView#terminalId",
     "member"
   ],
   [
@@ -846,27 +852,33 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js",
+    "file/src/index.js.html",
+    "src/index.js",
+    "file"
+  ],
+  [
     "src/utils.js",
     "file/src/utils.js.html",
     "src/utils.js",
     "file"
   ],
   [
-    "test/fixtures/fritzing-parts/node_modules/core-util-is/test.js",
-    "test-file/test/fixtures/fritzing-parts/node_modules/core-util-is/test.js.html",
-    "test/fixtures/fritzing-parts/node_modules/core-util-is/test.js",
+    "test/_fritzing-parts-test.js",
+    "test-file/test/_fritzing-parts-test.js.html",
+    "test/_fritzing-parts-test.js",
     "testFile"
   ],
   [
-    "test/fixtures/fritzing-parts/node_modules/isarray/test.js",
-    "test-file/test/fixtures/fritzing-parts/node_modules/isarray/test.js.html",
-    "test/fixtures/fritzing-parts/node_modules/isarray/test.js",
+    "test/fzp.connector-view.test.js",
+    "test-file/test/fzp.connector-view.test.js.html",
+    "test/fzp.connector-view.test.js",
     "testFile"
   ],
   [
-    "test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js",
-    "test-file/test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js.html",
-    "test/fixtures/fritzing-parts/node_modules/safe-buffer/test.js",
+    "test/fzp.connector.test.js",
+    "test-file/test/fzp.connector.test.js.html",
+    "test/fzp.connector.test.js",
     "testFile"
   ],
   [
@@ -876,15 +888,15 @@ window.esdocSearchIndex = [
     "testFile"
   ],
   [
-    "test/fzp.view.test.js",
-    "test-file/test/fzp.view.test.js.html",
-    "test/fzp.view.test.js",
+    "test/fzp.property.test.js",
+    "test-file/test/fzp.property.test.js.html",
+    "test/fzp.property.test.js",
     "testFile"
   ],
   [
-    "test/partstest.js",
-    "test-file/test/partstest.js.html",
-    "test/partstest.js",
+    "test/fzp.view.test.js",
+    "test-file/test/fzp.view.test.js.html",
+    "test/fzp.view.test.js",
     "testFile"
   ],
   [

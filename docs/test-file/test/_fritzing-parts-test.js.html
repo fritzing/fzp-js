@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">test/fzp.fzp.test.js | fzp-js</title>
+  <title data-ice="title">test/_fritzing-parts-test.js | fzp-js</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -44,38 +44,59 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">test/fzp.fzp.test.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">test/_fritzing-parts-test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const FZP = require(&apos;../src/fzp/fzp&apos;);
+const fs = require(&apos;fs&apos;);
+const path = require(&apos;path&apos;);
+const {parseFZP} = require(&apos;../src/utils&apos;);
 
-test(&apos;Test new FZP (empty)&apos;, () =&gt; {
-  let fzp = new FZP();
-  expect(fzp.version).toEqual(&apos;0.0.0&apos;);
+let fzpDir = fs.readdirSync(path.join(__dirname, &apos;./fixtures/fritzing-parts/core&apos;));
+
+// for (var i = 0; i &lt; fzpDir.length; i++) {
+//   if (path.extname(fzpDir[i]) === &quot;.fzp&quot;) {
+//
+//     const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
+//     parseFZP(data)
+//     .then((fzp) =&gt; {
+//       console.log(&apos;==&gt; OK   &apos;, fzpDir[i]);
+//     })
+//     .catch(e =&gt; {
+//       console.error(&apos;==&gt; ERROR&apos;,fzpDir[i])
+//       console.error(e);
+//     })
+//     console.log(path.extname(fzpDir[i]));
+//   }
+// }
+
+eachPromise(fzpDir, (name, next) =&gt; {
+  if (path.extname(name) === &apos;.fzp&apos;) {
+    const data = fs.readFileSync(path.join(__dirname, &apos;./fixtures/fritzing-parts/core&apos;, name));
+    parseFZP(data)
+    .then((fzp) =&gt; {
+      // console.log(&apos;==&gt; OK   &apos;, name);
+      next();
+    })
+    .catch((e) =&gt; {
+      console.error(&apos;\n==&gt; ERROR&apos;, name);
+      console.error(e);
+      next();
+    });
+  }
+}, () =&gt; {
+  console.log(&apos;==&gt; done&apos;);
 });
 
-test(&apos;Test new FZP (version)&apos;, () =&gt; {
-  let fzp = new FZP({version: &apos;test&apos;});
-  expect(fzp.version).toEqual(&apos;test&apos;);
+function eachPromise(items, task, cb) {
+  let idx = 0;
+  let len = items.length;
+  iter();
+  function iter() {
+    task(items[idx++], function() {
+ idx &gt;= len ? cb() : iter();
 });
-
-test(&apos;Test FZP setTag, totalTags&apos;, () =&gt; {
-  let fzp = new FZP();
-  fzp.setTag(&apos;test-tag-1&apos;);
-  fzp.setTag(&apos;test-tag-2&apos;);
-  expect(fzp.totalTags()).toEqual(2);
-  expect(fzp.tags).toEqual([&apos;test-tag-1&apos;, &apos;test-tag-2&apos;]);
-});
-
-test(&apos;Test FZP setProperty, getProperty&apos;, () =&gt; {
-  let fzp = new FZP();
-  fzp.setProperty(&apos;test-prop-1&apos;, 123, true);
-  expect(fzp.properties).toEqual({
-    &apos;test-prop-1&apos;: {value: 123, showInLabel: true},
-  });
-  expect(fzp.getProperty(&apos;test-prop-1&apos;).value).toEqual(123);
-  expect(fzp.getProperty(&apos;test-prop-1&apos;).showInLabel).toEqual(true);
-});
+  }
+};
 </code></pre>
 
 </div>
