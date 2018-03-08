@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/paulvollmer/fzp-js/issues"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "pretest": "make lint",
     "test": "make test",
