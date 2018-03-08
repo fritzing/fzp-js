@@ -86,21 +86,31 @@ function parseFZP(data) {
               c.id = connector.$.id;
               c.name = connector.$.name;
               c.type = connector.$.type;
-              c.description = connector.description[0];
+              if (connector.description) {
+                c.description = connector.description[0];
+              }
 
-              c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);
-              c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);
+              if (connector.views[0].breadboardView) {
+                c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);
+              }
 
-              for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {
-                switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {
-                  case 'copper0':
+              if (connector.views[0].schematicView) {
+                c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);
+              }
+
+              if (connector.views[0].pcbView) {
+                for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {
+                  switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {
+                    case 'copper0':
                     c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
                     break;
-                  case 'copper1':
+                    case 'copper1':
                     c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
                     break;
+                  }
                 }
               }
+
               fzp.connectors[c.id] = c;
             }
           }
