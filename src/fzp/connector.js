@@ -10,9 +10,7 @@ class FZPConnector {
    * FZPConnector constructor
    * @param {Object} opt - the options
    */
-  constructor(opt) {
-    opt = opt || {views: {pcb: {}}};
-
+  constructor(opt = {views: {pcb: {}}}) {
     /**
      * The id of the FZP connector.
      * @type {String}

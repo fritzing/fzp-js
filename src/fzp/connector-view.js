@@ -8,9 +8,7 @@ class FZPConnectorView {
    * FZPConnectorView constructor
    * @param {Object} opt
    */
-  constructor(opt) {
-    opt = opt || {};
-
+  constructor(opt = {}) {
     /**
      * the FZP connector view layer
      * @type {String}

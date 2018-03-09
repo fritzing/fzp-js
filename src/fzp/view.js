@@ -12,8 +12,9 @@ class FZPView {
    * @param {Array} ids
    * @param {Boolean} flipH
    * @param {Boolean} flipV
+   * @param {String} svg The raw svg string
    */
-  constructor(image, ids, flipH, flipV) {
+  constructor(image, ids, flipH, flipV, svg) {
     /**
      * The FZPView image
      * @type {String}
@@ -42,7 +43,7 @@ class FZPView {
      * The FZPView svg data
      * @type {String}
      */
-    this.svg = null;
+    this.svg = svg || null;
   }
 
   /**

@@ -1,3 +1,5 @@
+run: all test-load
+
 include node_modules/fritzing-js/setup.mk
 
 test-load-data:

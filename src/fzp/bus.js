@@ -8,9 +8,7 @@ class FZPBus {
    * FZPBus constructor
    * @param {Object} opt
    */
-  constructor(opt) {
-    opt = opt || {};
-
+  constructor(opt = {}) {
     /**
      * Store the FZP bus id
      * @type {String}
