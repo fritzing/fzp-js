@@ -85,6 +85,18 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber19",
+    "Test FZPBus setId, getId",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber25",
+    "Test FZPBus setNodeMember, getNodeMember",
+    "test"
+  ],
+  [
+    "",
     "test-file/test/utils.test.js.html#lineNumber94",
     "Test loadFZP and all SVGs",
     "test"
@@ -123,6 +135,18 @@ window.esdocSearchIndex = [
     "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber10",
     "Test new FZP (version)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber12",
+    "Test new FZPBus",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber5",
+    "Test new FZPBus (empty)",
     "test"
   ],
   [
@@ -492,6 +516,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/bus.js~fzpbus#getid",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-getId",
+    "src/fzp/bus.js~FZPBus#getId",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#getnodemembers",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-getNodeMembers",
+    "src/fzp/bus.js~FZPBus#getNodeMembers",
+    "method"
+  ],
+  [
     "src/fzp/bus.js~fzpbus#id",
     "class/src/fzp/bus.js~FZPBus.html#instance-member-id",
     "src/fzp/bus.js~FZPBus#id",
@@ -504,15 +540,21 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/fzp/bus.js~fzpbus#setmodemember",
-    "class/src/fzp/bus.js~FZPBus.html#instance-method-setModeMember",
-    "src/fzp/bus.js~FZPBus#setModeMember",
+    "src/fzp/bus.js~fzpbus#setid",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-setId",
+    "src/fzp/bus.js~FZPBus#setId",
     "method"
   ],
   [
-    "src/fzp/bus.js~fzpbus#setid",
-    "class/src/fzp/bus.js~FZPBus.html#instance-method-setid",
-    "src/fzp/bus.js~FZPBus#setid",
+    "src/fzp/bus.js~fzpbus#setnodemember",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-setNodeMember",
+    "src/fzp/bus.js~FZPBus#setNodeMember",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#totalnodemembers",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-totalNodeMembers",
+    "src/fzp/bus.js~FZPBus#totalNodeMembers",
     "method"
   ],
   [
@@ -528,6 +570,30 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/connector-view.js~fzpconnectorview#getlayer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getLayer",
+    "src/fzp/connector-view.js~FZPConnectorView#getLayer",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getlegid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getLegId",
+    "src/fzp/connector-view.js~FZPConnectorView#getLegId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getsvgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getSvgId",
+    "src/fzp/connector-view.js~FZPConnectorView#getSvgId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getterminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getTerminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#getTerminalId",
+    "method"
+  ],
+  [
     "src/fzp/connector-view.js~fzpconnectorview#layer",
     "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-layer",
     "src/fzp/connector-view.js~FZPConnectorView#layer",
@@ -538,6 +604,30 @@ window.esdocSearchIndex = [
     "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-legId",
     "src/fzp/connector-view.js~FZPConnectorView#legId",
     "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setlayer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setLayer",
+    "src/fzp/connector-view.js~FZPConnectorView#setLayer",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setlegid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setLegId",
+    "src/fzp/connector-view.js~FZPConnectorView#setLegId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setsvgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setSvgId",
+    "src/fzp/connector-view.js~FZPConnectorView#setSvgId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setterminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setTerminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#setTerminalId",
+    "method"
   ],
   [
     "src/fzp/connector-view.js~fzpconnectorview#svgid",
@@ -792,6 +882,30 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/property.js~fzpproperty#getshowinlabel",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-getShowInLabel",
+    "src/fzp/property.js~FZPProperty#getShowInLabel",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#getvalue",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-getValue",
+    "src/fzp/property.js~FZPProperty#getValue",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#setshowinlabel",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-setShowInLabel",
+    "src/fzp/property.js~FZPProperty#setShowInLabel",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#setvalue",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-setValue",
+    "src/fzp/property.js~FZPProperty#setValue",
+    "method"
+  ],
+  [
     "src/fzp/property.js~fzpproperty#showinlabel",
     "class/src/fzp/property.js~FZPProperty.html#instance-member-showInLabel",
     "src/fzp/property.js~FZPProperty#showInLabel",
@@ -897,6 +1011,12 @@ window.esdocSearchIndex = [
     "test/_fritzing-parts-test.js",
     "test-file/test/_fritzing-parts-test.js.html",
     "test/_fritzing-parts-test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.bus.test.js",
+    "test-file/test/fzp.bus.test.js.html",
+    "test/fzp.bus.test.js",
     "testFile"
   ],
   [

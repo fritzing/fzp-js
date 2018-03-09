@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/fzp/connector-view.js | fzp-js</title>
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/fzp.bus.test.js | fzp-js</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -45,108 +45,37 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/fzp/connector-view.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">test/fzp.bus.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-/**
- * FZPConnectorView class
- *
- * @example
- * const {FZPConnectorView} = require(&apos;fzp-js&apos;)
- *
- * let connectorView = new FZPConnectorView({layer: &apos;sample&apos;, svgId: &apos;sample.svg&apos;})
- * connectorView.legId = &apos;sample-leg&apos;
- * connectorView.terminalId = &apos;sample-terminal&apos;
- */
-class FZPConnectorView {
-  /**
-   * FZPConnectorView constructor
-   * @param {Object} opt
-   */
-  constructor(opt = {}) {
-    /**
-     * the FZP connector view layer
-     * @type {String}
-     */
-    this.layer = opt.layer || null;
+const FZPBus = require(&apos;../src/fzp/bus&apos;);
 
-    /**
-     * the FZP connector view svg
-     * @type {String}
-     */
-    this.svgId = opt.svgId || null;
+test(&apos;Test new FZPBus (empty)&apos;, () =&gt; {
+  let bus = new FZPBus();
+  expect(bus.id).toEqual(null);
+  expect(bus.nodeMembers).toHaveLength(0);
+  expect(bus.nodeMembers).toEqual([]);
+});
 
-    /**
-     * the FZP connector view leg
-     * @type {String}
-     */
-    this.legId = opt.legId || null;
+test(&apos;Test new FZPBus&apos;, () =&gt; {
+  let bus = new FZPBus({id: &apos;b&apos;, nodeMembers: [1, 2, 3]});
+  expect(bus.id).toEqual(&apos;b&apos;);
+  expect(bus.nodeMembers).toHaveLength(3);
+  expect(bus.nodeMembers).toEqual([1, 2, 3]);
+});
 
-    /**
-     * the FZP connector view terminal
-     * @type {String}
-     */
-    this.terminalId = opt.terminalId || null;
-  }
+test(&apos;Test FZPBus setId, getId&apos;, () =&gt; {
+  let bus = new FZPBus();
+  bus.setId(&apos;b&apos;);
+  expect(bus.getId()).toEqual(&apos;b&apos;);
+});
 
-  /**
-   * @param {String} l
-   */
-  setLayer(l) {
-    this.layer = l;
-  }
-
-  /**
-   * @return {String}
-   */
-  getLayer() {
-    return this.layer;
-  }
-
-  /**
-   * @param {String} id
-   */
-  setSvgId(id) {
-    this.svgId = id;
-  }
-
-  /**
-   * @return {String}
-   */
-  getSvgId() {
-    return this.svgId;
-  }
-
-  /**
-   * @param {String} leg
-   */
-  setLegId(leg) {
-    this.legId = leg;
-  }
-
-  /**
-   * @return {String}
-   */
-  getLegId() {
-    return this.legId;
-  }
-
-  /**
-   * @param {String} term
-   */
-  setTerminalId(term) {
-    this.terminalId = term;
-  }
-
-  /**
-   * @return {String}
-   */
-  getTerminalId() {
-    return this.terminalId;
-  }
-}
-
-module.exports = FZPConnectorView;
+test(&apos;Test FZPBus setNodeMember, getNodeMember&apos;, () =&gt; {
+  let bus = new FZPBus();
+  bus.setNodeMember(1);
+  expect(bus.totalNodeMembers()).toEqual(1);
+  expect(bus.getNodeMembers()).toEqual([1]);
+});
 </code></pre>
 
 </div>

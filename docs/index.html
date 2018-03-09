@@ -45,17 +45,15 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js--a-href--https---paulvollmer-net-fzp-js----img-src--https---paulvollmer-net-fzp-js-badge-svg--alt------a-">fzp-js <a href="https://paulvollmer.net/fzp-js/"><img src="https://paulvollmer.net/fzp-js/badge.svg" alt=""></a></h1><p>fritzing fzp javascript library</p>
-<h2 id="development">Development</h2><pre><code class="lang-sh"><code class="source-code prettyprint">yarn install
-make test</code>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js--a-href--https---fritzing-github-io-fzp-js----img-src--https---fritzing-github-io-fzp-js-badge-svg--alt------a-">fzp-js <a href="https://fritzing.github.io/fzp-js/"><img src="https://fritzing.github.io/fzp-js/badge.svg" alt=""></a></h1><p>The fritzing fzp javascript library is for processing fritzing fzp xml data.<br>The Library can be used to load fzp&apos;s, parse and marshal to XML.</p>
+<h2 id="installation">Installation</h2><p>Install the npm package</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install fritzing/fzp-js --save</code>
 </code></pre>
-<p>and lint your files before you commit</p>
-<pre><code class="lang-sh"><code class="source-code prettyprint">make lint</code>
+<p>or use yarn to install and add the dependency to your <code>package.json</code></p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">yarn add fritzing/fzp-js</code>
 </code></pre>
-<p>to build an es5 compatible version run</p>
-<pre><code class="lang-sh"><code class="source-code prettyprint">make build</code>
-</code></pre>
-<h2 id="usage">Usage</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">const {FZPUtils} = require(&apos;fzp-js&apos;)
+<h2 id="usage">Usage</h2><p>Let&apos;s start with a simple szenario and load a fzp file and all svg&apos;s.<br>Documentation of the library can be found <a href="https://fritzing.github.io/fzp-js/">here</a></p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const {FZPUtils} = require(&apos;fzp-js&apos;)
 
 const url = &apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;
 FZPUtils.loadFZP(url).then((fzp) =&gt; {
@@ -71,6 +69,15 @@ FZPUtils.loadFZP(url).then((fzp) =&gt; {
 }).catch((e) =&gt; {
   throw new Error(err)
 })</code>
+</code></pre>
+<h2 id="development">Development</h2><pre><code class="lang-sh"><code class="source-code prettyprint">yarn install
+make test</code>
+</code></pre>
+<p>and lint your files before you commit</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make lint</code>
+</code></pre>
+<p>to build an es5 compatible version run</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make build</code>
 </code></pre>
 <h2 id="license">License</h2><p><a href="LICENSE">MIT-LICENSE</a></p>
 </div>
