@@ -4,106 +4,108 @@ const FZPView = require('./view');
 const FZPProperty = require('./property');
 
 /**
- * The FZP class
+ * The FZP class is the main fzp data entry.
+ * Here you can access the main data properties/objects and some utility functions
+ * can be used to load svgs as string, count the total number of connections or set a connector.
  */
 class FZP {
   /**
-   * FZP constructor
+   * FZP constructor has an opt argument object that can be used to setup data at the initialization.
    * @param {Object} opt
    */
   constructor(opt = {}) {
     /**
-     * the module id
+     * The FZP module id
      * @type {String}
      */
     this.moduleId = opt.module || '';
 
     /**
-     * the fritzing version
+     * The FZP fritzing version
      * @type {String}
      */
     this.fritzingVersion = opt.fritzingVersion || '';
 
     /**
-     * the FZP version
+     * The FZP version
      * @type {String}
      */
     this.version = opt.version || '0.0.0';
 
     /**
-     * the FZP title
+     * The FZP title
      * @type {String}
      */
     this.title = opt.title || '';
 
     /**
-     * the description
+     * The FZP description
      * @type {String}
      */
     this.description = opt.description || '';
 
     /**
-     * the author
+     * The FZP author
      * @type {String}
      */
     this.author = opt.author || '';
 
     /**
-     * the date
+     * The FZP date
      * @type {String}
      */
     this.date = opt.date || '';
 
     /**
-     * the url
+     * The FZP url
      * @type {String}
      */
     this.url = opt.url || '';
 
     /**
-     * the label
+     * The FZP label
      * @type {String}
      */
     this.label = opt.label || '';
 
     /**
-     * the tags
+     * The FZP tags
      * @type {Array}
      */
     this.tags = opt.tags || [];
 
     /**
-     * the taxonomy
+     * The FZP taxonomy
      * @type {String}
      */
     this.taxonomy = opt.taxonomy || '';
 
     /**
-     * the language
+     * The FZP language
      * @type {String}
      */
     this.language = opt.language || '';
 
     /**
-     * the family
+     * The FZP family
      * @type {String}
      */
     this.family = opt.family || '';
 
     /**
-     * the variant
+     * The FZP variant
      * @type {String}
      */
     this.variant = opt.variant || '';
 
     /**
-     * the properties
+     * The FZP properties
      * @type {Object}
      */
     this.properties = opt.properties || {};
 
     /**
-     * the four views (icon, breadboard, schematic, pcb)
+     * The FZP views (icon, breadboard, schematic, pcb)
      * @type {Object}
      */
     this.views = {
@@ -114,13 +116,12 @@ class FZP {
     };
 
     /**
-     * the connectors
+     * The FZP connectors
      * @type {Object}
      */
     this.connectors = opt.connectors || {};
     /**
-     * the buses
-     * A bus is a instance of the Bus class
+     * The FZP buses is a map with instances of the Bus class.
      * @type {Object}
      */
     this.buses = opt.buses || {};
@@ -135,7 +136,7 @@ class FZP {
   }
 
   /**
-   * setTag
+   * Set a tag
    * @param {String} tag
    * @return {FZP}
    */
@@ -154,28 +155,28 @@ class FZP {
 
   /**
    * Create or update a FZPProperty instance to the FZP.
-   * @param {String} name
+   * @param {String} key
    * @param {String} value
    * @param {String} showInLabel
    * @return {FZP}
    */
-  setProperty(name, value, showInLabel) {
-    this.properties[name] = new FZPProperty(value, showInLabel);
+  setProperty(key, value, showInLabel) {
+    this.properties[key] = new FZPProperty(value, showInLabel);
     return this;
   }
 
   /**
-   * Get a FZP property by the given name.
-   * @param {String} name
+   * Get a FZP property by the given key.
+   * @param {String} key
    * @return {FZPProperty}
    */
-  getProperty(name) {
-    return this.properties[name];
+  getProperty(key) {
+    return this.properties[key];
   }
 
   /**
-   * setView
-   * @param {String} name
+   * Set a view
+   * @param {String} name The name of the view can be 'breadboard', 'pcb', or 'schematic'
    * @param {FZPView} view
    * @return {FZP}
    */
