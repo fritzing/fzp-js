@@ -11,9 +11,7 @@ class FZP {
    * FZP constructor
    * @param {Object} opt
    */
-  constructor(opt) {
-    opt = opt || {};
-
+  constructor(opt = {}) {
     /**
      * the module id
      * @type {String}
@@ -147,6 +145,14 @@ class FZP {
   }
 
   /**
+   * Get the total number of properties.
+   * @return {Number}
+   */
+  totalProperties() {
+    return Object.keys(this.properties).length;
+  }
+
+  /**
    * Create or update a FZPProperty instance to the FZP.
    * @param {String} name
    * @param {String} value
@@ -178,6 +184,15 @@ class FZP {
     return this;
   }
 
+
+  /**
+   * Get the total number of connector.
+   * @return {Number}
+   */
+  totalConnector() {
+    return Object.keys(this.connectors).length;
+  }
+
   /**
    * setConnector
    * @param {String} name
@@ -187,6 +202,14 @@ class FZP {
   setConnector(name, connector) {
     console.log('not jet implemented');
     return this;
+  }
+
+  /**
+   * Get the total number of buses.
+   * @return {Number}
+   */
+  totalBuses() {
+    return Object.keys(this.buses).length;
   }
 
   /**
@@ -203,7 +226,7 @@ class FZP {
   /**
    * Load all SVG sources.
    * @param {String} baseurl
-   * @return {Promise}
+   * @return {FZP}
    */
   loadSVGs(baseurl) {
     return this.views.breadboard.loadSVG(baseurl)
@@ -212,7 +235,7 @@ class FZP {
       .then((d) => {
         return this.views.pcb.loadSVG(baseurl)
         .then((d) => {
-          return d;
+          return this;
         });
       });
     });
