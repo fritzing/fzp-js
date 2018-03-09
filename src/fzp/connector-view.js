@@ -2,6 +2,13 @@
 
 /**
  * FZPConnectorView class
+ *
+ * @example
+ * const {FZPConnectorView} = require('fzp-js')
+ *
+ * let connectorView = new FZPConnectorView({layer: 'sample', svgId: 'sample.svg'})
+ * connectorView.legId = 'sample-leg'
+ * connectorView.terminalId = 'sample-terminal'
  */
 class FZPConnectorView {
   /**
@@ -32,6 +39,62 @@ class FZPConnectorView {
      * @type {String}
      */
     this.terminalId = opt.terminalId || null;
+  }
+
+  /**
+   * @param {String} l
+   */
+  setLayer(l) {
+    this.layer = l;
+  }
+
+  /**
+   * @return {String}
+   */
+  getLayer() {
+    return this.layer;
+  }
+
+  /**
+   * @param {String} id
+   */
+  setSvgId(id) {
+    this.svgId = id;
+  }
+
+  /**
+   * @return {String}
+   */
+  getSvgId() {
+    return this.svgId;
+  }
+
+  /**
+   * @param {String} leg
+   */
+  setLegId(leg) {
+    this.legId = leg;
+  }
+
+  /**
+   * @return {String}
+   */
+  getLegId() {
+    return this.legId;
+  }
+
+  /**
+   * @param {String} term
+   */
+  setTerminalId(term) {
+    this.terminalId = term;
+  }
+
+  /**
+   * @return {String}
+   */
+  getTerminalId() {
+    return this.terminalId;
   }
 }
 

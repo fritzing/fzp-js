@@ -2,6 +2,13 @@
 
 /**
  * FZP Bus class
+ *
+ * @example
+ * const {FZBus} = require('fzp-js')
+ *
+ * let bus = new FZBus()
+ * bus.setId('sample')
+ * bus.setModeMember('mode')
  */
 class FZPBus {
   /**
@@ -27,9 +34,17 @@ class FZPBus {
    * @param {String} id
    * @return {FZPBus}
    */
-  setid(id) {
+  setId(id) {
     this.id = id;
     return this;
+  }
+
+  /**
+   * Return the id
+   * @return {String}
+   */
+  getId() {
+    return this.id;
   }
 
   /**
@@ -37,11 +52,27 @@ class FZPBus {
    * @param {String} m
    * @return {FZPBus}
    */
-  setModeMember(m) {
+  setNodeMember(m) {
     if (!this.existModeMember(m)) {
       this.nodeMembers.push(m);
     }
     return this;
+  }
+
+  /**
+   * Return the nodeMembers array
+   * @return {Array}
+   */
+  getNodeMembers() {
+    return this.nodeMembers;
+  }
+
+  /**
+   * Return the total number of nodeMembers
+   * @return {Number}
+   */
+  totalNodeMembers() {
+    return this.nodeMembers.length;
   }
 
   /**

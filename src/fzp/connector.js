@@ -4,6 +4,17 @@ const FZPConnectorView = require('./connector-view');
 
 /**
  * FZPConnector class
+ *
+ * @example
+ * const {FZPConnector} = require('fzp-js')
+ *
+ * let connector = new FZPConnector({id: 'sample-id', name: 'sample-name'})
+ * connector.type = 'sample-type'
+ * connector.description = 'sample-description'
+ * connector.views.breadboard.setLayer('sample-b-layer')
+ * connector.views.breadboard.setSvgId('sample-b-svg')
+ * connector.views.breadboard.setLegId('sample-b-leg')
+ * connector.views.breadboard.setTerminalId('sample-b-terminal')
  */
 class FZPConnector {
   /**

@@ -7,6 +7,17 @@ const FZPProperty = require('./property');
  * The FZP class is the main fzp data entry.
  * Here you can access the main data properties/objects and some utility functions
  * can be used to load svgs as string, count the total number of connections or set a connector.
+ *
+ * @example
+ * const {FZP} = require('fzp-js')
+ *
+ * let fzp = new FZP({moduleId: 'sample'})
+ * fzp.version = '1.0.0'
+ * fzp.setTag('demo')
+ * fzp.setProperty('p', 'hello', true)
+ * fzp.setView()
+ * fzp.setConnector()
+ * fzp.setBus()
  */
 class FZP {
   /**
@@ -157,10 +168,13 @@ class FZP {
    * Create or update a FZPProperty instance to the FZP.
    * @param {String} key
    * @param {String} value
-   * @param {String} showInLabel
+   * @param {Boolean} showInLabel
    * @return {FZP}
    */
-  setProperty(key, value, showInLabel) {
+  setProperty(key, value = null, showInLabel = false) {
+    if (!key) {
+      throw new Error('Missing first argument at function');
+    }
     this.properties[key] = new FZPProperty(value, showInLabel);
     return this;
   }
@@ -171,6 +185,9 @@ class FZP {
    * @return {FZPProperty}
    */
   getProperty(key) {
+    if (!key) {
+      throw new Error('Missing first argument at function');
+    }
     return this.properties[key];
   }
 

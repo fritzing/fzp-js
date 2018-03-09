@@ -4,6 +4,11 @@ const axios = require('axios');
 
 /**
  * FZPView class is used by the fzp breadboard, pcb and schematics view.
+ *
+ * @example
+ * const {FZPView} = require('fzp-js')
+ *
+ * let view = new FZPView()
  */
 class FZPView {
   /**

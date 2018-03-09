@@ -12,6 +12,18 @@ const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
 
 /**
  * Load a FZP file from the given URL.
+ *
+ * @example
+ * const {FZPUtils} = require('fzp-js')
+ *
+ * FZPUtils.loadFZP('https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp')
+ * .then((fzz) => {
+ *   console.log(fzz.fz)
+ * })
+ * .catch((err) => {
+ *   console.error(err)
+ * })
+ *
  * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
@@ -24,6 +36,18 @@ function loadFZP(url) {
 
 /**
  * Load a FZP and all linked SVGs
+ *
+ * @example
+ * const {FZPUtils} = require('fzp-js')
+ *
+ * FZPUtils.loadFZPandSVGs('https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp')
+ * .then((fzz) => {
+ *   console.log(fzz)
+ * })
+ * .catch((err) => {
+ *   console.error(err)
+ * })
+ *
  * @param {String} url URL to the FZP file.
  * @return {FZP}
  */
@@ -169,6 +193,13 @@ function parseConnectorView(xml) {
 
 /**
  * Create a xml string of a FZP instance.
+ *
+ * @example
+ * const {marshalToXML} = require('fzp-js')
+ *
+ * const xmlData = FZPUtils.marshalToXML(fzp)
+ * console.log(xmlData)
+ *
  * @param {FZP} fzp
  * @return {String}
  */
