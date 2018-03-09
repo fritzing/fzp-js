@@ -1,11 +1,12 @@
 'use strict';
 
-const {parseFZP, loadFZP, marshalToXML} = require('../src/utils');
+const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require('../src/utils');
 const FZP = require('../src/fzp/fzp');
 const fs = require('fs');
 
 const FritzingAPI = 'https://fritzing.github.io/fritzing-parts';
 const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
+const FritzingAPICoreLEDFzp = FritzingAPI+'/core/LED-generic-3mm.fzp';
 
 test('Test parseFZP', (done) => {
   const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');
@@ -74,7 +75,7 @@ test('Test parseFZP', (done) => {
 });
 
 test('Test loadFZP and loadSVG', (done) => {
-  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) => {
     // load the svg of the breadboard view
     fzp.views.breadboard.loadSVG(FritzingAPISVGCore)
@@ -90,15 +91,15 @@ test('Test loadFZP and loadSVG', (done) => {
   });
 });
 
-test('Test loadFZP all SVGs', (done) => {
-  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
+test('Test loadFZP and all SVGs', (done) => {
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) => {
     fzp.loadSVGs(FritzingAPISVGCore)
     .then((d) => {
       // check if the svg string is not empty
-      expect(fzp.views.breadboard.svg).not.toBe('');
-      expect(fzp.views.pcb.svg).not.toBe('');
-      expect(fzp.views.schematic.svg).not.toBe('');
+      expect(fzp.views.breadboard.svg).not.toEqual('');
+      expect(fzp.views.pcb.svg).not.toEqual('');
+      expect(fzp.views.schematic.svg).not.toEqual('');
       done();
     })
     .catch((err) => {
@@ -107,6 +108,21 @@ test('Test loadFZP all SVGs', (done) => {
   })
   .catch((e) => {
     done(e);
+  });
+});
+
+test('Test loadFZPandSVGs', (done) => {
+  loadFZPandSVGs(FritzingAPICoreLEDFzp)
+  .then((fzp) => {
+    // check if the svg string is not empty
+    expect(fzp.views.breadboard.svg).not.toEqual('');
+    expect(fzp.views.pcb.svg).not.toEqual('');
+    expect(fzp.views.schematic.svg).not.toEqual('');
+    done();
+  })
+  .catch((err) => {
+    console.log('ERROR', err);
+    done(err);
   });
 });
 
@@ -142,7 +158,7 @@ test('Test marshalToXML', (done) => {
 });
 
 test('Test marshalToXML from loaded part', (done) => {
-  loadFZP(FritzingAPI+'/core/LED-generic-3mm.fzp')
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) => {
     let xml = marshalToXML(fzp);
     expect(xml).not.toEqual('');

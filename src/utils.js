@@ -7,6 +7,9 @@ const FZP = require('./fzp/fzp');
 const FZPConnector = require('./fzp/connector');
 const FZPConnectorView = require('./fzp/connector-view');
 
+const FritzingAPI = 'https://fritzing.github.io/fritzing-parts';
+const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
+
 /**
  * Load a FZP file from the given URL.
  * @param {String} url URL to the FZP file.
@@ -16,6 +19,19 @@ function loadFZP(url) {
   return axios.get(url, {responseType: 'xml'})
   .then((res) => {
     return parseFZP(res.data);
+  });
+}
+
+/**
+ * Load a FZP and all linked SVGs
+ * @param {String} url URL to the FZP file.
+ * @return {FZP}
+ */
+function loadFZPandSVGs(url) {
+  return loadFZP(url).then((fzp) => {
+    return fzp.loadSVGs(FritzingAPISVGCore).then((d) => {
+      return fzp;
+    });
   });
 }
 
@@ -189,6 +205,7 @@ function marshalToXML(fzp) {
 
 module.exports = {
   loadFZP,
+  loadFZPandSVGs,
   parseFZP,
   parseProperties,
   marshalToXML,
