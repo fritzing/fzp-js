@@ -31,7 +31,7 @@ eachPromise(fzpDir, (name, next) => {
       next();
     })
     .catch((e) => {
-      console.error('\n==> ERROR', name);
+      console.error('==> ERROR', name);
       console.error(e);
       next();
     });

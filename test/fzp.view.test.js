@@ -3,46 +3,47 @@
 const FZPView = require('../src/fzp/view');
 
 test('Test new FZPView (empty)', () => {
-  let fzp = new FZPView();
-  expect(fzp.image).toEqual(null);
-  expect(fzp.layerIds).toEqual([]);
-  expect(fzp.flipHorizontal).toEqual(false);
-  expect(fzp.flipVertical).toEqual(false);
-  expect(fzp.svg).toEqual(null);
+  let fzpView = new FZPView();
+  expect(fzpView.image).toEqual(null);
+  expect(fzpView.layerIds).toEqual([]);
+  expect(fzpView.flipHorizontal).toEqual(false);
+  expect(fzpView.flipVertical).toEqual(false);
+  expect(fzpView.svg).toEqual(null);
 });
 
 test('Test new FZPView (image name)', () => {
-  let fzp = new FZPView('test');
-  expect(fzp.image).toEqual('test');
-  expect(fzp.layerIds).toEqual([]);
-  expect(fzp.flipHorizontal).toEqual(false);
-  expect(fzp.flipVertical).toEqual(false);
-  expect(fzp.svg).toEqual(null);
+  let fzpView = new FZPView('test');
+  expect(fzpView.image).toEqual('test');
+  expect(fzpView.layerIds).toEqual([]);
+  expect(fzpView.flipHorizontal).toEqual(false);
+  expect(fzpView.flipVertical).toEqual(false);
+  expect(fzpView.svg).toEqual(null);
 });
 
 test('Test new FZPView', () => {
-  let fzp = new FZPView('test', ['breadboard'], true, true);
-  expect(fzp.image).toEqual('test');
-  expect(fzp.layerIds).toEqual(['breadboard']);
-  expect(fzp.flipHorizontal).toEqual(true);
-  expect(fzp.flipVertical).toEqual(true);
-  fzp.setLayerId('foo');
-  expect(fzp.layerIds).toEqual(['breadboard', 'foo']);
-  expect(fzp.existLayerId('foo')).toEqual(true);
-  expect(fzp.flipHorizontal).toEqual(true);
-  expect(fzp.flipVertical).toEqual(true);
-  fzp.setLayerId('foo');
-  expect(fzp.totalLayerId()).toEqual(2);
-  fzp.setSVG('hello-svg');
-  expect(fzp.svg).toEqual('hello-svg');
+  let fzpView = new FZPView('test', ['breadboard'], true, true);
+  expect(fzpView.image).toEqual('test');
+  expect(fzpView.layerIds).toEqual(['breadboard']);
+  expect(fzpView.flipHorizontal).toEqual(true);
+  expect(fzpView.flipVertical).toEqual(true);
+  fzpView.setLayerId('foo');
+  expect(fzpView.layerIds).toEqual(['breadboard', 'foo']);
+  expect(fzpView.existLayerId('foo')).toEqual(true);
+  expect(fzpView.flipHorizontal).toEqual(true);
+  expect(fzpView.flipVertical).toEqual(true);
+  fzpView.setLayerId('foo');
+  expect(fzpView.totalLayerId()).toEqual(2);
+  fzpView.setSVG('hello-svg');
+  expect(fzpView.svg).toEqual('hello-svg');
 });
 
 test('Test new FZPView loadSVG', (done) => {
-  let fzp = new FZPView('LED-3mm-red-leg.svg');
-  expect(fzp.image).toEqual('LED-3mm-red-leg.svg');
+  let fzpView = new FZPView('LED-3mm-red-leg.svg');
+  expect(fzpView.image).toEqual('LED-3mm-red-leg.svg');
   const baseurl = 'https://fritzing.github.io/fritzing-parts/svg/core/breadboard/';
-  fzp.loadSVG(baseurl).then((d) => {
+  fzpView.loadSVG(baseurl).then((d) => {
     expect(d).not.toEqual('');
+    expect(fzpView.svg).not.toEqual('');
 
     // check the first and the last line
     let lines = d.split('\n');
