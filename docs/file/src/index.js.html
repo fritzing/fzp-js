@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
@@ -47,17 +48,20 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const FZP = require(&apos;./fzp/fzp&apos;);
 const FZPBus = require(&apos;./fzp/bus&apos;);
-const connector = require(&apos;./fzp/connector&apos;);
+const FZPConnector = require(&apos;./fzp/connector&apos;);
+const FZPConnectorView = require(&apos;./fzp/connector-view&apos;);
+const FZPProperty = require(&apos;./fzp/property&apos;);
 const FZPView = require(&apos;./fzp/view&apos;);
 const FZPUtils = require(&apos;./utils&apos;);
 
 module.exports = {
-  FZP: FZP,
-  FZPBus: FZPBus,
-  FZPConnector: connector.FZPConnector,
-  FZPConnectorView: connector.FZPConnectorView,
-  FZPView: FZPView,
-  FZPUtils: FZPUtils,
+  FZP,
+  FZPBus,
+  FZPConnector,
+  FZPConnectorView,
+  FZPProperty,
+  FZPView,
+  FZPUtils,
 };
 </code></pre>
 

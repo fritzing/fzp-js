@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
@@ -47,12 +48,13 @@
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const {parseFZP, loadFZP, marshalToXML} = require(&apos;../src/utils&apos;);
+const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require(&apos;../src/utils&apos;);
 const FZP = require(&apos;../src/fzp/fzp&apos;);
 const fs = require(&apos;fs&apos;);
 
 const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
 const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
+const FritzingAPICoreLEDFzp = FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;;
 
 test(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
@@ -121,7 +123,7 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
 });
 
 test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
-  loadFZP(FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;)
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) =&gt; {
     // load the svg of the breadboard view
     fzp.views.breadboard.loadSVG(FritzingAPISVGCore)
@@ -137,15 +139,15 @@ test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
   });
 });
 
-test(&apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
-  loadFZP(FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;)
+test(&apos;Test loadFZP and all SVGs&apos;, (done) =&gt; {
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) =&gt; {
     fzp.loadSVGs(FritzingAPISVGCore)
     .then((d) =&gt; {
       // check if the svg string is not empty
-      expect(fzp.views.breadboard.svg).not.toBe(&apos;&apos;);
-      expect(fzp.views.pcb.svg).not.toBe(&apos;&apos;);
-      expect(fzp.views.schematic.svg).not.toBe(&apos;&apos;);
+      expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
+      expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
+      expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
       done();
     })
     .catch((err) =&gt; {
@@ -154,6 +156,21 @@ test(&apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
   })
   .catch((e) =&gt; {
     done(e);
+  });
+});
+
+test(&apos;Test loadFZPandSVGs&apos;, (done) =&gt; {
+  loadFZPandSVGs(FritzingAPICoreLEDFzp)
+  .then((fzp) =&gt; {
+    // check if the svg string is not empty
+    expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
+    expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
+    expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
+    done();
+  })
+  .catch((err) =&gt; {
+    console.log(&apos;ERROR&apos;, err);
+    done(err);
   });
 });
 
@@ -189,7 +206,7 @@ test(&apos;Test marshalToXML&apos;, (done) =&gt; {
 });
 
 test(&apos;Test marshalToXML from loaded part&apos;, (done) =&gt; {
-  loadFZP(FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;)
+  loadFZP(FritzingAPICoreLEDFzp)
   .then((fzp) =&gt; {
     let xml = marshalToXML(fzp);
     expect(xml).not.toEqual(&apos;&apos;);

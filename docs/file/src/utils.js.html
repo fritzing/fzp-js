@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
@@ -54,6 +55,9 @@ const FZP = require(&apos;./fzp/fzp&apos;);
 const FZPConnector = require(&apos;./fzp/connector&apos;);
 const FZPConnectorView = require(&apos;./fzp/connector-view&apos;);
 
+const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
+const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
+
 /**
  * Load a FZP file from the given URL.
  * @param {String} url URL to the FZP file.
@@ -63,6 +67,19 @@ function loadFZP(url) {
   return axios.get(url, {responseType: &apos;xml&apos;})
   .then((res) =&gt; {
     return parseFZP(res.data);
+  });
+}
+
+/**
+ * Load a FZP and all linked SVGs
+ * @param {String} url URL to the FZP file.
+ * @return {FZP}
+ */
+function loadFZPandSVGs(url) {
+  return loadFZP(url).then((fzp) =&gt; {
+    return fzp.loadSVGs(FritzingAPISVGCore).then((d) =&gt; {
+      return fzp;
+    });
   });
 }
 
@@ -236,6 +253,7 @@ function marshalToXML(fzp) {
 
 module.exports = {
   loadFZP,
+  loadFZPandSVGs,
   parseFZP,
   parseProperties,
   marshalToXML,

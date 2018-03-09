@@ -42,6 +42,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "fzp-js/src/utils.js~loadfzpandsvgs",
+    "function/index.html#static-function-loadFZPandSVGs",
+    "<span>loadFZPandSVGs</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
     "fzp-js/src/utils.js~marshaltoxml",
     "function/index.html#static-function-marshalToXML",
     "<span>marshalToXML</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
@@ -79,25 +85,31 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber93",
-    "Test loadFZP all SVGs",
+    "test-file/test/utils.test.js.html#lineNumber94",
+    "Test loadFZP and all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber76",
+    "test-file/test/utils.test.js.html#lineNumber77",
     "Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber113",
+    "test-file/test/utils.test.js.html#lineNumber114",
+    "Test loadFZPandSVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber129",
     "Test marshalToXML",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber144",
+    "test-file/test/utils.test.js.html#lineNumber160",
     "Test marshalToXML from loaded part",
     "test"
   ],
@@ -175,7 +187,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber10",
+    "test-file/test/utils.test.js.html#lineNumber11",
     "Test parseFZP",
     "test"
   ],
@@ -718,6 +730,24 @@ window.esdocSearchIndex = [
     "class/src/fzp/fzp.js~FZP.html#instance-member-title",
     "src/fzp/fzp.js~FZP#title",
     "member"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalbuses",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalBuses",
+    "src/fzp/fzp.js~FZP#totalBuses",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalconnector",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalConnector",
+    "src/fzp/fzp.js~FZP#totalConnector",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalproperties",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalProperties",
+    "src/fzp/fzp.js~FZP#totalProperties",
+    "method"
   ],
   [
     "src/fzp/fzp.js~fzp#totaltags",

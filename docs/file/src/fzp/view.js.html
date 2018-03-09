@@ -30,6 +30,7 @@
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
@@ -59,8 +60,9 @@ class FZPView {
    * @param {Array} ids
    * @param {Boolean} flipH
    * @param {Boolean} flipV
+   * @param {String} svg The raw svg string
    */
-  constructor(image, ids, flipH, flipV) {
+  constructor(image, ids, flipH, flipV, svg) {
     /**
      * The FZPView image
      * @type {String}
@@ -89,7 +91,7 @@ class FZPView {
      * The FZPView svg data
      * @type {String}
      */
-    this.svg = null;
+    this.svg = svg || null;
   }
 
   /**
