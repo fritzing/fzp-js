@@ -86,8 +86,8 @@ test('Test loadFZP and loadSVG', (done) => {
       done(err);
     });
   })
-  .catch((e) => {
-    done(e);
+  .catch((err) => {
+    done(err);
   });
 });
 
@@ -106,8 +106,8 @@ test('Test loadFZP and all SVGs', (done) => {
       done(err);
     });
   })
-  .catch((e) => {
-    done(e);
+  .catch((err) => {
+    done(err);
   });
 });
 
@@ -126,7 +126,7 @@ test('Test loadFZPandSVGs', (done) => {
   });
 });
 
-test('Test marshalToXML', (done) => {
+test('Test marshalToXML', () => {
   let fzp = new FZP();
   fzp.moduleId = 'test-moduleId';
   fzp.fritzingVersion = 'test-fritzingVersion';
@@ -154,7 +154,6 @@ test('Test marshalToXML', (done) => {
 
   // TODO: call 'parseFZP'
   // TODO: check if data is equal to the fzp from above
-  done();
 });
 
 test('Test marshalToXML from loaded part', (done) => {
@@ -165,7 +164,7 @@ test('Test marshalToXML from loaded part', (done) => {
     // console.log(xml);
     done();
   })
-  .catch((e) => {
-    done(e);
+  .catch((err) => {
+    done(err);
   });
 });

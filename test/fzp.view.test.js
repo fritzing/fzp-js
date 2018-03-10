@@ -52,8 +52,8 @@ test('Test new FZPView loadSVG', (done) => {
 
     done();
   })
-  .catch((e) => {
+  .catch((err) => {
     console.error('ERROR', e);
-    done(e);
+    done(err);
   });
 });

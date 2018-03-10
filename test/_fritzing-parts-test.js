@@ -30,9 +30,9 @@ eachPromise(fzpDir, (name, next) => {
       // console.log('==> OK   ', name);
       next();
     })
-    .catch((e) => {
+    .catch((err) => {
       console.error('==> ERROR', name);
-      console.error(e);
+      console.error(err);
       next();
     });
   }
