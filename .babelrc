@@ -1,6 +1,7 @@
 {
   "presets": ["env"],
   "plugins": [
+    ["minify-dead-code-elimination"],
     ["add-header-comment", {
       "header": ["BUILD ARTIFACT, DO NOT EDIT BY HAND"]
     }]
