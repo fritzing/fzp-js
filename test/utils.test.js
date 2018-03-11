@@ -78,6 +78,7 @@ describe('loadFZP', () => {
   test('Test loadFZP', (done) => {
     loadFZP(FritzingAPICoreLEDFzp)
     .then((fzp) => {
+      expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');
       // console.log(fzp);
       done();
     })
