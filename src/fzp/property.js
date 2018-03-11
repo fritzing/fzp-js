@@ -11,23 +11,44 @@
 class FZPProperty {
   /**
    * FZPProperty constructor
-   * @param {String} value
-   * @param {String} showInLabel
    */
-  constructor(value = null, showInLabel = false) {
+  constructor() {
     /**
      * the property value
      * @type {String}
      */
-    this.value = value;
+    this.value = null;
 
     /**
      * the property showInLabel
      * @type {Boolean}
      */
-    this.showInLabel = showInLabel;
+    this.showInLabel = false;
   }
 
+  /**
+  * @param {Object|String} v
+  * @param {Boolean} s
+  */
+  set(v = null, s = false) {
+    // let tmp = {value: v, showInLabel: s};
+    if (v) {
+      switch (typeof v) {
+        case 'object':
+          this.setValue(v.value);
+          this.setShowInLabel(v.showInLabel);
+          break;
+        case 'string':
+          this.setValue(v);
+          break;
+        default:
+          throw new Error(`FZPProperty type('${typeof v}') not supported`);
+      }
+    }
+    if (s) {
+      this.setShowInLabel(s);
+    }
+  }
   /**
    * Set the FZProperty  value
    * @param {String} val
@@ -49,7 +70,7 @@ class FZPProperty {
    * @param {Boolean} l
    */
   setShowInLabel(l) {
-    this.showInLabel = l;
+    this.showInLabel = l || false;
   }
 
   /**

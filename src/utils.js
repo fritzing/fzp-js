@@ -1,14 +1,11 @@
 'use strict';
 
-const axios = require('axios');
 const xml2js = require('xml2js');
 const parseXml = xml2js.parseString;
 const FZP = require('./fzp/fzp');
 const FZPConnector = require('./fzp/connector');
 const FZPConnectorView = require('./fzp/connector-view');
-
-const FritzingAPI = 'https://fritzing.github.io/fritzing-parts';
-const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
+const {FritzingPartsAPI, FritzingPartsAPIClient} = require('fritzing-parts-api-client-js');
 
 /**
  * Load a FZP file from the given URL.
@@ -16,7 +13,7 @@ const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
  * @example
  * const {FZPUtils} = require('fzp-js')
  *
- * FZPUtils.loadFZP('https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp')
+ * FZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')
  * .then((fzz) => {
  *   console.log(fzz.fz)
  * })
@@ -24,13 +21,16 @@ const FritzingAPISVGCore = FritzingAPI+'/svg/core/';
  *   console.error(err)
  * })
  *
+ * @param {String} src
  * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
-function loadFZP(url) {
-  return axios.get(url, {responseType: 'xml'})
-  .then((res) => {
-    return parseFZP(res.data);
+function loadFZP(src, url = FritzingPartsAPI) {
+  return FritzingPartsAPIClient.getFzp(src, url)
+  .then((fzp) => {
+    // let tmp = parseFZP(fzp);
+    // console.log(tmp);
+    return parseFZP(fzp);
   });
 }
 
@@ -40,7 +40,7 @@ function loadFZP(url) {
  * @example
  * const {FZPUtils} = require('fzp-js')
  *
- * FZPUtils.loadFZPandSVGs('https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp')
+ * FZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')
  * .then((fzz) => {
  *   console.log(fzz)
  * })
@@ -48,12 +48,13 @@ function loadFZP(url) {
  *   console.error(err)
  * })
  *
+ * @param {String} src
  * @param {String} url URL to the FZP file.
  * @return {FZP}
  */
-function loadFZPandSVGs(url) {
-  return loadFZP(url).then((fzp) => {
-    return fzp.loadSVGs(FritzingAPISVGCore).then((d) => {
+function loadFZPandSVGs(src, url = FritzingPartsAPI) {
+  return loadFZP(src, url).then((fzp) => {
+    return fzp.loadSVGs(`${url}/svg/core/`).then((d) => {
       return fzp;
     });
   });
@@ -169,12 +170,16 @@ function parseFZP(data) {
  */
 function parseProperties(xml) {
   let data = {};
-  for (let i = 0; i < xml.length; i++) {
-    data[xml[i].$.name] = {
-      value: xml[i]._,
-      showInLabel: xml[i].$.showInLabel,
-    };
-  }
+  // if (xml) {
+  //   if (xml.length > 0) {
+      for (let i = 0; i < xml.length; i++) {
+        data[xml[i].$.name] = {
+          value: xml[i]._,
+          showInLabel: xml[i].$.showInLabel,
+        };
+      }
+  //   }
+  // }
   return data;
 }
 

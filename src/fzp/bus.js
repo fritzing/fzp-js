@@ -13,20 +13,55 @@
 class FZPBus {
   /**
    * FZPBus constructor
-   * @param {Object} opt
    */
-  constructor(opt = {}) {
+  constructor() {
     /**
      * Store the FZP bus id
      * @type {String}
      */
-    this.id = opt.id || null;
+    this.id = null;
 
     /**
      * Store the FZP node members as an array
      * @type {Array}
      */
-    this.nodeMembers = opt.nodeMembers || [];
+    this.nodeMembers = [];
+  }
+
+  /**
+   * @param {Object|String} v
+   * @param {Array} m
+   */
+  set(v, m) {
+    if (v) {
+      switch (typeof v) {
+        case 'object':
+          if (v.id) {
+            this.setId(v.id);
+          }
+          if (v.nodeMembers) {
+            this.setNodeMember(v.nodeMembers);
+          }
+          return;
+
+        case 'string':
+          this.setId(v);
+          break;
+
+        default:
+          throw new Error(`FZPBus type ('${typeof v}') for argument one not supported`);
+      }
+    }
+
+    if (m) {
+      switch (typeof m) {
+        case 'object':
+          this.setNodeMember(m);
+          break;
+        default:
+          throw new Error(`FZPBus type ('${typeof m}') for argument one not supported`);
+      }
+    }
   }
 
   /**
@@ -53,8 +88,18 @@ class FZPBus {
    * @return {FZPBus}
    */
   setNodeMember(m) {
-    if (!this.existModeMember(m)) {
-      this.nodeMembers.push(m);
+    switch (typeof m) {
+      case 'object':
+        this.nodeMembers = m;
+        break;
+      case 'string':
+      case 'number':
+        if (!this.existModeMember(m)) {
+          this.nodeMembers.push(m);
+        }
+        break;
+      default:
+        throw new Error(`FZPBus nodeMember type ('${typeof m}') not supported`);
     }
     return this;
   }

@@ -175,7 +175,8 @@ class FZP {
     if (!key) {
       throw new Error('Missing first argument at function');
     }
-    this.properties[key] = new FZPProperty(value, showInLabel);
+    this.properties[key] = new FZPProperty();
+    this.properties[key].set(value, showInLabel);
     return this;
   }
 

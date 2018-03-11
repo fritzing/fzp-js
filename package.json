@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "fritzing-parts-api-client-js": "github:fritzing/fritzing-parts-api-client-js#refactor-to-object",
     "xml2js": "^0.4.19"
   }
 }
