@@ -91,7 +91,7 @@ describe('loadFZP', () => {
     .then((fzp) => {
       // load the svg of the breadboard view
       fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)
-      .then((d) => {
+      .then(() => {
         done();
       })
       .catch((err) => {
@@ -107,7 +107,7 @@ describe('loadFZP', () => {
     loadFZP(FritzingAPICoreLEDFzp)
     .then((fzp) => {
       fzp.loadSVGs(FritzingPartsAPISVGCore)
-      .then((d) => {
+      .then(() => {
         // check if the svg string is not empty
         expect(fzp.views.breadboard.svg).not.toEqual('');
         expect(fzp.views.pcb.svg).not.toEqual('');

@@ -54,7 +54,7 @@ function loadFZP(src, url = FritzingPartsAPI) {
  */
 function loadFZPandSVGs(src, url = FritzingPartsAPI) {
   return loadFZP(src, url).then((fzp) => {
-    return fzp.loadSVGs(`${url}/svg/core/`).then((d) => {
+    return fzp.loadSVGs(`${url}/svg/core/`).then(() => {
       return fzp;
     });
   });

@@ -187,7 +187,7 @@ class FZP {
    */
   getProperty(key) {
     if (!key) {
-      throw new Error('Missing first argument at function');
+      throw new Error('Missing first argument at function', key);
     }
     return this.properties[key];
   }
@@ -199,7 +199,7 @@ class FZP {
    * @return {FZP}
    */
   setView(name, view) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, view);
     return this;
   }
 
@@ -219,7 +219,7 @@ class FZP {
    * @return {FZP}
    */
   setConnector(name, connector) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, connector);
     return this;
   }
 
@@ -238,7 +238,7 @@ class FZP {
    * @return {FZP}
    */
   setBus(name, bus) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, bus);
     return this;
   }
 
@@ -249,11 +249,11 @@ class FZP {
    */
   loadSVGs(baseurl) {
     return this.views.breadboard.loadSVG(baseurl)
-    .then((d) => {
+    .then(() => {
       return this.views.schematic.loadSVG(baseurl)
-      .then((d) => {
+      .then(() => {
         return this.views.pcb.loadSVG(baseurl)
-        .then((d) => {
+        .then(() => {
           return this;
         });
       });
