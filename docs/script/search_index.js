@@ -73,146 +73,254 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber23",
-    "Test FZP setProperty, getProperty",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber15",
-    "Test FZP setTag, totalTags",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fzp.bus.test.js.html#lineNumber19",
-    "Test FZPBus setId, getId",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/fzp.bus.test.js.html#lineNumber25",
-    "Test FZPBus setNodeMember, getNodeMember",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber94",
-    "Test loadFZP and all SVGs",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber77",
-    "Test loadFZP and loadSVG",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber114",
-    "Test loadFZPandSVGs",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber129",
-    "Test marshalToXML",
-    "test"
-  ],
-  [
-    "",
-    "test-file/test/utils.test.js.html#lineNumber160",
-    "Test marshalToXML from loaded part",
-    "test"
-  ],
-  [
-    "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber5",
-    "Test new FZP (empty)",
+    "FZP",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber10",
-    "Test new FZP (version)",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber24",
+    "FZP Test FZP setProperty, getProperty",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.bus.test.js.html#lineNumber12",
-    "Test new FZPBus",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber16",
+    "FZP Test FZP setTag, totalTags",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber6",
+    "FZP Test new FZP (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber11",
+    "FZP Test new FZP (version)",
     "test"
   ],
   [
     "",
     "test-file/test/fzp.bus.test.js.html#lineNumber5",
-    "Test new FZPBus (empty)",
+    "FZPBus new",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.connector.test.js.html#lineNumber13",
-    "Test new FZPConnector",
+    "test-file/test/fzp.bus.test.js.html#lineNumber6",
+    "FZPBus new Test new FZPBus",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber14",
+    "FZPBus set",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber15",
+    "FZPBus set Test new FZPBus set (with arg object)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber23",
+    "FZPBus set Test new FZPBus set (with arg string)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber31",
+    "FZPBus set Test new FZPBus set (with args string, array)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber40",
+    "FZPBus setId, getId",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber41",
+    "FZPBus setId, getId Test FZPBus setId, getId",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber48",
+    "FZPBus setNodeMembers, getNodeMembers",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber49",
+    "FZPBus setNodeMembers, getNodeMembers Test FZPBus setNodeMember, getNodeMember",
     "test"
   ],
   [
     "",
     "test-file/test/fzp.connector.test.js.html#lineNumber5",
-    "Test new FZPConnector (empty)",
+    "FZPConnector",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.connector-view.test.js.html#lineNumber13",
-    "Test new FZPConnectorView",
+    "test-file/test/fzp.connector.test.js.html#lineNumber14",
+    "FZPConnector Test new FZPConnector",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber6",
+    "FZPConnector Test new FZPConnector (empty)",
     "test"
   ],
   [
     "",
     "test-file/test/fzp.connector-view.test.js.html#lineNumber5",
-    "Test new FZPConnectorView (empty)",
+    "FZPConnectorView",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.property.test.js.html#lineNumber11",
-    "Test new FZPProperty",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber14",
+    "FZPConnectorView Test new FZPConnectorView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber6",
+    "FZPConnectorView Test new FZPConnectorView (empty)",
     "test"
   ],
   [
     "",
     "test-file/test/fzp.property.test.js.html#lineNumber5",
-    "Test new FZPProperty (empty)",
+    "FZPProperty new",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber23",
-    "Test new FZPView",
+    "test-file/test/fzp.property.test.js.html#lineNumber6",
+    "FZPProperty new Test new FZPProperty (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber13",
+    "FZPProperty set",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber28",
+    "FZPProperty set Test FZPProperty set (object)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber21",
+    "FZPProperty set Test FZPProperty set (with args)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber14",
+    "FZPProperty set Test FZPProperty set (with one arg)",
     "test"
   ],
   [
     "",
     "test-file/test/fzp.view.test.js.html#lineNumber5",
-    "Test new FZPView (empty)",
+    "FZPView",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber14",
-    "Test new FZPView (image name)",
+    "test-file/test/fzp.view.test.js.html#lineNumber24",
+    "FZPView Test new FZPView",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.view.test.js.html#lineNumber40",
-    "Test new FZPView loadSVG",
+    "test-file/test/fzp.view.test.js.html#lineNumber6",
+    "FZPView Test new FZPView (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber15",
+    "FZPView Test new FZPView (image name)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber41",
+    "FZPView Test new FZPView loadSVG",
     "test"
   ],
   [
     "",
     "test-file/test/utils.test.js.html#lineNumber11",
     "Test parseFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber77",
+    "loadFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber78",
+    "loadFZP Test loadFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber107",
+    "loadFZP Test loadFZP and all SVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber90",
+    "loadFZP Test loadFZP and loadSVG",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber128",
+    "loadFZPandSVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber129",
+    "loadFZPandSVGs Test loadFZPandSVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber145",
+    "marshalToXML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber146",
+    "marshalToXML Test marshalToXML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber176",
+    "marshalToXML Test marshalToXML from loaded part",
     "test"
   ],
   [
@@ -538,6 +646,12 @@ window.esdocSearchIndex = [
     "class/src/fzp/bus.js~FZPBus.html#instance-member-nodeMembers",
     "src/fzp/bus.js~FZPBus#nodeMembers",
     "member"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#set",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-set",
+    "src/fzp/bus.js~FZPBus#set",
+    "method"
   ],
   [
     "src/fzp/bus.js~fzpbus#setid",
@@ -891,6 +1005,12 @@ window.esdocSearchIndex = [
     "src/fzp/property.js~fzpproperty#getvalue",
     "class/src/fzp/property.js~FZPProperty.html#instance-method-getValue",
     "src/fzp/property.js~FZPProperty#getValue",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#set",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-set",
+    "src/fzp/property.js~FZPProperty#set",
     "method"
   ],
   [

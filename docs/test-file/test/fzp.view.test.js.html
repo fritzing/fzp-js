@@ -50,59 +50,61 @@
 
 const FZPView = require(&apos;../src/fzp/view&apos;);
 
-test(&apos;Test new FZPView (empty)&apos;, () =&gt; {
-  let fzpView = new FZPView();
-  expect(fzpView.image).toEqual(null);
-  expect(fzpView.layerIds).toEqual([]);
-  expect(fzpView.flipHorizontal).toEqual(false);
-  expect(fzpView.flipVertical).toEqual(false);
-  expect(fzpView.svg).toEqual(null);
-});
+describe(&apos;FZPView&apos;, () =&gt; {
+  test(&apos;Test new FZPView (empty)&apos;, () =&gt; {
+    let fzpView = new FZPView();
+    expect(fzpView.image).toEqual(null);
+    expect(fzpView.layerIds).toEqual([]);
+    expect(fzpView.flipHorizontal).toEqual(false);
+    expect(fzpView.flipVertical).toEqual(false);
+    expect(fzpView.svg).toEqual(null);
+  });
 
-test(&apos;Test new FZPView (image name)&apos;, () =&gt; {
-  let fzpView = new FZPView(&apos;test&apos;);
-  expect(fzpView.image).toEqual(&apos;test&apos;);
-  expect(fzpView.layerIds).toEqual([]);
-  expect(fzpView.flipHorizontal).toEqual(false);
-  expect(fzpView.flipVertical).toEqual(false);
-  expect(fzpView.svg).toEqual(null);
-});
+  test(&apos;Test new FZPView (image name)&apos;, () =&gt; {
+    let fzpView = new FZPView(&apos;test&apos;);
+    expect(fzpView.image).toEqual(&apos;test&apos;);
+    expect(fzpView.layerIds).toEqual([]);
+    expect(fzpView.flipHorizontal).toEqual(false);
+    expect(fzpView.flipVertical).toEqual(false);
+    expect(fzpView.svg).toEqual(null);
+  });
 
-test(&apos;Test new FZPView&apos;, () =&gt; {
-  let fzpView = new FZPView(&apos;test&apos;, [&apos;breadboard&apos;], true, true);
-  expect(fzpView.image).toEqual(&apos;test&apos;);
-  expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;]);
-  expect(fzpView.flipHorizontal).toEqual(true);
-  expect(fzpView.flipVertical).toEqual(true);
-  fzpView.setLayerId(&apos;foo&apos;);
-  expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;, &apos;foo&apos;]);
-  expect(fzpView.existLayerId(&apos;foo&apos;)).toEqual(true);
-  expect(fzpView.flipHorizontal).toEqual(true);
-  expect(fzpView.flipVertical).toEqual(true);
-  fzpView.setLayerId(&apos;foo&apos;);
-  expect(fzpView.totalLayerId()).toEqual(2);
-  fzpView.setSVG(&apos;hello-svg&apos;);
-  expect(fzpView.svg).toEqual(&apos;hello-svg&apos;);
-});
+  test(&apos;Test new FZPView&apos;, () =&gt; {
+    let fzpView = new FZPView(&apos;test&apos;, [&apos;breadboard&apos;], true, true);
+    expect(fzpView.image).toEqual(&apos;test&apos;);
+    expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;]);
+    expect(fzpView.flipHorizontal).toEqual(true);
+    expect(fzpView.flipVertical).toEqual(true);
+    fzpView.setLayerId(&apos;foo&apos;);
+    expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;, &apos;foo&apos;]);
+    expect(fzpView.existLayerId(&apos;foo&apos;)).toEqual(true);
+    expect(fzpView.flipHorizontal).toEqual(true);
+    expect(fzpView.flipVertical).toEqual(true);
+    fzpView.setLayerId(&apos;foo&apos;);
+    expect(fzpView.totalLayerId()).toEqual(2);
+    fzpView.setSVG(&apos;hello-svg&apos;);
+    expect(fzpView.svg).toEqual(&apos;hello-svg&apos;);
+  });
 
-test(&apos;Test new FZPView loadSVG&apos;, (done) =&gt; {
-  let fzpView = new FZPView(&apos;LED-3mm-red-leg.svg&apos;);
-  expect(fzpView.image).toEqual(&apos;LED-3mm-red-leg.svg&apos;);
-  const baseurl = &apos;https://fritzing.github.io/fritzing-parts/svg/core/breadboard/&apos;;
-  fzpView.loadSVG(baseurl).then((d) =&gt; {
-    expect(d).not.toEqual(&apos;&apos;);
-    expect(fzpView.svg).not.toEqual(&apos;&apos;);
+  test(&apos;Test new FZPView loadSVG&apos;, (done) =&gt; {
+    let fzpView = new FZPView(&apos;LED-3mm-red-leg.svg&apos;);
+    expect(fzpView.image).toEqual(&apos;LED-3mm-red-leg.svg&apos;);
+    const baseurl = &apos;https://fritzing.github.io/fritzing-parts/svg/core/breadboard/&apos;;
+    fzpView.loadSVG(baseurl).then((d) =&gt; {
+      expect(d).not.toEqual(&apos;&apos;);
+      expect(fzpView.svg).not.toEqual(&apos;&apos;);
 
-    // check the first and the last line
-    let lines = d.split(&apos;\n&apos;);
-    expect(lines[0]).toEqual(&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&apos;);
-    expect(lines[lines.length-2]).toEqual(&apos;&lt;/svg&gt;&apos;);
+      // check the first and the last line
+      let lines = d.split(&apos;\n&apos;);
+      expect(lines[0]).toEqual(&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&apos;);
+      expect(lines[lines.length-2]).toEqual(&apos;&lt;/svg&gt;&apos;);
 
-    done();
-  })
-  .catch((e) =&gt; {
-    console.error(&apos;ERROR&apos;, e);
-    done(e);
+      done();
+    })
+    .catch((err) =&gt; {
+      console.error(&apos;ERROR&apos;, e);
+      done(err);
+    });
   });
 });
 </code></pre>

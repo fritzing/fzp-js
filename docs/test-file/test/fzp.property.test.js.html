@@ -50,16 +50,35 @@
 
 const FZPProperty = require(&apos;../src/fzp/property&apos;);
 
-test(&apos;Test new FZPProperty (empty)&apos;, () =&gt; {
-  let c = new FZPProperty();
-  expect(c.value).toEqual(null);
-  expect(c.showInLabel).toEqual(false);
+describe(&apos;FZPProperty new&apos;, () =&gt; {
+  test(&apos;Test new FZPProperty (empty)&apos;, () =&gt; {
+    let prop = new FZPProperty();
+    expect(prop.value).toEqual(null);
+    expect(prop.showInLabel).toEqual(false);
+  });
 });
 
-test(&apos;Test new FZPProperty&apos;, () =&gt; {
-  let c = new FZPProperty(&apos;lay1&apos;, true);
-  expect(c.value).toEqual(&apos;lay1&apos;);
-  expect(c.showInLabel).toEqual(true);
+describe(&apos;FZPProperty set&apos;, () =&gt; {
+  test(&apos;Test FZPProperty set (with one arg)&apos;, () =&gt; {
+    let prop = new FZPProperty();
+    prop.set(&apos;lay-test-1&apos;);
+    expect(prop.value).toEqual(&apos;lay-test-1&apos;);
+    expect(prop.showInLabel).toEqual(false);
+  });
+
+  test(&apos;Test FZPProperty set (with args)&apos;, () =&gt; {
+    let prop = new FZPProperty();
+    prop.set(&apos;lay-test-2&apos;, true);
+    expect(prop.value).toEqual(&apos;lay-test-2&apos;);
+    expect(prop.showInLabel).toEqual(true);
+  });
+
+  test(&apos;Test FZPProperty set (object)&apos;, () =&gt; {
+    let prop = new FZPProperty();
+    prop.set({value: &apos;lay-test-3&apos;, showInLabel: true});
+    expect(prop.value).toEqual(&apos;lay-test-3&apos;);
+    expect(prop.showInLabel).toEqual(true);
+  });
 });
 </code></pre>
 

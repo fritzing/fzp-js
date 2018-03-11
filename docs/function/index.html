@@ -64,7 +64,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
         </p>
       </div>
       <div>
@@ -93,7 +93,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
         </p>
       </div>
       <div>
@@ -236,11 +236,11 @@
     
     
     
-    <span class="code" data-ice="name">loadFZP</span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+    <span class="code" data-ice="name">loadFZP</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber30">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber28">source</a></span></span>
     </span>
   </h3>
 
@@ -261,6 +261,12 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">src</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">url</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
@@ -301,7 +307,7 @@
       
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZPUtils} = require(&apos;fzp-js&apos;)
 
-FZPUtils.loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp&apos;)
+FZPUtils.loadFZP(&apos;core/Arduino Nano3(fix).fzp&apos;)
 .then((fzz) =&gt; {
   console.log(fzz.fz)
 })
@@ -324,11 +330,11 @@ FZPUtils.loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Na
     
     
     
-    <span class="code" data-ice="name">loadFZPandSVGs</span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+    <span class="code" data-ice="name">loadFZPandSVGs</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber54">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber55">source</a></span></span>
     </span>
   </h3>
 
@@ -349,6 +355,12 @@ FZPUtils.loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Na
     <tbody>
     
     <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">src</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">url</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
@@ -389,7 +401,7 @@ FZPUtils.loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Na
       
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZPUtils} = require(&apos;fzp-js&apos;)
 
-FZPUtils.loadFZPandSVGs(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp&apos;)
+FZPUtils.loadFZPandSVGs(&apos;core/Arduino Nano3(fix).fzp&apos;)
 .then((fzz) =&gt; {
   console.log(fzz)
 })
@@ -416,7 +428,7 @@ FZPUtils.loadFZPandSVGs(&apos;https://fritzing.github.io/fritzing-parts/core/Ard
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber206">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber211">source</a></span></span>
     </span>
   </h3>
 
@@ -498,7 +510,7 @@ console.log(xmlData)</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber185">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber190">source</a></span></span>
     </span>
   </h3>
 
@@ -569,7 +581,7 @@ console.log(xmlData)</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber68">source</a></span></span>
     </span>
   </h3>
 
@@ -641,7 +653,7 @@ console.log(xmlData)</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber170">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber171">source</a></span></span>
     </span>
   </h3>
 

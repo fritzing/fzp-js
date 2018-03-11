@@ -48,15 +48,12 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/utils.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const axios = require(&apos;axios&apos;);
 const xml2js = require(&apos;xml2js&apos;);
 const parseXml = xml2js.parseString;
 const FZP = require(&apos;./fzp/fzp&apos;);
 const FZPConnector = require(&apos;./fzp/connector&apos;);
 const FZPConnectorView = require(&apos;./fzp/connector-view&apos;);
-
-const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
-const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
+const {FritzingPartsAPI, FritzingPartsAPIClient} = require(&apos;fritzing-parts-api-client-js&apos;);
 
 /**
  * Load a FZP file from the given URL.
@@ -64,7 +61,7 @@ const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
  * @example
  * const {FZPUtils} = require(&apos;fzp-js&apos;)
  *
- * FZPUtils.loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp&apos;)
+ * FZPUtils.loadFZP(&apos;core/Arduino Nano3(fix).fzp&apos;)
  * .then((fzz) =&gt; {
  *   console.log(fzz.fz)
  * })
@@ -72,13 +69,16 @@ const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
  *   console.error(err)
  * })
  *
+ * @param {String} src
  * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
-function loadFZP(url) {
-  return axios.get(url, {responseType: &apos;xml&apos;})
-  .then((res) =&gt; {
-    return parseFZP(res.data);
+function loadFZP(src, url = FritzingPartsAPI) {
+  return FritzingPartsAPIClient.getFzp(src, url)
+  .then((fzp) =&gt; {
+    // let tmp = parseFZP(fzp);
+    // console.log(tmp);
+    return parseFZP(fzp);
   });
 }
 
@@ -88,7 +88,7 @@ function loadFZP(url) {
  * @example
  * const {FZPUtils} = require(&apos;fzp-js&apos;)
  *
- * FZPUtils.loadFZPandSVGs(&apos;https://fritzing.github.io/fritzing-parts/core/Arduino Nano3(fix).fzp&apos;)
+ * FZPUtils.loadFZPandSVGs(&apos;core/Arduino Nano3(fix).fzp&apos;)
  * .then((fzz) =&gt; {
  *   console.log(fzz)
  * })
@@ -96,12 +96,13 @@ function loadFZP(url) {
  *   console.error(err)
  * })
  *
+ * @param {String} src
  * @param {String} url URL to the FZP file.
  * @return {FZP}
  */
-function loadFZPandSVGs(url) {
-  return loadFZP(url).then((fzp) =&gt; {
-    return fzp.loadSVGs(FritzingAPISVGCore).then((d) =&gt; {
+function loadFZPandSVGs(src, url = FritzingPartsAPI) {
+  return loadFZP(src, url).then((fzp) =&gt; {
+    return fzp.loadSVGs(`${url}/svg/core/`).then(() =&gt; {
       return fzp;
     });
   });
@@ -217,12 +218,16 @@ function parseFZP(data) {
  */
 function parseProperties(xml) {
   let data = {};
-  for (let i = 0; i &lt; xml.length; i++) {
-    data[xml[i].$.name] = {
-      value: xml[i]._,
-      showInLabel: xml[i].$.showInLabel,
-    };
-  }
+  // if (xml) {
+  //   if (xml.length &gt; 0) {
+      for (let i = 0; i &lt; xml.length; i++) {
+        data[xml[i].$.name] = {
+          value: xml[i]._,
+          showInLabel: xml[i].$.showInLabel,
+        };
+      }
+  //   }
+  // }
   return data;
 }
 

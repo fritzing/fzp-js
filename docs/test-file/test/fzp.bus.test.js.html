@@ -50,31 +50,56 @@
 
 const FZPBus = require(&apos;../src/fzp/bus&apos;);
 
-test(&apos;Test new FZPBus (empty)&apos;, () =&gt; {
-  let bus = new FZPBus();
-  expect(bus.id).toEqual(null);
-  expect(bus.nodeMembers).toHaveLength(0);
-  expect(bus.nodeMembers).toEqual([]);
+describe(&apos;FZPBus new&apos;, () =&gt; {
+  test(&apos;Test new FZPBus&apos;, () =&gt; {
+    let bus = new FZPBus();
+    expect(bus.id).toEqual(null);
+    expect(bus.nodeMembers).toHaveLength(0);
+    expect(bus.nodeMembers).toEqual([]);
+  });
 });
 
-test(&apos;Test new FZPBus&apos;, () =&gt; {
-  let bus = new FZPBus({id: &apos;b&apos;, nodeMembers: [1, 2, 3]});
-  expect(bus.id).toEqual(&apos;b&apos;);
-  expect(bus.nodeMembers).toHaveLength(3);
-  expect(bus.nodeMembers).toEqual([1, 2, 3]);
+describe(&apos;FZPBus set&apos;, () =&gt; {
+  test(&apos;Test new FZPBus set (with arg object)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set({id: &apos;test&apos;, nodeMembers: [1, 2, 3]});
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(3);
+    expect(bus.nodeMembers).toEqual([1, 2, 3]);
+  });
+
+  test(&apos;Test new FZPBus set (with arg string)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set(&apos;test&apos;);
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(0);
+    expect(bus.nodeMembers).toEqual([]);
+  });
+
+  test(&apos;Test new FZPBus set (with args string, array)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set(&apos;test&apos;, [1, 2, 3]);
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(3);
+    expect(bus.nodeMembers).toEqual([1, 2, 3]);
+  });
 });
 
-test(&apos;Test FZPBus setId, getId&apos;, () =&gt; {
-  let bus = new FZPBus();
-  bus.setId(&apos;b&apos;);
-  expect(bus.getId()).toEqual(&apos;b&apos;);
+describe(&apos;FZPBus setId, getId&apos;, () =&gt; {
+  test(&apos;Test FZPBus setId, getId&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.setId(&apos;b&apos;);
+    expect(bus.getId()).toEqual(&apos;b&apos;);
+  });
 });
 
-test(&apos;Test FZPBus setNodeMember, getNodeMember&apos;, () =&gt; {
-  let bus = new FZPBus();
-  bus.setNodeMember(1);
-  expect(bus.totalNodeMembers()).toEqual(1);
-  expect(bus.getNodeMembers()).toEqual([1]);
+describe(&apos;FZPBus setNodeMembers, getNodeMembers&apos;, () =&gt; {
+  test(&apos;Test FZPBus setNodeMember, getNodeMember&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.setNodeMember(1);
+    expect(bus.totalNodeMembers()).toEqual(1);
+    expect(bus.getNodeMembers()).toEqual([1]);
+  });
 });
 </code></pre>
 

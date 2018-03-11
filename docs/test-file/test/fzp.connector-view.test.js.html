@@ -50,26 +50,28 @@
 
 const FZPConnectorView = require(&apos;../src/fzp/connector-view&apos;);
 
-test(&apos;Test new FZPConnectorView (empty)&apos;, () =&gt; {
-  let c = new FZPConnectorView();
-  expect(c.layer).toEqual(null);
-  expect(c.svgId).toEqual(null);
-  expect(c.legId).toEqual(null);
-  expect(c.terminalId).toEqual(null);
-});
+describe(&apos;FZPConnectorView&apos;, () =&gt; {
+  test(&apos;Test new FZPConnectorView (empty)&apos;, () =&gt; {
+    let c = new FZPConnectorView();
+    expect(c.layer).toEqual(null);
+    expect(c.svgId).toEqual(null);
+    expect(c.legId).toEqual(null);
+    expect(c.terminalId).toEqual(null);
+  });
 
-test(&apos;Test new FZPConnectorView&apos;, () =&gt; {
-  const opt = {
-    layer: &apos;lay1&apos;,
-    svgId: &apos;svg1&apos;,
-    legId: &apos;leg1&apos;,
-    terminalId: &apos;ter1&apos;,
-  };
-  let c = new FZPConnectorView(opt);
-  expect(c.layer).toEqual(&apos;lay1&apos;);
-  expect(c.svgId).toEqual(&apos;svg1&apos;);
-  expect(c.legId).toEqual(&apos;leg1&apos;);
-  expect(c.terminalId).toEqual(&apos;ter1&apos;);
+  test(&apos;Test new FZPConnectorView&apos;, () =&gt; {
+    const opt = {
+      layer: &apos;lay1&apos;,
+      svgId: &apos;svg1&apos;,
+      legId: &apos;leg1&apos;,
+      terminalId: &apos;ter1&apos;,
+    };
+    let c = new FZPConnectorView(opt);
+    expect(c.layer).toEqual(&apos;lay1&apos;);
+    expect(c.svgId).toEqual(&apos;svg1&apos;);
+    expect(c.legId).toEqual(&apos;leg1&apos;);
+    expect(c.terminalId).toEqual(&apos;ter1&apos;);
+  });
 });
 </code></pre>
 

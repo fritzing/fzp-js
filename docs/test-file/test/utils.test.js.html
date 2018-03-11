@@ -48,13 +48,13 @@
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require(&apos;../src/utils&apos;);
-const FZP = require(&apos;../src/fzp/fzp&apos;);
 const fs = require(&apos;fs&apos;);
+const FZP = require(&apos;../src/fzp/fzp&apos;);
+const {FritzingPartsAPI} = require(&apos;fritzing-parts-api-client-js&apos;);
+const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require(&apos;../src/utils&apos;);
 
-const FritzingAPI = &apos;https://fritzing.github.io/fritzing-parts&apos;;
-const FritzingAPISVGCore = FritzingAPI+&apos;/svg/core/&apos;;
-const FritzingAPICoreLEDFzp = FritzingAPI+&apos;/core/LED-generic-3mm.fzp&apos;;
+const FritzingPartsAPISVGCore = FritzingPartsAPI+&apos;/svg/core/&apos;;
+const FritzingAPICoreLEDFzp = &apos;core/LED-generic-3mm.fzp&apos;;
 
 test(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
@@ -122,28 +122,61 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
   });
 });
 
-test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
-  loadFZP(FritzingAPICoreLEDFzp)
-  .then((fzp) =&gt; {
-    // load the svg of the breadboard view
-    fzp.views.breadboard.loadSVG(FritzingAPISVGCore)
-    .then((d) =&gt; {
-        done();
+describe(&apos;loadFZP&apos;, () =&gt; {
+  test(&apos;Test loadFZP&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
+      // console.log(fzp);
+      done();
     })
     .catch((err) =&gt; {
       done(err);
     });
-  })
-  .catch((e) =&gt; {
-    done(e);
+  });
+
+  test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      // load the svg of the breadboard view
+      fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)
+      .then(() =&gt; {
+        done();
+      })
+      .catch((err) =&gt; {
+        done(err);
+      });
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
+  });
+
+  test(&apos;Test loadFZP and all SVGs&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      fzp.loadSVGs(FritzingPartsAPISVGCore)
+      .then(() =&gt; {
+        // check if the svg string is not empty
+        expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
+        expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
+        expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
+        done();
+      })
+      .catch((err) =&gt; {
+        done(err);
+      });
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
   });
 });
 
-test(&apos;Test loadFZP and all SVGs&apos;, (done) =&gt; {
-  loadFZP(FritzingAPICoreLEDFzp)
-  .then((fzp) =&gt; {
-    fzp.loadSVGs(FritzingAPISVGCore)
-    .then((d) =&gt; {
+describe(&apos;loadFZPandSVGs&apos;, () =&gt; {
+  test(&apos;Test loadFZPandSVGs&apos;, (done) =&gt; {
+    loadFZPandSVGs(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
       // check if the svg string is not empty
       expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
       expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
@@ -151,70 +184,54 @@ test(&apos;Test loadFZP and all SVGs&apos;, (done) =&gt; {
       done();
     })
     .catch((err) =&gt; {
+      console.log(&apos;ERROR&apos;, err);
       done(err);
     });
-  })
-  .catch((e) =&gt; {
-    done(e);
   });
 });
 
-test(&apos;Test loadFZPandSVGs&apos;, (done) =&gt; {
-  loadFZPandSVGs(FritzingAPICoreLEDFzp)
-  .then((fzp) =&gt; {
-    // check if the svg string is not empty
-    expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
-    expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
-    expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
-    done();
-  })
-  .catch((err) =&gt; {
-    console.log(&apos;ERROR&apos;, err);
-    done(err);
-  });
-});
-
-test(&apos;Test marshalToXML&apos;, (done) =&gt; {
-  let fzp = new FZP();
-  fzp.moduleId = &apos;test-moduleId&apos;;
-  fzp.fritzingVersion = &apos;test-fritzingVersion&apos;;
-  fzp.version = &apos;test-version&apos;;
-  fzp.title = &apos;test-title&apos;;
-  fzp.description = &apos;test-description&apos;;
-  fzp.author = &apos;test-author&apos;;
-  fzp.date = &apos;test-date&apos;;
-  fzp.url = &apos;test-url&apos;;
-  fzp.label = &apos;test-label&apos;;
-  fzp.taxonomy = &apos;test-taxonomy&apos;;
-  fzp.language = &apos;test-language&apos;;
-  fzp.family = &apos;test-family&apos;;
-  fzp.variant = &apos;test-variant&apos;;
-  fzp.properties = &apos;test-properties&apos;;
-  fzp.views.icon.image = &apos;test-views-icon-image&apos;;
-  fzp.views.breadboard.image = &apos;test-views-breadboard-image&apos;;
-  fzp.views.schematic.image = &apos;test-views-schematic-image&apos;;
-  fzp.views.pcb.image = &apos;test-views-pcb-image&apos;;
-  let xml = marshalToXML(fzp);
-
-  // check if the generated xml is not empty
-  expect(xml).not.toEqual(&apos;&apos;);
-  // console.log(xml);
-
-  // TODO: call &apos;parseFZP&apos;
-  // TODO: check if data is equal to the fzp from above
-  done();
-});
-
-test(&apos;Test marshalToXML from loaded part&apos;, (done) =&gt; {
-  loadFZP(FritzingAPICoreLEDFzp)
-  .then((fzp) =&gt; {
+describe(&apos;marshalToXML&apos;, () =&gt; {
+  test(&apos;Test marshalToXML&apos;, () =&gt; {
+    let fzp = new FZP();
+    fzp.moduleId = &apos;test-moduleId&apos;;
+    fzp.fritzingVersion = &apos;test-fritzingVersion&apos;;
+    fzp.version = &apos;test-version&apos;;
+    fzp.title = &apos;test-title&apos;;
+    fzp.description = &apos;test-description&apos;;
+    fzp.author = &apos;test-author&apos;;
+    fzp.date = &apos;test-date&apos;;
+    fzp.url = &apos;test-url&apos;;
+    fzp.label = &apos;test-label&apos;;
+    fzp.taxonomy = &apos;test-taxonomy&apos;;
+    fzp.language = &apos;test-language&apos;;
+    fzp.family = &apos;test-family&apos;;
+    fzp.variant = &apos;test-variant&apos;;
+    fzp.properties = &apos;test-properties&apos;;
+    fzp.views.icon.image = &apos;test-views-icon-image&apos;;
+    fzp.views.breadboard.image = &apos;test-views-breadboard-image&apos;;
+    fzp.views.schematic.image = &apos;test-views-schematic-image&apos;;
+    fzp.views.pcb.image = &apos;test-views-pcb-image&apos;;
     let xml = marshalToXML(fzp);
+
+    // check if the generated xml is not empty
     expect(xml).not.toEqual(&apos;&apos;);
     // console.log(xml);
-    done();
-  })
-  .catch((e) =&gt; {
-    done(e);
+
+    // TODO: call &apos;parseFZP&apos;
+    // TODO: check if data is equal to the fzp from above
+  });
+
+  test(&apos;Test marshalToXML from loaded part&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      let xml = marshalToXML(fzp);
+      expect(xml).not.toEqual(&apos;&apos;);
+      // console.log(xml);
+      done();
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
   });
 });
 </code></pre>

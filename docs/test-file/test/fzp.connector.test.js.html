@@ -50,47 +50,49 @@
 
 const FZPConnector = require(&apos;../src/fzp/connector&apos;);
 
-test(&apos;Test new FZPConnector (empty)&apos;, () =&gt; {
-  let c = new FZPConnector();
-  expect(c.id).toEqual(null);
-  expect(c.name).toEqual(null);
-  expect(c.type).toEqual(null);
-  expect(c.description).toEqual(null);
-});
+describe(&apos;FZPConnector&apos;, () =&gt; {
+  test(&apos;Test new FZPConnector (empty)&apos;, () =&gt; {
+    let c = new FZPConnector();
+    expect(c.id).toEqual(null);
+    expect(c.name).toEqual(null);
+    expect(c.type).toEqual(null);
+    expect(c.description).toEqual(null);
+  });
 
-test(&apos;Test new FZPConnector&apos;, () =&gt; {
-  const opt = {
-    id: &apos;t1&apos;,
-    name: &apos;test&apos;,
-    type: &apos;testtype&apos;,
-    description: &apos;test connector&apos;,
-    views: {
-      breadboard: {
-        layer: &apos;b-layer&apos;,
-      },
-      schematic: {
-        layer: &apos;s-layer&apos;,
-      },
-      pcb: {
-        copper0: {
-          layer: &apos;copper0&apos;,
+  test(&apos;Test new FZPConnector&apos;, () =&gt; {
+    const opt = {
+      id: &apos;t1&apos;,
+      name: &apos;test&apos;,
+      type: &apos;testtype&apos;,
+      description: &apos;test connector&apos;,
+      views: {
+        breadboard: {
+          layer: &apos;b-layer&apos;,
         },
-        copper1: {
-          layer: &apos;copper1&apos;,
+        schematic: {
+          layer: &apos;s-layer&apos;,
         },
+        pcb: {
+          copper0: {
+            layer: &apos;copper0&apos;,
+          },
+          copper1: {
+            layer: &apos;copper1&apos;,
+          },
 
+        },
       },
-    },
-  };
-  let c = new FZPConnector(opt);
-  expect(c.id).toEqual(&apos;t1&apos;);
-  expect(c.name).toEqual(&apos;test&apos;);
-  expect(c.type).toEqual(&apos;testtype&apos;);
-  expect(c.description).toEqual(&apos;test connector&apos;);
-  expect(c.views.breadboard.layer).toEqual(&apos;b-layer&apos;);
-  expect(c.views.schematic.layer).toEqual(&apos;s-layer&apos;);
-  expect(c.views.pcb.copper0.layer).toEqual(&apos;copper0&apos;);
-  expect(c.views.pcb.copper1.layer).toEqual(&apos;copper1&apos;);
+    };
+    let c = new FZPConnector(opt);
+    expect(c.id).toEqual(&apos;t1&apos;);
+    expect(c.name).toEqual(&apos;test&apos;);
+    expect(c.type).toEqual(&apos;testtype&apos;);
+    expect(c.description).toEqual(&apos;test connector&apos;);
+    expect(c.views.breadboard.layer).toEqual(&apos;b-layer&apos;);
+    expect(c.views.schematic.layer).toEqual(&apos;s-layer&apos;);
+    expect(c.views.pcb.copper0.layer).toEqual(&apos;copper0&apos;);
+    expect(c.views.pcb.copper1.layer).toEqual(&apos;copper1&apos;);
+  });
 });
 </code></pre>
 

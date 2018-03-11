@@ -78,9 +78,9 @@ eachPromise(fzpDir, (name, next) =&gt; {
       // console.log(&apos;==&gt; OK   &apos;, name);
       next();
     })
-    .catch((e) =&gt; {
+    .catch((err) =&gt; {
       console.error(&apos;==&gt; ERROR&apos;, name);
-      console.error(e);
+      console.error(err);
       next();
     });
   }
