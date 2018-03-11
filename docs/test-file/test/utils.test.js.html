@@ -48,12 +48,12 @@
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const fs = require(&apos;fs&apos;);
-const FZP = require(&apos;../src/fzp/fzp&apos;);
-const {FritzingPartsAPI} = require(&apos;fritzing-parts-api-client-js&apos;);
 const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require(&apos;../src/utils&apos;);
-
+const FZP = require(&apos;../src/fzp/fzp&apos;);
+const fs = require(&apos;fs&apos;);
+const {FritzingPartsAPI} = require(&apos;fritzing-parts-api-client-js&apos;);
 const FritzingPartsAPISVGCore = FritzingPartsAPI+&apos;/svg/core/&apos;;
+
 const FritzingAPICoreLEDFzp = &apos;core/LED-generic-3mm.fzp&apos;;
 
 test(&apos;Test parseFZP&apos;, (done) =&gt; {
