@@ -19,10 +19,10 @@
           "logo": "",
           "title": "fzp-js",
           "description": "fritzing fzp javascript",
-          "repository": "https://github.com/paulvollmer/fzp-js",
-          "site": "https://paulvollmer.net",
-          "author": "https://github.com/paulvollmer",
-          "image": "https://github.com/paulvollmer/logo.png"
+          "repository": "https://github.com/fritzing/fzp-js",
+          "site": "https://fritzing.org",
+          "author": "https://github.com/fritzing",
+          "image": ""
         },
         "test": {
           "source": "./test/",

@@ -1,32 +1,9 @@
-BIN = ./node_modules/.bin
+run: all test-load
 
-all: lint test build
-lint:
-	@$(BIN)/eslint .
-lint-fix:
-	@$(BIN)/eslint . --fix
-test:
-	@$(BIN)/jest
-open-coverage: test
-	@open coverage/lcov-report/index.html
-.PHONY: all lint lint-fix test open-coverage
+include node_modules/fritzing-js/setup.mk
 
-build:
-	@$(BIN)/babel -d lib src
-build-commit: build
-	git add lib
-	git commit -m "Updated lib artifact"
-.PHONY: build build-commit
-
-docs:
-	@$(BIN)/esdoc
-docs-open: docs
-	@open docs/index.html
-docs-commit: docs
-	git add docs
-	git commit -m "Updated docs artifact"
-.PHONY: docs docs-open docs-commit
-
-clean:
-	@rm -rf docs
-.PHONY: clean
+test-load-data:
+	git clone git@github.com:fritzing/fritzing-parts.git test/fixtures/fritzing-parts
+test-load:
+	node test/_fritzing-parts-test.js
+.PHONY: test-load-data test-load

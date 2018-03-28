@@ -567,9 +567,9 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/fzp/bus.js",
-    "content": "/**\n * FZP Bus class\n */\nclass FZPBus {\n  /**\n   * FZPBus constructor\n   * @param {Object} opt\n   */\n  constructor(opt) {\n    opt = opt || {};\n\n    /**\n     * Store the FZP bus id\n     * @type {String}\n     */\n    this.id = opt.id || '';\n\n    /**\n     * Store the FZP node members as an array\n     * @type {Array}\n     */\n    this.nodeMembers = opt.nodeMembers || [];\n  }\n\n  /**\n   * Set the FZP bus id\n   * @param {String} id\n   */\n  setid(id) {\n    this.id = id;\n  }\n\n  /**\n   * add a new node member if not exist\n   * @param {String} m\n   */\n  addModeMember(m) {\n    if (!this.existModeMember(m)) {\n      this.nodeMembers.push(m);\n    }\n  }\n\n  /**\n   * check if the given node member name does not exist at the nodeMembers array\n   * @param {String} m\n   * @return {Boolean}\n   */\n  existModeMember(m) {\n    for (let i = 0; i < this.nodeMembers.length; i++) {\n      if (this.nodeMembers[i] === m) {\n        return true;\n      }\n    }\n    return false;\n  }\n}\n\nmodule.exports = FZPBus;\n",
+    "content": "'use strict';\n\n/**\n * FZP Bus class\n *\n * @example\n * const {FZBus} = require('fzp-js')\n *\n * let bus = new FZBus()\n * bus.setId('sample')\n * bus.setModeMember('mode')\n */\nclass FZPBus {\n  /**\n   * FZPBus constructor\n   */\n  constructor() {\n    /**\n     * Store the FZP bus id\n     * @type {String}\n     */\n    this.id = null;\n\n    /**\n     * Store the FZP node members as an array\n     * @type {Array}\n     */\n    this.nodeMembers = [];\n  }\n\n  /**\n   * @param {Object|String} v\n   * @param {Array} m\n   */\n  set(v, m) {\n    if (v) {\n      switch (typeof v) {\n        case 'object':\n          if (v.id) {\n            this.setId(v.id);\n          }\n          if (v.nodeMembers) {\n            this.setNodeMember(v.nodeMembers);\n          }\n          return;\n\n        case 'string':\n          this.setId(v);\n          break;\n\n        default:\n          throw new Error(`FZPBus type ('${typeof v}') for argument one not supported`);\n      }\n    }\n\n    if (m) {\n      switch (typeof m) {\n        case 'object':\n          this.setNodeMember(m);\n          break;\n        default:\n          throw new Error(`FZPBus type ('${typeof m}') for argument one not supported`);\n      }\n    }\n  }\n\n  /**\n   * Set the FZP bus id\n   * @param {String} id\n   * @return {FZPBus}\n   */\n  setId(id) {\n    this.id = id;\n    return this;\n  }\n\n  /**\n   * Return the id\n   * @return {String}\n   */\n  getId() {\n    return this.id;\n  }\n\n  /**\n   * add a new node member if not exist\n   * @param {String} m\n   * @return {FZPBus}\n   */\n  setNodeMember(m) {\n    switch (typeof m) {\n      case 'object':\n        this.nodeMembers = m;\n        break;\n      case 'string':\n      case 'number':\n        if (!this.existModeMember(m)) {\n          this.nodeMembers.push(m);\n        }\n        break;\n      default:\n        throw new Error(`FZPBus nodeMember type ('${typeof m}') not supported`);\n    }\n    return this;\n  }\n\n  /**\n   * Return the nodeMembers array\n   * @return {Array}\n   */\n  getNodeMembers() {\n    return this.nodeMembers;\n  }\n\n  /**\n   * Return the total number of nodeMembers\n   * @return {Number}\n   */\n  totalNodeMembers() {\n    return this.nodeMembers.length;\n  }\n\n  /**\n   * check if the given node member name does not exist at the nodeMembers array\n   * @param {String} m\n   * @return {Boolean}\n   */\n  existModeMember(m) {\n    for (let i = 0; i < this.nodeMembers.length; i++) {\n      if (this.nodeMembers[i] === m) {\n        return true;\n      }\n    }\n    return false;\n  }\n}\n\nmodule.exports = FZPBus;\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/fzp/bus.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/bus.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -586,7 +586,10 @@
     "importPath": "fzp-js/src/fzp/bus.js",
     "importStyle": null,
     "description": "FZP Bus class",
-    "lineNumber": 4,
+    "examples": [
+      "const {FZBus} = require('fzp-js')\n\nlet bus = new FZBus()\nbus.setId('sample')\nbus.setModeMember('mode')"
+    ],
+    "lineNumber": 13,
     "interface": false
   },
   {
@@ -600,19 +603,7 @@
     "longname": "src/fzp/bus.js~FZPBus#constructor",
     "access": "public",
     "description": "FZPBus constructor",
-    "lineNumber": 9,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "Object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "opt",
-        "description": ""
-      }
-    ]
+    "lineNumber": 17
   },
   {
     "__docId__": 51,
@@ -623,7 +614,7 @@
     "longname": "src/fzp/bus.js~FZPBus#id",
     "access": "public",
     "description": "Store the FZP bus id",
-    "lineNumber": 16,
+    "lineNumber": 22,
     "type": {
       "nullable": null,
       "types": [
@@ -642,7 +633,7 @@
     "longname": "src/fzp/bus.js~FZPBus#nodeMembers",
     "access": "public",
     "description": "Store the FZP node members as an array",
-    "lineNumber": 22,
+    "lineNumber": 28,
     "type": {
       "nullable": null,
       "types": [
@@ -655,15 +646,52 @@
   {
     "__docId__": 53,
     "kind": "method",
-    "name": "setid",
+    "name": "set",
     "memberof": "src/fzp/bus.js~FZPBus",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/fzp/bus.js~FZPBus#setid",
+    "longname": "src/fzp/bus.js~FZPBus#set",
+    "access": "public",
+    "description": "",
+    "lineNumber": 35,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object",
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Array"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "m",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "setId",
+    "memberof": "src/fzp/bus.js~FZPBus",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/bus.js~FZPBus#setId",
     "access": "public",
     "description": "Set the FZP bus id",
-    "lineNumber": 29,
+    "lineNumber": 72,
     "params": [
       {
         "nullable": null,
@@ -676,20 +704,49 @@
         "description": ""
       }
     ],
-    "return": null
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPBus"
+      ],
+      "spread": false,
+      "description": ""
+    }
   },
   {
-    "__docId__": 55,
+    "__docId__": 56,
     "kind": "method",
-    "name": "addModeMember",
+    "name": "getId",
     "memberof": "src/fzp/bus.js~FZPBus",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/fzp/bus.js~FZPBus#addModeMember",
+    "longname": "src/fzp/bus.js~FZPBus#getId",
+    "access": "public",
+    "description": "Return the id",
+    "lineNumber": 81,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 57,
+    "kind": "method",
+    "name": "setNodeMember",
+    "memberof": "src/fzp/bus.js~FZPBus",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/bus.js~FZPBus#setNodeMember",
     "access": "public",
     "description": "add a new node member if not exist",
-    "lineNumber": 37,
+    "lineNumber": 90,
     "params": [
       {
         "nullable": null,
@@ -702,10 +759,61 @@
         "description": ""
       }
     ],
-    "return": null
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPBus"
+      ],
+      "spread": false,
+      "description": ""
+    }
   },
   {
-    "__docId__": 56,
+    "__docId__": 59,
+    "kind": "method",
+    "name": "getNodeMembers",
+    "memberof": "src/fzp/bus.js~FZPBus",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/bus.js~FZPBus#getNodeMembers",
+    "access": "public",
+    "description": "Return the nodeMembers array",
+    "lineNumber": 111,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Array"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 60,
+    "kind": "method",
+    "name": "totalNodeMembers",
+    "memberof": "src/fzp/bus.js~FZPBus",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/bus.js~FZPBus#totalNodeMembers",
+    "access": "public",
+    "description": "Return the total number of nodeMembers",
+    "lineNumber": 119,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 61,
     "kind": "method",
     "name": "existModeMember",
     "memberof": "src/fzp/bus.js~FZPBus",
@@ -715,7 +823,7 @@
     "longname": "src/fzp/bus.js~FZPBus#existModeMember",
     "access": "public",
     "description": "check if the given node member name does not exist at the nodeMembers array",
-    "lineNumber": 48,
+    "lineNumber": 128,
     "params": [
       {
         "nullable": null,
@@ -738,18 +846,361 @@
     }
   },
   {
-    "__docId__": 57,
+    "__docId__": 62,
     "kind": "file",
-    "name": "src/fzp/connector.js",
-    "content": "/**\n * FZPConnector class\n */\nclass FZPConnector {\n  /**\n   * FZPConnector constructor\n   * @param {Object} opt\n   */\n  constructor(opt) {\n    /**\n     * the FZP connector id\n     */\n    this.id = '';\n\n    /**\n     * the FZP connector name\n     */\n    this.name = '';\n\n    /**\n     * the FZP connector type\n     */\n    this.type = '';\n\n    /**\n     * the FZP connector description\n     */\n    this.description = '';\n\n    /**\n     * the FZP connector views fro breadboard, schematic and pcb\n     */\n    this.views = {\n      breadboard: new FZPConnectorView(),\n      schematic: new FZPConnectorView(),\n      pcb: new FZPConnectorView(),\n    };\n  }\n}\n\n/**\n *\n */\nclass FZPConnectorView {\n  /**\n   * FZPConnectorView constructor\n   * @param {Object} opt\n   */\n  constructor(opt) {\n    opt = opt || {};\n\n    /**\n     * the FZP connector view layer\n     */\n    this.layer = opt.layer || '';\n\n    /**\n     * the FZP connector view svg\n     */\n    this.svgId = opt.svgId || '';\n\n    /**\n     * the FZP connector view leg\n     */\n    this.legId = opt.legId || '';\n\n    /**\n     * the FZP connector view terminal\n     */\n    this.terminalId = opt.terminalId || '';\n  }\n}\n\nmodule.exports = {\n  FZPConnector,\n  FZPConnectorView,\n};\n",
+    "name": "src/fzp/connector-view.js",
+    "content": "'use strict';\n\n/**\n * FZPConnectorView class\n *\n * @example\n * const {FZPConnectorView} = require('fzp-js')\n *\n * let connectorView = new FZPConnectorView({layer: 'sample', svgId: 'sample.svg'})\n * connectorView.legId = 'sample-leg'\n * connectorView.terminalId = 'sample-terminal'\n */\nclass FZPConnectorView {\n  /**\n   * FZPConnectorView constructor\n   * @param {Object} opt\n   */\n  constructor(opt = {}) {\n    /**\n     * the FZP connector view layer\n     * @type {String}\n     */\n    this.layer = opt.layer || null;\n\n    /**\n     * the FZP connector view svg\n     * @type {String}\n     */\n    this.svgId = opt.svgId || null;\n\n    /**\n     * the FZP connector view leg\n     * @type {String}\n     */\n    this.legId = opt.legId || null;\n\n    /**\n     * the FZP connector view terminal\n     * @type {String}\n     */\n    this.terminalId = opt.terminalId || null;\n  }\n\n  /**\n   * @param {String} l\n   */\n  setLayer(l) {\n    this.layer = l;\n  }\n\n  /**\n   * @return {String}\n   */\n  getLayer() {\n    return this.layer;\n  }\n\n  /**\n   * @param {String} id\n   */\n  setSvgId(id) {\n    this.svgId = id;\n  }\n\n  /**\n   * @return {String}\n   */\n  getSvgId() {\n    return this.svgId;\n  }\n\n  /**\n   * @param {String} leg\n   */\n  setLegId(leg) {\n    this.legId = leg;\n  }\n\n  /**\n   * @return {String}\n   */\n  getLegId() {\n    return this.legId;\n  }\n\n  /**\n   * @param {String} term\n   */\n  setTerminalId(term) {\n    this.terminalId = term;\n  }\n\n  /**\n   * @return {String}\n   */\n  getTerminalId() {\n    return this.terminalId;\n  }\n}\n\nmodule.exports = FZPConnectorView;\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/fzp/connector.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/connector-view.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 58,
+    "__docId__": 63,
+    "kind": "class",
+    "name": "FZPConnectorView",
+    "memberof": "src/fzp/connector-view.js",
+    "static": true,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/fzp/connector-view.js",
+    "importStyle": null,
+    "description": "FZPConnectorView class",
+    "examples": [
+      "const {FZPConnectorView} = require('fzp-js')\n\nlet connectorView = new FZPConnectorView({layer: 'sample', svgId: 'sample.svg'})\nconnectorView.legId = 'sample-leg'\nconnectorView.terminalId = 'sample-terminal'"
+    ],
+    "lineNumber": 13,
+    "interface": false
+  },
+  {
+    "__docId__": 64,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#constructor",
+    "access": "public",
+    "description": "FZPConnectorView constructor",
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "opt",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "__docId__": 65,
+    "kind": "member",
+    "name": "layer",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#layer",
+    "access": "public",
+    "description": "the FZP connector view layer",
+    "lineNumber": 23,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "svgId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#svgId",
+    "access": "public",
+    "description": "the FZP connector view svg",
+    "lineNumber": 29,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "legId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#legId",
+    "access": "public",
+    "description": "the FZP connector view leg",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "terminalId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#terminalId",
+    "access": "public",
+    "description": "the FZP connector view terminal",
+    "lineNumber": 41,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "method",
+    "name": "setLayer",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#setLayer",
+    "access": "public",
+    "description": "",
+    "lineNumber": 47,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "l",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "getLayer",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#getLayer",
+    "access": "public",
+    "description": "",
+    "lineNumber": 54,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "setSvgId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#setSvgId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 61,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "getSvgId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#getSvgId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 68,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "setLegId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#setLegId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 75,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "leg",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "getLegId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#getLegId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 82,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "setTerminalId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#setTerminalId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 89,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "term",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "getTerminalId",
+    "memberof": "src/fzp/connector-view.js~FZPConnectorView",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/connector-view.js~FZPConnectorView#getTerminalId",
+    "access": "public",
+    "description": "",
+    "lineNumber": 96,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 81,
+    "kind": "file",
+    "name": "src/fzp/connector.js",
+    "content": "'use strict';\n\nconst FZPConnectorView = require('./connector-view');\n\n/**\n * FZPConnector class\n *\n * @example\n * const {FZPConnector} = require('fzp-js')\n *\n * let connector = new FZPConnector({id: 'sample-id', name: 'sample-name'})\n * connector.type = 'sample-type'\n * connector.description = 'sample-description'\n * connector.views.breadboard.setLayer('sample-b-layer')\n * connector.views.breadboard.setSvgId('sample-b-svg')\n * connector.views.breadboard.setLegId('sample-b-leg')\n * connector.views.breadboard.setTerminalId('sample-b-terminal')\n */\nclass FZPConnector {\n  /**\n   * FZPConnector constructor\n   * @param {Object} opt - the options\n   */\n  constructor(opt = {views: {pcb: {}}}) {\n    /**\n     * The id of the FZP connector.\n     * @type {String}\n     */\n    this.id = opt.id || null;\n\n    /**\n     * The name of the FZP connector.\n     * @type {String}\n     */\n    this.name = opt.name || null;\n\n    /**\n     * The type of the FZP connector\n     * @type {String}\n     */\n    this.type = opt.type || null;\n\n    /**\n     * The description of the FZP connector\n     * @type {String}\n     */\n    this.description = opt.description || null;\n\n    /**\n     * The FZP connector views for breadboard, schematic and pcb.\n     * Note that the pcb view has an object for copper0, copper1 etc.\n     */\n    this.views = {\n      breadboard: new FZPConnectorView(opt.views.breadboard),\n      schematic: new FZPConnectorView(opt.views.schematic),\n      pcb: {\n        copper0: new FZPConnectorView(opt.views.pcb.copper0),\n        copper1: new FZPConnectorView(opt.views.pcb.copper1),\n      },\n    };\n  }\n}\n\nmodule.exports = FZPConnector;\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/connector.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 82,
+    "kind": "variable",
+    "name": "FZPConnectorView",
+    "memberof": "src/fzp/connector.js",
+    "static": true,
+    "longname": "src/fzp/connector.js~FZPConnectorView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/fzp/connector.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 83,
     "kind": "class",
     "name": "FZPConnector",
     "memberof": "src/fzp/connector.js",
@@ -760,11 +1211,14 @@
     "importPath": "fzp-js/src/fzp/connector.js",
     "importStyle": null,
     "description": "FZPConnector class",
-    "lineNumber": 4,
+    "examples": [
+      "const {FZPConnector} = require('fzp-js')\n\nlet connector = new FZPConnector({id: 'sample-id', name: 'sample-name'})\nconnector.type = 'sample-type'\nconnector.description = 'sample-description'\nconnector.views.breadboard.setLayer('sample-b-layer')\nconnector.views.breadboard.setSvgId('sample-b-svg')\nconnector.views.breadboard.setLegId('sample-b-leg')\nconnector.views.breadboard.setTerminalId('sample-b-terminal')"
+    ],
+    "lineNumber": 19,
     "interface": false
   },
   {
-    "__docId__": 59,
+    "__docId__": 84,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/fzp/connector.js~FZPConnector",
@@ -774,7 +1228,7 @@
     "longname": "src/fzp/connector.js~FZPConnector#constructor",
     "access": "public",
     "description": "FZPConnector constructor",
-    "lineNumber": 9,
+    "lineNumber": 24,
     "params": [
       {
         "nullable": null,
@@ -784,84 +1238,96 @@
         "spread": false,
         "optional": false,
         "name": "opt",
-        "description": ""
+        "description": "the options"
       }
     ]
   },
   {
-    "__docId__": 60,
+    "__docId__": 85,
     "kind": "member",
     "name": "id",
     "memberof": "src/fzp/connector.js~FZPConnector",
     "static": false,
     "longname": "src/fzp/connector.js~FZPConnector#id",
     "access": "public",
-    "description": "the FZP connector id",
-    "lineNumber": 13,
+    "description": "The id of the FZP connector.",
+    "lineNumber": 29,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 61,
+    "__docId__": 86,
     "kind": "member",
     "name": "name",
     "memberof": "src/fzp/connector.js~FZPConnector",
     "static": false,
     "longname": "src/fzp/connector.js~FZPConnector#name",
     "access": "public",
-    "description": "the FZP connector name",
-    "lineNumber": 18,
+    "description": "The name of the FZP connector.",
+    "lineNumber": 35,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 62,
+    "__docId__": 87,
     "kind": "member",
     "name": "type",
     "memberof": "src/fzp/connector.js~FZPConnector",
     "static": false,
     "longname": "src/fzp/connector.js~FZPConnector#type",
     "access": "public",
-    "description": "the FZP connector type",
-    "lineNumber": 23,
+    "description": "The type of the FZP connector",
+    "lineNumber": 41,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 63,
+    "__docId__": 88,
     "kind": "member",
     "name": "description",
     "memberof": "src/fzp/connector.js~FZPConnector",
     "static": false,
     "longname": "src/fzp/connector.js~FZPConnector#description",
     "access": "public",
-    "description": "the FZP connector description",
-    "lineNumber": 28,
+    "description": "The description of the FZP connector",
+    "lineNumber": 47,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 64,
+    "__docId__": 89,
     "kind": "member",
     "name": "views",
     "memberof": "src/fzp/connector.js~FZPConnector",
     "static": false,
     "longname": "src/fzp/connector.js~FZPConnector#views",
     "access": "public",
-    "description": "the FZP connector views fro breadboard, schematic and pcb",
-    "lineNumber": 33,
+    "description": "The FZP connector views for breadboard, schematic and pcb.\nNote that the pcb view has an object for copper0, copper1 etc.",
+    "lineNumber": 53,
     "type": {
       "types": [
         "{\"breadboard\": *, \"schematic\": *, \"pcb\": *}"
@@ -869,122 +1335,18 @@
     }
   },
   {
-    "__docId__": 65,
-    "kind": "class",
-    "name": "FZPConnectorView",
-    "memberof": "src/fzp/connector.js",
-    "static": true,
-    "longname": "src/fzp/connector.js~FZPConnectorView",
-    "access": "public",
-    "export": false,
-    "importPath": "fzp-js/src/fzp/connector.js",
-    "importStyle": null,
-    "description": "",
-    "lineNumber": 44,
-    "interface": false
-  },
-  {
-    "__docId__": 66,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/fzp/connector.js~FZPConnectorView",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/fzp/connector.js~FZPConnectorView#constructor",
-    "access": "public",
-    "description": "FZPConnectorView constructor",
-    "lineNumber": 49,
-    "params": [
-      {
-        "nullable": null,
-        "types": [
-          "Object"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "opt",
-        "description": ""
-      }
-    ]
-  },
-  {
-    "__docId__": 67,
-    "kind": "member",
-    "name": "layer",
-    "memberof": "src/fzp/connector.js~FZPConnectorView",
-    "static": false,
-    "longname": "src/fzp/connector.js~FZPConnectorView#layer",
-    "access": "public",
-    "description": "the FZP connector view layer",
-    "lineNumber": 55,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 68,
-    "kind": "member",
-    "name": "svgId",
-    "memberof": "src/fzp/connector.js~FZPConnectorView",
-    "static": false,
-    "longname": "src/fzp/connector.js~FZPConnectorView#svgId",
-    "access": "public",
-    "description": "the FZP connector view svg",
-    "lineNumber": 60,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 69,
-    "kind": "member",
-    "name": "legId",
-    "memberof": "src/fzp/connector.js~FZPConnectorView",
-    "static": false,
-    "longname": "src/fzp/connector.js~FZPConnectorView#legId",
-    "access": "public",
-    "description": "the FZP connector view leg",
-    "lineNumber": 65,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 70,
-    "kind": "member",
-    "name": "terminalId",
-    "memberof": "src/fzp/connector.js~FZPConnectorView",
-    "static": false,
-    "longname": "src/fzp/connector.js~FZPConnectorView#terminalId",
-    "access": "public",
-    "description": "the FZP connector view terminal",
-    "lineNumber": 70,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 71,
+    "__docId__": 90,
     "kind": "file",
     "name": "src/fzp/fzp.js",
-    "content": "const FZPView = require('./view');\nconst FZPProperty = require('./property');\n\n/**\n * The FZP class\n */\nclass FZP {\n  /**\n   * FZP constructor\n   * @param {Object} opt\n   */\n  constructor(opt) {\n    opt = opt || {};\n    /** the module id */\n    this.moduleId = opt.module || '';\n    /** the fritzing version */\n    this.fritzingVersion = opt.fritzingVersion || '';\n    /** the FZP version */\n    this.version = opt.version || '';\n    /** the FZP title */\n    this.title = '';\n    /** the description */\n    this.description = '';\n    /** the author */\n    this.author = '';\n    /** the date */\n    this.date = '';\n    /** the url */\n    this.url = '';\n    /** the label */\n    this.label = '';\n    /** the tags */\n    this.tags = [];\n    /** the taxonomy */\n    this.taxonomy = '';\n    /** the language */\n    this.language = '';\n    /** the family */\n    this.family = '';\n    /** the variant */\n    this.variant = '';\n    /** the properties */\n    this.properties = {};\n    /** the views */\n    this.views = {\n      icon: new FZPView(),\n      schematic: new FZPView(),\n      breadboard: new FZPView(),\n      pcb: new FZPView(),\n    };\n    /** the connectors */\n    this.connectors = {};\n    /**\n     * the buses\n     * A bus is a instance of the Bus class\n     */\n    this.buses = {};\n  }\n\n  /**\n   * Get the total number of tags.\n   * @return {Number}\n   */\n  totalTags() {\n    return this.tags.length;\n  }\n\n  /**\n   * setTag\n   * @param {String} tag\n   * @return {FZP}\n   */\n  addTag(tag) {\n    this.tags.push(tag);\n    return this;\n  }\n\n  /**\n   * Add a property to the fzp instance.\n   * @param {String} name\n   * @param {String} value\n   * @param {String} showInLabel\n   * @return {FZP}\n   */\n  addProperty(name, value, showInLabel) {\n    this.properties[name] = new FZPProperty(value, showInLabel);\n    return this;\n  }\n\n  /**\n   * Get a fzp property by the name.\n   * @param {String} name\n   * @return {FZPProperty}\n   */\n  getProperty(name) {\n    return this.properties[name];\n  }\n\n  /**\n   * setView\n   * @param {String} name\n   * @param {FZPView} view\n   * @return {FZP}\n   */\n  setView(name, view) {\n    console.log('not jet implemented');\n    return this;\n  }\n\n  /**\n   * setConnector\n   * @param {String} name\n   * @param {FZPConnector} connector\n   * @return {FZP}\n   */\n  setConnector(name, connector) {\n    console.log('not jet implemented');\n    return this;\n  }\n\n  /**\n   * setBus\n   * @param {String} name\n   * @param {FZPBus} bus\n   * @return {FZP}\n   */\n  setBus(name, bus) {\n    console.log('not jet implemented');\n    return this;\n  }\n\n  /**\n   * ;oad all svg sources\n   * @return {Promise}\n   */\n  loadSVGs() {\n    return this.views.breadboard.loadSVG()\n    .then((d) => {\n      return this.views.schematic.loadSVG()\n      .then((d) => {\n        return this.views.pcb.loadSVG()\n        .then((d) => {\n          return d;\n        });\n      });\n    });\n  }\n}\n\nmodule.exports = FZP;\n",
+    "content": "'use strict';\n\nconst FZPView = require('./view');\nconst FZPProperty = require('./property');\n\n/**\n * The FZP class is the main fzp data entry.\n * Here you can access the main data properties/objects and some utility functions\n * can be used to load svgs as string, count the total number of connections or set a connector.\n *\n * @example\n * const {FZP} = require('fzp-js')\n *\n * let fzp = new FZP({moduleId: 'sample'})\n * fzp.version = '1.0.0'\n * fzp.setTag('demo')\n * fzp.setProperty('p', 'hello', true)\n * fzp.setView()\n * fzp.setConnector()\n * fzp.setBus()\n */\nclass FZP {\n  /**\n   * FZP constructor has an opt argument object that can be used to setup data at the initialization.\n   * @param {Object} opt\n   */\n  constructor(opt = {}) {\n    /**\n     * The FZP module id\n     * @type {String}\n     */\n    this.moduleId = opt.module || '';\n\n    /**\n     * The FZP fritzing version\n     * @type {String}\n     */\n    this.fritzingVersion = opt.fritzingVersion || '';\n\n    /**\n     * The FZP version\n     * @type {String}\n     */\n    this.version = opt.version || '0.0.0';\n\n    /**\n     * The FZP title\n     * @type {String}\n     */\n    this.title = opt.title || '';\n\n    /**\n     * The FZP description\n     * @type {String}\n     */\n    this.description = opt.description || '';\n\n    /**\n     * The FZP author\n     * @type {String}\n     */\n    this.author = opt.author || '';\n\n    /**\n     * The FZP date\n     * @type {String}\n     */\n    this.date = opt.date || '';\n\n    /**\n     * The FZP url\n     * @type {String}\n     */\n    this.url = opt.url || '';\n\n    /**\n     * The FZP label\n     * @type {String}\n     */\n    this.label = opt.label || '';\n\n    /**\n     * The FZP tags\n     * @type {Array}\n     */\n    this.tags = opt.tags || [];\n\n    /**\n     * The FZP taxonomy\n     * @type {String}\n     */\n    this.taxonomy = opt.taxonomy || '';\n\n    /**\n     * The FZP language\n     * @type {String}\n     */\n    this.language = opt.language || '';\n\n    /**\n     * The FZP family\n     * @type {String}\n     */\n    this.family = opt.family || '';\n\n    /**\n     * The FZP variant\n     * @type {String}\n     */\n    this.variant = opt.variant || '';\n\n    /**\n     * The FZP properties\n     * @type {Object}\n     */\n    this.properties = opt.properties || {};\n\n    /**\n     * The FZP views (icon, breadboard, schematic, pcb)\n     * @type {Object}\n     */\n    this.views = {\n      icon: new FZPView(),\n      schematic: new FZPView(),\n      breadboard: new FZPView(),\n      pcb: new FZPView(),\n    };\n\n    /**\n     * The FZP connectors\n     * @type {Object}\n     */\n    this.connectors = opt.connectors || {};\n    /**\n     * The FZP buses is a map with instances of the Bus class.\n     * @type {Object}\n     */\n    this.buses = opt.buses || {};\n  }\n\n  /**\n   * Get the total number of tags.\n   * @return {Number}\n   */\n  totalTags() {\n    return this.tags.length;\n  }\n\n  /**\n   * Set a tag\n   * @param {String} tag\n   * @return {FZP}\n   */\n  setTag(tag) {\n    this.tags.push(tag);\n    return this;\n  }\n\n  /**\n   * Get the total number of properties.\n   * @return {Number}\n   */\n  totalProperties() {\n    return Object.keys(this.properties).length;\n  }\n\n  /**\n   * Create or update a FZPProperty instance to the FZP.\n   * @param {String} key\n   * @param {String} value\n   * @param {Boolean} showInLabel\n   * @return {FZP}\n   */\n  setProperty(key, value = null, showInLabel = false) {\n    if (!key) {\n      throw new Error('Missing first argument at function');\n    }\n    this.properties[key] = new FZPProperty();\n    this.properties[key].set(value, showInLabel);\n    return this;\n  }\n\n  /**\n   * Get a FZP property by the given key.\n   * @param {String} key\n   * @return {FZPProperty}\n   */\n  getProperty(key) {\n    if (!key) {\n      throw new Error('Missing first argument at function', key);\n    }\n    return this.properties[key];\n  }\n\n  /**\n   * Set a view\n   * @param {String} name The name of the view can be 'breadboard', 'pcb', or 'schematic'\n   * @param {FZPView} view\n   * @return {FZP}\n   */\n  setView(name, view) {\n    console.log('not jet implemented', name, view);\n    return this;\n  }\n\n\n  /**\n   * Get the total number of connector.\n   * @return {Number}\n   */\n  totalConnector() {\n    return Object.keys(this.connectors).length;\n  }\n\n  /**\n   * setConnector\n   * @param {String} name\n   * @param {FZPConnector} connector\n   * @return {FZP}\n   */\n  setConnector(name, connector) {\n    console.log('not jet implemented', name, connector);\n    return this;\n  }\n\n  /**\n   * Get the total number of buses.\n   * @return {Number}\n   */\n  totalBuses() {\n    return Object.keys(this.buses).length;\n  }\n\n  /**\n   * setBus\n   * @param {String} name\n   * @param {FZPBus} bus\n   * @return {FZP}\n   */\n  setBus(name, bus) {\n    console.log('not jet implemented', name, bus);\n    return this;\n  }\n\n  /**\n   * Load all SVG sources.\n   * @param {String} baseurl\n   * @return {FZP}\n   */\n  loadSVGs(baseurl) {\n    return this.views.breadboard.loadSVG(baseurl)\n    .then(() => {\n      return this.views.schematic.loadSVG(baseurl)\n      .then(() => {\n        return this.views.pcb.loadSVG(baseurl)\n        .then(() => {\n          return this;\n        });\n      });\n    });\n  }\n}\n\nmodule.exports = FZP;\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/fzp/fzp.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/fzp.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 72,
+    "__docId__": 91,
     "kind": "variable",
     "name": "FZPView",
     "memberof": "src/fzp/fzp.js",
@@ -995,7 +1357,7 @@
     "importPath": "fzp-js/src/fzp/fzp.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 1,
+    "lineNumber": 3,
     "undocument": true,
     "type": {
       "types": [
@@ -1005,7 +1367,7 @@
     "ignore": true
   },
   {
-    "__docId__": 73,
+    "__docId__": 92,
     "kind": "variable",
     "name": "FZPProperty",
     "memberof": "src/fzp/fzp.js",
@@ -1016,7 +1378,7 @@
     "importPath": "fzp-js/src/fzp/fzp.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 2,
+    "lineNumber": 4,
     "undocument": true,
     "type": {
       "types": [
@@ -1026,7 +1388,7 @@
     "ignore": true
   },
   {
-    "__docId__": 74,
+    "__docId__": 93,
     "kind": "class",
     "name": "FZP",
     "memberof": "src/fzp/fzp.js",
@@ -1036,12 +1398,15 @@
     "export": false,
     "importPath": "fzp-js/src/fzp/fzp.js",
     "importStyle": null,
-    "description": "The FZP class",
-    "lineNumber": 7,
+    "description": "The FZP class is the main fzp data entry.\nHere you can access the main data properties/objects and some utility functions\ncan be used to load svgs as string, count the total number of connections or set a connector.",
+    "examples": [
+      "const {FZP} = require('fzp-js')\n\nlet fzp = new FZP({moduleId: 'sample'})\nfzp.version = '1.0.0'\nfzp.setTag('demo')\nfzp.setProperty('p', 'hello', true)\nfzp.setView()\nfzp.setConnector()\nfzp.setBus()"
+    ],
+    "lineNumber": 22,
     "interface": false
   },
   {
-    "__docId__": 75,
+    "__docId__": 94,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1050,8 +1415,8 @@
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#constructor",
     "access": "public",
-    "description": "FZP constructor",
-    "lineNumber": 12,
+    "description": "FZP constructor has an opt argument object that can be used to setup data at the initialization.",
+    "lineNumber": 27,
     "params": [
       {
         "nullable": null,
@@ -1066,295 +1431,349 @@
     ]
   },
   {
-    "__docId__": 76,
+    "__docId__": 95,
     "kind": "member",
     "name": "moduleId",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#moduleId",
     "access": "public",
-    "description": "the module id",
-    "lineNumber": 15,
+    "description": "The FZP module id",
+    "lineNumber": 32,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 96,
     "kind": "member",
     "name": "fritzingVersion",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#fritzingVersion",
     "access": "public",
-    "description": "the fritzing version",
-    "lineNumber": 17,
+    "description": "The FZP fritzing version",
+    "lineNumber": 38,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 97,
     "kind": "member",
     "name": "version",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#version",
     "access": "public",
-    "description": "the FZP version",
-    "lineNumber": 19,
+    "description": "The FZP version",
+    "lineNumber": 44,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 79,
+    "__docId__": 98,
     "kind": "member",
     "name": "title",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#title",
     "access": "public",
-    "description": "the FZP title",
-    "lineNumber": 21,
+    "description": "The FZP title",
+    "lineNumber": 50,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 80,
+    "__docId__": 99,
     "kind": "member",
     "name": "description",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#description",
     "access": "public",
-    "description": "the description",
-    "lineNumber": 23,
+    "description": "The FZP description",
+    "lineNumber": 56,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 81,
+    "__docId__": 100,
     "kind": "member",
     "name": "author",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#author",
     "access": "public",
-    "description": "the author",
-    "lineNumber": 25,
+    "description": "The FZP author",
+    "lineNumber": 62,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 101,
     "kind": "member",
     "name": "date",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#date",
     "access": "public",
-    "description": "the date",
-    "lineNumber": 27,
+    "description": "The FZP date",
+    "lineNumber": 68,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 102,
     "kind": "member",
     "name": "url",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#url",
     "access": "public",
-    "description": "the url",
-    "lineNumber": 29,
+    "description": "The FZP url",
+    "lineNumber": 74,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 103,
     "kind": "member",
     "name": "label",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#label",
     "access": "public",
-    "description": "the label",
-    "lineNumber": 31,
+    "description": "The FZP label",
+    "lineNumber": 80,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 104,
     "kind": "member",
     "name": "tags",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#tags",
     "access": "public",
-    "description": "the tags",
-    "lineNumber": 33,
+    "description": "The FZP tags",
+    "lineNumber": 86,
     "type": {
+      "nullable": null,
       "types": [
-        "*[]"
-      ]
+        "Array"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 105,
     "kind": "member",
     "name": "taxonomy",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#taxonomy",
     "access": "public",
-    "description": "the taxonomy",
-    "lineNumber": 35,
+    "description": "The FZP taxonomy",
+    "lineNumber": 92,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 87,
+    "__docId__": 106,
     "kind": "member",
     "name": "language",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#language",
     "access": "public",
-    "description": "the language",
-    "lineNumber": 37,
+    "description": "The FZP language",
+    "lineNumber": 98,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 107,
     "kind": "member",
     "name": "family",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#family",
     "access": "public",
-    "description": "the family",
-    "lineNumber": 39,
+    "description": "The FZP family",
+    "lineNumber": 104,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 108,
     "kind": "member",
     "name": "variant",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#variant",
     "access": "public",
-    "description": "the variant",
-    "lineNumber": 41,
+    "description": "The FZP variant",
+    "lineNumber": 110,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 109,
     "kind": "member",
     "name": "properties",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#properties",
     "access": "public",
-    "description": "the properties",
-    "lineNumber": 43,
+    "description": "The FZP properties",
+    "lineNumber": 116,
     "type": {
+      "nullable": null,
       "types": [
-        "{}"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 110,
     "kind": "member",
     "name": "views",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#views",
     "access": "public",
-    "description": "the views",
-    "lineNumber": 45,
+    "description": "The FZP views (icon, breadboard, schematic, pcb)",
+    "lineNumber": 122,
     "type": {
+      "nullable": null,
       "types": [
-        "{\"icon\": *, \"schematic\": *, \"breadboard\": *, \"pcb\": *}"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 111,
     "kind": "member",
     "name": "connectors",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#connectors",
     "access": "public",
-    "description": "the connectors",
-    "lineNumber": 52,
+    "description": "The FZP connectors",
+    "lineNumber": 133,
     "type": {
+      "nullable": null,
       "types": [
-        "{}"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 112,
     "kind": "member",
     "name": "buses",
     "memberof": "src/fzp/fzp.js~FZP",
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#buses",
     "access": "public",
-    "description": "the buses\nA bus is a instance of the Bus class",
-    "lineNumber": 57,
+    "description": "The FZP buses is a map with instances of the Bus class.",
+    "lineNumber": 138,
     "type": {
+      "nullable": null,
       "types": [
-        "{}"
-      ]
+        "Object"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 113,
     "kind": "method",
     "name": "totalTags",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1364,7 +1783,7 @@
     "longname": "src/fzp/fzp.js~FZP#totalTags",
     "access": "public",
     "description": "Get the total number of tags.",
-    "lineNumber": 64,
+    "lineNumber": 145,
     "return": {
       "nullable": null,
       "types": [
@@ -1376,17 +1795,17 @@
     "params": []
   },
   {
-    "__docId__": 95,
+    "__docId__": 114,
     "kind": "method",
-    "name": "addTag",
+    "name": "setTag",
     "memberof": "src/fzp/fzp.js~FZP",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/fzp/fzp.js~FZP#addTag",
+    "longname": "src/fzp/fzp.js~FZP#setTag",
     "access": "public",
-    "description": "setTag",
-    "lineNumber": 73,
+    "description": "Set a tag",
+    "lineNumber": 154,
     "params": [
       {
         "nullable": null,
@@ -1409,17 +1828,39 @@
     }
   },
   {
-    "__docId__": 96,
+    "__docId__": 115,
     "kind": "method",
-    "name": "addProperty",
+    "name": "totalProperties",
     "memberof": "src/fzp/fzp.js~FZP",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/fzp/fzp.js~FZP#addProperty",
+    "longname": "src/fzp/fzp.js~FZP#totalProperties",
     "access": "public",
-    "description": "Add a property to the fzp instance.",
-    "lineNumber": 85,
+    "description": "Get the total number of properties.",
+    "lineNumber": 163,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "name": "setProperty",
+    "memberof": "src/fzp/fzp.js~FZP",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/fzp.js~FZP#setProperty",
+    "access": "public",
+    "description": "Create or update a FZPProperty instance to the FZP.",
+    "lineNumber": 174,
     "params": [
       {
         "nullable": null,
@@ -1428,7 +1869,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "name",
+        "name": "key",
         "description": ""
       },
       {
@@ -1444,7 +1885,7 @@
       {
         "nullable": null,
         "types": [
-          "String"
+          "Boolean"
         ],
         "spread": false,
         "optional": false,
@@ -1462,7 +1903,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 117,
     "kind": "method",
     "name": "getProperty",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1471,8 +1912,8 @@
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#getProperty",
     "access": "public",
-    "description": "Get a fzp property by the name.",
-    "lineNumber": 95,
+    "description": "Get a FZP property by the given key.",
+    "lineNumber": 188,
     "params": [
       {
         "nullable": null,
@@ -1481,7 +1922,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "name",
+        "name": "key",
         "description": ""
       }
     ],
@@ -1495,7 +1936,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 118,
     "kind": "method",
     "name": "setView",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1504,8 +1945,8 @@
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#setView",
     "access": "public",
-    "description": "setView",
-    "lineNumber": 105,
+    "description": "Set a view",
+    "lineNumber": 201,
     "params": [
       {
         "nullable": null,
@@ -1515,7 +1956,7 @@
         "spread": false,
         "optional": false,
         "name": "name",
-        "description": ""
+        "description": "The name of the view can be 'breadboard', 'pcb', or 'schematic'"
       },
       {
         "nullable": null,
@@ -1538,7 +1979,29 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 119,
+    "kind": "method",
+    "name": "totalConnector",
+    "memberof": "src/fzp/fzp.js~FZP",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/fzp.js~FZP#totalConnector",
+    "access": "public",
+    "description": "Get the total number of connector.",
+    "lineNumber": 211,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 120,
     "kind": "method",
     "name": "setConnector",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1548,7 +2011,7 @@
     "longname": "src/fzp/fzp.js~FZP#setConnector",
     "access": "public",
     "description": "setConnector",
-    "lineNumber": 116,
+    "lineNumber": 221,
     "params": [
       {
         "nullable": null,
@@ -1581,7 +2044,29 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 121,
+    "kind": "method",
+    "name": "totalBuses",
+    "memberof": "src/fzp/fzp.js~FZP",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/fzp.js~FZP#totalBuses",
+    "access": "public",
+    "description": "Get the total number of buses.",
+    "lineNumber": 230,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 122,
     "kind": "method",
     "name": "setBus",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1591,7 +2076,7 @@
     "longname": "src/fzp/fzp.js~FZP#setBus",
     "access": "public",
     "description": "setBus",
-    "lineNumber": 127,
+    "lineNumber": 240,
     "params": [
       {
         "nullable": null,
@@ -1624,7 +2109,7 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 123,
     "kind": "method",
     "name": "loadSVGs",
     "memberof": "src/fzp/fzp.js~FZP",
@@ -1633,31 +2118,42 @@
     "static": false,
     "longname": "src/fzp/fzp.js~FZP#loadSVGs",
     "access": "public",
-    "description": ";oad all svg sources",
-    "lineNumber": 136,
+    "description": "Load all SVG sources.",
+    "lineNumber": 250,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "baseurl",
+        "description": ""
+      }
+    ],
     "return": {
       "nullable": null,
       "types": [
-        "Promise"
+        "FZP"
       ],
       "spread": false,
       "description": ""
-    },
-    "params": []
+    }
   },
   {
-    "__docId__": 102,
+    "__docId__": 124,
     "kind": "file",
     "name": "src/fzp/property.js",
-    "content": "/**\n * FZPProperty class\n */\nclass FZPProperty {\n  /**\n   * FZPProperty constructor\n   * @param {String} value\n   * @param {String} showInLabel\n   */\n  constructor(value, showInLabel) {\n    /** the property value */\n    this.value = value || null;\n    /** the property showInLabel */\n    this.showInLabel = showInLabel || null;\n  }\n}\n\nmodule.exports = FZPProperty;\n",
+    "content": "'use strict';\n\n/**\n * FZPProperty class\n *\n * @example\n * const {FZPProperty} = require('fzp-js')\n *\n * let property = new FZPProperty()\n */\nclass FZPProperty {\n  /**\n   * FZPProperty constructor\n   */\n  constructor() {\n    /**\n     * the property value\n     * @type {String}\n     */\n    this.value = null;\n\n    /**\n     * the property showInLabel\n     * @type {Boolean}\n     */\n    this.showInLabel = false;\n  }\n\n  /**\n  * @param {Object|String} v\n  * @param {Boolean} s\n  */\n  set(v = null, s = false) {\n    // let tmp = {value: v, showInLabel: s};\n    if (v) {\n      switch (typeof v) {\n        case 'object':\n          this.setValue(v.value);\n          this.setShowInLabel(v.showInLabel);\n          break;\n        case 'string':\n          this.setValue(v);\n          break;\n        default:\n          throw new Error(`FZPProperty type('${typeof v}') not supported`);\n      }\n    }\n    if (s) {\n      this.setShowInLabel(s);\n    }\n  }\n  /**\n   * Set the FZProperty  value\n   * @param {String} val\n   */\n  setValue(val) {\n    this.value = val;\n  }\n\n  /**\n   * Get the FZProperty  value\n   * @return {String}\n   */\n  getValue() {\n    return this.value;\n  }\n\n  /**\n   * Set the FZProperty showInLabel boolean\n   * @param {Boolean} l\n   */\n  setShowInLabel(l) {\n    this.showInLabel = l || false;\n  }\n\n  /**\n   * Get the FZProperty showInLabel boolean\n   * @return {Boolean}\n   */\n  getShowInLabel() {\n    return this.showInLabel;\n  }\n}\n\nmodule.exports = FZPProperty;\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/fzp/property.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/property.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 103,
+    "__docId__": 125,
     "kind": "class",
     "name": "FZPProperty",
     "memberof": "src/fzp/property.js",
@@ -1668,11 +2164,14 @@
     "importPath": "fzp-js/src/fzp/property.js",
     "importStyle": null,
     "description": "FZPProperty class",
-    "lineNumber": 4,
+    "examples": [
+      "const {FZPProperty} = require('fzp-js')\n\nlet property = new FZPProperty()"
+    ],
+    "lineNumber": 11,
     "interface": false
   },
   {
-    "__docId__": 104,
+    "__docId__": 126,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/fzp/property.js~FZPProperty",
@@ -1682,7 +2181,95 @@
     "longname": "src/fzp/property.js~FZPProperty#constructor",
     "access": "public",
     "description": "FZPProperty constructor",
-    "lineNumber": 10,
+    "lineNumber": 15
+  },
+  {
+    "__docId__": 127,
+    "kind": "member",
+    "name": "value",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#value",
+    "access": "public",
+    "description": "the property value",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 128,
+    "kind": "member",
+    "name": "showInLabel",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#showInLabel",
+    "access": "public",
+    "description": "the property showInLabel",
+    "lineNumber": 26,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 129,
+    "kind": "method",
+    "name": "set",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#set",
+    "access": "public",
+    "description": "",
+    "lineNumber": 33,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object",
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "v",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "s",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 130,
+    "kind": "method",
+    "name": "setValue",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#setValue",
+    "access": "public",
+    "description": "Set the FZProperty  value",
+    "lineNumber": 56,
     "params": [
       {
         "nullable": null,
@@ -1691,66 +2278,95 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "value",
+        "name": "val",
         "description": ""
-      },
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 132,
+    "kind": "method",
+    "name": "getValue",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#getValue",
+    "access": "public",
+    "description": "Get the FZProperty  value",
+    "lineNumber": 64,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 133,
+    "kind": "method",
+    "name": "setShowInLabel",
+    "memberof": "src/fzp/property.js~FZPProperty",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/fzp/property.js~FZPProperty#setShowInLabel",
+    "access": "public",
+    "description": "Set the FZProperty showInLabel boolean",
+    "lineNumber": 72,
+    "params": [
       {
         "nullable": null,
         "types": [
-          "String"
+          "Boolean"
         ],
         "spread": false,
         "optional": false,
-        "name": "showInLabel",
+        "name": "l",
         "description": ""
       }
-    ]
+    ],
+    "return": null
   },
   {
-    "__docId__": 105,
-    "kind": "member",
-    "name": "value",
+    "__docId__": 135,
+    "kind": "method",
+    "name": "getShowInLabel",
     "memberof": "src/fzp/property.js~FZPProperty",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "src/fzp/property.js~FZPProperty#value",
+    "longname": "src/fzp/property.js~FZPProperty#getShowInLabel",
     "access": "public",
-    "description": "the property value",
-    "lineNumber": 12,
-    "type": {
+    "description": "Get the FZProperty showInLabel boolean",
+    "lineNumber": 80,
+    "return": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
-    }
+        "Boolean"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
   },
   {
-    "__docId__": 106,
-    "kind": "member",
-    "name": "showInLabel",
-    "memberof": "src/fzp/property.js~FZPProperty",
-    "static": false,
-    "longname": "src/fzp/property.js~FZPProperty#showInLabel",
-    "access": "public",
-    "description": "the property showInLabel",
-    "lineNumber": 14,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 107,
+    "__docId__": 136,
     "kind": "file",
     "name": "src/fzp/view.js",
-    "content": "const axios = require('axios');\n\n/**\n * FZPView class\n */\nclass FZPView {\n  /**\n   * FZPView constructor\n   * @param {String} image\n   * @param {Array} ids\n   */\n  constructor(image, ids) {\n    /** The FZPView image */\n    this.image = image || '';\n    /** The FZPView layer id's */\n    this.layerIds = ids || [];\n    /** The FZPView svg data */\n    this.svg = '';\n  }\n\n  /**\n   * Set the FZPView image source\n   * @param {String} src\n   */\n  setImage(src) {\n    this.image = src;\n  }\n\n  /**\n   * Get the total number of FZPView layer id's\n   * @return {Number}\n   */\n  totalLayerId() {\n    return this.layerIds.length;\n  }\n\n  /**\n   * Add a layer id to the FZPView\n   * @param {String} name\n   */\n  addLayerId(name) {\n    if (!this.existLayerId(name)) {\n      this.layerIds.push(name);\n    }\n  }\n\n  /**\n   * Check if a layer id exist at the FZPView layerIds array\n   * @param {String} id\n   * @return {Boolean}\n   */\n  existLayerId(id) {\n    for (let i = 0; i < this.layerIds.length; i++) {\n      if (this.layerIds[i] === id) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n  /**\n   * Set the svg data\n   * @param {String} data\n   */\n  setSVG(data) {\n    this.svg = data;\n  }\n\n  /**\n   * load the svg of the image path from the fritzing-parts api\n   * @return {Promise}\n   */\n  loadSVG() {\n    let self = this;\n    return axios.get('https://fritzing.github.io/fritzing-parts/svg/core/'+this.image, {responseType: 'xml'})\n    .then((res) => {\n      self.setSVG(res.data);\n      return res.data;\n    });\n  }\n}\n\nmodule.exports = FZPView;\n",
+    "content": "'use strict';\n\nconst axios = require('axios');\n\n/**\n * FZPView class is used by the fzp breadboard, pcb and schematics view.\n *\n * @example\n * const {FZPView} = require('fzp-js')\n *\n * let view = new FZPView()\n */\nclass FZPView {\n  /**\n   * FZPView constructor\n   * @param {String} image\n   * @param {Array} ids\n   * @param {Boolean} flipH\n   * @param {Boolean} flipV\n   * @param {String} svg The raw svg string\n   */\n  constructor(image, ids, flipH, flipV, svg) {\n    /**\n     * The FZPView image\n     * @type {String}\n     */\n    this.image = image || null;\n\n    /**\n     * The FZPView layer id's\n     * @type {Array}\n     */\n    this.layerIds = ids || [];\n\n    /**\n     * FZPView flip horizontal\n     * @type {Boolean}\n     */\n    this.flipHorizontal = (flipH == 'true') || (flipH == true) || false;\n\n\n    /**\n     * FZPView flip vertical\n     * @type {Boolean}\n     */\n    this.flipVertical = (flipV == 'true') || (flipV == true) || false;\n\n    /**\n     * The FZPView svg data\n     * @type {String}\n     */\n    this.svg = svg || null;\n  }\n\n  /**\n   * Set the FZPView image source\n   * @param {String} src The image source\n   * @return {FZPView}\n   */\n  setImage(src) {\n    this.image = src;\n    return this;\n  }\n\n  /**\n   * Get the total number of FZPView layer id's\n   * @return {Number}\n   */\n  totalLayerId() {\n    return this.layerIds.length;\n  }\n\n  /**\n   * Add a layer id to the FZPView\n   * @param {String} name The layer name\n   * @return {FZPView}\n   */\n  setLayerId(name) {\n    if (!this.existLayerId(name)) {\n      this.layerIds.push(name);\n    }\n    return this;\n  }\n\n  /**\n   * Check if a layer id exist at the FZPView layerIds array\n   * @param {String} id\n   * @return {Boolean}\n   */\n  existLayerId(id) {\n    for (let i = 0; i < this.layerIds.length; i++) {\n      if (this.layerIds[i] === id) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n  /**\n   * Set the svg data\n   * @param {String} data The SVG data\n   * @return {FZPView}\n   */\n  setSVG(data) {\n    this.svg = data;\n    return this;\n  }\n\n  /**\n   * load the svg of the image path from the fritzing-parts api\n   * @param {String} baseurl the url to the fritzing-parts/core directory\n   * @return {Promise}\n   */\n  loadSVG(baseurl) {\n    let self = this;\n    return axios.get(baseurl+this.image, {responseType: 'xml'})\n    .then((res) => {\n      self.setSVG(res.data);\n      return res.data;\n    });\n  }\n}\n\nmodule.exports = FZPView;\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/fzp/view.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/view.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 108,
+    "__docId__": 137,
     "kind": "variable",
     "name": "axios",
     "memberof": "src/fzp/view.js",
@@ -1761,7 +2377,7 @@
     "importPath": "fzp-js/src/fzp/view.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 1,
+    "lineNumber": 3,
     "undocument": true,
     "type": {
       "types": [
@@ -1771,7 +2387,7 @@
     "ignore": true
   },
   {
-    "__docId__": 109,
+    "__docId__": 138,
     "kind": "class",
     "name": "FZPView",
     "memberof": "src/fzp/view.js",
@@ -1781,12 +2397,15 @@
     "export": false,
     "importPath": "fzp-js/src/fzp/view.js",
     "importStyle": null,
-    "description": "FZPView class",
-    "lineNumber": 6,
+    "description": "FZPView class is used by the fzp breadboard, pcb and schematics view.",
+    "examples": [
+      "const {FZPView} = require('fzp-js')\n\nlet view = new FZPView()"
+    ],
+    "lineNumber": 13,
     "interface": false
   },
   {
-    "__docId__": 110,
+    "__docId__": 139,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1796,7 +2415,7 @@
     "longname": "src/fzp/view.js~FZPView#constructor",
     "access": "public",
     "description": "FZPView constructor",
-    "lineNumber": 12,
+    "lineNumber": 22,
     "params": [
       {
         "nullable": null,
@@ -1817,11 +2436,41 @@
         "optional": false,
         "name": "ids",
         "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "flipH",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Boolean"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "flipV",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "svg",
+        "description": "The raw svg string"
       }
     ]
   },
   {
-    "__docId__": 111,
+    "__docId__": 140,
     "kind": "member",
     "name": "image",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1829,15 +2478,18 @@
     "longname": "src/fzp/view.js~FZPView#image",
     "access": "public",
     "description": "The FZPView image",
-    "lineNumber": 14,
+    "lineNumber": 27,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 112,
+    "__docId__": 141,
     "kind": "member",
     "name": "layerIds",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1845,15 +2497,56 @@
     "longname": "src/fzp/view.js~FZPView#layerIds",
     "access": "public",
     "description": "The FZPView layer id's",
-    "lineNumber": 16,
+    "lineNumber": 33,
     "type": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "Array"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 142,
+    "kind": "member",
+    "name": "flipHorizontal",
+    "memberof": "src/fzp/view.js~FZPView",
+    "static": false,
+    "longname": "src/fzp/view.js~FZPView#flipHorizontal",
+    "access": "public",
+    "description": "FZPView flip horizontal",
+    "lineNumber": 39,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 143,
+    "kind": "member",
+    "name": "flipVertical",
+    "memberof": "src/fzp/view.js~FZPView",
+    "static": false,
+    "longname": "src/fzp/view.js~FZPView#flipVertical",
+    "access": "public",
+    "description": "FZPView flip vertical",
+    "lineNumber": 46,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 144,
     "kind": "member",
     "name": "svg",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1861,15 +2554,18 @@
     "longname": "src/fzp/view.js~FZPView#svg",
     "access": "public",
     "description": "The FZPView svg data",
-    "lineNumber": 18,
+    "lineNumber": 52,
     "type": {
+      "nullable": null,
       "types": [
-        "string"
-      ]
+        "String"
+      ],
+      "spread": false,
+      "description": null
     }
   },
   {
-    "__docId__": 114,
+    "__docId__": 145,
     "kind": "method",
     "name": "setImage",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1879,7 +2575,7 @@
     "longname": "src/fzp/view.js~FZPView#setImage",
     "access": "public",
     "description": "Set the FZPView image source",
-    "lineNumber": 25,
+    "lineNumber": 60,
     "params": [
       {
         "nullable": null,
@@ -1889,13 +2585,20 @@
         "spread": false,
         "optional": false,
         "name": "src",
-        "description": ""
+        "description": "The image source"
       }
     ],
-    "return": null
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPView"
+      ],
+      "spread": false,
+      "description": ""
+    }
   },
   {
-    "__docId__": 116,
+    "__docId__": 147,
     "kind": "method",
     "name": "totalLayerId",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1905,7 +2608,7 @@
     "longname": "src/fzp/view.js~FZPView#totalLayerId",
     "access": "public",
     "description": "Get the total number of FZPView layer id's",
-    "lineNumber": 33,
+    "lineNumber": 69,
     "return": {
       "nullable": null,
       "types": [
@@ -1917,17 +2620,17 @@
     "params": []
   },
   {
-    "__docId__": 117,
+    "__docId__": 148,
     "kind": "method",
-    "name": "addLayerId",
+    "name": "setLayerId",
     "memberof": "src/fzp/view.js~FZPView",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/fzp/view.js~FZPView#addLayerId",
+    "longname": "src/fzp/view.js~FZPView#setLayerId",
     "access": "public",
     "description": "Add a layer id to the FZPView",
-    "lineNumber": 41,
+    "lineNumber": 78,
     "params": [
       {
         "nullable": null,
@@ -1937,13 +2640,20 @@
         "spread": false,
         "optional": false,
         "name": "name",
-        "description": ""
+        "description": "The layer name"
       }
     ],
-    "return": null
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPView"
+      ],
+      "spread": false,
+      "description": ""
+    }
   },
   {
-    "__docId__": 118,
+    "__docId__": 149,
     "kind": "method",
     "name": "existLayerId",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1953,7 +2663,7 @@
     "longname": "src/fzp/view.js~FZPView#existLayerId",
     "access": "public",
     "description": "Check if a layer id exist at the FZPView layerIds array",
-    "lineNumber": 52,
+    "lineNumber": 90,
     "params": [
       {
         "nullable": null,
@@ -1976,7 +2686,7 @@
     }
   },
   {
-    "__docId__": 119,
+    "__docId__": 150,
     "kind": "method",
     "name": "setSVG",
     "memberof": "src/fzp/view.js~FZPView",
@@ -1986,7 +2696,7 @@
     "longname": "src/fzp/view.js~FZPView#setSVG",
     "access": "public",
     "description": "Set the svg data",
-    "lineNumber": 65,
+    "lineNumber": 104,
     "params": [
       {
         "nullable": null,
@@ -1996,13 +2706,20 @@
         "spread": false,
         "optional": false,
         "name": "data",
-        "description": ""
+        "description": "The SVG data"
       }
     ],
-    "return": null
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPView"
+      ],
+      "spread": false,
+      "description": ""
+    }
   },
   {
-    "__docId__": 121,
+    "__docId__": 152,
     "kind": "method",
     "name": "loadSVG",
     "memberof": "src/fzp/view.js~FZPView",
@@ -2012,7 +2729,19 @@
     "longname": "src/fzp/view.js~FZPView#loadSVG",
     "access": "public",
     "description": "load the svg of the image path from the fritzing-parts api",
-    "lineNumber": 73,
+    "lineNumber": 114,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "baseurl",
+        "description": "the url to the fritzing-parts/core directory"
+      }
+    ],
     "return": {
       "nullable": null,
       "types": [
@@ -2020,30 +2749,29 @@
       ],
       "spread": false,
       "description": ""
-    },
-    "params": []
+    }
   },
   {
-    "__docId__": 122,
+    "__docId__": 153,
     "kind": "file",
-    "name": "src/utils.js",
-    "content": "const axios = require('axios');\nconst xml2js = require('xml2js');\nconst parseXml = xml2js.parseString;\nconst FZP = require('./fzp/fzp');\nconst {FZPConnector} = require('./fzp/connector');\n\n/**\n * @param {String} url\n * @return {Promise}\n */\nfunction loadFZP(url) {\n  return axios.get(url, {responseType: 'xml'})\n  .then((res) => {\n    return parseFZP(res.data);\n  });\n}\n\n\n/**\n * parse a fzp xml string\n * @param {String} data\n * @return {Promise}\n */\nfunction parseFZP(data) {\n  return new Promise(function(resolve, reject) {\n    let fzp = new FZP();\n    if (data) {\n      parseXml(data, (err, xml) => {\n        if (err) {\n          // cb(err);\n          return reject(err);\n        }\n        // console.log(xml.module.connectors[0]);\n\n        fzp.moduleId = xml.module.$.moduleId;\n        fzp.fritzingVersion = xml.module.$.fritzingVersion;\n        if (xml.module.version) fzp.version = xml.module.version[0];\n        if (xml.module.title) fzp.title = xml.module.title[0];\n        if (xml.module.description) fzp.description = xml.module.description[0];\n        if (xml.module.author) fzp.author = xml.module.author[0];\n        if (xml.module.date) fzp.date = xml.module.date[0];\n        if (xml.module.url) fzp.url = xml.module.url[0];\n        if (xml.module.label) fzp.label = xml.module.label[0];\n        if (xml.module.tags) fzp.tags = xml.module.tags[0].tag;\n        if (xml.module.taxonomy) fzp.taxonomy = xml.module.taxonomy;\n        if (xml.module.language) fzp.language = xml.module.language;\n        if (xml.module.family) fzp.family = xml.module.family;\n        if (xml.module.variant) fzp.variant = xml.module.variant;\n        if (xml.module.properties) {\n          fzp.properties = parseProperties(xml.module.properties[0].property);\n        }\n\n        // console.log(JSON.stringify(xml.module.properties, '', '  '));\n        if (xml.module.views) {\n          if (xml.module.views[0].iconView) {\n            const iconViewLayer = xml.module.views[0].iconView[0].layers[0];\n            fzp.views.icon.setImage(iconViewLayer.$.image);\n            fzp.views.icon.addLayerId(iconViewLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].breadboardView) {\n            const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];\n            fzp.views.breadboard.setImage(breadboardLayer.$.image);\n            fzp.views.breadboard.addLayerId(breadboardLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].pcbView) {\n            fzp.views.pcb.setImage(xml.module.views[0].pcbView[0].layers[0].$.image);\n            fzp.views.pcb.addLayerId(xml.module.views[0].pcbView[0].layers[0].layer[0].$.layerId);\n          }\n          if (xml.module.views[0].schematicView) {\n            fzp.views.schematic.setImage(xml.module.views[0].schematicView[0].layers[0].$.image);\n            fzp.views.schematic.addLayerId(xml.module.views[0].schematicView[0].layers[0].layer[0].$.layerId);\n          }\n        }\n\n        if (xml.module.connectors) {\n          if (xml.module.connectors[0].connector) {\n            for (let i = 0; i < xml.module.connectors[0].connector.length; i++) {\n              const connector = xml.module.connectors[0].connector[i];\n\n              let c = new FZPConnector();\n              c.id = connector.$.id;\n              c.name = connector.$.name;\n              c.type = connector.$.type;\n              c.description = connector.description[0];\n              c.views.breadboard.layer = connector.views[0].breadboardView[0].p[0].$.layer;\n              c.views.breadboard.svgId = connector.views[0].breadboardView[0].p[0].$.svgId;\n              c.views.breadboard.legId = connector.views[0].breadboardView[0].p[0].$.legId;\n              c.views.breadboard.terminalId = connector.views[0].breadboardView[0].p[0].$.terminalId;\n\n              fzp.connectors[c.id] = c;\n            }\n          }\n        }\n\n        // cb(null, fzp);\n        return resolve(fzp);\n      });\n    }\n  });\n}\n\n/**\n * Get the parsed xml object and map to a proper structure\n * @param {String} xml\n * @return {Object}\n */\nfunction parseProperties(xml) {\n  let data = {};\n  for (let i = 0; i < xml.length; i++) {\n    data[xml[i].$.name] = {\n      value: xml[i]._,\n      showInLabel: xml[i].$.showInLabel,\n    };\n  }\n  return data;\n}\n\n/**\n * Create a xml string of a fzp instance\n * @param {FZP} fzp\n * @return {String}\n */\nfunction marshalToXML(fzp) {\n  let builder = new xml2js.Builder();\n  let data = {\n    module: Object.assign({}, fzp),\n  };\n  data.module.$ = {\n    moduleId: fzp.moduleId,\n    fritzingVersion: fzp.fritzingVersion,\n  };\n  delete data.moduleId;\n  delete data.fritzingVersion;\n  delete data.module.views.icon.svg;\n  delete data.module.views.breadboard.svg;\n  delete data.module.views.schematic.svg;\n  delete data.module.views.pcb.svg;\n\n  return builder.buildObject(data);\n}\n\nmodule.exports = {\n  loadFZP,\n  parseFZP,\n  parseProperties,\n  marshalToXML,\n};\n",
+    "name": "src/index.js",
+    "content": "const FZP = require('./fzp/fzp');\nconst FZPBus = require('./fzp/bus');\nconst FZPConnector = require('./fzp/connector');\nconst FZPConnectorView = require('./fzp/connector-view');\nconst FZPProperty = require('./fzp/property');\nconst FZPView = require('./fzp/view');\nconst FZPUtils = require('./utils');\n\nmodule.exports = {\n  FZP,\n  FZPBus,\n  FZPConnector,\n  FZPConnectorView,\n  FZPProperty,\n  FZPView,\n  FZPUtils,\n};\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/src/utils.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 123,
+    "__docId__": 154,
     "kind": "variable",
-    "name": "axios",
-    "memberof": "src/utils.js",
+    "name": "FZP",
+    "memberof": "src/index.js",
     "static": true,
-    "longname": "src/utils.js~axios",
+    "longname": "src/index.js~FZP",
     "access": "public",
     "export": false,
-    "importPath": "fzp-js/src/utils.js",
+    "importPath": "fzp-js/src/index.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 1,
@@ -2056,15 +2784,15 @@
     "ignore": true
   },
   {
-    "__docId__": 124,
+    "__docId__": 155,
     "kind": "variable",
-    "name": "xml2js",
-    "memberof": "src/utils.js",
+    "name": "FZPBus",
+    "memberof": "src/index.js",
     "static": true,
-    "longname": "src/utils.js~xml2js",
+    "longname": "src/index.js~FZPBus",
     "access": "public",
     "export": false,
-    "importPath": "fzp-js/src/utils.js",
+    "importPath": "fzp-js/src/index.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 2,
@@ -2077,12 +2805,128 @@
     "ignore": true
   },
   {
-    "__docId__": 125,
+    "__docId__": 156,
     "kind": "variable",
-    "name": "parseXml",
+    "name": "FZPConnector",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~FZPConnector",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 157,
+    "kind": "variable",
+    "name": "FZPConnectorView",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~FZPConnectorView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 158,
+    "kind": "variable",
+    "name": "FZPProperty",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~FZPProperty",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 159,
+    "kind": "variable",
+    "name": "FZPView",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~FZPView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 160,
+    "kind": "variable",
+    "name": "FZPUtils",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~FZPUtils",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 161,
+    "kind": "file",
+    "name": "src/utils.js",
+    "content": "'use strict';\n\nconst xml2js = require('xml2js');\nconst parseXml = xml2js.parseString;\nconst FZP = require('./fzp/fzp');\nconst FZPConnector = require('./fzp/connector');\nconst FZPConnectorView = require('./fzp/connector-view');\nconst {FritzingPartsAPI, FritzingPartsAPIClient} = require('fritzing-parts-api-client-js');\n\n\n/**\n * Load a FZP file from the given URL.\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz.fz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {Promise}\n */\nfunction loadFZP(src, url = FritzingPartsAPI) {\n  return FritzingPartsAPIClient.getFzp(src, url)\n  .then((fzp) => {\n    // let tmp = parseFZP(fzp);\n    // console.log(tmp);\n    return parseFZP(fzp);\n  });\n}\n\n/**\n * Load a FZP and all linked SVGs\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {FZP}\n */\nfunction loadFZPandSVGs(src, url = FritzingPartsAPI) {\n  return loadFZP(src, url).then((fzp) => {\n    return fzp.loadSVGs(`${url}/svg/core/`).then(() => {\n      return fzp;\n    });\n  });\n}\n\n/**\n * parse a fzp xml string\n * @param {String} data\n * @return {Promise}\n */\nfunction parseFZP(data) {\n  return new Promise(function(resolve, reject) {\n    let fzp = new FZP();\n    if (data) {\n      parseXml(data, (err, xml) => {\n        if (err) {\n          return reject(err);\n        }\n\n        console.log(xml.module.tags);\n        fzp.moduleId = xml.module.$.moduleId;\n        fzp.fritzingVersion = xml.module.$.fritzingVersion;\n        if (xml.module.version) fzp.version = xml.module.version[0];\n        if (xml.module.title) fzp.title = xml.module.title[0];\n        if (xml.module.description) fzp.description = xml.module.description[0];\n        if (xml.module.author) fzp.author = xml.module.author[0];\n        if (xml.module.date) fzp.date = xml.module.date[0];\n        if (xml.module.url) fzp.url = xml.module.url[0];\n        if (xml.module.label) fzp.label = xml.module.label[0];\n        if (xml.module.tags) fzp.tags = xml.module.tags[0].tag;\n        if (xml.module.taxonomy) fzp.taxonomy = xml.module.taxonomy;\n        if (xml.module.language) fzp.language = xml.module.language;\n        if (xml.module.family) fzp.family = xml.module.family;\n        if (xml.module.variant) fzp.variant = xml.module.variant;\n        if (xml.module.properties) {\n          fzp.properties = parseProperties(xml.module.properties[0].property);\n        }\n\n        if (xml.module.views) {\n          if (xml.module.views[0].iconView) {\n            const iconViewLayer = xml.module.views[0].iconView[0].layers[0];\n            fzp.views.icon.setImage(iconViewLayer.$.image);\n            fzp.views.icon.setLayerId(iconViewLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].breadboardView) {\n            const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];\n            fzp.views.breadboard.setImage(breadboardLayer.$.image);\n            fzp.views.breadboard.setLayerId(breadboardLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].pcbView) {\n            const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];\n            fzp.views.pcb.setImage(pcbViewLayer.$.image);\n            for (let iLayer = 0; iLayer < pcbViewLayer.layer.length; iLayer++) {\n              fzp.views.pcb.setLayerId(pcbViewLayer.layer[iLayer].$.layerId);\n            }\n          }\n          if (xml.module.views[0].schematicView) {\n            const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];\n            fzp.views.schematic.setImage(schematicViewLayer.$.image);\n            fzp.views.schematic.setLayerId(schematicViewLayer.layer[0].$.layerId);\n          }\n        }\n\n        if (xml.module.connectors) {\n          if (xml.module.connectors[0].connector) {\n            for (let i = 0; i < xml.module.connectors[0].connector.length; i++) {\n              const connector = xml.module.connectors[0].connector[i];\n\n              // create the connector for the three views.\n              let c = new FZPConnector();\n              c.id = connector.$.id;\n              c.name = connector.$.name;\n              c.type = connector.$.type;\n              if (connector.description) {\n                c.description = connector.description[0];\n              }\n\n              if (connector.views[0].breadboardView) {\n                c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);\n              }\n\n              if (connector.views[0].schematicView) {\n                c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);\n              }\n\n              if (connector.views[0].pcbView) {\n                for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {\n                  switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {\n                    case 'copper0':\n                    c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                    case 'copper1':\n                    c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                  }\n                }\n              }\n\n              fzp.connectors[c.id] = c;\n            }\n          }\n        }\n\n        return resolve(fzp);\n      });\n    }\n  });\n}\n\n/**\n * Get the parsed xml object and map to a proper structure\n * @param {String} xml\n * @return {Object}\n */\nfunction parseProperties(xml) {\n  let data = {};\n  // if (xml) {\n  //   if (xml.length > 0) {\n      for (let i = 0; i < xml.length; i++) {\n        data[xml[i].$.name] = {\n          value: xml[i]._,\n          showInLabel: xml[i].$.showInLabel,\n        };\n      }\n  //   }\n  // }\n  return data;\n}\n\n/**\n * @param {Object} xml\n * @return {FZPConnectorView}\n */\nfunction parseConnectorView(xml) {\n  let conView = new FZPConnectorView();\n  conView.layer = xml.$.layer || null;\n  conView.svgId = xml.$.svgId || null;\n  conView.legId = xml.$.legId || null;\n  conView.terminalId = xml.$.terminalId || null;\n  return conView;\n}\n\n/**\n * Create a xml string of a FZP instance.\n *\n * @example\n * const {marshalToXML} = require('fzp-js')\n *\n * const xmlData = FZPUtils.marshalToXML(fzp)\n * console.log(xmlData)\n *\n * @param {FZP} fzp\n * @return {String}\n */\nfunction marshalToXML(fzp) {\n  let builder = new xml2js.Builder();\n  let data = {\n    module: {\n      $: {\n        moduleId: fzp.moduleId,\n        fritzingVersion: fzp.fritzingVersion,\n      },\n      version: [fzp.version],\n      title: [fzp.title],\n      author: [fzp.author],\n      label: [fzp.label],\n      date: [fzp.date],\n      tags: [{tag: fzp.tags}],\n      // properties: fzp.properties,\n      description: [fzp.description],\n      views: [[{}]],\n      connectors: [[{}]],\n    },\n  };\n  // let data = {\n  //   module: Object.assign({}, fzp),\n  // };\n  // data.module.$ = {\n  // };\n  // delete data.moduleId;\n  // delete data.fritzingVersion;\n  //\n  // data.module.tags =\n  //\n  // if (data.module) {\n  //   if (data.module.views) {\n  //     if (data.module.icon) {\n  //       delete data.module.views.icon.svg;\n  //     }\n  //     if (data.module.breadboard) {\n  //       delete data.module.views.breadboard.svg;\n  //     }\n  //     if (data.module.schematic) {\n  //       delete data.module.views.schematic.svg;\n  //     }\n  //     if (data.module.pcb) {\n  //       delete data.module.views.pcb.svg;\n  //     }\n  //   }\n  // }\n  return builder.buildObject(data);\n}\n\nmodule.exports = {\n  loadFZP,\n  loadFZPandSVGs,\n  parseFZP,\n  parseProperties,\n  marshalToXML,\n};\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/utils.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 162,
+    "kind": "variable",
+    "name": "xml2js",
     "memberof": "src/utils.js",
     "static": true,
-    "longname": "src/utils.js~parseXml",
+    "longname": "src/utils.js~xml2js",
     "access": "public",
     "export": false,
     "importPath": "fzp-js/src/utils.js",
@@ -2098,12 +2942,12 @@
     "ignore": true
   },
   {
-    "__docId__": 126,
+    "__docId__": 163,
     "kind": "variable",
-    "name": "FZP",
+    "name": "parseXml",
     "memberof": "src/utils.js",
     "static": true,
-    "longname": "src/utils.js~FZP",
+    "longname": "src/utils.js~parseXml",
     "access": "public",
     "export": false,
     "importPath": "fzp-js/src/utils.js",
@@ -2119,12 +2963,12 @@
     "ignore": true
   },
   {
-    "__docId__": 127,
+    "__docId__": 164,
     "kind": "variable",
-    "name": "FZPConnector",
+    "name": "FZP",
     "memberof": "src/utils.js",
     "static": true,
-    "longname": "src/utils.js~FZPConnector",
+    "longname": "src/utils.js~FZP",
     "access": "public",
     "export": false,
     "importPath": "fzp-js/src/utils.js",
@@ -2140,7 +2984,70 @@
     "ignore": true
   },
   {
-    "__docId__": 128,
+    "__docId__": 165,
+    "kind": "variable",
+    "name": "FZPConnector",
+    "memberof": "src/utils.js",
+    "static": true,
+    "longname": "src/utils.js~FZPConnector",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/utils.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 166,
+    "kind": "variable",
+    "name": "FZPConnectorView",
+    "memberof": "src/utils.js",
+    "static": true,
+    "longname": "src/utils.js~FZPConnectorView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/utils.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 167,
+    "kind": "variable",
+    "name": "FritzingPartsAPI",
+    "memberof": "src/utils.js",
+    "static": true,
+    "longname": "src/utils.js~FritzingPartsAPI",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/utils.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 168,
     "kind": "function",
     "name": "loadFZP",
     "memberof": "src/utils.js",
@@ -2152,8 +3059,11 @@
     "export": false,
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
-    "description": "",
-    "lineNumber": 11,
+    "description": "Load a FZP file from the given URL.",
+    "examples": [
+      "const {FZPUtils} = require('fzp-js')\n\nFZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')\n.then((fzz) => {\n  console.log(fzz.fz)\n})\n.catch((err) => {\n  console.error(err)\n})"
+    ],
+    "lineNumber": 29,
     "params": [
       {
         "nullable": null,
@@ -2162,8 +3072,18 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "url",
+        "name": "src",
         "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "URL to the FZP file."
       }
     ],
     "return": {
@@ -2176,7 +3096,56 @@
     }
   },
   {
-    "__docId__": 129,
+    "__docId__": 169,
+    "kind": "function",
+    "name": "loadFZPandSVGs",
+    "memberof": "src/utils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/utils.js~loadFZPandSVGs",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/utils.js",
+    "importStyle": null,
+    "description": "Load a FZP and all linked SVGs",
+    "examples": [
+      "const {FZPUtils} = require('fzp-js')\n\nFZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')\n.then((fzz) => {\n  console.log(fzz)\n})\n.catch((err) => {\n  console.error(err)\n})"
+    ],
+    "lineNumber": 56,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "src",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "URL to the FZP file."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZP"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 170,
     "kind": "function",
     "name": "parseFZP",
     "memberof": "src/utils.js",
@@ -2189,7 +3158,7 @@
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
     "description": "parse a fzp xml string",
-    "lineNumber": 24,
+    "lineNumber": 69,
     "params": [
       {
         "nullable": null,
@@ -2212,7 +3181,7 @@
     }
   },
   {
-    "__docId__": 130,
+    "__docId__": 171,
     "kind": "function",
     "name": "parseProperties",
     "memberof": "src/utils.js",
@@ -2225,7 +3194,7 @@
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
     "description": "Get the parsed xml object and map to a proper structure",
-    "lineNumber": 107,
+    "lineNumber": 173,
     "params": [
       {
         "nullable": null,
@@ -2248,7 +3217,43 @@
     }
   },
   {
-    "__docId__": 131,
+    "__docId__": 172,
+    "kind": "function",
+    "name": "parseConnectorView",
+    "memberof": "src/utils.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/utils.js~parseConnectorView",
+    "access": "public",
+    "export": false,
+    "importPath": "fzp-js/src/utils.js",
+    "importStyle": null,
+    "description": "",
+    "lineNumber": 192,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "xml",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "FZPConnectorView"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 173,
     "kind": "function",
     "name": "marshalToXML",
     "memberof": "src/utils.js",
@@ -2260,8 +3265,11 @@
     "export": false,
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
-    "description": "Create a xml string of a fzp instance",
-    "lineNumber": 123,
+    "description": "Create a xml string of a FZP instance.",
+    "examples": [
+      "const {marshalToXML} = require('fzp-js')\n\nconst xmlData = FZPUtils.marshalToXML(fzp)\nconsole.log(xmlData)"
+    ],
+    "lineNumber": 213,
     "params": [
       {
         "nullable": null,
@@ -2285,131 +3293,652 @@
   },
   {
     "kind": "index",
-    "content": "# fzp-js [![](https://paulvollmer.net/fzp-js/badge.svg)](https://paulvollmer.net/fzp-js/)\n\nfritzing fzp javascript library\n\n## Development\n```sh\nyarn install\nmake test\n```\n\nand lint your files before you commit\n```sh\nmake lint\n```\n\nto build an es5 compatible version run\n```sh\nmake build\n```\n\n## Usage\n\n```javascript\nconst {FZPUtils} = require('fzp-js')\n\nconst url = 'https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp'\nFZPUtils.loadFZP(url).then((fzp) => {\n  console.log('FZP', fzp);\n\n  // load the svg of the breadboard view\n  fzp.views.breadboard.loadSVG('foo').then((d) => {\n    console.log('SVG', d);\n  }).catch((err) => {\n    throw new Error(err)\n  })\n\n}).catch((e) => {\n  throw new Error(err)\n})\n```\n\n## License\n[MIT-LICENSE](LICENSE)\n",
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/README.md",
+    "content": "# fzp-js [![](https://fritzing.github.io/fzp-js/badge.svg)](https://fritzing.github.io/fzp-js/)\n\nThe fritzing fzp javascript library is for processing fritzing fzp xml data.  \nThe Library can be used to load fzp's, parse and marshal to XML.\n\n\n## Installation\n\nInstall the npm package\n```sh\nnpm install fritzing/fzp-js --save\n```\n\nor use yarn to install and add the dependency to your `package.json`\n```sh\nyarn add fritzing/fzp-js\n```\n\n\n## Usage\n\nLet's start with a simple szenario and load a fzp file and all svg's.  \nDocumentation of the library can be found [here](https://fritzing.github.io/fzp-js/)\n```javascript\nconst {FZPUtils} = require('fzp-js')\n\nconst url = 'https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp'\nFZPUtils.loadFZP(url).then((fzp) => {\n  console.log('FZP', fzp);\n\n  // load the svg of the breadboard view\n  fzp.views.breadboard.loadSVG('foo').then((d) => {\n    console.log('SVG', d);\n  }).catch((err) => {\n    throw new Error(err)\n  })\n\n}).catch((e) => {\n  throw new Error(err)\n})\n```\n\n\n## Development\n```sh\nyarn install\nmake test\n```\n\nand lint your files before you commit\n```sh\nmake lint\n```\n\nto build an es5 compatible version run\n```sh\nmake build\n```\n\n\n## License\n[MIT-LICENSE](LICENSE)\n",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"fzp-js\",\n  \"version\": \"0.1.1\",\n  \"description\": \"fritzing fzp javascript library\",\n  \"author\": \"Paul Vollmer\",\n  \"license\": \"MIT\",\n  \"keywords\": [\n    \"fritzing\",\n    \"fzp\"\n  ],\n  \"homepage\": \"https://github.com/paulvollmer/fzp-js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/paulvollmer/fzp-js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/paulvollmer/fzp-js/issues\"\n  },\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"pretest\": \"make lint\",\n    \"test\": \"make test\",\n    \"precommit\": \"make lint\",\n    \"prepush\": \"make lint\"\n  },\n  \"jest\": {\n    \"verbose\": true,\n    \"collectCoverage\": true,\n    \"coverageReporters\": [\n      \"text\",\n      \"lcov\"\n    ]\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-plugin-add-header-comment\": \"^1.0.3\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.18.0\",\n    \"eslint-config-google\": \"^0.9.1\",\n    \"husky\": \"^0.14.3\",\n    \"jest\": \"^22.0.6\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"xml2js\": \"^0.4.19\"\n  }\n}\n",
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/package.json",
+    "content": "{\n  \"name\": \"fzp-js\",\n  \"version\": \"0.2.0\",\n  \"description\": \"fritzing fzp javascript library\",\n  \"author\": \"Paul Vollmer\",\n  \"license\": \"MIT\",\n  \"keywords\": [\n    \"fritzing\",\n    \"fzp\"\n  ],\n  \"homepage\": \"https://github.com/paulvollmer/fzp-js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/paulvollmer/fzp-js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/paulvollmer/fzp-js/issues\"\n  },\n  \"main\": \"lib/index.js\",\n  \"scripts\": {\n    \"pretest\": \"make lint\",\n    \"test\": \"make test\",\n    \"precommit\": \"make lint\",\n    \"prepush\": \"make lint\"\n  },\n  \"jest\": {\n    \"verbose\": true,\n    \"collectCoverage\": true,\n    \"coverageReporters\": [\n      \"text\",\n      \"lcov\"\n    ]\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-plugin-add-header-comment\": \"^1.0.3\",\n    \"babel-plugin-minify-dead-code-elimination\": \"^0.3.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.18.0\",\n    \"eslint-config-google\": \"^0.9.1\",\n    \"fritzing-js\": \"github:fritzing/fritzing-js\",\n    \"husky\": \"^0.14.3\",\n    \"jest\": \"^22.0.6\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"fritzing-parts-api-client-js\": \"github:fritzing/fritzing-parts-api-client-js#v0.2.0\",\n    \"xml2js\": \"^0.4.19\"\n  }\n}\n",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"
   },
   {
-    "__docId__": 132,
+    "__docId__": 174,
     "kind": "testFile",
-    "name": "test/fzp.fzp.test.js",
-    "content": "const FZP = require('../src/fzp/fzp');\n\ntest('Test new FZP', () => {\n  let fzp = new FZP({version: 'test'});\n  expect(fzp.version).toEqual('test');\n});\n\ntest('Test FZP tags', () => {\n  let fzp = new FZP();\n  fzp.addTag('test-tag-1');\n  fzp.addTag('test-tag-2');\n  expect(fzp.totalTags()).toEqual(2);\n  expect(fzp.tags).toEqual(['test-tag-1', 'test-tag-2']);\n});\n\ntest('Test FZP properties', () => {\n  let fzp = new FZP();\n  fzp.addProperty('test-prop-1', 123, true);\n  expect(fzp.properties).toEqual({\n    'test-prop-1': {value: 123, showInLabel: true},\n  });\n  expect(fzp.getProperty('test-prop-1').value).toEqual(123);\n  expect(fzp.getProperty('test-prop-1').showInLabel).toEqual(true);\n});\n",
+    "name": "test/_fritzing-parts-test.js",
+    "content": "'use strict';\n\nconst fs = require('fs');\nconst path = require('path');\nconst {parseFZP} = require('../src/utils');\n\nlet fzpDir = fs.readdirSync(path.join(__dirname, './fixtures/fritzing-parts/core'));\n\n// for (var i = 0; i < fzpDir.length; i++) {\n//   if (path.extname(fzpDir[i]) === \".fzp\") {\n//\n//     const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');\n//     parseFZP(data)\n//     .then((fzp) => {\n//       console.log('==> OK   ', fzpDir[i]);\n//     })\n//     .catch(e => {\n//       console.error('==> ERROR',fzpDir[i])\n//       console.error(e);\n//     })\n//     console.log(path.extname(fzpDir[i]));\n//   }\n// }\n\neachPromise(fzpDir, (name, next) => {\n  if (path.extname(name) === '.fzp') {\n    const data = fs.readFileSync(path.join(__dirname, './fixtures/fritzing-parts/core', name));\n    parseFZP(data)\n    .then((fzp) => {\n      // console.log('==> OK   ', name);\n      next();\n    })\n    .catch((err) => {\n      console.error('==> ERROR', name);\n      console.error(err);\n      next();\n    });\n  }\n}, () => {\n  console.log('==> done');\n});\n\nfunction eachPromise(items, task, cb) {\n  let idx = 0;\n  let len = items.length;\n  iter();\n  function iter() {\n    task(items[idx++], function() {\n idx >= len ? cb() : iter();\n});\n  }\n};\n",
     "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/test/fzp.fzp.test.js",
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/_fritzing-parts-test.js",
     "access": null,
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 133,
+    "__docId__": 175,
+    "kind": "testFile",
+    "name": "test/fzp.bus.test.js",
+    "content": "'use strict';\n\nconst FZPBus = require('../src/fzp/bus');\n\ndescribe('FZPBus new', () => {\n  test('Test new FZPBus', () => {\n    let bus = new FZPBus();\n    expect(bus.id).toEqual(null);\n    expect(bus.nodeMembers).toHaveLength(0);\n    expect(bus.nodeMembers).toEqual([]);\n  });\n});\n\ndescribe('FZPBus set', () => {\n  test('Test new FZPBus set (with arg object)', () => {\n    let bus = new FZPBus();\n    bus.set({id: 'test', nodeMembers: [1, 2, 3]});\n    expect(bus.id).toEqual('test');\n    expect(bus.nodeMembers).toHaveLength(3);\n    expect(bus.nodeMembers).toEqual([1, 2, 3]);\n  });\n\n  test('Test new FZPBus set (with arg string)', () => {\n    let bus = new FZPBus();\n    bus.set('test');\n    expect(bus.id).toEqual('test');\n    expect(bus.nodeMembers).toHaveLength(0);\n    expect(bus.nodeMembers).toEqual([]);\n  });\n\n  test('Test new FZPBus set (with args string, array)', () => {\n    let bus = new FZPBus();\n    bus.set('test', [1, 2, 3]);\n    expect(bus.id).toEqual('test');\n    expect(bus.nodeMembers).toHaveLength(3);\n    expect(bus.nodeMembers).toEqual([1, 2, 3]);\n  });\n});\n\ndescribe('FZPBus setId, getId', () => {\n  test('Test FZPBus setId, getId', () => {\n    let bus = new FZPBus();\n    bus.setId('b');\n    expect(bus.getId()).toEqual('b');\n  });\n});\n\ndescribe('FZPBus setNodeMembers, getNodeMembers', () => {\n  test('Test FZPBus setNodeMember, getNodeMember', () => {\n    let bus = new FZPBus();\n    bus.setNodeMember(1);\n    expect(bus.totalNodeMembers()).toEqual(1);\n    expect(bus.getNodeMembers()).toEqual([1]);\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.bus.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 176,
     "kind": "test",
-    "name": "test0",
+    "name": "describe0",
     "testId": 0,
-    "memberof": "test/fzp.fzp.test.js",
+    "memberof": "test/fzp.bus.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "test/fzp.fzp.test.js~test0",
+    "longname": "test/fzp.bus.test.js~describe0",
     "access": null,
-    "description": "Test new FZP",
-    "lineNumber": 3
-  },
-  {
-    "__docId__": 134,
-    "kind": "test",
-    "name": "test1",
-    "testId": 1,
-    "memberof": "test/fzp.fzp.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "test/fzp.fzp.test.js~test1",
-    "access": null,
-    "description": "Test FZP tags",
-    "lineNumber": 8
-  },
-  {
-    "__docId__": 135,
-    "kind": "test",
-    "name": "test2",
-    "testId": 2,
-    "memberof": "test/fzp.fzp.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "test/fzp.fzp.test.js~test2",
-    "access": null,
-    "description": "Test FZP properties",
-    "lineNumber": 16
-  },
-  {
-    "__docId__": 136,
-    "kind": "testFile",
-    "name": "test/utils.test.js",
-    "content": "const {parseFZP, loadFZP, marshalToXML} = require('../src/utils');\nconst FZP = require('../src/fzp/fzp');\nconst fs = require('fs');\n\ntest('Test parseFZP', (done) => {\n  const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');\n  parseFZP(data)\n  .then((fzp) => {\n    // console.log(JSON.stringify(fzp, '', '  '));\n    expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n    expect(fzp.fritzingVersion).toEqual('0.1.beta.1396');\n    expect(fzp.version).toEqual('4');\n    expect(fzp.title).toEqual('Red LED - 3mm');\n    expect(fzp.description).toEqual('A generic red LED (~1.8V)');\n    expect(fzp.author).toEqual('Stefan Hermann');\n    expect(fzp.date).toEqual('2008-10-10');\n    expect(fzp.url).toEqual('');\n    expect(fzp.label).toEqual('LED');\n    expect(fzp.tags).toEqual(['LED', 'Red LED', 'indicator', 'fritzing core']);\n    expect(fzp.taxonomy).toEqual('');\n    expect(fzp.language).toEqual('');\n    expect(fzp.family).toEqual('');\n    expect(fzp.variant).toEqual('');\n    expect(fzp.properties).toEqual({\n        package: {value: '3 mm [THT]'},\n        family: {value: 'LED'},\n        color: {value: 'Red (633nm)', showInLabel: 'yes'},\n        current: {showInLabel: 'yes'},\n        leg: {value: 'yes'},\n      });\n\n    expect(fzp.views.icon.image).toEqual('icon/LED-red-5mmicon.svg');\n    expect(fzp.views.icon.layerIds).toEqual(['icon']);\n    //\n    // expect(fzp.views.breadboard.image).toEqual('breadboard/LED-3mm-red-leg.svg')\n    // expect(fzp.views.breadboard.layerIds).toEqual(['breadboard'])\n\n    // expect(fzp.views.pcb).toEqual('pcb/LED-red-5mmicon.svg')\n    // expect(fzp.views.pcb.layerIds).toEqual('pcb')\n\n    // expect(fzp.views.schematic).toEqual('schematic/led.svg')\n    // expect(fzp.views.schematic.layerIds).toEqual(['schematic'])\n    done();\n  })\n  .catch((err) => {\n    done(err);\n  });\n});\n\ntest('Test loadFZP and loadSVG', (done) => {\n  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')\n  .then((fzp) => {\n    // load the svg of the breadboard view\n    fzp.views.breadboard.loadSVG('foo')\n    .then((d) => {\n        done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  })\n  .catch((e) => {\n    done(e);\n  });\n});\n\ntest('Test loadFZP all SVGs', (done) => {\n  loadFZP('https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp')\n  .then((fzp) => {\n    fzp.loadSVGs()\n    .then((d) => {\n      expect(fzp.views.breadboard.svg).not.toBe('');\n      expect(fzp.views.pcb.svg).not.toBe('');\n      expect(fzp.views.schematic.svg).not.toBe('');\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  })\n  .catch((e) => {\n    done(e);\n  });\n});\n\n\ntest('Test marshalToXML', (done) => {\n  let fzp = new FZP();\n  fzp.moduleId = 'test-moduleId';\n  fzp.fritzingVersion = 'test-fritzingVersion';\n  fzp.version = 'test-version';\n  fzp.title = 'test-title';\n  fzp.description = 'test-description';\n  fzp.author = 'test-author';\n  fzp.date = 'test-date';\n  fzp.url = 'test-url';\n  fzp.label = 'test-label';\n  fzp.taxonomy = 'test-taxonomy';\n  fzp.language = 'test-language';\n  fzp.family = 'test-family';\n  fzp.variant = 'test-variant';\n  fzp.properties = 'test-properties';\n  fzp.views.icon.image = 'test-views-icon-image';\n  fzp.views.breadboard.image = 'test-views-breadboard-image';\n  fzp.views.schematic.image = 'test-views-schematic-image';\n  fzp.views.pcb.image = 'test-views-pcb-image';\n  let xml = marshalToXML(fzp);\n  expect(xml).not.toEqual('');\n  // console.log(xml);\n  done();\n});\n",
-    "static": true,
-    "longname": "/Users/paul/code/src/github.com/paulvollmer/fzp-js/test/utils.test.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 137,
-    "kind": "test",
-    "name": "test3",
-    "testId": 3,
-    "memberof": "test/utils.test.js",
-    "testDepth": 0,
-    "static": true,
-    "longname": "test/utils.test.js~test3",
-    "access": null,
-    "description": "Test parseFZP",
+    "description": "FZPBus new",
     "lineNumber": 5
   },
   {
-    "__docId__": 138,
+    "__docId__": 177,
+    "kind": "test",
+    "name": "test1",
+    "testId": 1,
+    "memberof": "test/fzp.bus.test.js~describe0",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe0.test1",
+    "access": null,
+    "description": "Test new FZPBus",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 178,
+    "kind": "test",
+    "name": "describe2",
+    "testId": 2,
+    "memberof": "test/fzp.bus.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe2",
+    "access": null,
+    "description": "FZPBus set",
+    "lineNumber": 14
+  },
+  {
+    "__docId__": 179,
+    "kind": "test",
+    "name": "test3",
+    "testId": 3,
+    "memberof": "test/fzp.bus.test.js~describe2",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe2.test3",
+    "access": null,
+    "description": "Test new FZPBus set (with arg object)",
+    "lineNumber": 15
+  },
+  {
+    "__docId__": 180,
     "kind": "test",
     "name": "test4",
     "testId": 4,
-    "memberof": "test/utils.test.js",
-    "testDepth": 0,
+    "memberof": "test/fzp.bus.test.js~describe2",
+    "testDepth": 1,
     "static": true,
-    "longname": "test/utils.test.js~test4",
+    "longname": "test/fzp.bus.test.js~describe2.test4",
     "access": null,
-    "description": "Test loadFZP and loadSVG",
-    "lineNumber": 50
+    "description": "Test new FZPBus set (with arg string)",
+    "lineNumber": 23
   },
   {
-    "__docId__": 139,
+    "__docId__": 181,
     "kind": "test",
     "name": "test5",
     "testId": 5,
-    "memberof": "test/utils.test.js",
-    "testDepth": 0,
+    "memberof": "test/fzp.bus.test.js~describe2",
+    "testDepth": 1,
     "static": true,
-    "longname": "test/utils.test.js~test5",
+    "longname": "test/fzp.bus.test.js~describe2.test5",
     "access": null,
-    "description": "Test loadFZP all SVGs",
-    "lineNumber": 67
+    "description": "Test new FZPBus set (with args string, array)",
+    "lineNumber": 31
   },
   {
-    "__docId__": 140,
+    "__docId__": 182,
     "kind": "test",
-    "name": "test6",
+    "name": "describe6",
     "testId": 6,
+    "memberof": "test/fzp.bus.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe6",
+    "access": null,
+    "description": "FZPBus setId, getId",
+    "lineNumber": 40
+  },
+  {
+    "__docId__": 183,
+    "kind": "test",
+    "name": "test7",
+    "testId": 7,
+    "memberof": "test/fzp.bus.test.js~describe6",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe6.test7",
+    "access": null,
+    "description": "Test FZPBus setId, getId",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 184,
+    "kind": "test",
+    "name": "describe8",
+    "testId": 8,
+    "memberof": "test/fzp.bus.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe8",
+    "access": null,
+    "description": "FZPBus setNodeMembers, getNodeMembers",
+    "lineNumber": 48
+  },
+  {
+    "__docId__": 185,
+    "kind": "test",
+    "name": "test9",
+    "testId": 9,
+    "memberof": "test/fzp.bus.test.js~describe8",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.bus.test.js~describe8.test9",
+    "access": null,
+    "description": "Test FZPBus setNodeMember, getNodeMember",
+    "lineNumber": 49
+  },
+  {
+    "__docId__": 186,
+    "kind": "testFile",
+    "name": "test/fzp.connector-view.test.js",
+    "content": "'use strict';\n\nconst FZPConnectorView = require('../src/fzp/connector-view');\n\ndescribe('FZPConnectorView', () => {\n  test('Test new FZPConnectorView (empty)', () => {\n    let c = new FZPConnectorView();\n    expect(c.layer).toEqual(null);\n    expect(c.svgId).toEqual(null);\n    expect(c.legId).toEqual(null);\n    expect(c.terminalId).toEqual(null);\n  });\n\n  test('Test new FZPConnectorView', () => {\n    const opt = {\n      layer: 'lay1',\n      svgId: 'svg1',\n      legId: 'leg1',\n      terminalId: 'ter1',\n    };\n    let c = new FZPConnectorView(opt);\n    expect(c.layer).toEqual('lay1');\n    expect(c.svgId).toEqual('svg1');\n    expect(c.legId).toEqual('leg1');\n    expect(c.terminalId).toEqual('ter1');\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.connector-view.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 187,
+    "kind": "test",
+    "name": "describe10",
+    "testId": 10,
+    "memberof": "test/fzp.connector-view.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.connector-view.test.js~describe10",
+    "access": null,
+    "description": "FZPConnectorView",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 188,
+    "kind": "test",
+    "name": "test11",
+    "testId": 11,
+    "memberof": "test/fzp.connector-view.test.js~describe10",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.connector-view.test.js~describe10.test11",
+    "access": null,
+    "description": "Test new FZPConnectorView (empty)",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 189,
+    "kind": "test",
+    "name": "test12",
+    "testId": 12,
+    "memberof": "test/fzp.connector-view.test.js~describe10",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.connector-view.test.js~describe10.test12",
+    "access": null,
+    "description": "Test new FZPConnectorView",
+    "lineNumber": 14
+  },
+  {
+    "__docId__": 190,
+    "kind": "testFile",
+    "name": "test/fzp.connector.test.js",
+    "content": "'use strict';\n\nconst FZPConnector = require('../src/fzp/connector');\n\ndescribe('FZPConnector', () => {\n  test('Test new FZPConnector (empty)', () => {\n    let c = new FZPConnector();\n    expect(c.id).toEqual(null);\n    expect(c.name).toEqual(null);\n    expect(c.type).toEqual(null);\n    expect(c.description).toEqual(null);\n  });\n\n  test('Test new FZPConnector', () => {\n    const opt = {\n      id: 't1',\n      name: 'test',\n      type: 'testtype',\n      description: 'test connector',\n      views: {\n        breadboard: {\n          layer: 'b-layer',\n        },\n        schematic: {\n          layer: 's-layer',\n        },\n        pcb: {\n          copper0: {\n            layer: 'copper0',\n          },\n          copper1: {\n            layer: 'copper1',\n          },\n\n        },\n      },\n    };\n    let c = new FZPConnector(opt);\n    expect(c.id).toEqual('t1');\n    expect(c.name).toEqual('test');\n    expect(c.type).toEqual('testtype');\n    expect(c.description).toEqual('test connector');\n    expect(c.views.breadboard.layer).toEqual('b-layer');\n    expect(c.views.schematic.layer).toEqual('s-layer');\n    expect(c.views.pcb.copper0.layer).toEqual('copper0');\n    expect(c.views.pcb.copper1.layer).toEqual('copper1');\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.connector.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 191,
+    "kind": "test",
+    "name": "describe13",
+    "testId": 13,
+    "memberof": "test/fzp.connector.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.connector.test.js~describe13",
+    "access": null,
+    "description": "FZPConnector",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 192,
+    "kind": "test",
+    "name": "test14",
+    "testId": 14,
+    "memberof": "test/fzp.connector.test.js~describe13",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.connector.test.js~describe13.test14",
+    "access": null,
+    "description": "Test new FZPConnector (empty)",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 193,
+    "kind": "test",
+    "name": "test15",
+    "testId": 15,
+    "memberof": "test/fzp.connector.test.js~describe13",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.connector.test.js~describe13.test15",
+    "access": null,
+    "description": "Test new FZPConnector",
+    "lineNumber": 14
+  },
+  {
+    "__docId__": 194,
+    "kind": "testFile",
+    "name": "test/fzp.fzp.test.js",
+    "content": "'use strict';\n\nconst FZP = require('../src/fzp/fzp');\n\ndescribe('FZP', () => {\n  test('Test new FZP (empty)', () => {\n    let fzp = new FZP();\n    expect(fzp.version).toEqual('0.0.0');\n  });\n\n  test('Test new FZP (version)', () => {\n    let fzp = new FZP({version: 'test'});\n    expect(fzp.version).toEqual('test');\n  });\n\n  test('Test FZP setTag, totalTags', () => {\n    let fzp = new FZP();\n    fzp.setTag('test-tag-1');\n    fzp.setTag('test-tag-2');\n    expect(fzp.totalTags()).toEqual(2);\n    expect(fzp.tags).toEqual(['test-tag-1', 'test-tag-2']);\n  });\n\n  test('Test FZP setProperty, getProperty', () => {\n    let fzp = new FZP();\n    fzp.setProperty('test-prop-1', 'abc', true);\n    expect(fzp.getProperty('test-prop-1').value).toEqual('abc');\n    expect(fzp.getProperty('test-prop-1').showInLabel).toEqual(true);\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.fzp.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 195,
+    "kind": "test",
+    "name": "describe16",
+    "testId": 16,
+    "memberof": "test/fzp.fzp.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.fzp.test.js~describe16",
+    "access": null,
+    "description": "FZP",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 196,
+    "kind": "test",
+    "name": "test17",
+    "testId": 17,
+    "memberof": "test/fzp.fzp.test.js~describe16",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.fzp.test.js~describe16.test17",
+    "access": null,
+    "description": "Test new FZP (empty)",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 197,
+    "kind": "test",
+    "name": "test18",
+    "testId": 18,
+    "memberof": "test/fzp.fzp.test.js~describe16",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.fzp.test.js~describe16.test18",
+    "access": null,
+    "description": "Test new FZP (version)",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 198,
+    "kind": "test",
+    "name": "test19",
+    "testId": 19,
+    "memberof": "test/fzp.fzp.test.js~describe16",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.fzp.test.js~describe16.test19",
+    "access": null,
+    "description": "Test FZP setTag, totalTags",
+    "lineNumber": 16
+  },
+  {
+    "__docId__": 199,
+    "kind": "test",
+    "name": "test20",
+    "testId": 20,
+    "memberof": "test/fzp.fzp.test.js~describe16",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.fzp.test.js~describe16.test20",
+    "access": null,
+    "description": "Test FZP setProperty, getProperty",
+    "lineNumber": 24
+  },
+  {
+    "__docId__": 200,
+    "kind": "testFile",
+    "name": "test/fzp.property.test.js",
+    "content": "'use strict';\n\nconst FZPProperty = require('../src/fzp/property');\n\ndescribe('FZPProperty new', () => {\n  test('Test new FZPProperty (empty)', () => {\n    let prop = new FZPProperty();\n    expect(prop.value).toEqual(null);\n    expect(prop.showInLabel).toEqual(false);\n  });\n});\n\ndescribe('FZPProperty set', () => {\n  test('Test FZPProperty set (with one arg)', () => {\n    let prop = new FZPProperty();\n    prop.set('lay-test-1');\n    expect(prop.value).toEqual('lay-test-1');\n    expect(prop.showInLabel).toEqual(false);\n  });\n\n  test('Test FZPProperty set (with args)', () => {\n    let prop = new FZPProperty();\n    prop.set('lay-test-2', true);\n    expect(prop.value).toEqual('lay-test-2');\n    expect(prop.showInLabel).toEqual(true);\n  });\n\n  test('Test FZPProperty set (object)', () => {\n    let prop = new FZPProperty();\n    prop.set({value: 'lay-test-3', showInLabel: true});\n    expect(prop.value).toEqual('lay-test-3');\n    expect(prop.showInLabel).toEqual(true);\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.property.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 201,
+    "kind": "test",
+    "name": "describe21",
+    "testId": 21,
+    "memberof": "test/fzp.property.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe21",
+    "access": null,
+    "description": "FZPProperty new",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 202,
+    "kind": "test",
+    "name": "test22",
+    "testId": 22,
+    "memberof": "test/fzp.property.test.js~describe21",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe21.test22",
+    "access": null,
+    "description": "Test new FZPProperty (empty)",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 203,
+    "kind": "test",
+    "name": "describe23",
+    "testId": 23,
+    "memberof": "test/fzp.property.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe23",
+    "access": null,
+    "description": "FZPProperty set",
+    "lineNumber": 13
+  },
+  {
+    "__docId__": 204,
+    "kind": "test",
+    "name": "test24",
+    "testId": 24,
+    "memberof": "test/fzp.property.test.js~describe23",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe23.test24",
+    "access": null,
+    "description": "Test FZPProperty set (with one arg)",
+    "lineNumber": 14
+  },
+  {
+    "__docId__": 205,
+    "kind": "test",
+    "name": "test25",
+    "testId": 25,
+    "memberof": "test/fzp.property.test.js~describe23",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe23.test25",
+    "access": null,
+    "description": "Test FZPProperty set (with args)",
+    "lineNumber": 21
+  },
+  {
+    "__docId__": 206,
+    "kind": "test",
+    "name": "test26",
+    "testId": 26,
+    "memberof": "test/fzp.property.test.js~describe23",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.property.test.js~describe23.test26",
+    "access": null,
+    "description": "Test FZPProperty set (object)",
+    "lineNumber": 28
+  },
+  {
+    "__docId__": 207,
+    "kind": "testFile",
+    "name": "test/fzp.view.test.js",
+    "content": "'use strict';\n\nconst FZPView = require('../src/fzp/view');\n\ndescribe('FZPView', () => {\n  test('Test new FZPView (empty)', () => {\n    let fzpView = new FZPView();\n    expect(fzpView.image).toEqual(null);\n    expect(fzpView.layerIds).toEqual([]);\n    expect(fzpView.flipHorizontal).toEqual(false);\n    expect(fzpView.flipVertical).toEqual(false);\n    expect(fzpView.svg).toEqual(null);\n  });\n\n  test('Test new FZPView (image name)', () => {\n    let fzpView = new FZPView('test');\n    expect(fzpView.image).toEqual('test');\n    expect(fzpView.layerIds).toEqual([]);\n    expect(fzpView.flipHorizontal).toEqual(false);\n    expect(fzpView.flipVertical).toEqual(false);\n    expect(fzpView.svg).toEqual(null);\n  });\n\n  test('Test new FZPView', () => {\n    let fzpView = new FZPView('test', ['breadboard'], true, true);\n    expect(fzpView.image).toEqual('test');\n    expect(fzpView.layerIds).toEqual(['breadboard']);\n    expect(fzpView.flipHorizontal).toEqual(true);\n    expect(fzpView.flipVertical).toEqual(true);\n    fzpView.setLayerId('foo');\n    expect(fzpView.layerIds).toEqual(['breadboard', 'foo']);\n    expect(fzpView.existLayerId('foo')).toEqual(true);\n    expect(fzpView.flipHorizontal).toEqual(true);\n    expect(fzpView.flipVertical).toEqual(true);\n    fzpView.setLayerId('foo');\n    expect(fzpView.totalLayerId()).toEqual(2);\n    fzpView.setSVG('hello-svg');\n    expect(fzpView.svg).toEqual('hello-svg');\n  });\n\n  test('Test new FZPView loadSVG', (done) => {\n    let fzpView = new FZPView('LED-3mm-red-leg.svg');\n    expect(fzpView.image).toEqual('LED-3mm-red-leg.svg');\n    const baseurl = 'https://fritzing.github.io/fritzing-parts/svg/core/breadboard/';\n    fzpView.loadSVG(baseurl).then((d) => {\n      expect(d).not.toEqual('');\n      expect(fzpView.svg).not.toEqual('');\n\n      // check the first and the last line\n      let lines = d.split('\\n');\n      expect(lines[0]).toEqual('<?xml version=\"1.0\" encoding=\"utf-8\"?>');\n      expect(lines[lines.length-2]).toEqual('</svg>');\n\n      done();\n    })\n    .catch((err) => {\n      console.error('ERROR', e);\n      done(err);\n    });\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/fzp.view.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 208,
+    "kind": "test",
+    "name": "describe27",
+    "testId": 27,
+    "memberof": "test/fzp.view.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/fzp.view.test.js~describe27",
+    "access": null,
+    "description": "FZPView",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 209,
+    "kind": "test",
+    "name": "test28",
+    "testId": 28,
+    "memberof": "test/fzp.view.test.js~describe27",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.view.test.js~describe27.test28",
+    "access": null,
+    "description": "Test new FZPView (empty)",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 210,
+    "kind": "test",
+    "name": "test29",
+    "testId": 29,
+    "memberof": "test/fzp.view.test.js~describe27",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.view.test.js~describe27.test29",
+    "access": null,
+    "description": "Test new FZPView (image name)",
+    "lineNumber": 15
+  },
+  {
+    "__docId__": 211,
+    "kind": "test",
+    "name": "test30",
+    "testId": 30,
+    "memberof": "test/fzp.view.test.js~describe27",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.view.test.js~describe27.test30",
+    "access": null,
+    "description": "Test new FZPView",
+    "lineNumber": 24
+  },
+  {
+    "__docId__": 212,
+    "kind": "test",
+    "name": "test31",
+    "testId": 31,
+    "memberof": "test/fzp.view.test.js~describe27",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/fzp.view.test.js~describe27.test31",
+    "access": null,
+    "description": "Test new FZPView loadSVG",
+    "lineNumber": 41
+  },
+  {
+    "__docId__": 213,
+    "kind": "testFile",
+    "name": "test/utils.test.js",
+    "content": "'use strict';\n\nconst {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require('../src/utils');\nconst FZP = require('../src/fzp/fzp');\nconst fs = require('fs');\nconst {FritzingPartsAPI} = require('fritzing-parts-api-client-js');\nconst FritzingPartsAPISVGCore = FritzingPartsAPI+'/svg/core/';\n\nconst FritzingAPICoreLEDFzp = 'core/LED-generic-3mm.fzp';\n\ntest('Test parseFZP', (done) => {\n  const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');\n  parseFZP(data)\n  .then((fzp) => {\n    expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n    expect(fzp.fritzingVersion).toEqual('0.1.beta.1396');\n    expect(fzp.version).toEqual('4');\n    expect(fzp.author).toEqual('Stefan Hermann');\n    expect(fzp.title).toEqual('Red LED - 3mm');\n    expect(fzp.label).toEqual('LED');\n    expect(fzp.date).toEqual('2008-10-10');\n    expect(fzp.tags).toEqual(['LED', 'Red LED', 'indicator', 'fritzing core']);\n    expect(fzp.description).toEqual('A generic red LED (~1.8V)');\n    expect(fzp.url).toEqual('');\n    expect(fzp.taxonomy).toEqual('');\n    expect(fzp.language).toEqual('');\n    expect(fzp.family).toEqual('');\n    expect(fzp.variant).toEqual('');\n\n    expect(fzp.properties).toEqual({\n      package: {value: '3 mm [THT]'},\n      family: {value: 'LED'},\n      color: {value: 'Red (633nm)', showInLabel: 'yes'},\n      current: {showInLabel: 'yes'},\n      leg: {value: 'yes'},\n    });\n\n    // testing the views\n    expect(fzp.views.icon.image).toEqual('icon/LED-red-5mmicon.svg');\n    expect(fzp.views.icon.layerIds).toEqual(['icon']);\n\n    expect(fzp.views.breadboard.image).toEqual('breadboard/LED-3mm-red-leg.svg');\n    expect(fzp.views.breadboard.layerIds).toEqual(['breadboard']);\n    expect(fzp.views.breadboard.flipHorizontal).toEqual(false);\n    expect(fzp.views.breadboard.flipVertical).toEqual(false);\n\n    expect(fzp.views.pcb.image).toEqual('pcb/3mm_LED.svg');\n    expect(fzp.views.pcb.layerIds).toEqual(['copper0', 'copper1', 'keepout', 'outline', 'silkscreen', 'soldermask']);\n\n    expect(fzp.views.schematic.image).toEqual('schematic/led.svg');\n    expect(fzp.views.schematic.layerIds).toEqual(['schematic']);\n\n    // testing the connertor\n    expect(fzp.connectors['connector0'].name).toEqual('cathode');\n    expect(fzp.connectors['connector0'].type).toEqual('male');\n    expect(fzp.connectors['connector0'].description).toEqual('cathode pin');\n\n    expect(fzp.connectors['connector0'].views.breadboard.layer).toEqual('breadboard');\n    expect(fzp.connectors['connector0'].views.breadboard.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.breadboard.legId).toEqual('connector0leg');\n\n    expect(fzp.connectors['connector0'].views.schematic.layer).toEqual('schematic');\n    expect(fzp.connectors['connector0'].views.schematic.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.schematic.terminalId).toEqual('connector0terminal');\n\n    expect(fzp.connectors['connector0'].views.pcb.copper0.layer).toEqual('copper0');\n    expect(fzp.connectors['connector0'].views.pcb.copper0.svgId).toEqual('connector0pad');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.layer).toEqual('copper1');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.svgId).toEqual('connector0pad');\n\n    expect(fzp.buses).toEqual({});\n\n    done();\n  })\n  .catch((err) => {\n    done(err);\n  });\n});\n\ndescribe('loadFZP', () => {\n  test('Test loadFZP', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n      // console.log(fzp);\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and loadSVG', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // load the svg of the breadboard view\n      fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)\n      .then(() => {\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and all SVGs', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      fzp.loadSVGs(FritzingPartsAPISVGCore)\n      .then(() => {\n        // check if the svg string is not empty\n        expect(fzp.views.breadboard.svg).not.toEqual('');\n        expect(fzp.views.pcb.svg).not.toEqual('');\n        expect(fzp.views.schematic.svg).not.toEqual('');\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n\ndescribe('loadFZPandSVGs', () => {\n  test('Test loadFZPandSVGs', (done) => {\n    loadFZPandSVGs(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // check if the svg string is not empty\n      expect(fzp.views.breadboard.svg).not.toEqual('');\n      expect(fzp.views.pcb.svg).not.toEqual('');\n      expect(fzp.views.schematic.svg).not.toEqual('');\n      done();\n    })\n    .catch((err) => {\n      console.log('ERROR', err);\n      done(err);\n    });\n  });\n});\n\ndescribe('marshalToXML', () => {\n  test('Test marshalToXML', () => {\n    let fzp = new FZP();\n    fzp.moduleId = 'test-moduleId';\n    fzp.fritzingVersion = 'test-fritzingVersion';\n    fzp.version = 'test-version';\n    fzp.title = 'test-title';\n    fzp.description = 'test-description';\n    fzp.author = 'test-author';\n    fzp.date = 'test-date';\n    fzp.url = 'test-url';\n    fzp.label = 'test-label';\n    fzp.taxonomy = 'test-taxonomy';\n    fzp.language = 'test-language';\n    fzp.family = 'test-family';\n    fzp.variant = 'test-variant';\n    fzp.properties = 'test-properties';\n    fzp.views.icon.image = 'test-views-icon-image';\n    fzp.views.breadboard.image = 'test-views-breadboard-image';\n    fzp.views.schematic.image = 'test-views-schematic-image';\n    fzp.views.pcb.image = 'test-views-pcb-image';\n    let xml = marshalToXML(fzp);\n\n    // check if the generated xml is not empty\n    expect(xml).not.toEqual('');\n    // console.log(xml);\n\n    // TODO: call 'parseFZP'\n    // TODO: check if data is equal to the fzp from above\n  });\n\n  test('Test marshalToXML from loaded part', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      let xml = marshalToXML(fzp);\n      expect(xml).toEqual(`<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<module moduleId=\"3mmColorLEDModuleID\" fritzingVersion=\"0.1.beta.1396\">\n  <version>4</version>\n  <title>Red LED - 3mm</title>\n  <author>Stefan Hermann</author>\n  <label>LED</label>\n  <date>2008-10-10</date>\n  <tags>\n    <tag>LED</tag>\n    <tag>Red LED</tag>\n    <tag>indicator</tag>\n    <tag>fritzing core</tag>\n  </tags>\n  <description>A generic red LED (~1.8V)</description>\n  <views/>\n  <connectors/>\n</module>`);\n\n// TODO: finish the xml marshaller\n//\n// <properties>\n//   <property name=\"package\">3 mm [THT]</property>\n//   <property name=\"family\">LED</property>\n//   <property name=\"color\" showInLabel=\"yes\">Red (633nm)</property>\n//   <property name=\"current\" showInLabel=\"yes\"></property>\n//   <property name=\"leg\" >yes</property>\n// </properties>\n// <description>A generic red LED (~1.8V)</description>\n// <views>\n//   <iconView>\n//     <layers image=\"icon/LED-red-5mmicon.svg\">\n//       <layer layerId=\"icon\"/>\n//     </layers>\n//   </iconView>\n//   <breadboardView fliphorizontal=\"true\" flipvertical=\"true\">\n//     <layers image=\"breadboard/LED-3mm-red-leg.svg\">\n//       <layer layerId=\"breadboard\"/>\n//     </layers>\n//   </breadboardView>\n//   <schematicView>\n//     <layers image=\"schematic/led.svg\">\n//       <layer layerId=\"schematic\"/>\n//     </layers>\n//   </schematicView>\n//   <pcbView>\n//     <layers image=\"pcb/3mm_LED.svg\">\n//       <layer layerId=\"copper0\"/>\n//       <layer layerId=\"copper1\"/>\n//       <layer layerId=\"keepout\"/>\n//       <layer layerId=\"outline\"/>\n//       <layer layerId=\"silkscreen\"/>\n//       <layer layerId=\"soldermask\"/>\n//     </layers>\n//   </pcbView>\n// </views>\n// <connectors>\n//   <connector id=\"connector0\" name=\"cathode\" type=\"male\">\n//     <description>cathode pin</description>\n//     <views>\n//       <breadboardView>\n//         <p layer=\"breadboard\" svgId=\"connector0pin\"  legId=\"connector0leg\"/>\n//       </breadboardView>\n//       <schematicView>\n//         <p layer=\"schematic\" svgId=\"connector0pin\" terminalId=\"connector0terminal\"/>\n//       </schematicView>\n//       <pcbView>\n//         <p layer=\"copper0\" svgId=\"connector0pad\"/>\n//         <p layer=\"copper1\" svgId=\"connector0pad\"/>\n//       </pcbView>\n//     </views>\n//   </connector>\n//   <connector id=\"connector1\" name=\"anode\" type=\"male\">\n//     <description>anode pin</description>\n//     <views>\n//       <breadboardView>\n//         <p layer=\"breadboard\" svgId=\"connector1pin\"  legId=\"connector1leg\"/>\n//       </breadboardView>\n//       <schematicView>\n//         <p layer=\"schematic\" svgId=\"connector1pin\" terminalId=\"connector1terminal\"/>\n//       </schematicView>\n//       <pcbView>\n//         <p layer=\"copper0\" svgId=\"connector1pad\"/>\n//         <p layer=\"copper1\" svgId=\"connector1pad\"/>\n//       </pcbView>\n//     </views>\n//   </connector>\n// </connectors>\n\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n",
+    "static": true,
+    "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/utils.test.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 214,
+    "kind": "test",
+    "name": "test32",
+    "testId": 32,
     "memberof": "test/utils.test.js",
     "testDepth": 0,
     "static": true,
-    "longname": "test/utils.test.js~test6",
+    "longname": "test/utils.test.js~test32",
+    "access": null,
+    "description": "Test parseFZP",
+    "lineNumber": 11
+  },
+  {
+    "__docId__": 215,
+    "kind": "test",
+    "name": "describe33",
+    "testId": 33,
+    "memberof": "test/utils.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/utils.test.js~describe33",
+    "access": null,
+    "description": "loadFZP",
+    "lineNumber": 80
+  },
+  {
+    "__docId__": 216,
+    "kind": "test",
+    "name": "test34",
+    "testId": 34,
+    "memberof": "test/utils.test.js~describe33",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe33.test34",
+    "access": null,
+    "description": "Test loadFZP",
+    "lineNumber": 81
+  },
+  {
+    "__docId__": 217,
+    "kind": "test",
+    "name": "test35",
+    "testId": 35,
+    "memberof": "test/utils.test.js~describe33",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe33.test35",
+    "access": null,
+    "description": "Test loadFZP and loadSVG",
+    "lineNumber": 93
+  },
+  {
+    "__docId__": 218,
+    "kind": "test",
+    "name": "test36",
+    "testId": 36,
+    "memberof": "test/utils.test.js~describe33",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe33.test36",
+    "access": null,
+    "description": "Test loadFZP and all SVGs",
+    "lineNumber": 110
+  },
+  {
+    "__docId__": 219,
+    "kind": "test",
+    "name": "describe37",
+    "testId": 37,
+    "memberof": "test/utils.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/utils.test.js~describe37",
+    "access": null,
+    "description": "loadFZPandSVGs",
+    "lineNumber": 131
+  },
+  {
+    "__docId__": 220,
+    "kind": "test",
+    "name": "test38",
+    "testId": 38,
+    "memberof": "test/utils.test.js~describe37",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe37.test38",
+    "access": null,
+    "description": "Test loadFZPandSVGs",
+    "lineNumber": 132
+  },
+  {
+    "__docId__": 221,
+    "kind": "test",
+    "name": "describe39",
+    "testId": 39,
+    "memberof": "test/utils.test.js",
+    "testDepth": 0,
+    "static": true,
+    "longname": "test/utils.test.js~describe39",
+    "access": null,
+    "description": "marshalToXML",
+    "lineNumber": 148
+  },
+  {
+    "__docId__": 222,
+    "kind": "test",
+    "name": "test40",
+    "testId": 40,
+    "memberof": "test/utils.test.js~describe39",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe39.test40",
     "access": null,
     "description": "Test marshalToXML",
-    "lineNumber": 87
+    "lineNumber": 149
+  },
+  {
+    "__docId__": 223,
+    "kind": "test",
+    "name": "test41",
+    "testId": 41,
+    "memberof": "test/utils.test.js~describe39",
+    "testDepth": 1,
+    "static": true,
+    "longname": "test/utils.test.js~describe39.test41",
+    "access": null,
+    "description": "Test marshalToXML from loaded part",
+    "lineNumber": 179
   }
 ]

@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -44,83 +46,70 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/connector.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const FZPConnectorView = require(&apos;./connector-view&apos;);
+
+/**
  * FZPConnector class
+ *
+ * @example
+ * const {FZPConnector} = require(&apos;fzp-js&apos;)
+ *
+ * let connector = new FZPConnector({id: &apos;sample-id&apos;, name: &apos;sample-name&apos;})
+ * connector.type = &apos;sample-type&apos;
+ * connector.description = &apos;sample-description&apos;
+ * connector.views.breadboard.setLayer(&apos;sample-b-layer&apos;)
+ * connector.views.breadboard.setSvgId(&apos;sample-b-svg&apos;)
+ * connector.views.breadboard.setLegId(&apos;sample-b-leg&apos;)
+ * connector.views.breadboard.setTerminalId(&apos;sample-b-terminal&apos;)
  */
 class FZPConnector {
   /**
    * FZPConnector constructor
-   * @param {Object} opt
+   * @param {Object} opt - the options
    */
-  constructor(opt) {
+  constructor(opt = {views: {pcb: {}}}) {
     /**
-     * the FZP connector id
+     * The id of the FZP connector.
+     * @type {String}
      */
-    this.id = &apos;&apos;;
+    this.id = opt.id || null;
 
     /**
-     * the FZP connector name
+     * The name of the FZP connector.
+     * @type {String}
      */
-    this.name = &apos;&apos;;
+    this.name = opt.name || null;
 
     /**
-     * the FZP connector type
+     * The type of the FZP connector
+     * @type {String}
      */
-    this.type = &apos;&apos;;
+    this.type = opt.type || null;
 
     /**
-     * the FZP connector description
+     * The description of the FZP connector
+     * @type {String}
      */
-    this.description = &apos;&apos;;
+    this.description = opt.description || null;
 
     /**
-     * the FZP connector views fro breadboard, schematic and pcb
+     * The FZP connector views for breadboard, schematic and pcb.
+     * Note that the pcb view has an object for copper0, copper1 etc.
      */
     this.views = {
-      breadboard: new FZPConnectorView(),
-      schematic: new FZPConnectorView(),
-      pcb: new FZPConnectorView(),
+      breadboard: new FZPConnectorView(opt.views.breadboard),
+      schematic: new FZPConnectorView(opt.views.schematic),
+      pcb: {
+        copper0: new FZPConnectorView(opt.views.pcb.copper0),
+        copper1: new FZPConnectorView(opt.views.pcb.copper1),
+      },
     };
   }
 }
 
-/**
- *
- */
-class FZPConnectorView {
-  /**
-   * FZPConnectorView constructor
-   * @param {Object} opt
-   */
-  constructor(opt) {
-    opt = opt || {};
-
-    /**
-     * the FZP connector view layer
-     */
-    this.layer = opt.layer || &apos;&apos;;
-
-    /**
-     * the FZP connector view svg
-     */
-    this.svgId = opt.svgId || &apos;&apos;;
-
-    /**
-     * the FZP connector view leg
-     */
-    this.legId = opt.legId || &apos;&apos;;
-
-    /**
-     * the FZP connector view terminal
-     */
-    this.terminalId = opt.terminalId || &apos;&apos;;
-  }
-}
-
-module.exports = {
-  FZPConnector,
-  FZPConnectorView,
-};
+module.exports = FZPConnector;
 </code></pre>
 
 </div>

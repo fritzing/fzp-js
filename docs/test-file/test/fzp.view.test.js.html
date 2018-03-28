@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/fzp.view.test.js | fzp-js</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">test/fzp.view.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const FZPView = require(&apos;../src/fzp/view&apos;);
+
+describe(&apos;FZPView&apos;, () =&gt; {
+  test(&apos;Test new FZPView (empty)&apos;, () =&gt; {
+    let fzpView = new FZPView();
+    expect(fzpView.image).toEqual(null);
+    expect(fzpView.layerIds).toEqual([]);
+    expect(fzpView.flipHorizontal).toEqual(false);
+    expect(fzpView.flipVertical).toEqual(false);
+    expect(fzpView.svg).toEqual(null);
+  });
+
+  test(&apos;Test new FZPView (image name)&apos;, () =&gt; {
+    let fzpView = new FZPView(&apos;test&apos;);
+    expect(fzpView.image).toEqual(&apos;test&apos;);
+    expect(fzpView.layerIds).toEqual([]);
+    expect(fzpView.flipHorizontal).toEqual(false);
+    expect(fzpView.flipVertical).toEqual(false);
+    expect(fzpView.svg).toEqual(null);
+  });
+
+  test(&apos;Test new FZPView&apos;, () =&gt; {
+    let fzpView = new FZPView(&apos;test&apos;, [&apos;breadboard&apos;], true, true);
+    expect(fzpView.image).toEqual(&apos;test&apos;);
+    expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;]);
+    expect(fzpView.flipHorizontal).toEqual(true);
+    expect(fzpView.flipVertical).toEqual(true);
+    fzpView.setLayerId(&apos;foo&apos;);
+    expect(fzpView.layerIds).toEqual([&apos;breadboard&apos;, &apos;foo&apos;]);
+    expect(fzpView.existLayerId(&apos;foo&apos;)).toEqual(true);
+    expect(fzpView.flipHorizontal).toEqual(true);
+    expect(fzpView.flipVertical).toEqual(true);
+    fzpView.setLayerId(&apos;foo&apos;);
+    expect(fzpView.totalLayerId()).toEqual(2);
+    fzpView.setSVG(&apos;hello-svg&apos;);
+    expect(fzpView.svg).toEqual(&apos;hello-svg&apos;);
+  });
+
+  test(&apos;Test new FZPView loadSVG&apos;, (done) =&gt; {
+    let fzpView = new FZPView(&apos;LED-3mm-red-leg.svg&apos;);
+    expect(fzpView.image).toEqual(&apos;LED-3mm-red-leg.svg&apos;);
+    const baseurl = &apos;https://fritzing.github.io/fritzing-parts/svg/core/breadboard/&apos;;
+    fzpView.loadSVG(baseurl).then((d) =&gt; {
+      expect(d).not.toEqual(&apos;&apos;);
+      expect(fzpView.svg).not.toEqual(&apos;&apos;);
+
+      // check the first and the last line
+      let lines = d.split(&apos;\n&apos;);
+      expect(lines[0]).toEqual(&apos;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&apos;);
+      expect(lines[lines.length-2]).toEqual(&apos;&lt;/svg&gt;&apos;);
+
+      done();
+    })
+    .catch((err) =&gt; {
+      console.error(&apos;ERROR&apos;, e);
+      done(err);
+    });
+  });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

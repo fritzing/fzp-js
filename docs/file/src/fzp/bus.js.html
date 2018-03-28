@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -44,46 +46,126 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/fzp/bus.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+/**
  * FZP Bus class
+ *
+ * @example
+ * const {FZBus} = require(&apos;fzp-js&apos;)
+ *
+ * let bus = new FZBus()
+ * bus.setId(&apos;sample&apos;)
+ * bus.setModeMember(&apos;mode&apos;)
  */
 class FZPBus {
   /**
    * FZPBus constructor
-   * @param {Object} opt
    */
-  constructor(opt) {
-    opt = opt || {};
-
+  constructor() {
     /**
      * Store the FZP bus id
      * @type {String}
      */
-    this.id = opt.id || &apos;&apos;;
+    this.id = null;
 
     /**
      * Store the FZP node members as an array
      * @type {Array}
      */
-    this.nodeMembers = opt.nodeMembers || [];
+    this.nodeMembers = [];
+  }
+
+  /**
+   * @param {Object|String} v
+   * @param {Array} m
+   */
+  set(v, m) {
+    if (v) {
+      switch (typeof v) {
+        case &apos;object&apos;:
+          if (v.id) {
+            this.setId(v.id);
+          }
+          if (v.nodeMembers) {
+            this.setNodeMember(v.nodeMembers);
+          }
+          return;
+
+        case &apos;string&apos;:
+          this.setId(v);
+          break;
+
+        default:
+          throw new Error(`FZPBus type (&apos;${typeof v}&apos;) for argument one not supported`);
+      }
+    }
+
+    if (m) {
+      switch (typeof m) {
+        case &apos;object&apos;:
+          this.setNodeMember(m);
+          break;
+        default:
+          throw new Error(`FZPBus type (&apos;${typeof m}&apos;) for argument one not supported`);
+      }
+    }
   }
 
   /**
    * Set the FZP bus id
    * @param {String} id
+   * @return {FZPBus}
    */
-  setid(id) {
+  setId(id) {
     this.id = id;
+    return this;
+  }
+
+  /**
+   * Return the id
+   * @return {String}
+   */
+  getId() {
+    return this.id;
   }
 
   /**
    * add a new node member if not exist
    * @param {String} m
+   * @return {FZPBus}
    */
-  addModeMember(m) {
-    if (!this.existModeMember(m)) {
-      this.nodeMembers.push(m);
+  setNodeMember(m) {
+    switch (typeof m) {
+      case &apos;object&apos;:
+        this.nodeMembers = m;
+        break;
+      case &apos;string&apos;:
+      case &apos;number&apos;:
+        if (!this.existModeMember(m)) {
+          this.nodeMembers.push(m);
+        }
+        break;
+      default:
+        throw new Error(`FZPBus nodeMember type (&apos;${typeof m}&apos;) not supported`);
     }
+    return this;
+  }
+
+  /**
+   * Return the nodeMembers array
+   * @return {Array}
+   */
+  getNodeMembers() {
+    return this.nodeMembers;
+  }
+
+  /**
+   * Return the total number of nodeMembers
+   * @return {Number}
+   */
+  totalNodeMembers() {
+    return this.nodeMembers.length;
   }
 
   /**

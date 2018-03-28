@@ -1,6 +1,6 @@
 {
   "name": "fzp-js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "fritzing fzp javascript library",
   "author": "Paul Vollmer",
   "license": "MIT",
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/paulvollmer/fzp-js/issues"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "pretest": "make lint",
     "test": "make test",
@@ -34,17 +34,20 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-add-header-comment": "^1.0.3",
+    "babel-plugin-minify-dead-code-elimination": "^0.3.0",
     "babel-preset-env": "^1.6.1",
     "esdoc": "^1.0.4",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.18.0",
     "eslint-config-google": "^0.9.1",
+    "fritzing-js": "github:fritzing/fritzing-js",
     "husky": "^0.14.3",
     "jest": "^22.0.6"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "fritzing-parts-api-client-js": "github:fritzing/fritzing-parts-api-client-js#v0.2.0",
     "xml2js": "^0.4.19"
   }
 }

@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -62,13 +64,43 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
         </p>
       </div>
       <div>
         
         
+        <div data-ice="description"><p>Load a FZP file from the given URL.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+        </p>
+      </div>
+      <div>
         
+        
+        <div data-ice="description"><p>Load a FZP and all linked SVGs</p>
+</div>
       </div>
     </td>
     <td>
@@ -96,8 +128,36 @@
       <div>
         
         
-        <div data-ice="description"><p>Create a xml string of a fzp instance</p>
+        <div data-ice="description"><p>Create a xml string of a FZP instance.</p>
 </div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span><span class="code" data-ice="signature">(xml: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
       </div>
     </td>
     <td>
@@ -176,18 +236,19 @@
     
     
     
-    <span class="code" data-ice="name">loadFZP</span><span class="code" data-ice="signature">(url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+    <span class="code" data-ice="name">loadFZP</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber11">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber29">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  
+  <div data-ice="description"><p>Load a FZP file from the given URL.</p>
+</div>
 
   
 
@@ -200,10 +261,17 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">url</td>
+      <td data-ice="name" class="code" data-depth="0">src</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">url</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>URL to the FZP file.</p>
+</td>
     </tr>
 </tbody>
   </table>
@@ -232,7 +300,116 @@
 
   
 
+  <div data-ice="example">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZPUtils} = require(&apos;fzp-js&apos;)
+
+FZPUtils.loadFZP(&apos;core/Arduino Nano3(fix).fzp&apos;)
+.then((fzz) =&gt; {
+  console.log(fzz.fz)
+})
+.catch((err) =&gt; {
+  console.error(err)
+})</code></pre>
+    </div>
+</div>
+
   
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-loadFZPandSVGs">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">loadFZPandSVGs</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, url: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber56">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Load a FZP and all linked SVGs</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">src</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">url</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>URL to the FZP file.</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  <div data-ice="example">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZPUtils} = require(&apos;fzp-js&apos;)
+
+FZPUtils.loadFZPandSVGs(&apos;core/Arduino Nano3(fix).fzp&apos;)
+.then((fzz) =&gt; {
+  console.log(fzz)
+})
+.catch((err) =&gt; {
+  console.error(err)
+})</code></pre>
+    </div>
+</div>
 
   
 
@@ -251,14 +428,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber123">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber213">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Create a xml string of a fzp instance</p>
+  <div data-ice="description"><p>Create a xml string of a FZP instance.</p>
 </div>
 
   
@@ -304,6 +481,87 @@
 
   
 
+  <div data-ice="example">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const {marshalToXML} = require(&apos;fzp-js&apos;)
+
+const xmlData = FZPUtils.marshalToXML(fzp)
+console.log(xmlData)</code></pre>
+    </div>
+</div>
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-parseConnectorView">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">parseConnectorView</span><span class="code" data-ice="signature">(xml: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber192">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">xml</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -323,7 +581,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber69">source</a></span></span>
     </span>
   </h3>
 
@@ -395,7 +653,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber107">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils.js.html#lineNumber173">source</a></span></span>
     </span>
   </h3>
 

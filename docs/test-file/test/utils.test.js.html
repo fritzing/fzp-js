@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -44,48 +46,78 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">test/utils.test.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const {parseFZP, loadFZP, marshalToXML} = require(&apos;../src/utils&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require(&apos;../src/utils&apos;);
 const FZP = require(&apos;../src/fzp/fzp&apos;);
 const fs = require(&apos;fs&apos;);
+const {FritzingPartsAPI} = require(&apos;fritzing-parts-api-client-js&apos;);
+const FritzingPartsAPISVGCore = FritzingPartsAPI+&apos;/svg/core/&apos;;
+
+const FritzingAPICoreLEDFzp = &apos;core/LED-generic-3mm.fzp&apos;;
 
 test(&apos;Test parseFZP&apos;, (done) =&gt; {
   const data = fs.readFileSync(&apos;./test/fixtures/LED-generic-3mm.fzp&apos;);
   parseFZP(data)
   .then((fzp) =&gt; {
-    // console.log(JSON.stringify(fzp, &apos;&apos;, &apos;  &apos;));
     expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
     expect(fzp.fritzingVersion).toEqual(&apos;0.1.beta.1396&apos;);
     expect(fzp.version).toEqual(&apos;4&apos;);
-    expect(fzp.title).toEqual(&apos;Red LED - 3mm&apos;);
-    expect(fzp.description).toEqual(&apos;A generic red LED (~1.8V)&apos;);
     expect(fzp.author).toEqual(&apos;Stefan Hermann&apos;);
-    expect(fzp.date).toEqual(&apos;2008-10-10&apos;);
-    expect(fzp.url).toEqual(&apos;&apos;);
+    expect(fzp.title).toEqual(&apos;Red LED - 3mm&apos;);
     expect(fzp.label).toEqual(&apos;LED&apos;);
+    expect(fzp.date).toEqual(&apos;2008-10-10&apos;);
     expect(fzp.tags).toEqual([&apos;LED&apos;, &apos;Red LED&apos;, &apos;indicator&apos;, &apos;fritzing core&apos;]);
+    expect(fzp.description).toEqual(&apos;A generic red LED (~1.8V)&apos;);
+    expect(fzp.url).toEqual(&apos;&apos;);
     expect(fzp.taxonomy).toEqual(&apos;&apos;);
     expect(fzp.language).toEqual(&apos;&apos;);
     expect(fzp.family).toEqual(&apos;&apos;);
     expect(fzp.variant).toEqual(&apos;&apos;);
-    expect(fzp.properties).toEqual({
-        package: {value: &apos;3 mm [THT]&apos;},
-        family: {value: &apos;LED&apos;},
-        color: {value: &apos;Red (633nm)&apos;, showInLabel: &apos;yes&apos;},
-        current: {showInLabel: &apos;yes&apos;},
-        leg: {value: &apos;yes&apos;},
-      });
 
+    expect(fzp.properties).toEqual({
+      package: {value: &apos;3 mm [THT]&apos;},
+      family: {value: &apos;LED&apos;},
+      color: {value: &apos;Red (633nm)&apos;, showInLabel: &apos;yes&apos;},
+      current: {showInLabel: &apos;yes&apos;},
+      leg: {value: &apos;yes&apos;},
+    });
+
+    // testing the views
     expect(fzp.views.icon.image).toEqual(&apos;icon/LED-red-5mmicon.svg&apos;);
     expect(fzp.views.icon.layerIds).toEqual([&apos;icon&apos;]);
-    //
-    // expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;)
-    // expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;])
 
-    // expect(fzp.views.pcb).toEqual(&apos;pcb/LED-red-5mmicon.svg&apos;)
-    // expect(fzp.views.pcb.layerIds).toEqual(&apos;pcb&apos;)
+    expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;);
+    expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;]);
+    expect(fzp.views.breadboard.flipHorizontal).toEqual(false);
+    expect(fzp.views.breadboard.flipVertical).toEqual(false);
 
-    // expect(fzp.views.schematic).toEqual(&apos;schematic/led.svg&apos;)
-    // expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;])
+    expect(fzp.views.pcb.image).toEqual(&apos;pcb/3mm_LED.svg&apos;);
+    expect(fzp.views.pcb.layerIds).toEqual([&apos;copper0&apos;, &apos;copper1&apos;, &apos;keepout&apos;, &apos;outline&apos;, &apos;silkscreen&apos;, &apos;soldermask&apos;]);
+
+    expect(fzp.views.schematic.image).toEqual(&apos;schematic/led.svg&apos;);
+    expect(fzp.views.schematic.layerIds).toEqual([&apos;schematic&apos;]);
+
+    // testing the connertor
+    expect(fzp.connectors[&apos;connector0&apos;].name).toEqual(&apos;cathode&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].type).toEqual(&apos;male&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].description).toEqual(&apos;cathode pin&apos;);
+
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.layer).toEqual(&apos;breadboard&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.svgId).toEqual(&apos;connector0pin&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.legId).toEqual(&apos;connector0leg&apos;);
+
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.layer).toEqual(&apos;schematic&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.svgId).toEqual(&apos;connector0pin&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.schematic.terminalId).toEqual(&apos;connector0terminal&apos;);
+
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper0.layer).toEqual(&apos;copper0&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper0.svgId).toEqual(&apos;connector0pad&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.layer).toEqual(&apos;copper1&apos;);
+    expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.svgId).toEqual(&apos;connector0pad&apos;);
+
+    expect(fzp.buses).toEqual({});
+
     done();
   })
   .catch((err) =&gt; {
@@ -93,67 +125,203 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
   });
 });
 
-test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
-  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
-  .then((fzp) =&gt; {
-    // load the svg of the breadboard view
-    fzp.views.breadboard.loadSVG(&apos;foo&apos;)
-    .then((d) =&gt; {
-        done();
-    })
-    .catch((err) =&gt; {
-      done(err);
-    });
-  })
-  .catch((e) =&gt; {
-    done(e);
-  });
-});
-
-test(&apos;Test loadFZP all SVGs&apos;, (done) =&gt; {
-  loadFZP(&apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;)
-  .then((fzp) =&gt; {
-    fzp.loadSVGs()
-    .then((d) =&gt; {
-      expect(fzp.views.breadboard.svg).not.toBe(&apos;&apos;);
-      expect(fzp.views.pcb.svg).not.toBe(&apos;&apos;);
-      expect(fzp.views.schematic.svg).not.toBe(&apos;&apos;);
+describe(&apos;loadFZP&apos;, () =&gt; {
+  test(&apos;Test loadFZP&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      expect(fzp.moduleId).toEqual(&apos;3mmColorLEDModuleID&apos;);
+      // console.log(fzp);
       done();
     })
     .catch((err) =&gt; {
       done(err);
     });
-  })
-  .catch((e) =&gt; {
-    done(e);
+  });
+
+  test(&apos;Test loadFZP and loadSVG&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      // load the svg of the breadboard view
+      fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)
+      .then(() =&gt; {
+        done();
+      })
+      .catch((err) =&gt; {
+        done(err);
+      });
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
+  });
+
+  test(&apos;Test loadFZP and all SVGs&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      fzp.loadSVGs(FritzingPartsAPISVGCore)
+      .then(() =&gt; {
+        // check if the svg string is not empty
+        expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
+        expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
+        expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
+        done();
+      })
+      .catch((err) =&gt; {
+        done(err);
+      });
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
   });
 });
 
+describe(&apos;loadFZPandSVGs&apos;, () =&gt; {
+  test(&apos;Test loadFZPandSVGs&apos;, (done) =&gt; {
+    loadFZPandSVGs(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      // check if the svg string is not empty
+      expect(fzp.views.breadboard.svg).not.toEqual(&apos;&apos;);
+      expect(fzp.views.pcb.svg).not.toEqual(&apos;&apos;);
+      expect(fzp.views.schematic.svg).not.toEqual(&apos;&apos;);
+      done();
+    })
+    .catch((err) =&gt; {
+      console.log(&apos;ERROR&apos;, err);
+      done(err);
+    });
+  });
+});
 
-test(&apos;Test marshalToXML&apos;, (done) =&gt; {
-  let fzp = new FZP();
-  fzp.moduleId = &apos;test-moduleId&apos;;
-  fzp.fritzingVersion = &apos;test-fritzingVersion&apos;;
-  fzp.version = &apos;test-version&apos;;
-  fzp.title = &apos;test-title&apos;;
-  fzp.description = &apos;test-description&apos;;
-  fzp.author = &apos;test-author&apos;;
-  fzp.date = &apos;test-date&apos;;
-  fzp.url = &apos;test-url&apos;;
-  fzp.label = &apos;test-label&apos;;
-  fzp.taxonomy = &apos;test-taxonomy&apos;;
-  fzp.language = &apos;test-language&apos;;
-  fzp.family = &apos;test-family&apos;;
-  fzp.variant = &apos;test-variant&apos;;
-  fzp.properties = &apos;test-properties&apos;;
-  fzp.views.icon.image = &apos;test-views-icon-image&apos;;
-  fzp.views.breadboard.image = &apos;test-views-breadboard-image&apos;;
-  fzp.views.schematic.image = &apos;test-views-schematic-image&apos;;
-  fzp.views.pcb.image = &apos;test-views-pcb-image&apos;;
-  let xml = marshalToXML(fzp);
-  expect(xml).not.toEqual(&apos;&apos;);
-  // console.log(xml);
-  done();
+describe(&apos;marshalToXML&apos;, () =&gt; {
+  test(&apos;Test marshalToXML&apos;, () =&gt; {
+    let fzp = new FZP();
+    fzp.moduleId = &apos;test-moduleId&apos;;
+    fzp.fritzingVersion = &apos;test-fritzingVersion&apos;;
+    fzp.version = &apos;test-version&apos;;
+    fzp.title = &apos;test-title&apos;;
+    fzp.description = &apos;test-description&apos;;
+    fzp.author = &apos;test-author&apos;;
+    fzp.date = &apos;test-date&apos;;
+    fzp.url = &apos;test-url&apos;;
+    fzp.label = &apos;test-label&apos;;
+    fzp.taxonomy = &apos;test-taxonomy&apos;;
+    fzp.language = &apos;test-language&apos;;
+    fzp.family = &apos;test-family&apos;;
+    fzp.variant = &apos;test-variant&apos;;
+    fzp.properties = &apos;test-properties&apos;;
+    fzp.views.icon.image = &apos;test-views-icon-image&apos;;
+    fzp.views.breadboard.image = &apos;test-views-breadboard-image&apos;;
+    fzp.views.schematic.image = &apos;test-views-schematic-image&apos;;
+    fzp.views.pcb.image = &apos;test-views-pcb-image&apos;;
+    let xml = marshalToXML(fzp);
+
+    // check if the generated xml is not empty
+    expect(xml).not.toEqual(&apos;&apos;);
+    // console.log(xml);
+
+    // TODO: call &apos;parseFZP&apos;
+    // TODO: check if data is equal to the fzp from above
+  });
+
+  test(&apos;Test marshalToXML from loaded part&apos;, (done) =&gt; {
+    loadFZP(FritzingAPICoreLEDFzp)
+    .then((fzp) =&gt; {
+      let xml = marshalToXML(fzp);
+      expect(xml).toEqual(`&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+&lt;module moduleId=&quot;3mmColorLEDModuleID&quot; fritzingVersion=&quot;0.1.beta.1396&quot;&gt;
+  &lt;version&gt;4&lt;/version&gt;
+  &lt;title&gt;Red LED - 3mm&lt;/title&gt;
+  &lt;author&gt;Stefan Hermann&lt;/author&gt;
+  &lt;label&gt;LED&lt;/label&gt;
+  &lt;date&gt;2008-10-10&lt;/date&gt;
+  &lt;tags&gt;
+    &lt;tag&gt;LED&lt;/tag&gt;
+    &lt;tag&gt;Red LED&lt;/tag&gt;
+    &lt;tag&gt;indicator&lt;/tag&gt;
+    &lt;tag&gt;fritzing core&lt;/tag&gt;
+  &lt;/tags&gt;
+  &lt;description&gt;A generic red LED (~1.8V)&lt;/description&gt;
+  &lt;views/&gt;
+  &lt;connectors/&gt;
+&lt;/module&gt;`);
+
+// TODO: finish the xml marshaller
+//
+// &lt;properties&gt;
+//   &lt;property name=&quot;package&quot;&gt;3 mm [THT]&lt;/property&gt;
+//   &lt;property name=&quot;family&quot;&gt;LED&lt;/property&gt;
+//   &lt;property name=&quot;color&quot; showInLabel=&quot;yes&quot;&gt;Red (633nm)&lt;/property&gt;
+//   &lt;property name=&quot;current&quot; showInLabel=&quot;yes&quot;&gt;&lt;/property&gt;
+//   &lt;property name=&quot;leg&quot; &gt;yes&lt;/property&gt;
+// &lt;/properties&gt;
+// &lt;description&gt;A generic red LED (~1.8V)&lt;/description&gt;
+// &lt;views&gt;
+//   &lt;iconView&gt;
+//     &lt;layers image=&quot;icon/LED-red-5mmicon.svg&quot;&gt;
+//       &lt;layer layerId=&quot;icon&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/iconView&gt;
+//   &lt;breadboardView fliphorizontal=&quot;true&quot; flipvertical=&quot;true&quot;&gt;
+//     &lt;layers image=&quot;breadboard/LED-3mm-red-leg.svg&quot;&gt;
+//       &lt;layer layerId=&quot;breadboard&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/breadboardView&gt;
+//   &lt;schematicView&gt;
+//     &lt;layers image=&quot;schematic/led.svg&quot;&gt;
+//       &lt;layer layerId=&quot;schematic&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/schematicView&gt;
+//   &lt;pcbView&gt;
+//     &lt;layers image=&quot;pcb/3mm_LED.svg&quot;&gt;
+//       &lt;layer layerId=&quot;copper0&quot;/&gt;
+//       &lt;layer layerId=&quot;copper1&quot;/&gt;
+//       &lt;layer layerId=&quot;keepout&quot;/&gt;
+//       &lt;layer layerId=&quot;outline&quot;/&gt;
+//       &lt;layer layerId=&quot;silkscreen&quot;/&gt;
+//       &lt;layer layerId=&quot;soldermask&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/pcbView&gt;
+// &lt;/views&gt;
+// &lt;connectors&gt;
+//   &lt;connector id=&quot;connector0&quot; name=&quot;cathode&quot; type=&quot;male&quot;&gt;
+//     &lt;description&gt;cathode pin&lt;/description&gt;
+//     &lt;views&gt;
+//       &lt;breadboardView&gt;
+//         &lt;p layer=&quot;breadboard&quot; svgId=&quot;connector0pin&quot;  legId=&quot;connector0leg&quot;/&gt;
+//       &lt;/breadboardView&gt;
+//       &lt;schematicView&gt;
+//         &lt;p layer=&quot;schematic&quot; svgId=&quot;connector0pin&quot; terminalId=&quot;connector0terminal&quot;/&gt;
+//       &lt;/schematicView&gt;
+//       &lt;pcbView&gt;
+//         &lt;p layer=&quot;copper0&quot; svgId=&quot;connector0pad&quot;/&gt;
+//         &lt;p layer=&quot;copper1&quot; svgId=&quot;connector0pad&quot;/&gt;
+//       &lt;/pcbView&gt;
+//     &lt;/views&gt;
+//   &lt;/connector&gt;
+//   &lt;connector id=&quot;connector1&quot; name=&quot;anode&quot; type=&quot;male&quot;&gt;
+//     &lt;description&gt;anode pin&lt;/description&gt;
+//     &lt;views&gt;
+//       &lt;breadboardView&gt;
+//         &lt;p layer=&quot;breadboard&quot; svgId=&quot;connector1pin&quot;  legId=&quot;connector1leg&quot;/&gt;
+//       &lt;/breadboardView&gt;
+//       &lt;schematicView&gt;
+//         &lt;p layer=&quot;schematic&quot; svgId=&quot;connector1pin&quot; terminalId=&quot;connector1terminal&quot;/&gt;
+//       &lt;/schematicView&gt;
+//       &lt;pcbView&gt;
+//         &lt;p layer=&quot;copper0&quot; svgId=&quot;connector1pad&quot;/&gt;
+//         &lt;p layer=&quot;copper1&quot; svgId=&quot;connector1pad&quot;/&gt;
+//       &lt;/pcbView&gt;
+//     &lt;/views&gt;
+//   &lt;/connector&gt;
+// &lt;/connectors&gt;
+
+      done();
+    })
+    .catch((err) =&gt; {
+      done(err);
+    });
+  });
 });
 </code></pre>
 

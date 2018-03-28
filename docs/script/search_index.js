@@ -18,9 +18,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "fzp-js/src/fzp/connector.js~fzpconnectorview",
-    "class/src/fzp/connector.js~FZPConnectorView.html",
-    "<span>FZPConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/connector.js</span>",
+    "fzp-js/src/fzp/connector-view.js~fzpconnectorview",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html",
+    "<span>FZPConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/fzp/connector-view.js</span>",
     "class"
   ],
   [
@@ -42,9 +42,21 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "fzp-js/src/utils.js~loadfzpandsvgs",
+    "function/index.html#static-function-loadFZPandSVGs",
+    "<span>loadFZPandSVGs</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
     "fzp-js/src/utils.js~marshaltoxml",
     "function/index.html#static-function-marshalToXML",
     "<span>marshalToXML</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
+    "function"
+  ],
+  [
+    "fzp-js/src/utils.js~parseconnectorview",
+    "function/index.html#static-function-parseConnectorView",
+    "<span>parseConnectorView</span> <span class=\"search-result-import-path\">fzp-js/src/utils.js</span>",
     "function"
   ],
   [
@@ -61,44 +73,254 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber5",
+    "FZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber24",
+    "FZP Test FZP setProperty, getProperty",
+    "test"
+  ],
+  [
+    "",
     "test-file/test/fzp.fzp.test.js.html#lineNumber16",
-    "Test FZP properties",
+    "FZP Test FZP setTag, totalTags",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber8",
-    "Test FZP tags",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber6",
+    "FZP Test new FZP (empty)",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber67",
-    "Test loadFZP all SVGs",
+    "test-file/test/fzp.fzp.test.js.html#lineNumber11",
+    "FZP Test new FZP (version)",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber50",
-    "Test loadFZP and loadSVG",
+    "test-file/test/fzp.bus.test.js.html#lineNumber5",
+    "FZPBus new",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber87",
-    "Test marshalToXML",
+    "test-file/test/fzp.bus.test.js.html#lineNumber6",
+    "FZPBus new Test new FZPBus",
     "test"
   ],
   [
     "",
-    "test-file/test/fzp.fzp.test.js.html#lineNumber3",
-    "Test new FZP",
+    "test-file/test/fzp.bus.test.js.html#lineNumber14",
+    "FZPBus set",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber5",
+    "test-file/test/fzp.bus.test.js.html#lineNumber15",
+    "FZPBus set Test new FZPBus set (with arg object)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber23",
+    "FZPBus set Test new FZPBus set (with arg string)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber31",
+    "FZPBus set Test new FZPBus set (with args string, array)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber40",
+    "FZPBus setId, getId",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber41",
+    "FZPBus setId, getId Test FZPBus setId, getId",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber48",
+    "FZPBus setNodeMembers, getNodeMembers",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.bus.test.js.html#lineNumber49",
+    "FZPBus setNodeMembers, getNodeMembers Test FZPBus setNodeMember, getNodeMember",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber5",
+    "FZPConnector",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber14",
+    "FZPConnector Test new FZPConnector",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector.test.js.html#lineNumber6",
+    "FZPConnector Test new FZPConnector (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber5",
+    "FZPConnectorView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber14",
+    "FZPConnectorView Test new FZPConnectorView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.connector-view.test.js.html#lineNumber6",
+    "FZPConnectorView Test new FZPConnectorView (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber5",
+    "FZPProperty new",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber6",
+    "FZPProperty new Test new FZPProperty (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber13",
+    "FZPProperty set",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber28",
+    "FZPProperty set Test FZPProperty set (object)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber21",
+    "FZPProperty set Test FZPProperty set (with args)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.property.test.js.html#lineNumber14",
+    "FZPProperty set Test FZPProperty set (with one arg)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber5",
+    "FZPView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber24",
+    "FZPView Test new FZPView",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber6",
+    "FZPView Test new FZPView (empty)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber15",
+    "FZPView Test new FZPView (image name)",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/fzp.view.test.js.html#lineNumber41",
+    "FZPView Test new FZPView loadSVG",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber11",
     "Test parseFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber80",
+    "loadFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber81",
+    "loadFZP Test loadFZP",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber110",
+    "loadFZP Test loadFZP and all SVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber93",
+    "loadFZP Test loadFZP and loadSVG",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber131",
+    "loadFZPandSVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber132",
+    "loadFZPandSVGs Test loadFZPandSVGs",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber148",
+    "marshalToXML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber149",
+    "marshalToXML Test marshalToXML",
+    "test"
+  ],
+  [
+    "",
+    "test-file/test/utils.test.js.html#lineNumber179",
+    "marshalToXML Test marshalToXML from loaded part",
     "test"
   ],
   [
@@ -390,12 +612,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/fzp/bus.js~fzpbus#addmodemember",
-    "class/src/fzp/bus.js~FZPBus.html#instance-method-addModeMember",
-    "src/fzp/bus.js~FZPBus#addModeMember",
-    "method"
-  ],
-  [
     "src/fzp/bus.js~fzpbus#constructor",
     "class/src/fzp/bus.js~FZPBus.html#instance-constructor-constructor",
     "src/fzp/bus.js~FZPBus#constructor",
@@ -405,6 +621,18 @@ window.esdocSearchIndex = [
     "src/fzp/bus.js~fzpbus#existmodemember",
     "class/src/fzp/bus.js~FZPBus.html#instance-method-existModeMember",
     "src/fzp/bus.js~FZPBus#existModeMember",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#getid",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-getId",
+    "src/fzp/bus.js~FZPBus#getId",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#getnodemembers",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-getNodeMembers",
+    "src/fzp/bus.js~FZPBus#getNodeMembers",
     "method"
   ],
   [
@@ -420,10 +648,112 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/fzp/bus.js~fzpbus#setid",
-    "class/src/fzp/bus.js~FZPBus.html#instance-method-setid",
-    "src/fzp/bus.js~FZPBus#setid",
+    "src/fzp/bus.js~fzpbus#set",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-set",
+    "src/fzp/bus.js~FZPBus#set",
     "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#setid",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-setId",
+    "src/fzp/bus.js~FZPBus#setId",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#setnodemember",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-setNodeMember",
+    "src/fzp/bus.js~FZPBus#setNodeMember",
+    "method"
+  ],
+  [
+    "src/fzp/bus.js~fzpbus#totalnodemembers",
+    "class/src/fzp/bus.js~FZPBus.html#instance-method-totalNodeMembers",
+    "src/fzp/bus.js~FZPBus#totalNodeMembers",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js",
+    "file/src/fzp/connector-view.js.html",
+    "src/fzp/connector-view.js",
+    "file"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#constructor",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-constructor-constructor",
+    "src/fzp/connector-view.js~FZPConnectorView#constructor",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getlayer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getLayer",
+    "src/fzp/connector-view.js~FZPConnectorView#getLayer",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getlegid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getLegId",
+    "src/fzp/connector-view.js~FZPConnectorView#getLegId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getsvgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getSvgId",
+    "src/fzp/connector-view.js~FZPConnectorView#getSvgId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#getterminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-getTerminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#getTerminalId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#layer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-layer",
+    "src/fzp/connector-view.js~FZPConnectorView#layer",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#legid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-legId",
+    "src/fzp/connector-view.js~FZPConnectorView#legId",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setlayer",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setLayer",
+    "src/fzp/connector-view.js~FZPConnectorView#setLayer",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setlegid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setLegId",
+    "src/fzp/connector-view.js~FZPConnectorView#setLegId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setsvgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setSvgId",
+    "src/fzp/connector-view.js~FZPConnectorView#setSvgId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#setterminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-method-setTerminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#setTerminalId",
+    "method"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#svgid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-svgId",
+    "src/fzp/connector-view.js~FZPConnectorView#svgId",
+    "member"
+  ],
+  [
+    "src/fzp/connector-view.js~fzpconnectorview#terminalid",
+    "class/src/fzp/connector-view.js~FZPConnectorView.html#instance-member-terminalId",
+    "src/fzp/connector-view.js~FZPConnectorView#terminalId",
+    "member"
   ],
   [
     "src/fzp/connector.js",
@@ -468,52 +798,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/fzp/connector.js~fzpconnectorview#constructor",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-constructor-constructor",
-    "src/fzp/connector.js~FZPConnectorView#constructor",
-    "method"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#layer",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-layer",
-    "src/fzp/connector.js~FZPConnectorView#layer",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#legid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-legId",
-    "src/fzp/connector.js~FZPConnectorView#legId",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#svgid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-svgId",
-    "src/fzp/connector.js~FZPConnectorView#svgId",
-    "member"
-  ],
-  [
-    "src/fzp/connector.js~fzpconnectorview#terminalid",
-    "class/src/fzp/connector.js~FZPConnectorView.html#instance-member-terminalId",
-    "src/fzp/connector.js~FZPConnectorView#terminalId",
-    "member"
-  ],
-  [
     "src/fzp/fzp.js",
     "file/src/fzp/fzp.js.html",
     "src/fzp/fzp.js",
     "file"
-  ],
-  [
-    "src/fzp/fzp.js~fzp#addproperty",
-    "class/src/fzp/fzp.js~FZP.html#instance-method-addProperty",
-    "src/fzp/fzp.js~FZP#addProperty",
-    "method"
-  ],
-  [
-    "src/fzp/fzp.js~fzp#addtag",
-    "class/src/fzp/fzp.js~FZP.html#instance-method-addTag",
-    "src/fzp/fzp.js~FZP#addTag",
-    "method"
   ],
   [
     "src/fzp/fzp.js~fzp#author",
@@ -612,6 +900,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/fzp.js~fzp#setproperty",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-setProperty",
+    "src/fzp/fzp.js~FZP#setProperty",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#settag",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-setTag",
+    "src/fzp/fzp.js~FZP#setTag",
+    "method"
+  ],
+  [
     "src/fzp/fzp.js~fzp#setview",
     "class/src/fzp/fzp.js~FZP.html#instance-method-setView",
     "src/fzp/fzp.js~FZP#setView",
@@ -634,6 +934,24 @@ window.esdocSearchIndex = [
     "class/src/fzp/fzp.js~FZP.html#instance-member-title",
     "src/fzp/fzp.js~FZP#title",
     "member"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalbuses",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalBuses",
+    "src/fzp/fzp.js~FZP#totalBuses",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalconnector",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalConnector",
+    "src/fzp/fzp.js~FZP#totalConnector",
+    "method"
+  ],
+  [
+    "src/fzp/fzp.js~fzp#totalproperties",
+    "class/src/fzp/fzp.js~FZP.html#instance-method-totalProperties",
+    "src/fzp/fzp.js~FZP#totalProperties",
+    "method"
   ],
   [
     "src/fzp/fzp.js~fzp#totaltags",
@@ -678,6 +996,36 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/property.js~fzpproperty#getshowinlabel",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-getShowInLabel",
+    "src/fzp/property.js~FZPProperty#getShowInLabel",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#getvalue",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-getValue",
+    "src/fzp/property.js~FZPProperty#getValue",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#set",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-set",
+    "src/fzp/property.js~FZPProperty#set",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#setshowinlabel",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-setShowInLabel",
+    "src/fzp/property.js~FZPProperty#setShowInLabel",
+    "method"
+  ],
+  [
+    "src/fzp/property.js~fzpproperty#setvalue",
+    "class/src/fzp/property.js~FZPProperty.html#instance-method-setValue",
+    "src/fzp/property.js~FZPProperty#setValue",
+    "method"
+  ],
+  [
     "src/fzp/property.js~fzpproperty#showinlabel",
     "class/src/fzp/property.js~FZPProperty.html#instance-member-showInLabel",
     "src/fzp/property.js~FZPProperty#showInLabel",
@@ -696,12 +1044,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/fzp/view.js~fzpview#addlayerid",
-    "class/src/fzp/view.js~FZPView.html#instance-method-addLayerId",
-    "src/fzp/view.js~FZPView#addLayerId",
-    "method"
-  ],
-  [
     "src/fzp/view.js~fzpview#constructor",
     "class/src/fzp/view.js~FZPView.html#instance-constructor-constructor",
     "src/fzp/view.js~FZPView#constructor",
@@ -712,6 +1054,18 @@ window.esdocSearchIndex = [
     "class/src/fzp/view.js~FZPView.html#instance-method-existLayerId",
     "src/fzp/view.js~FZPView#existLayerId",
     "method"
+  ],
+  [
+    "src/fzp/view.js~fzpview#fliphorizontal",
+    "class/src/fzp/view.js~FZPView.html#instance-member-flipHorizontal",
+    "src/fzp/view.js~FZPView#flipHorizontal",
+    "member"
+  ],
+  [
+    "src/fzp/view.js~fzpview#flipvertical",
+    "class/src/fzp/view.js~FZPView.html#instance-member-flipVertical",
+    "src/fzp/view.js~FZPView#flipVertical",
+    "member"
   ],
   [
     "src/fzp/view.js~fzpview#image",
@@ -738,6 +1092,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/fzp/view.js~fzpview#setlayerid",
+    "class/src/fzp/view.js~FZPView.html#instance-method-setLayerId",
+    "src/fzp/view.js~FZPView#setLayerId",
+    "method"
+  ],
+  [
     "src/fzp/view.js~fzpview#setsvg",
     "class/src/fzp/view.js~FZPView.html#instance-method-setSVG",
     "src/fzp/view.js~FZPView#setSVG",
@@ -756,15 +1116,57 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js",
+    "file/src/index.js.html",
+    "src/index.js",
+    "file"
+  ],
+  [
     "src/utils.js",
     "file/src/utils.js.html",
     "src/utils.js",
     "file"
   ],
   [
+    "test/_fritzing-parts-test.js",
+    "test-file/test/_fritzing-parts-test.js.html",
+    "test/_fritzing-parts-test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.bus.test.js",
+    "test-file/test/fzp.bus.test.js.html",
+    "test/fzp.bus.test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.connector-view.test.js",
+    "test-file/test/fzp.connector-view.test.js.html",
+    "test/fzp.connector-view.test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.connector.test.js",
+    "test-file/test/fzp.connector.test.js.html",
+    "test/fzp.connector.test.js",
+    "testFile"
+  ],
+  [
     "test/fzp.fzp.test.js",
     "test-file/test/fzp.fzp.test.js.html",
     "test/fzp.fzp.test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.property.test.js",
+    "test-file/test/fzp.property.test.js.html",
+    "test/fzp.property.test.js",
+    "testFile"
+  ],
+  [
+    "test/fzp.view.test.js",
+    "test-file/test/fzp.view.test.js.html",
+    "test/fzp.view.test.js",
     "testFile"
   ],
   [

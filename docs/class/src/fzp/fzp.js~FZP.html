@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -50,7 +52,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/src/fzp/fzp.js.html#lineNumber7">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/fzp/fzp.js.html#lineNumber22">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -70,13 +72,30 @@
 
   
   
-  <div class="description" data-ice="description"><p>The FZP class</p>
+  <div class="description" data-ice="description"><p>The FZP class is the main fzp data entry.
+Here you can access the main data properties/objects and some utility functions
+can be used to load svgs as string, count the total number of connections or set a connector.</p>
 </div>
   
 
   
 
-  
+  <div data-ice="exampleDocs">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZP} = require(&apos;fzp-js&apos;)
+
+let fzp = new FZP({moduleId: &apos;sample&apos;})
+fzp.version = &apos;1.0.0&apos;
+fzp.setTag(&apos;demo&apos;)
+fzp.setProperty(&apos;p&apos;, &apos;hello&apos;, true)
+fzp.setView()
+fzp.setConnector()
+fzp.setBus()</code></pre>
+    </div>
+</div>
 
   
 
@@ -109,7 +128,7 @@
       <div>
         
         
-        <div data-ice="description"><p>FZP constructor</p>
+        <div data-ice="description"><p>FZP constructor has an opt argument object that can be used to setup data at the initialization.</p>
 </div>
       </div>
     </td>
@@ -139,13 +158,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-author">author</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-author">author</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the author</p>
+        <div data-ice="description"><p>The FZP author</p>
 </div>
       </div>
     </td>
@@ -168,14 +187,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-buses">buses</a></span></span><span class="code" data-ice="signature">: {}</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-buses">buses</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the buses
-A bus is a instance of the Bus class</p>
+        <div data-ice="description"><p>The FZP buses is a map with instances of the Bus class.</p>
 </div>
       </div>
     </td>
@@ -198,13 +216,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-connectors">connectors</a></span></span><span class="code" data-ice="signature">: {}</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-connectors">connectors</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the connectors</p>
+        <div data-ice="description"><p>The FZP connectors</p>
 </div>
       </div>
     </td>
@@ -227,13 +245,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-date">date</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-date">date</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the date</p>
+        <div data-ice="description"><p>The FZP date</p>
 </div>
       </div>
     </td>
@@ -256,13 +274,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-description">description</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-description">description</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the description</p>
+        <div data-ice="description"><p>The FZP description</p>
 </div>
       </div>
     </td>
@@ -285,13 +303,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-family">family</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-family">family</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the family</p>
+        <div data-ice="description"><p>The FZP family</p>
 </div>
       </div>
     </td>
@@ -314,13 +332,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-fritzingVersion">fritzingVersion</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-fritzingVersion">fritzingVersion</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the fritzing version</p>
+        <div data-ice="description"><p>The FZP fritzing version</p>
 </div>
       </div>
     </td>
@@ -343,13 +361,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-label">label</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-label">label</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the label</p>
+        <div data-ice="description"><p>The FZP label</p>
 </div>
       </div>
     </td>
@@ -372,13 +390,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-language">language</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-language">language</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the language</p>
+        <div data-ice="description"><p>The FZP language</p>
 </div>
       </div>
     </td>
@@ -401,13 +419,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-moduleId">moduleId</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-moduleId">moduleId</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the module id</p>
+        <div data-ice="description"><p>The FZP module id</p>
 </div>
       </div>
     </td>
@@ -430,13 +448,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-properties">properties</a></span></span><span class="code" data-ice="signature">: {}</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-properties">properties</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the properties</p>
+        <div data-ice="description"><p>The FZP properties</p>
 </div>
       </div>
     </td>
@@ -459,13 +477,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-tags">tags</a></span></span><span class="code" data-ice="signature">: <span><span>*</span><span>[]</span></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-tags">tags</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the tags</p>
+        <div data-ice="description"><p>The FZP tags</p>
 </div>
       </div>
     </td>
@@ -488,13 +506,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-taxonomy">taxonomy</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-taxonomy">taxonomy</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the taxonomy</p>
+        <div data-ice="description"><p>The FZP taxonomy</p>
 </div>
       </div>
     </td>
@@ -517,13 +535,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-title">title</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-title">title</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the FZP title</p>
+        <div data-ice="description"><p>The FZP title</p>
 </div>
       </div>
     </td>
@@ -546,13 +564,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-url">url</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-url">url</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the url</p>
+        <div data-ice="description"><p>The FZP url</p>
 </div>
       </div>
     </td>
@@ -575,13 +593,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-variant">variant</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-variant">variant</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the variant</p>
+        <div data-ice="description"><p>The FZP variant</p>
 </div>
       </div>
     </td>
@@ -604,13 +622,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-version">version</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-version">version</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the FZP version</p>
+        <div data-ice="description"><p>The FZP version</p>
 </div>
       </div>
     </td>
@@ -633,13 +651,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-views">views</a></span></span><span class="code" data-ice="signature">: {&quot;icon&quot;: <span>*</span>, &quot;schematic&quot;: <span>*</span>, &quot;breadboard&quot;: <span>*</span>, &quot;pcb&quot;: <span>*</span>}</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-member-views">views</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>the views</p>
+        <div data-ice="description"><p>The FZP views (icon, breadboard, schematic, pcb)</p>
 </div>
       </div>
     </td>
@@ -669,13 +687,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-addProperty">addProperty</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, showInLabel: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-getProperty">getProperty</a></span></span><span class="code" data-ice="signature">(key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Add a property to the fzp instance.</p>
+        <div data-ice="description"><p>Get a FZP property by the given key.</p>
 </div>
       </div>
     </td>
@@ -698,71 +716,13 @@ A bus is a instance of the Bus class</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-addTag">addTag</a></span></span><span class="code" data-ice="signature">(tag: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-loadSVGs">loadSVGs</a></span></span><span class="code" data-ice="signature">(baseurl: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>setTag</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-getProperty">getProperty</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Get a fzp property by the name.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-loadSVGs">loadSVGs</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>;oad all svg sources</p>
+        <div data-ice="description"><p>Load all SVG sources.</p>
 </div>
       </div>
     </td>
@@ -843,13 +803,158 @@ A bus is a instance of the Bus class</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-setProperty">setProperty</a></span></span><span class="code" data-ice="signature">(key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, showInLabel: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Create or update a FZPProperty instance to the FZP.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-setTag">setTag</a></span></span><span class="code" data-ice="signature">(tag: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Set a tag</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-setView">setView</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, view: <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>setView</p>
+        <div data-ice="description"><p>Set a view</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-totalBuses">totalBuses</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Get the total number of buses.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-totalConnector">totalConnector</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Get the total number of connector.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html#instance-method-totalProperties">totalProperties</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Get the total number of properties.</p>
 </div>
       </div>
     </td>
@@ -909,14 +1014,14 @@ A bus is a instance of the Bus class</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber12">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>FZP constructor</p>
+  <div data-ice="description"><p>FZP constructor has an opt argument object that can be used to setup data at the initialization.</p>
 </div>
 
   
@@ -968,18 +1073,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">author</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">author</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber25">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber62">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the author</p>
+  <div data-ice="description"><p>The FZP author</p>
 </div>
 
   
@@ -1012,19 +1117,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">buses</span><span class="code" data-ice="signature">: {}</span>
+    <span class="code" data-ice="name">buses</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber57">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber138">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the buses
-A bus is a instance of the Bus class</p>
+  <div data-ice="description"><p>The FZP buses is a map with instances of the Bus class.</p>
 </div>
 
   
@@ -1057,18 +1161,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">connectors</span><span class="code" data-ice="signature">: {}</span>
+    <span class="code" data-ice="name">connectors</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber52">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber133">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the connectors</p>
+  <div data-ice="description"><p>The FZP connectors</p>
 </div>
 
   
@@ -1101,18 +1205,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">date</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">date</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber27">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber68">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the date</p>
+  <div data-ice="description"><p>The FZP date</p>
 </div>
 
   
@@ -1145,18 +1249,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">description</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">description</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber23">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber56">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the description</p>
+  <div data-ice="description"><p>The FZP description</p>
 </div>
 
   
@@ -1189,18 +1293,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">family</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">family</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber39">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber104">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the family</p>
+  <div data-ice="description"><p>The FZP family</p>
 </div>
 
   
@@ -1233,18 +1337,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">fritzingVersion</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">fritzingVersion</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber17">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber38">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the fritzing version</p>
+  <div data-ice="description"><p>The FZP fritzing version</p>
 </div>
 
   
@@ -1277,18 +1381,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">label</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">label</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber80">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the label</p>
+  <div data-ice="description"><p>The FZP label</p>
 </div>
 
   
@@ -1321,18 +1425,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">language</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">language</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber37">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber98">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the language</p>
+  <div data-ice="description"><p>The FZP language</p>
 </div>
 
   
@@ -1365,18 +1469,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">moduleId</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">moduleId</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber15">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber32">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the module id</p>
+  <div data-ice="description"><p>The FZP module id</p>
 </div>
 
   
@@ -1409,18 +1513,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">properties</span><span class="code" data-ice="signature">: {}</span>
+    <span class="code" data-ice="name">properties</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber43">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the properties</p>
+  <div data-ice="description"><p>The FZP properties</p>
 </div>
 
   
@@ -1453,18 +1557,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">tags</span><span class="code" data-ice="signature">: <span><span>*</span><span>[]</span></span></span>
+    <span class="code" data-ice="name">tags</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber86">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the tags</p>
+  <div data-ice="description"><p>The FZP tags</p>
 </div>
 
   
@@ -1497,18 +1601,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">taxonomy</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">taxonomy</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber92">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the taxonomy</p>
+  <div data-ice="description"><p>The FZP taxonomy</p>
 </div>
 
   
@@ -1541,18 +1645,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">title</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">title</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber21">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber50">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the FZP title</p>
+  <div data-ice="description"><p>The FZP title</p>
 </div>
 
   
@@ -1585,18 +1689,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">url</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">url</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber29">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber74">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the url</p>
+  <div data-ice="description"><p>The FZP url</p>
 </div>
 
   
@@ -1629,18 +1733,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">variant</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">variant</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber41">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber110">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the variant</p>
+  <div data-ice="description"><p>The FZP variant</p>
 </div>
 
   
@@ -1673,18 +1777,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">version</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">version</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber19">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber44">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the FZP version</p>
+  <div data-ice="description"><p>The FZP version</p>
 </div>
 
   
@@ -1717,18 +1821,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">views</span><span class="code" data-ice="signature">: {&quot;icon&quot;: <span>*</span>, &quot;schematic&quot;: <span>*</span>, &quot;breadboard&quot;: <span>*</span>, &quot;pcb&quot;: <span>*</span>}</span>
+    <span class="code" data-ice="name">views</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber122">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>the views</p>
+  <div data-ice="description"><p>The FZP views (icon, breadboard, schematic, pcb)</p>
 </div>
 
   
@@ -1757,162 +1861,6 @@ A bus is a instance of the Bus class</p>
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-addProperty">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">addProperty</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, showInLabel: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber85">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Add a property to the fzp instance.</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">value</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">showInLabel</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tbody>
-        <tr>
-          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
-          
-        </tr>
-      </tbody>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-addTag">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">addTag</span><span class="code" data-ice="signature">(tag: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber73">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>setTag</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">tag</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tbody>
-        <tr>
-          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
-          
-        </tr>
-      </tbody>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-getProperty">
     <span class="access" data-ice="access">public</span>
     
@@ -1920,18 +1868,18 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">getProperty</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span>
+    <span class="code" data-ice="name">getProperty</span><span class="code" data-ice="signature">(key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber95">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber188">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Get a fzp property by the name.</p>
+  <div data-ice="description"><p>Get a FZP property by the given key.</p>
 </div>
 
   
@@ -1945,7 +1893,7 @@ A bus is a instance of the Bus class</p>
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="name" class="code" data-depth="0">key</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
@@ -1992,23 +1940,39 @@ A bus is a instance of the Bus class</p>
     
     
     
-    <span class="code" data-ice="name">loadSVGs</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+    <span class="code" data-ice="name">loadSVGs</span><span class="code" data-ice="signature">(baseurl: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber136">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber250">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>;oad all svg sources</p>
+  <div data-ice="description"><p>Load all SVG sources.</p>
 </div>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">baseurl</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -2016,7 +1980,7 @@ A bus is a instance of the Bus class</p>
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
           
         </tr>
       </tbody>
@@ -2052,7 +2016,7 @@ A bus is a instance of the Bus class</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber127">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber240">source</a></span></span>
     </span>
   </h3>
 
@@ -2130,7 +2094,7 @@ A bus is a instance of the Bus class</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber116">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber221">source</a></span></span>
     </span>
   </h3>
 
@@ -2197,6 +2161,162 @@ A bus is a instance of the Bus class</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setProperty">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setProperty</span><span class="code" data-ice="signature">(key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, showInLabel: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber174">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Create or update a FZPProperty instance to the FZP.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">key</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">value</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">showInLabel</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setTag">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setTag</span><span class="code" data-ice="signature">(tag: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber154">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Set a tag</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">tag</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-setView">
     <span class="access" data-ice="access">public</span>
     
@@ -2208,14 +2328,14 @@ A bus is a instance of the Bus class</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber201">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>setView</p>
+  <div data-ice="description"><p>Set a view</p>
 </div>
 
   
@@ -2232,7 +2352,8 @@ A bus is a instance of the Bus class</p>
       <td data-ice="name" class="code" data-depth="0">name</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>The name of the view can be &apos;breadboard&apos;, &apos;pcb&apos;, or &apos;schematic&apos;</p>
+</td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">view</td>
@@ -2275,6 +2396,174 @@ A bus is a instance of the Bus class</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-totalBuses">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">totalBuses</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber230">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Get the total number of buses.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-totalConnector">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">totalConnector</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber211">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Get the total number of connector.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-totalProperties">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">totalProperties</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber163">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Get the total number of properties.</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-totalTags">
     <span class="access" data-ice="access">public</span>
     
@@ -2286,7 +2575,7 @@ A bus is a instance of the Bus class</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber64">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/fzp.js.html#lineNumber145">source</a></span></span>
     </span>
   </h3>
 

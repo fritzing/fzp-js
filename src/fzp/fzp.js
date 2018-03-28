@@ -1,60 +1,141 @@
+'use strict';
+
 const FZPView = require('./view');
 const FZPProperty = require('./property');
 
 /**
- * The FZP class
+ * The FZP class is the main fzp data entry.
+ * Here you can access the main data properties/objects and some utility functions
+ * can be used to load svgs as string, count the total number of connections or set a connector.
+ *
+ * @example
+ * const {FZP} = require('fzp-js')
+ *
+ * let fzp = new FZP({moduleId: 'sample'})
+ * fzp.version = '1.0.0'
+ * fzp.setTag('demo')
+ * fzp.setProperty('p', 'hello', true)
+ * fzp.setView()
+ * fzp.setConnector()
+ * fzp.setBus()
  */
 class FZP {
   /**
-   * FZP constructor
+   * FZP constructor has an opt argument object that can be used to setup data at the initialization.
    * @param {Object} opt
    */
-  constructor(opt) {
-    opt = opt || {};
-    /** the module id */
+  constructor(opt = {}) {
+    /**
+     * The FZP module id
+     * @type {String}
+     */
     this.moduleId = opt.module || '';
-    /** the fritzing version */
+
+    /**
+     * The FZP fritzing version
+     * @type {String}
+     */
     this.fritzingVersion = opt.fritzingVersion || '';
-    /** the FZP version */
-    this.version = opt.version || '';
-    /** the FZP title */
-    this.title = '';
-    /** the description */
-    this.description = '';
-    /** the author */
-    this.author = '';
-    /** the date */
-    this.date = '';
-    /** the url */
-    this.url = '';
-    /** the label */
-    this.label = '';
-    /** the tags */
-    this.tags = [];
-    /** the taxonomy */
-    this.taxonomy = '';
-    /** the language */
-    this.language = '';
-    /** the family */
-    this.family = '';
-    /** the variant */
-    this.variant = '';
-    /** the properties */
-    this.properties = {};
-    /** the views */
+
+    /**
+     * The FZP version
+     * @type {String}
+     */
+    this.version = opt.version || '0.0.0';
+
+    /**
+     * The FZP title
+     * @type {String}
+     */
+    this.title = opt.title || '';
+
+    /**
+     * The FZP description
+     * @type {String}
+     */
+    this.description = opt.description || '';
+
+    /**
+     * The FZP author
+     * @type {String}
+     */
+    this.author = opt.author || '';
+
+    /**
+     * The FZP date
+     * @type {String}
+     */
+    this.date = opt.date || '';
+
+    /**
+     * The FZP url
+     * @type {String}
+     */
+    this.url = opt.url || '';
+
+    /**
+     * The FZP label
+     * @type {String}
+     */
+    this.label = opt.label || '';
+
+    /**
+     * The FZP tags
+     * @type {Array}
+     */
+    this.tags = opt.tags || [];
+
+    /**
+     * The FZP taxonomy
+     * @type {String}
+     */
+    this.taxonomy = opt.taxonomy || '';
+
+    /**
+     * The FZP language
+     * @type {String}
+     */
+    this.language = opt.language || '';
+
+    /**
+     * The FZP family
+     * @type {String}
+     */
+    this.family = opt.family || '';
+
+    /**
+     * The FZP variant
+     * @type {String}
+     */
+    this.variant = opt.variant || '';
+
+    /**
+     * The FZP properties
+     * @type {Object}
+     */
+    this.properties = opt.properties || {};
+
+    /**
+     * The FZP views (icon, breadboard, schematic, pcb)
+     * @type {Object}
+     */
     this.views = {
       icon: new FZPView(),
       schematic: new FZPView(),
       breadboard: new FZPView(),
       pcb: new FZPView(),
     };
-    /** the connectors */
-    this.connectors = {};
+
     /**
-     * the buses
-     * A bus is a instance of the Bus class
+     * The FZP connectors
+     * @type {Object}
      */
-    this.buses = {};
+    this.connectors = opt.connectors || {};
+    /**
+     * The FZP buses is a map with instances of the Bus class.
+     * @type {Object}
+     */
+    this.buses = opt.buses || {};
   }
 
   /**
@@ -66,45 +147,69 @@ class FZP {
   }
 
   /**
-   * setTag
+   * Set a tag
    * @param {String} tag
    * @return {FZP}
    */
-  addTag(tag) {
+  setTag(tag) {
     this.tags.push(tag);
     return this;
   }
 
   /**
-   * Add a property to the fzp instance.
-   * @param {String} name
+   * Get the total number of properties.
+   * @return {Number}
+   */
+  totalProperties() {
+    return Object.keys(this.properties).length;
+  }
+
+  /**
+   * Create or update a FZPProperty instance to the FZP.
+   * @param {String} key
    * @param {String} value
-   * @param {String} showInLabel
+   * @param {Boolean} showInLabel
    * @return {FZP}
    */
-  addProperty(name, value, showInLabel) {
-    this.properties[name] = new FZPProperty(value, showInLabel);
+  setProperty(key, value = null, showInLabel = false) {
+    if (!key) {
+      throw new Error('Missing first argument at function');
+    }
+    this.properties[key] = new FZPProperty();
+    this.properties[key].set(value, showInLabel);
     return this;
   }
 
   /**
-   * Get a fzp property by the name.
-   * @param {String} name
+   * Get a FZP property by the given key.
+   * @param {String} key
    * @return {FZPProperty}
    */
-  getProperty(name) {
-    return this.properties[name];
+  getProperty(key) {
+    if (!key) {
+      throw new Error('Missing first argument at function', key);
+    }
+    return this.properties[key];
   }
 
   /**
-   * setView
-   * @param {String} name
+   * Set a view
+   * @param {String} name The name of the view can be 'breadboard', 'pcb', or 'schematic'
    * @param {FZPView} view
    * @return {FZP}
    */
   setView(name, view) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, view);
     return this;
+  }
+
+
+  /**
+   * Get the total number of connector.
+   * @return {Number}
+   */
+  totalConnector() {
+    return Object.keys(this.connectors).length;
   }
 
   /**
@@ -114,8 +219,16 @@ class FZP {
    * @return {FZP}
    */
   setConnector(name, connector) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, connector);
     return this;
+  }
+
+  /**
+   * Get the total number of buses.
+   * @return {Number}
+   */
+  totalBuses() {
+    return Object.keys(this.buses).length;
   }
 
   /**
@@ -125,22 +238,23 @@ class FZP {
    * @return {FZP}
    */
   setBus(name, bus) {
-    console.log('not jet implemented');
+    console.log('not jet implemented', name, bus);
     return this;
   }
 
   /**
-   * ;oad all svg sources
-   * @return {Promise}
+   * Load all SVG sources.
+   * @param {String} baseurl
+   * @return {FZP}
    */
-  loadSVGs() {
-    return this.views.breadboard.loadSVG()
-    .then((d) => {
-      return this.views.schematic.loadSVG()
-      .then((d) => {
-        return this.views.pcb.loadSVG()
-        .then((d) => {
-          return d;
+  loadSVGs(baseurl) {
+    return this.views.breadboard.loadSVG(baseurl)
+    .then(() => {
+      return this.views.schematic.loadSVG(baseurl)
+      .then(() => {
+        return this.views.pcb.loadSVG(baseurl)
+        .then(() => {
+          return this;
         });
       });
     });

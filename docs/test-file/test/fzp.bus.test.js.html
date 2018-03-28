@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">test/fzp.bus.test.js | fzp-js</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">test/fzp.bus.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const FZPBus = require(&apos;../src/fzp/bus&apos;);
+
+describe(&apos;FZPBus new&apos;, () =&gt; {
+  test(&apos;Test new FZPBus&apos;, () =&gt; {
+    let bus = new FZPBus();
+    expect(bus.id).toEqual(null);
+    expect(bus.nodeMembers).toHaveLength(0);
+    expect(bus.nodeMembers).toEqual([]);
+  });
+});
+
+describe(&apos;FZPBus set&apos;, () =&gt; {
+  test(&apos;Test new FZPBus set (with arg object)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set({id: &apos;test&apos;, nodeMembers: [1, 2, 3]});
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(3);
+    expect(bus.nodeMembers).toEqual([1, 2, 3]);
+  });
+
+  test(&apos;Test new FZPBus set (with arg string)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set(&apos;test&apos;);
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(0);
+    expect(bus.nodeMembers).toEqual([]);
+  });
+
+  test(&apos;Test new FZPBus set (with args string, array)&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.set(&apos;test&apos;, [1, 2, 3]);
+    expect(bus.id).toEqual(&apos;test&apos;);
+    expect(bus.nodeMembers).toHaveLength(3);
+    expect(bus.nodeMembers).toEqual([1, 2, 3]);
+  });
+});
+
+describe(&apos;FZPBus setId, getId&apos;, () =&gt; {
+  test(&apos;Test FZPBus setId, getId&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.setId(&apos;b&apos;);
+    expect(bus.getId()).toEqual(&apos;b&apos;);
+  });
+});
+
+describe(&apos;FZPBus setNodeMembers, getNodeMembers&apos;, () =&gt; {
+  test(&apos;Test FZPBus setNodeMember, getNodeMember&apos;, () =&gt; {
+    let bus = new FZPBus();
+    bus.setNodeMember(1);
+    expect(bus.totalNodeMembers()).toEqual(1);
+    expect(bus.getNodeMembers()).toEqual([1]);
+  });
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

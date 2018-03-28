@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -43,17 +45,15 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js--a-href--https---paulvollmer-net-fzp-js----img-src--https---paulvollmer-net-fzp-js-badge-svg--alt------a-">fzp-js <a href="https://paulvollmer.net/fzp-js/"><img src="https://paulvollmer.net/fzp-js/badge.svg" alt=""></a></h1><p>fritzing fzp javascript library</p>
-<h2 id="development">Development</h2><pre><code class="lang-sh"><code class="source-code prettyprint">yarn install
-make test</code>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="fzp-js--a-href--https---fritzing-github-io-fzp-js----img-src--https---fritzing-github-io-fzp-js-badge-svg--alt------a-">fzp-js <a href="https://fritzing.github.io/fzp-js/"><img src="https://fritzing.github.io/fzp-js/badge.svg" alt=""></a></h1><p>The fritzing fzp javascript library is for processing fritzing fzp xml data.<br>The Library can be used to load fzp&apos;s, parse and marshal to XML.</p>
+<h2 id="installation">Installation</h2><p>Install the npm package</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install fritzing/fzp-js --save</code>
 </code></pre>
-<p>and lint your files before you commit</p>
-<pre><code class="lang-sh"><code class="source-code prettyprint">make lint</code>
+<p>or use yarn to install and add the dependency to your <code>package.json</code></p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">yarn add fritzing/fzp-js</code>
 </code></pre>
-<p>to build an es5 compatible version run</p>
-<pre><code class="lang-sh"><code class="source-code prettyprint">make build</code>
-</code></pre>
-<h2 id="usage">Usage</h2><pre><code class="lang-javascript"><code class="source-code prettyprint">const {FZPUtils} = require(&apos;fzp-js&apos;)
+<h2 id="usage">Usage</h2><p>Let&apos;s start with a simple szenario and load a fzp file and all svg&apos;s.<br>Documentation of the library can be found <a href="https://fritzing.github.io/fzp-js/">here</a></p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">const {FZPUtils} = require(&apos;fzp-js&apos;)
 
 const url = &apos;https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp&apos;
 FZPUtils.loadFZP(url).then((fzp) =&gt; {
@@ -69,6 +69,15 @@ FZPUtils.loadFZP(url).then((fzp) =&gt; {
 }).catch((e) =&gt; {
   throw new Error(err)
 })</code>
+</code></pre>
+<h2 id="development">Development</h2><pre><code class="lang-sh"><code class="source-code prettyprint">yarn install
+make test</code>
+</code></pre>
+<p>and lint your files before you commit</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make lint</code>
+</code></pre>
+<p>to build an es5 compatible version run</p>
+<pre><code class="lang-sh"><code class="source-code prettyprint">make build</code>
 </code></pre>
 <h2 id="license">License</h2><p><a href="LICENSE">MIT-LICENSE</a></p>
 </div>

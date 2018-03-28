@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -43,7 +45,7 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">67/75</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">91/108</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -61,54 +63,71 @@
   <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/fzp/bus.js.html">src/fzp/bus.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">7/7</span></td>
-      <td style="display: none;" data-ice="size">987 byte</td>
-      <td style="display: none;" data-ice="lines">58</td>
-      <td style="display: none;" data-ice="updated">2018-02-06 22:49:46 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">11/11</span></td>
+      <td style="display: none;" data-ice="size">2487 byte</td>
+      <td style="display: none;" data-ice="lines">138</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/fzp/connector.js.html">src/fzp/connector.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span>
-<span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">13/13</span></td>
-      <td style="display: none;" data-ice="size">1220 byte</td>
-      <td style="display: none;" data-ice="lines">77</td>
-      <td style="display: none;" data-ice="updated">2018-02-02 08:33:34 (UTC)</td>
+      <td data-ice="filePath"><span><a href="file/src/fzp/connector-view.js.html">src/fzp/connector-view.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">14/14</span></td>
+      <td style="display: none;" data-ice="size">1551 byte</td>
+      <td style="display: none;" data-ice="lines">101</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/fzp/fzp.js.html#errorLines=1,2">src/fzp/fzp.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/fzp/connector.js.html#errorLines=3">src/fzp/connector.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></td>
+      <td class="coverage"><span data-ice="coverage">87 %</span><span data-ice="coverageCount" class="coverage-count">7/8</span></td>
+      <td style="display: none;" data-ice="size">1637 byte</td>
+      <td style="display: none;" data-ice="lines">64</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/fzp/fzp.js.html#errorLines=3,4">src/fzp/fzp.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></td>
-      <td class="coverage"><span data-ice="coverage">93 %</span><span data-ice="coverageCount" class="coverage-count">28/30</span></td>
-      <td style="display: none;" data-ice="size">2906 byte</td>
-      <td style="display: none;" data-ice="lines">150</td>
-      <td style="display: none;" data-ice="updated">2018-02-02 08:16:37 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">93 %</span><span data-ice="coverageCount" class="coverage-count">31/33</span></td>
+      <td style="display: none;" data-ice="size">5184 byte</td>
+      <td style="display: none;" data-ice="lines">264</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/fzp/property.js.html">src/fzp/property.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">4/4</span></td>
-      <td style="display: none;" data-ice="size">365 byte</td>
-      <td style="display: none;" data-ice="lines">18</td>
-      <td style="display: none;" data-ice="updated">2018-02-02 08:33:34 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">9/9</span></td>
+      <td style="display: none;" data-ice="size">1467 byte</td>
+      <td style="display: none;" data-ice="lines">85</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/fzp/view.js.html#errorLines=1">src/fzp/view.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/fzp/view.js.html#errorLines=3">src/fzp/view.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></td>
-      <td class="coverage"><span data-ice="coverage">91 %</span><span data-ice="coverageCount" class="coverage-count">11/12</span></td>
-      <td style="display: none;" data-ice="size">1548 byte</td>
-      <td style="display: none;" data-ice="lines">83</td>
-      <td style="display: none;" data-ice="updated">2018-02-02 08:25:25 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">92 %</span><span data-ice="coverageCount" class="coverage-count">13/14</span></td>
+      <td style="display: none;" data-ice="size">2422 byte</td>
+      <td style="display: none;" data-ice="lines">124</td>
+      <td style="display: none;" data-ice="updated">2018-03-04 22:08:24 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/utils.js.html#errorLines=1,2,3,4,5">src/utils.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/index.js.html#errorLines=1,2,3,4,5,6,7">src/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/7</span></td>
+      <td style="display: none;" data-ice="size">415 byte</td>
+      <td style="display: none;" data-ice="lines">17</td>
+      <td style="display: none;" data-ice="updated">2018-03-01 07:36:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/utils.js.html#errorLines=3,4,5,6,7,8">src/utils.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span>
+<span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span>
 <span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span>
+<span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span>
 <span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span>
 <span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></td>
-      <td class="coverage"><span data-ice="coverage">44 %</span><span data-ice="coverageCount" class="coverage-count">4/9</span></td>
-      <td style="display: none;" data-ice="size">4912 byte</td>
-      <td style="display: none;" data-ice="lines">147</td>
-      <td style="display: none;" data-ice="updated">2018-02-02 08:33:34 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">6/12</span></td>
+      <td style="display: none;" data-ice="size">7918 byte</td>
+      <td style="display: none;" data-ice="lines">268</td>
+      <td style="display: none;" data-ice="updated">2018-03-04 22:25:14 (UTC)</td>
     </tr>
 </tbody>
 </table>

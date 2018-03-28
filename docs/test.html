@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -53,43 +55,253 @@
   </thead>
 
   <tbody data-ice="tests"><tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber3"><p>Test new FZP</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber5"><p>FZPBus new</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber6"><p>Test new FZPBus</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber8"><p>Test FZP tags</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber14"><p>FZPBus set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber15"><p>Test new FZPBus set (with arg object)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber23"><p>Test new FZPBus set (with arg string)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber31"><p>Test new FZPBus set (with args string, array)</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber16"><p>Test FZP properties</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber40"><p>FZPBus setId, getId</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber41"><p>Test FZPBus setId, getId</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/utils.test.js.html#lineNumber5"><p>Test parseFZP</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber48"><p>FZPBus setNodeMembers, getNodeMembers</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.bus.test.js.html#lineNumber49"><p>Test FZPBus setNodeMember, getNodeMember</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/utils.test.js.html#lineNumber50"><p>Test loadFZP and loadSVG</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.connector-view.test.js.html#lineNumber5"><p>FZPConnectorView</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.connector-view.test.js.html#lineNumber6"><p>Test new FZPConnectorView (empty)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.connector-view.test.js.html#lineNumber14"><p>Test new FZPConnectorView</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/utils.test.js.html#lineNumber67"><p>Test loadFZP all SVGs</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.connector.test.js.html#lineNumber5"><p>FZPConnector</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.connector.test.js.html#lineNumber6"><p>Test new FZPConnector (empty)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.connector.test.js.html#lineNumber14"><p>Test new FZPConnector</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>
 
 <tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
-  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/utils.test.js.html#lineNumber87"><p>Test marshalToXML</p>
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber5"><p>FZP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber6"><p>Test new FZP (empty)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber11"><p>Test new FZP (version)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber16"><p>Test FZP setTag, totalTags</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.fzp.test.js.html#lineNumber24"><p>Test FZP setProperty, getProperty</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.property.test.js.html#lineNumber5"><p>FZPProperty new</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.property.test.js.html#lineNumber6"><p>Test new FZPProperty (empty)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.property.test.js.html#lineNumber13"><p>FZPProperty set</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.property.test.js.html#lineNumber14"><p>Test FZPProperty set (with one arg)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.property.test.js.html#lineNumber21"><p>Test FZPProperty set (with args)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.property.test.js.html#lineNumber28"><p>Test FZPProperty set (object)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/fzp.view.test.js.html#lineNumber5"><p>FZPView</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.view.test.js.html#lineNumber6"><p>Test new FZPView (empty)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.view.test.js.html#lineNumber15"><p>Test new FZPView (image name)</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.view.test.js.html#lineNumber24"><p>Test new FZPView</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/fzp.view.test.js.html#lineNumber41"><p>Test new FZPView loadSVG</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span><a href="test-file/test/utils.test.js.html#lineNumber11"><p>Test parseFZP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/utils.test.js.html#lineNumber80"><p>loadFZP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber81"><p>Test loadFZP</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber93"><p>Test loadFZP and loadSVG</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber110"><p>Test loadFZP and all SVGs</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/utils.test.js.html#lineNumber131"><p>loadFZPandSVGs</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber132"><p>Test loadFZPandSVGs</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="0">
+  <td data-ice="testDescription" style="padding-left: 10px"><span data-ice="testInterfaceToggle" class="toggle closed"></span><span><a href="test-file/test/utils.test.js.html#lineNumber148"><p>marshalToXML</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber149"><p>Test marshalToXML</p>
+</a></span></td>
+  <td data-ice="testTarget" class="test-target">-</td>
+</tr>
+
+<tr class="test-interface" data-ice="testInterface" style="display: none;" data-test-depth="1">
+  <td data-ice="testDescription" style="padding-left: 20px"><span><a href="test-file/test/utils.test.js.html#lineNumber179"><p>Test marshalToXML from loaded part</p>
 </a></span></td>
   <td data-ice="testTarget" class="test-target">-</td>
 </tr>

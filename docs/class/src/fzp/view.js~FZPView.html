@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -50,7 +52,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/src/fzp/view.js.html#lineNumber6">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/fzp/view.js.html#lineNumber13">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -70,13 +72,22 @@
 
   
   
-  <div class="description" data-ice="description"><p>FZPView class</p>
+  <div class="description" data-ice="description"><p>FZPView class is used by the fzp breadboard, pcb and schematics view.</p>
 </div>
   
 
   
 
-  
+  <div data-ice="exampleDocs">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const {FZPView} = require(&apos;fzp-js&apos;)
+
+let view = new FZPView()</code></pre>
+    </div>
+</div>
 
   
 
@@ -103,7 +114,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(image: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, ids: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(image: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, ids: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>, flipH: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>, flipV: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>, svg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
         </p>
       </div>
       <div>
@@ -139,7 +150,65 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-image">image</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-flipHorizontal">flipHorizontal</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>FZPView flip horizontal</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-flipVertical">flipVertical</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>FZPView flip vertical</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-image">image</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
@@ -168,7 +237,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-layerIds">layerIds</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-layerIds">layerIds</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span></span>
         </p>
       </div>
       <div>
@@ -197,7 +266,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-svg">svg</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-member-svg">svg</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
         </p>
       </div>
       <div>
@@ -220,35 +289,6 @@
   <tbody>
   
   <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-addLayerId">addLayerId</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Add a layer id to the FZPView</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
       
@@ -291,7 +331,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-loadSVG">loadSVG</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-loadSVG">loadSVG</a></span></span><span class="code" data-ice="signature">(baseurl: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
         </p>
       </div>
       <div>
@@ -320,7 +360,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-setImage">setImage</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-setImage">setImage</a></span></span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
         </p>
       </div>
       <div>
@@ -349,7 +389,36 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-setSVG">setSVG</a></span></span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-setLayerId">setLayerId</a></span></span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Add a layer id to the FZPView</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html#instance-method-setSVG">setSVG</a></span></span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
         </p>
       </div>
       <div>
@@ -411,11 +480,11 @@
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(image: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, ids: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(image: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, ids: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>, flipH: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>, flipV: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span>, svg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber12">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber22">source</a></span></span>
     </span>
   </h3>
 
@@ -447,6 +516,25 @@
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">flipH</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">flipV</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">svg</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>The raw svg string</p>
+</td>
+    </tr>
 </tbody>
   </table>
 </div>
@@ -473,6 +561,94 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-flipHorizontal">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">flipHorizontal</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber39">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>FZPView flip horizontal</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-flipVertical">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">flipVertical</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber46">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>FZPView flip vertical</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-member-image">
     <span class="access" data-ice="access">public</span>
     
@@ -480,11 +656,11 @@
     
     
     
-    <span class="code" data-ice="name">image</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">image</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber14">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
@@ -524,11 +700,11 @@
     
     
     
-    <span class="code" data-ice="name">layerIds</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">layerIds</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber16">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber33">source</a></span></span>
     </span>
   </h3>
 
@@ -568,11 +744,11 @@
     
     
     
-    <span class="code" data-ice="name">svg</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
+    <span class="code" data-ice="name">svg</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber18">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber52">source</a></span></span>
     </span>
   </h3>
 
@@ -608,66 +784,6 @@
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-addLayerId">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">addLayerId</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber41">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Add a layer id to the FZPView</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-existLayerId">
     <span class="access" data-ice="access">public</span>
     
@@ -679,7 +795,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber52">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber90">source</a></span></span>
     </span>
   </h3>
 
@@ -747,11 +863,11 @@
     
     
     
-    <span class="code" data-ice="name">loadSVG</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
+    <span class="code" data-ice="name">loadSVG</span><span class="code" data-ice="signature">(baseurl: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber73">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -763,7 +879,24 @@
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">baseurl</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>the url to the fritzing-parts/core directory</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -803,11 +936,11 @@
     
     
     
-    <span class="code" data-ice="name">setImage</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+    <span class="code" data-ice="name">setImage</span><span class="code" data-ice="signature">(src: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber25">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber60">source</a></span></span>
     </span>
   </h3>
 
@@ -831,14 +964,100 @@
       <td data-ice="name" class="code" data-depth="0">src</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>The image source</p>
+</td>
     </tr>
 </tbody>
   </table>
 </div>
 </div>
 
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setLayerId">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setLayerId</span><span class="code" data-ice="signature">(name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber78">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Add a layer id to the FZPView</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>The layer name</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -863,11 +1082,11 @@
     
     
     
-    <span class="code" data-ice="name">setSVG</span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+    <span class="code" data-ice="name">setSVG</span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber65">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber104">source</a></span></span>
     </span>
   </h3>
 
@@ -891,14 +1110,27 @@
       <td data-ice="name" class="code" data-depth="0">data</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
+      <td data-ice="description"><p>The SVG data</p>
+</td>
     </tr>
 </tbody>
   </table>
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -927,7 +1159,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/fzp/view.js.html#lineNumber69">source</a></span></span>
     </span>
   </h3>
 

@@ -1,29 +1,65 @@
+'use strict';
+
 const axios = require('axios');
 
 /**
- * FZPView class
+ * FZPView class is used by the fzp breadboard, pcb and schematics view.
+ *
+ * @example
+ * const {FZPView} = require('fzp-js')
+ *
+ * let view = new FZPView()
  */
 class FZPView {
   /**
    * FZPView constructor
    * @param {String} image
    * @param {Array} ids
+   * @param {Boolean} flipH
+   * @param {Boolean} flipV
+   * @param {String} svg The raw svg string
    */
-  constructor(image, ids) {
-    /** The FZPView image */
-    this.image = image || '';
-    /** The FZPView layer id's */
+  constructor(image, ids, flipH, flipV, svg) {
+    /**
+     * The FZPView image
+     * @type {String}
+     */
+    this.image = image || null;
+
+    /**
+     * The FZPView layer id's
+     * @type {Array}
+     */
     this.layerIds = ids || [];
-    /** The FZPView svg data */
-    this.svg = '';
+
+    /**
+     * FZPView flip horizontal
+     * @type {Boolean}
+     */
+    this.flipHorizontal = (flipH == 'true') || (flipH == true) || false;
+
+
+    /**
+     * FZPView flip vertical
+     * @type {Boolean}
+     */
+    this.flipVertical = (flipV == 'true') || (flipV == true) || false;
+
+    /**
+     * The FZPView svg data
+     * @type {String}
+     */
+    this.svg = svg || null;
   }
 
   /**
    * Set the FZPView image source
-   * @param {String} src
+   * @param {String} src The image source
+   * @return {FZPView}
    */
   setImage(src) {
     this.image = src;
+    return this;
   }
 
   /**
@@ -36,12 +72,14 @@ class FZPView {
 
   /**
    * Add a layer id to the FZPView
-   * @param {String} name
+   * @param {String} name The layer name
+   * @return {FZPView}
    */
-  addLayerId(name) {
+  setLayerId(name) {
     if (!this.existLayerId(name)) {
       this.layerIds.push(name);
     }
+    return this;
   }
 
   /**
@@ -60,19 +98,22 @@ class FZPView {
 
   /**
    * Set the svg data
-   * @param {String} data
+   * @param {String} data The SVG data
+   * @return {FZPView}
    */
   setSVG(data) {
     this.svg = data;
+    return this;
   }
 
   /**
    * load the svg of the image path from the fritzing-parts api
+   * @param {String} baseurl the url to the fritzing-parts/core directory
    * @return {Promise}
    */
-  loadSVG() {
+  loadSVG(baseurl) {
     let self = this;
-    return axios.get('https://fritzing.github.io/fritzing-parts/svg/core/'+this.image, {responseType: 'xml'})
+    return axios.get(baseurl+this.image, {responseType: 'xml'})
     .then((res) => {
       self.setSVG(res.data);
       return res.data;

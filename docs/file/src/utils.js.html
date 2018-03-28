@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="fritzing fzp javascript"><meta property="og:type" content="website"><meta property="og:url" content="https://paulvollmer.net"><meta property="og:site_name" content="fzp-js"><meta property="og:title" content="fzp-js"><meta property="og:image" content="https://github.com/paulvollmer/logo.png"><meta property="og:description" content="fritzing fzp javascript"><meta property="og:author" content="https://github.com/paulvollmer"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"><meta property="twitter:image" content="https://github.com/paulvollmer/logo.png"></head>
+<meta name="description" content="fritzing fzp javascript"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="fzp-js"><meta property="twitter:description" content="fritzing fzp javascript"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -24,18 +24,20 @@
   </span>
     <ul class="search-result"></ul>
   </div>
-<a style="position:relative; top:3px;" href="https://github.com/paulvollmer/fzp-js"><img width="20px" src="./image/github.png"></a></header>
+<a style="position:relative; top:3px;" href="https://github.com/fritzing/fzp-js"><img width="20px" src="./image/github.png"></a></header>
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
   <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZP">loadFZP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-loadFZPandSVGs">loadFZPandSVGs</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-marshalToXML">marshalToXML</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseConnectorView">parseConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseFZP">parseFZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-parseProperties">parseProperties</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#fzp">fzp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/bus.js~FZPBus.html">FZPBus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector-view.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnector.html">FZPConnector</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/connector.js~FZPConnectorView.html">FZPConnectorView</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/fzp.js~FZP.html">FZP</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/property.js~FZPProperty.html">FZPProperty</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/fzp/view.js~FZPView.html">FZPView</a></span></span></li>
@@ -44,23 +46,68 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/utils.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const axios = require(&apos;axios&apos;);
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
 const xml2js = require(&apos;xml2js&apos;);
 const parseXml = xml2js.parseString;
 const FZP = require(&apos;./fzp/fzp&apos;);
-const {FZPConnector} = require(&apos;./fzp/connector&apos;);
+const FZPConnector = require(&apos;./fzp/connector&apos;);
+const FZPConnectorView = require(&apos;./fzp/connector-view&apos;);
+const {FritzingPartsAPI, FritzingPartsAPIClient} = require(&apos;fritzing-parts-api-client-js&apos;);
+
 
 /**
- * @param {String} url
+ * Load a FZP file from the given URL.
+ *
+ * @example
+ * const {FZPUtils} = require(&apos;fzp-js&apos;)
+ *
+ * FZPUtils.loadFZP(&apos;core/Arduino Nano3(fix).fzp&apos;)
+ * .then((fzz) =&gt; {
+ *   console.log(fzz.fz)
+ * })
+ * .catch((err) =&gt; {
+ *   console.error(err)
+ * })
+ *
+ * @param {String} src
+ * @param {String} url URL to the FZP file.
  * @return {Promise}
  */
-function loadFZP(url) {
-  return axios.get(url, {responseType: &apos;xml&apos;})
-  .then((res) =&gt; {
-    return parseFZP(res.data);
+function loadFZP(src, url = FritzingPartsAPI) {
+  return FritzingPartsAPIClient.getFzp(src, url)
+  .then((fzp) =&gt; {
+    // let tmp = parseFZP(fzp);
+    // console.log(tmp);
+    return parseFZP(fzp);
   });
 }
 
+/**
+ * Load a FZP and all linked SVGs
+ *
+ * @example
+ * const {FZPUtils} = require(&apos;fzp-js&apos;)
+ *
+ * FZPUtils.loadFZPandSVGs(&apos;core/Arduino Nano3(fix).fzp&apos;)
+ * .then((fzz) =&gt; {
+ *   console.log(fzz)
+ * })
+ * .catch((err) =&gt; {
+ *   console.error(err)
+ * })
+ *
+ * @param {String} src
+ * @param {String} url URL to the FZP file.
+ * @return {FZP}
+ */
+function loadFZPandSVGs(src, url = FritzingPartsAPI) {
+  return loadFZP(src, url).then((fzp) =&gt; {
+    return fzp.loadSVGs(`${url}/svg/core/`).then(() =&gt; {
+      return fzp;
+    });
+  });
+}
 
 /**
  * parse a fzp xml string
@@ -73,11 +120,10 @@ function parseFZP(data) {
     if (data) {
       parseXml(data, (err, xml) =&gt; {
         if (err) {
-          // cb(err);
           return reject(err);
         }
-        // console.log(xml.module.connectors[0]);
 
+        console.log(xml.module.tags);
         fzp.moduleId = xml.module.$.moduleId;
         fzp.fritzingVersion = xml.module.$.fritzingVersion;
         if (xml.module.version) fzp.version = xml.module.version[0];
@@ -96,25 +142,28 @@ function parseFZP(data) {
           fzp.properties = parseProperties(xml.module.properties[0].property);
         }
 
-        // console.log(JSON.stringify(xml.module.properties, &apos;&apos;, &apos;  &apos;));
         if (xml.module.views) {
           if (xml.module.views[0].iconView) {
             const iconViewLayer = xml.module.views[0].iconView[0].layers[0];
             fzp.views.icon.setImage(iconViewLayer.$.image);
-            fzp.views.icon.addLayerId(iconViewLayer.layer[0].$.layerId);
+            fzp.views.icon.setLayerId(iconViewLayer.layer[0].$.layerId);
           }
           if (xml.module.views[0].breadboardView) {
             const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];
             fzp.views.breadboard.setImage(breadboardLayer.$.image);
-            fzp.views.breadboard.addLayerId(breadboardLayer.layer[0].$.layerId);
+            fzp.views.breadboard.setLayerId(breadboardLayer.layer[0].$.layerId);
           }
           if (xml.module.views[0].pcbView) {
-            fzp.views.pcb.setImage(xml.module.views[0].pcbView[0].layers[0].$.image);
-            fzp.views.pcb.addLayerId(xml.module.views[0].pcbView[0].layers[0].layer[0].$.layerId);
+            const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];
+            fzp.views.pcb.setImage(pcbViewLayer.$.image);
+            for (let iLayer = 0; iLayer &lt; pcbViewLayer.layer.length; iLayer++) {
+              fzp.views.pcb.setLayerId(pcbViewLayer.layer[iLayer].$.layerId);
+            }
           }
           if (xml.module.views[0].schematicView) {
-            fzp.views.schematic.setImage(xml.module.views[0].schematicView[0].layers[0].$.image);
-            fzp.views.schematic.addLayerId(xml.module.views[0].schematicView[0].layers[0].layer[0].$.layerId);
+            const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];
+            fzp.views.schematic.setImage(schematicViewLayer.$.image);
+            fzp.views.schematic.setLayerId(schematicViewLayer.layer[0].$.layerId);
           }
         }
 
@@ -123,22 +172,41 @@ function parseFZP(data) {
             for (let i = 0; i &lt; xml.module.connectors[0].connector.length; i++) {
               const connector = xml.module.connectors[0].connector[i];
 
+              // create the connector for the three views.
               let c = new FZPConnector();
               c.id = connector.$.id;
               c.name = connector.$.name;
               c.type = connector.$.type;
-              c.description = connector.description[0];
-              c.views.breadboard.layer = connector.views[0].breadboardView[0].p[0].$.layer;
-              c.views.breadboard.svgId = connector.views[0].breadboardView[0].p[0].$.svgId;
-              c.views.breadboard.legId = connector.views[0].breadboardView[0].p[0].$.legId;
-              c.views.breadboard.terminalId = connector.views[0].breadboardView[0].p[0].$.terminalId;
+              if (connector.description) {
+                c.description = connector.description[0];
+              }
+
+              if (connector.views[0].breadboardView) {
+                c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);
+              }
+
+              if (connector.views[0].schematicView) {
+                c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);
+              }
+
+              if (connector.views[0].pcbView) {
+                for (let iPcb = 0; iPcb &lt; connector.views[0].pcbView[0].p.length; iPcb++) {
+                  switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {
+                    case &apos;copper0&apos;:
+                    c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
+                    break;
+                    case &apos;copper1&apos;:
+                    c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);
+                    break;
+                  }
+                }
+              }
 
               fzp.connectors[c.id] = c;
             }
           }
         }
 
-        // cb(null, fzp);
         return resolve(fzp);
       });
     }
@@ -152,41 +220,96 @@ function parseFZP(data) {
  */
 function parseProperties(xml) {
   let data = {};
-  for (let i = 0; i &lt; xml.length; i++) {
-    data[xml[i].$.name] = {
-      value: xml[i]._,
-      showInLabel: xml[i].$.showInLabel,
-    };
-  }
+  // if (xml) {
+  //   if (xml.length &gt; 0) {
+      for (let i = 0; i &lt; xml.length; i++) {
+        data[xml[i].$.name] = {
+          value: xml[i]._,
+          showInLabel: xml[i].$.showInLabel,
+        };
+      }
+  //   }
+  // }
   return data;
 }
 
 /**
- * Create a xml string of a fzp instance
+ * @param {Object} xml
+ * @return {FZPConnectorView}
+ */
+function parseConnectorView(xml) {
+  let conView = new FZPConnectorView();
+  conView.layer = xml.$.layer || null;
+  conView.svgId = xml.$.svgId || null;
+  conView.legId = xml.$.legId || null;
+  conView.terminalId = xml.$.terminalId || null;
+  return conView;
+}
+
+/**
+ * Create a xml string of a FZP instance.
+ *
+ * @example
+ * const {marshalToXML} = require(&apos;fzp-js&apos;)
+ *
+ * const xmlData = FZPUtils.marshalToXML(fzp)
+ * console.log(xmlData)
+ *
  * @param {FZP} fzp
  * @return {String}
  */
 function marshalToXML(fzp) {
   let builder = new xml2js.Builder();
   let data = {
-    module: Object.assign({}, fzp),
+    module: {
+      $: {
+        moduleId: fzp.moduleId,
+        fritzingVersion: fzp.fritzingVersion,
+      },
+      version: [fzp.version],
+      title: [fzp.title],
+      author: [fzp.author],
+      label: [fzp.label],
+      date: [fzp.date],
+      tags: [{tag: fzp.tags}],
+      // properties: fzp.properties,
+      description: [fzp.description],
+      views: [[{}]],
+      connectors: [[{}]],
+    },
   };
-  data.module.$ = {
-    moduleId: fzp.moduleId,
-    fritzingVersion: fzp.fritzingVersion,
-  };
-  delete data.moduleId;
-  delete data.fritzingVersion;
-  delete data.module.views.icon.svg;
-  delete data.module.views.breadboard.svg;
-  delete data.module.views.schematic.svg;
-  delete data.module.views.pcb.svg;
-
+  // let data = {
+  //   module: Object.assign({}, fzp),
+  // };
+  // data.module.$ = {
+  // };
+  // delete data.moduleId;
+  // delete data.fritzingVersion;
+  //
+  // data.module.tags =
+  //
+  // if (data.module) {
+  //   if (data.module.views) {
+  //     if (data.module.icon) {
+  //       delete data.module.views.icon.svg;
+  //     }
+  //     if (data.module.breadboard) {
+  //       delete data.module.views.breadboard.svg;
+  //     }
+  //     if (data.module.schematic) {
+  //       delete data.module.views.schematic.svg;
+  //     }
+  //     if (data.module.pcb) {
+  //       delete data.module.views.pcb.svg;
+  //     }
+  //   }
+  // }
   return builder.buildObject(data);
 }
 
 module.exports = {
   loadFZP,
+  loadFZPandSVGs,
   parseFZP,
   parseProperties,
   marshalToXML,
