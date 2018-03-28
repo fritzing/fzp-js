@@ -55,6 +55,7 @@ const FZPConnector = require(&apos;./fzp/connector&apos;);
 const FZPConnectorView = require(&apos;./fzp/connector-view&apos;);
 const {FritzingPartsAPI, FritzingPartsAPIClient} = require(&apos;fritzing-parts-api-client-js&apos;);
 
+
 /**
  * Load a FZP file from the given URL.
  *
@@ -122,6 +123,7 @@ function parseFZP(data) {
           return reject(err);
         }
 
+        console.log(xml.module.tags);
         fzp.moduleId = xml.module.$.moduleId;
         fzp.fritzingVersion = xml.module.$.fritzingVersion;
         if (xml.module.version) fzp.version = xml.module.version[0];
@@ -259,31 +261,49 @@ function parseConnectorView(xml) {
 function marshalToXML(fzp) {
   let builder = new xml2js.Builder();
   let data = {
-    module: Object.assign({}, fzp),
+    module: {
+      $: {
+        moduleId: fzp.moduleId,
+        fritzingVersion: fzp.fritzingVersion,
+      },
+      version: [fzp.version],
+      title: [fzp.title],
+      author: [fzp.author],
+      label: [fzp.label],
+      date: [fzp.date],
+      tags: [{tag: fzp.tags}],
+      // properties: fzp.properties,
+      description: [fzp.description],
+      views: [[{}]],
+      connectors: [[{}]],
+    },
   };
-  data.module.$ = {
-    moduleId: fzp.moduleId,
-    fritzingVersion: fzp.fritzingVersion,
-  };
-  delete data.moduleId;
-  delete data.fritzingVersion;
-
-  if (data.module) {
-    if (data.module.views) {
-      if (data.module.icon) {
-        delete data.module.views.icon.svg;
-      }
-      if (data.module.breadboard) {
-        delete data.module.views.breadboard.svg;
-      }
-      if (data.module.schematic) {
-        delete data.module.views.schematic.svg;
-      }
-      if (data.module.pcb) {
-        delete data.module.views.pcb.svg;
-      }
-    }
-  }
+  // let data = {
+  //   module: Object.assign({}, fzp),
+  // };
+  // data.module.$ = {
+  // };
+  // delete data.moduleId;
+  // delete data.fritzingVersion;
+  //
+  // data.module.tags =
+  //
+  // if (data.module) {
+  //   if (data.module.views) {
+  //     if (data.module.icon) {
+  //       delete data.module.views.icon.svg;
+  //     }
+  //     if (data.module.breadboard) {
+  //       delete data.module.views.breadboard.svg;
+  //     }
+  //     if (data.module.schematic) {
+  //       delete data.module.views.schematic.svg;
+  //     }
+  //     if (data.module.pcb) {
+  //       delete data.module.views.pcb.svg;
+  //     }
+  //   }
+  // }
   return builder.buildObject(data);
 }
 

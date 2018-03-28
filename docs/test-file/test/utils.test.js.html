@@ -89,6 +89,8 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
 
     expect(fzp.views.breadboard.image).toEqual(&apos;breadboard/LED-3mm-red-leg.svg&apos;);
     expect(fzp.views.breadboard.layerIds).toEqual([&apos;breadboard&apos;]);
+    expect(fzp.views.breadboard.flipHorizontal).toEqual(false);
+    expect(fzp.views.breadboard.flipVertical).toEqual(false);
 
     expect(fzp.views.pcb.image).toEqual(&apos;pcb/3mm_LED.svg&apos;);
     expect(fzp.views.pcb.layerIds).toEqual([&apos;copper0&apos;, &apos;copper1&apos;, &apos;keepout&apos;, &apos;outline&apos;, &apos;silkscreen&apos;, &apos;soldermask&apos;]);
@@ -101,7 +103,6 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
     expect(fzp.connectors[&apos;connector0&apos;].type).toEqual(&apos;male&apos;);
     expect(fzp.connectors[&apos;connector0&apos;].description).toEqual(&apos;cathode pin&apos;);
 
-    // console.log(&apos;-------------&apos;, fzp.connectors[&apos;connector0&apos;].views.breadboard);
     expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.layer).toEqual(&apos;breadboard&apos;);
     expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.svgId).toEqual(&apos;connector0pin&apos;);
     expect(fzp.connectors[&apos;connector0&apos;].views.breadboard.legId).toEqual(&apos;connector0leg&apos;);
@@ -114,6 +115,8 @@ test(&apos;Test parseFZP&apos;, (done) =&gt; {
     expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper0.svgId).toEqual(&apos;connector0pad&apos;);
     expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.layer).toEqual(&apos;copper1&apos;);
     expect(fzp.connectors[&apos;connector0&apos;].views.pcb.copper1.svgId).toEqual(&apos;connector0pad&apos;);
+
+    expect(fzp.buses).toEqual({});
 
     done();
   })
@@ -225,8 +228,94 @@ describe(&apos;marshalToXML&apos;, () =&gt; {
     loadFZP(FritzingAPICoreLEDFzp)
     .then((fzp) =&gt; {
       let xml = marshalToXML(fzp);
-      expect(xml).not.toEqual(&apos;&apos;);
-      // console.log(xml);
+      expect(xml).toEqual(`&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+&lt;module moduleId=&quot;3mmColorLEDModuleID&quot; fritzingVersion=&quot;0.1.beta.1396&quot;&gt;
+  &lt;version&gt;4&lt;/version&gt;
+  &lt;title&gt;Red LED - 3mm&lt;/title&gt;
+  &lt;author&gt;Stefan Hermann&lt;/author&gt;
+  &lt;label&gt;LED&lt;/label&gt;
+  &lt;date&gt;2008-10-10&lt;/date&gt;
+  &lt;tags&gt;
+    &lt;tag&gt;LED&lt;/tag&gt;
+    &lt;tag&gt;Red LED&lt;/tag&gt;
+    &lt;tag&gt;indicator&lt;/tag&gt;
+    &lt;tag&gt;fritzing core&lt;/tag&gt;
+  &lt;/tags&gt;
+  &lt;description&gt;A generic red LED (~1.8V)&lt;/description&gt;
+  &lt;views/&gt;
+  &lt;connectors/&gt;
+&lt;/module&gt;`);
+
+// TODO: finish the xml marshaller
+//
+// &lt;properties&gt;
+//   &lt;property name=&quot;package&quot;&gt;3 mm [THT]&lt;/property&gt;
+//   &lt;property name=&quot;family&quot;&gt;LED&lt;/property&gt;
+//   &lt;property name=&quot;color&quot; showInLabel=&quot;yes&quot;&gt;Red (633nm)&lt;/property&gt;
+//   &lt;property name=&quot;current&quot; showInLabel=&quot;yes&quot;&gt;&lt;/property&gt;
+//   &lt;property name=&quot;leg&quot; &gt;yes&lt;/property&gt;
+// &lt;/properties&gt;
+// &lt;description&gt;A generic red LED (~1.8V)&lt;/description&gt;
+// &lt;views&gt;
+//   &lt;iconView&gt;
+//     &lt;layers image=&quot;icon/LED-red-5mmicon.svg&quot;&gt;
+//       &lt;layer layerId=&quot;icon&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/iconView&gt;
+//   &lt;breadboardView fliphorizontal=&quot;true&quot; flipvertical=&quot;true&quot;&gt;
+//     &lt;layers image=&quot;breadboard/LED-3mm-red-leg.svg&quot;&gt;
+//       &lt;layer layerId=&quot;breadboard&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/breadboardView&gt;
+//   &lt;schematicView&gt;
+//     &lt;layers image=&quot;schematic/led.svg&quot;&gt;
+//       &lt;layer layerId=&quot;schematic&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/schematicView&gt;
+//   &lt;pcbView&gt;
+//     &lt;layers image=&quot;pcb/3mm_LED.svg&quot;&gt;
+//       &lt;layer layerId=&quot;copper0&quot;/&gt;
+//       &lt;layer layerId=&quot;copper1&quot;/&gt;
+//       &lt;layer layerId=&quot;keepout&quot;/&gt;
+//       &lt;layer layerId=&quot;outline&quot;/&gt;
+//       &lt;layer layerId=&quot;silkscreen&quot;/&gt;
+//       &lt;layer layerId=&quot;soldermask&quot;/&gt;
+//     &lt;/layers&gt;
+//   &lt;/pcbView&gt;
+// &lt;/views&gt;
+// &lt;connectors&gt;
+//   &lt;connector id=&quot;connector0&quot; name=&quot;cathode&quot; type=&quot;male&quot;&gt;
+//     &lt;description&gt;cathode pin&lt;/description&gt;
+//     &lt;views&gt;
+//       &lt;breadboardView&gt;
+//         &lt;p layer=&quot;breadboard&quot; svgId=&quot;connector0pin&quot;  legId=&quot;connector0leg&quot;/&gt;
+//       &lt;/breadboardView&gt;
+//       &lt;schematicView&gt;
+//         &lt;p layer=&quot;schematic&quot; svgId=&quot;connector0pin&quot; terminalId=&quot;connector0terminal&quot;/&gt;
+//       &lt;/schematicView&gt;
+//       &lt;pcbView&gt;
+//         &lt;p layer=&quot;copper0&quot; svgId=&quot;connector0pad&quot;/&gt;
+//         &lt;p layer=&quot;copper1&quot; svgId=&quot;connector0pad&quot;/&gt;
+//       &lt;/pcbView&gt;
+//     &lt;/views&gt;
+//   &lt;/connector&gt;
+//   &lt;connector id=&quot;connector1&quot; name=&quot;anode&quot; type=&quot;male&quot;&gt;
+//     &lt;description&gt;anode pin&lt;/description&gt;
+//     &lt;views&gt;
+//       &lt;breadboardView&gt;
+//         &lt;p layer=&quot;breadboard&quot; svgId=&quot;connector1pin&quot;  legId=&quot;connector1leg&quot;/&gt;
+//       &lt;/breadboardView&gt;
+//       &lt;schematicView&gt;
+//         &lt;p layer=&quot;schematic&quot; svgId=&quot;connector1pin&quot; terminalId=&quot;connector1terminal&quot;/&gt;
+//       &lt;/schematicView&gt;
+//       &lt;pcbView&gt;
+//         &lt;p layer=&quot;copper0&quot; svgId=&quot;connector1pad&quot;/&gt;
+//         &lt;p layer=&quot;copper1&quot; svgId=&quot;connector1pad&quot;/&gt;
+//       &lt;/pcbView&gt;
+//     &lt;/views&gt;
+//   &lt;/connector&gt;
+// &lt;/connectors&gt;
+
       done();
     })
     .catch((err) =&gt; {

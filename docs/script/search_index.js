@@ -271,55 +271,55 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber77",
+    "test-file/test/utils.test.js.html#lineNumber80",
     "loadFZP",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber78",
+    "test-file/test/utils.test.js.html#lineNumber81",
     "loadFZP Test loadFZP",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber107",
+    "test-file/test/utils.test.js.html#lineNumber110",
     "loadFZP Test loadFZP and all SVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber90",
+    "test-file/test/utils.test.js.html#lineNumber93",
     "loadFZP Test loadFZP and loadSVG",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber128",
+    "test-file/test/utils.test.js.html#lineNumber131",
     "loadFZPandSVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber129",
+    "test-file/test/utils.test.js.html#lineNumber132",
     "loadFZPandSVGs Test loadFZPandSVGs",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber145",
+    "test-file/test/utils.test.js.html#lineNumber148",
     "marshalToXML",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber146",
+    "test-file/test/utils.test.js.html#lineNumber149",
     "marshalToXML Test marshalToXML",
     "test"
   ],
   [
     "",
-    "test-file/test/utils.test.js.html#lineNumber176",
+    "test-file/test/utils.test.js.html#lineNumber179",
     "marshalToXML Test marshalToXML from loaded part",
     "test"
   ],

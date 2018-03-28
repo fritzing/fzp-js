@@ -2358,7 +2358,7 @@
     "__docId__": 136,
     "kind": "file",
     "name": "src/fzp/view.js",
-    "content": "'use strict';\n\nconst axios = require('axios');\n\n/**\n * FZPView class is used by the fzp breadboard, pcb and schematics view.\n *\n * @example\n * const {FZPView} = require('fzp-js')\n *\n * let view = new FZPView()\n */\nclass FZPView {\n  /**\n   * FZPView constructor\n   * @param {String} image\n   * @param {Array} ids\n   * @param {Boolean} flipH\n   * @param {Boolean} flipV\n   * @param {String} svg The raw svg string\n   */\n  constructor(image, ids, flipH, flipV, svg) {\n    /**\n     * The FZPView image\n     * @type {String}\n     */\n    this.image = image || null;\n\n    /**\n     * The FZPView layer id's\n     * @type {Array}\n     */\n    this.layerIds = ids || [];\n\n    /**\n     * FZPView flip horizontal\n     * @type {Boolean}\n     */\n    this.flipHorizontal = flipH || false;\n\n    /**\n     * FZPView flip vertical\n     * @type {Boolean}\n     */\n    this.flipVertical = flipV || false;\n\n    /**\n     * The FZPView svg data\n     * @type {String}\n     */\n    this.svg = svg || null;\n  }\n\n  /**\n   * Set the FZPView image source\n   * @param {String} src The image source\n   * @return {FZPView}\n   */\n  setImage(src) {\n    this.image = src;\n    return this;\n  }\n\n  /**\n   * Get the total number of FZPView layer id's\n   * @return {Number}\n   */\n  totalLayerId() {\n    return this.layerIds.length;\n  }\n\n  /**\n   * Add a layer id to the FZPView\n   * @param {String} name The layer name\n   * @return {FZPView}\n   */\n  setLayerId(name) {\n    if (!this.existLayerId(name)) {\n      this.layerIds.push(name);\n    }\n    return this;\n  }\n\n  /**\n   * Check if a layer id exist at the FZPView layerIds array\n   * @param {String} id\n   * @return {Boolean}\n   */\n  existLayerId(id) {\n    for (let i = 0; i < this.layerIds.length; i++) {\n      if (this.layerIds[i] === id) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n  /**\n   * Set the svg data\n   * @param {String} data The SVG data\n   * @return {FZPView}\n   */\n  setSVG(data) {\n    this.svg = data;\n    return this;\n  }\n\n  /**\n   * load the svg of the image path from the fritzing-parts api\n   * @param {String} baseurl the url to the fritzing-parts/core directory\n   * @return {Promise}\n   */\n  loadSVG(baseurl) {\n    let self = this;\n    return axios.get(baseurl+this.image, {responseType: 'xml'})\n    .then((res) => {\n      self.setSVG(res.data);\n      return res.data;\n    });\n  }\n}\n\nmodule.exports = FZPView;\n",
+    "content": "'use strict';\n\nconst axios = require('axios');\n\n/**\n * FZPView class is used by the fzp breadboard, pcb and schematics view.\n *\n * @example\n * const {FZPView} = require('fzp-js')\n *\n * let view = new FZPView()\n */\nclass FZPView {\n  /**\n   * FZPView constructor\n   * @param {String} image\n   * @param {Array} ids\n   * @param {Boolean} flipH\n   * @param {Boolean} flipV\n   * @param {String} svg The raw svg string\n   */\n  constructor(image, ids, flipH, flipV, svg) {\n    /**\n     * The FZPView image\n     * @type {String}\n     */\n    this.image = image || null;\n\n    /**\n     * The FZPView layer id's\n     * @type {Array}\n     */\n    this.layerIds = ids || [];\n\n    /**\n     * FZPView flip horizontal\n     * @type {Boolean}\n     */\n    this.flipHorizontal = (flipH == 'true') || (flipH == true) || false;\n\n\n    /**\n     * FZPView flip vertical\n     * @type {Boolean}\n     */\n    this.flipVertical = (flipV == 'true') || (flipV == true) || false;\n\n    /**\n     * The FZPView svg data\n     * @type {String}\n     */\n    this.svg = svg || null;\n  }\n\n  /**\n   * Set the FZPView image source\n   * @param {String} src The image source\n   * @return {FZPView}\n   */\n  setImage(src) {\n    this.image = src;\n    return this;\n  }\n\n  /**\n   * Get the total number of FZPView layer id's\n   * @return {Number}\n   */\n  totalLayerId() {\n    return this.layerIds.length;\n  }\n\n  /**\n   * Add a layer id to the FZPView\n   * @param {String} name The layer name\n   * @return {FZPView}\n   */\n  setLayerId(name) {\n    if (!this.existLayerId(name)) {\n      this.layerIds.push(name);\n    }\n    return this;\n  }\n\n  /**\n   * Check if a layer id exist at the FZPView layerIds array\n   * @param {String} id\n   * @return {Boolean}\n   */\n  existLayerId(id) {\n    for (let i = 0; i < this.layerIds.length; i++) {\n      if (this.layerIds[i] === id) {\n        return true;\n      }\n    }\n    return false;\n  }\n\n  /**\n   * Set the svg data\n   * @param {String} data The SVG data\n   * @return {FZPView}\n   */\n  setSVG(data) {\n    this.svg = data;\n    return this;\n  }\n\n  /**\n   * load the svg of the image path from the fritzing-parts api\n   * @param {String} baseurl the url to the fritzing-parts/core directory\n   * @return {Promise}\n   */\n  loadSVG(baseurl) {\n    let self = this;\n    return axios.get(baseurl+this.image, {responseType: 'xml'})\n    .then((res) => {\n      self.setSVG(res.data);\n      return res.data;\n    });\n  }\n}\n\nmodule.exports = FZPView;\n",
     "static": true,
     "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/fzp/view.js",
     "access": "public",
@@ -2535,7 +2535,7 @@
     "longname": "src/fzp/view.js~FZPView#flipVertical",
     "access": "public",
     "description": "FZPView flip vertical",
-    "lineNumber": 45,
+    "lineNumber": 46,
     "type": {
       "nullable": null,
       "types": [
@@ -2554,7 +2554,7 @@
     "longname": "src/fzp/view.js~FZPView#svg",
     "access": "public",
     "description": "The FZPView svg data",
-    "lineNumber": 51,
+    "lineNumber": 52,
     "type": {
       "nullable": null,
       "types": [
@@ -2575,7 +2575,7 @@
     "longname": "src/fzp/view.js~FZPView#setImage",
     "access": "public",
     "description": "Set the FZPView image source",
-    "lineNumber": 59,
+    "lineNumber": 60,
     "params": [
       {
         "nullable": null,
@@ -2608,7 +2608,7 @@
     "longname": "src/fzp/view.js~FZPView#totalLayerId",
     "access": "public",
     "description": "Get the total number of FZPView layer id's",
-    "lineNumber": 68,
+    "lineNumber": 69,
     "return": {
       "nullable": null,
       "types": [
@@ -2630,7 +2630,7 @@
     "longname": "src/fzp/view.js~FZPView#setLayerId",
     "access": "public",
     "description": "Add a layer id to the FZPView",
-    "lineNumber": 77,
+    "lineNumber": 78,
     "params": [
       {
         "nullable": null,
@@ -2663,7 +2663,7 @@
     "longname": "src/fzp/view.js~FZPView#existLayerId",
     "access": "public",
     "description": "Check if a layer id exist at the FZPView layerIds array",
-    "lineNumber": 89,
+    "lineNumber": 90,
     "params": [
       {
         "nullable": null,
@@ -2696,7 +2696,7 @@
     "longname": "src/fzp/view.js~FZPView#setSVG",
     "access": "public",
     "description": "Set the svg data",
-    "lineNumber": 103,
+    "lineNumber": 104,
     "params": [
       {
         "nullable": null,
@@ -2729,7 +2729,7 @@
     "longname": "src/fzp/view.js~FZPView#loadSVG",
     "access": "public",
     "description": "load the svg of the image path from the fritzing-parts api",
-    "lineNumber": 113,
+    "lineNumber": 114,
     "params": [
       {
         "nullable": null,
@@ -2913,7 +2913,7 @@
     "__docId__": 161,
     "kind": "file",
     "name": "src/utils.js",
-    "content": "'use strict';\n\nconst xml2js = require('xml2js');\nconst parseXml = xml2js.parseString;\nconst FZP = require('./fzp/fzp');\nconst FZPConnector = require('./fzp/connector');\nconst FZPConnectorView = require('./fzp/connector-view');\nconst {FritzingPartsAPI, FritzingPartsAPIClient} = require('fritzing-parts-api-client-js');\n\n/**\n * Load a FZP file from the given URL.\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz.fz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {Promise}\n */\nfunction loadFZP(src, url = FritzingPartsAPI) {\n  return FritzingPartsAPIClient.getFzp(src, url)\n  .then((fzp) => {\n    // let tmp = parseFZP(fzp);\n    // console.log(tmp);\n    return parseFZP(fzp);\n  });\n}\n\n/**\n * Load a FZP and all linked SVGs\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {FZP}\n */\nfunction loadFZPandSVGs(src, url = FritzingPartsAPI) {\n  return loadFZP(src, url).then((fzp) => {\n    return fzp.loadSVGs(`${url}/svg/core/`).then(() => {\n      return fzp;\n    });\n  });\n}\n\n/**\n * parse a fzp xml string\n * @param {String} data\n * @return {Promise}\n */\nfunction parseFZP(data) {\n  return new Promise(function(resolve, reject) {\n    let fzp = new FZP();\n    if (data) {\n      parseXml(data, (err, xml) => {\n        if (err) {\n          return reject(err);\n        }\n\n        fzp.moduleId = xml.module.$.moduleId;\n        fzp.fritzingVersion = xml.module.$.fritzingVersion;\n        if (xml.module.version) fzp.version = xml.module.version[0];\n        if (xml.module.title) fzp.title = xml.module.title[0];\n        if (xml.module.description) fzp.description = xml.module.description[0];\n        if (xml.module.author) fzp.author = xml.module.author[0];\n        if (xml.module.date) fzp.date = xml.module.date[0];\n        if (xml.module.url) fzp.url = xml.module.url[0];\n        if (xml.module.label) fzp.label = xml.module.label[0];\n        if (xml.module.tags) fzp.tags = xml.module.tags[0].tag;\n        if (xml.module.taxonomy) fzp.taxonomy = xml.module.taxonomy;\n        if (xml.module.language) fzp.language = xml.module.language;\n        if (xml.module.family) fzp.family = xml.module.family;\n        if (xml.module.variant) fzp.variant = xml.module.variant;\n        if (xml.module.properties) {\n          fzp.properties = parseProperties(xml.module.properties[0].property);\n        }\n\n        if (xml.module.views) {\n          if (xml.module.views[0].iconView) {\n            const iconViewLayer = xml.module.views[0].iconView[0].layers[0];\n            fzp.views.icon.setImage(iconViewLayer.$.image);\n            fzp.views.icon.setLayerId(iconViewLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].breadboardView) {\n            const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];\n            fzp.views.breadboard.setImage(breadboardLayer.$.image);\n            fzp.views.breadboard.setLayerId(breadboardLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].pcbView) {\n            const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];\n            fzp.views.pcb.setImage(pcbViewLayer.$.image);\n            for (let iLayer = 0; iLayer < pcbViewLayer.layer.length; iLayer++) {\n              fzp.views.pcb.setLayerId(pcbViewLayer.layer[iLayer].$.layerId);\n            }\n          }\n          if (xml.module.views[0].schematicView) {\n            const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];\n            fzp.views.schematic.setImage(schematicViewLayer.$.image);\n            fzp.views.schematic.setLayerId(schematicViewLayer.layer[0].$.layerId);\n          }\n        }\n\n        if (xml.module.connectors) {\n          if (xml.module.connectors[0].connector) {\n            for (let i = 0; i < xml.module.connectors[0].connector.length; i++) {\n              const connector = xml.module.connectors[0].connector[i];\n\n              // create the connector for the three views.\n              let c = new FZPConnector();\n              c.id = connector.$.id;\n              c.name = connector.$.name;\n              c.type = connector.$.type;\n              if (connector.description) {\n                c.description = connector.description[0];\n              }\n\n              if (connector.views[0].breadboardView) {\n                c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);\n              }\n\n              if (connector.views[0].schematicView) {\n                c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);\n              }\n\n              if (connector.views[0].pcbView) {\n                for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {\n                  switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {\n                    case 'copper0':\n                    c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                    case 'copper1':\n                    c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                  }\n                }\n              }\n\n              fzp.connectors[c.id] = c;\n            }\n          }\n        }\n\n        return resolve(fzp);\n      });\n    }\n  });\n}\n\n/**\n * Get the parsed xml object and map to a proper structure\n * @param {String} xml\n * @return {Object}\n */\nfunction parseProperties(xml) {\n  let data = {};\n  // if (xml) {\n  //   if (xml.length > 0) {\n      for (let i = 0; i < xml.length; i++) {\n        data[xml[i].$.name] = {\n          value: xml[i]._,\n          showInLabel: xml[i].$.showInLabel,\n        };\n      }\n  //   }\n  // }\n  return data;\n}\n\n/**\n * @param {Object} xml\n * @return {FZPConnectorView}\n */\nfunction parseConnectorView(xml) {\n  let conView = new FZPConnectorView();\n  conView.layer = xml.$.layer || null;\n  conView.svgId = xml.$.svgId || null;\n  conView.legId = xml.$.legId || null;\n  conView.terminalId = xml.$.terminalId || null;\n  return conView;\n}\n\n/**\n * Create a xml string of a FZP instance.\n *\n * @example\n * const {marshalToXML} = require('fzp-js')\n *\n * const xmlData = FZPUtils.marshalToXML(fzp)\n * console.log(xmlData)\n *\n * @param {FZP} fzp\n * @return {String}\n */\nfunction marshalToXML(fzp) {\n  let builder = new xml2js.Builder();\n  let data = {\n    module: Object.assign({}, fzp),\n  };\n  data.module.$ = {\n    moduleId: fzp.moduleId,\n    fritzingVersion: fzp.fritzingVersion,\n  };\n  delete data.moduleId;\n  delete data.fritzingVersion;\n\n  if (data.module) {\n    if (data.module.views) {\n      if (data.module.icon) {\n        delete data.module.views.icon.svg;\n      }\n      if (data.module.breadboard) {\n        delete data.module.views.breadboard.svg;\n      }\n      if (data.module.schematic) {\n        delete data.module.views.schematic.svg;\n      }\n      if (data.module.pcb) {\n        delete data.module.views.pcb.svg;\n      }\n    }\n  }\n  return builder.buildObject(data);\n}\n\nmodule.exports = {\n  loadFZP,\n  loadFZPandSVGs,\n  parseFZP,\n  parseProperties,\n  marshalToXML,\n};\n",
+    "content": "'use strict';\n\nconst xml2js = require('xml2js');\nconst parseXml = xml2js.parseString;\nconst FZP = require('./fzp/fzp');\nconst FZPConnector = require('./fzp/connector');\nconst FZPConnectorView = require('./fzp/connector-view');\nconst {FritzingPartsAPI, FritzingPartsAPIClient} = require('fritzing-parts-api-client-js');\n\n\n/**\n * Load a FZP file from the given URL.\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz.fz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {Promise}\n */\nfunction loadFZP(src, url = FritzingPartsAPI) {\n  return FritzingPartsAPIClient.getFzp(src, url)\n  .then((fzp) => {\n    // let tmp = parseFZP(fzp);\n    // console.log(tmp);\n    return parseFZP(fzp);\n  });\n}\n\n/**\n * Load a FZP and all linked SVGs\n *\n * @example\n * const {FZPUtils} = require('fzp-js')\n *\n * FZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')\n * .then((fzz) => {\n *   console.log(fzz)\n * })\n * .catch((err) => {\n *   console.error(err)\n * })\n *\n * @param {String} src\n * @param {String} url URL to the FZP file.\n * @return {FZP}\n */\nfunction loadFZPandSVGs(src, url = FritzingPartsAPI) {\n  return loadFZP(src, url).then((fzp) => {\n    return fzp.loadSVGs(`${url}/svg/core/`).then(() => {\n      return fzp;\n    });\n  });\n}\n\n/**\n * parse a fzp xml string\n * @param {String} data\n * @return {Promise}\n */\nfunction parseFZP(data) {\n  return new Promise(function(resolve, reject) {\n    let fzp = new FZP();\n    if (data) {\n      parseXml(data, (err, xml) => {\n        if (err) {\n          return reject(err);\n        }\n\n        console.log(xml.module.tags);\n        fzp.moduleId = xml.module.$.moduleId;\n        fzp.fritzingVersion = xml.module.$.fritzingVersion;\n        if (xml.module.version) fzp.version = xml.module.version[0];\n        if (xml.module.title) fzp.title = xml.module.title[0];\n        if (xml.module.description) fzp.description = xml.module.description[0];\n        if (xml.module.author) fzp.author = xml.module.author[0];\n        if (xml.module.date) fzp.date = xml.module.date[0];\n        if (xml.module.url) fzp.url = xml.module.url[0];\n        if (xml.module.label) fzp.label = xml.module.label[0];\n        if (xml.module.tags) fzp.tags = xml.module.tags[0].tag;\n        if (xml.module.taxonomy) fzp.taxonomy = xml.module.taxonomy;\n        if (xml.module.language) fzp.language = xml.module.language;\n        if (xml.module.family) fzp.family = xml.module.family;\n        if (xml.module.variant) fzp.variant = xml.module.variant;\n        if (xml.module.properties) {\n          fzp.properties = parseProperties(xml.module.properties[0].property);\n        }\n\n        if (xml.module.views) {\n          if (xml.module.views[0].iconView) {\n            const iconViewLayer = xml.module.views[0].iconView[0].layers[0];\n            fzp.views.icon.setImage(iconViewLayer.$.image);\n            fzp.views.icon.setLayerId(iconViewLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].breadboardView) {\n            const breadboardLayer = xml.module.views[0].breadboardView[0].layers[0];\n            fzp.views.breadboard.setImage(breadboardLayer.$.image);\n            fzp.views.breadboard.setLayerId(breadboardLayer.layer[0].$.layerId);\n          }\n          if (xml.module.views[0].pcbView) {\n            const pcbViewLayer = xml.module.views[0].pcbView[0].layers[0];\n            fzp.views.pcb.setImage(pcbViewLayer.$.image);\n            for (let iLayer = 0; iLayer < pcbViewLayer.layer.length; iLayer++) {\n              fzp.views.pcb.setLayerId(pcbViewLayer.layer[iLayer].$.layerId);\n            }\n          }\n          if (xml.module.views[0].schematicView) {\n            const schematicViewLayer = xml.module.views[0].schematicView[0].layers[0];\n            fzp.views.schematic.setImage(schematicViewLayer.$.image);\n            fzp.views.schematic.setLayerId(schematicViewLayer.layer[0].$.layerId);\n          }\n        }\n\n        if (xml.module.connectors) {\n          if (xml.module.connectors[0].connector) {\n            for (let i = 0; i < xml.module.connectors[0].connector.length; i++) {\n              const connector = xml.module.connectors[0].connector[i];\n\n              // create the connector for the three views.\n              let c = new FZPConnector();\n              c.id = connector.$.id;\n              c.name = connector.$.name;\n              c.type = connector.$.type;\n              if (connector.description) {\n                c.description = connector.description[0];\n              }\n\n              if (connector.views[0].breadboardView) {\n                c.views.breadboard = parseConnectorView(connector.views[0].breadboardView[0].p[0]);\n              }\n\n              if (connector.views[0].schematicView) {\n                c.views.schematic = parseConnectorView(connector.views[0].schematicView[0].p[0]);\n              }\n\n              if (connector.views[0].pcbView) {\n                for (let iPcb = 0; iPcb < connector.views[0].pcbView[0].p.length; iPcb++) {\n                  switch (connector.views[0].pcbView[0].p[iPcb].$.layer) {\n                    case 'copper0':\n                    c.views.pcb.copper0 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                    case 'copper1':\n                    c.views.pcb.copper1 = parseConnectorView(connector.views[0].pcbView[0].p[iPcb]);\n                    break;\n                  }\n                }\n              }\n\n              fzp.connectors[c.id] = c;\n            }\n          }\n        }\n\n        return resolve(fzp);\n      });\n    }\n  });\n}\n\n/**\n * Get the parsed xml object and map to a proper structure\n * @param {String} xml\n * @return {Object}\n */\nfunction parseProperties(xml) {\n  let data = {};\n  // if (xml) {\n  //   if (xml.length > 0) {\n      for (let i = 0; i < xml.length; i++) {\n        data[xml[i].$.name] = {\n          value: xml[i]._,\n          showInLabel: xml[i].$.showInLabel,\n        };\n      }\n  //   }\n  // }\n  return data;\n}\n\n/**\n * @param {Object} xml\n * @return {FZPConnectorView}\n */\nfunction parseConnectorView(xml) {\n  let conView = new FZPConnectorView();\n  conView.layer = xml.$.layer || null;\n  conView.svgId = xml.$.svgId || null;\n  conView.legId = xml.$.legId || null;\n  conView.terminalId = xml.$.terminalId || null;\n  return conView;\n}\n\n/**\n * Create a xml string of a FZP instance.\n *\n * @example\n * const {marshalToXML} = require('fzp-js')\n *\n * const xmlData = FZPUtils.marshalToXML(fzp)\n * console.log(xmlData)\n *\n * @param {FZP} fzp\n * @return {String}\n */\nfunction marshalToXML(fzp) {\n  let builder = new xml2js.Builder();\n  let data = {\n    module: {\n      $: {\n        moduleId: fzp.moduleId,\n        fritzingVersion: fzp.fritzingVersion,\n      },\n      version: [fzp.version],\n      title: [fzp.title],\n      author: [fzp.author],\n      label: [fzp.label],\n      date: [fzp.date],\n      tags: [{tag: fzp.tags}],\n      // properties: fzp.properties,\n      description: [fzp.description],\n      views: [[{}]],\n      connectors: [[{}]],\n    },\n  };\n  // let data = {\n  //   module: Object.assign({}, fzp),\n  // };\n  // data.module.$ = {\n  // };\n  // delete data.moduleId;\n  // delete data.fritzingVersion;\n  //\n  // data.module.tags =\n  //\n  // if (data.module) {\n  //   if (data.module.views) {\n  //     if (data.module.icon) {\n  //       delete data.module.views.icon.svg;\n  //     }\n  //     if (data.module.breadboard) {\n  //       delete data.module.views.breadboard.svg;\n  //     }\n  //     if (data.module.schematic) {\n  //       delete data.module.views.schematic.svg;\n  //     }\n  //     if (data.module.pcb) {\n  //       delete data.module.views.pcb.svg;\n  //     }\n  //   }\n  // }\n  return builder.buildObject(data);\n}\n\nmodule.exports = {\n  loadFZP,\n  loadFZPandSVGs,\n  parseFZP,\n  parseProperties,\n  marshalToXML,\n};\n",
     "static": true,
     "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/src/utils.js",
     "access": "public",
@@ -3063,7 +3063,7 @@
     "examples": [
       "const {FZPUtils} = require('fzp-js')\n\nFZPUtils.loadFZP('core/Arduino Nano3(fix).fzp')\n.then((fzz) => {\n  console.log(fzz.fz)\n})\n.catch((err) => {\n  console.error(err)\n})"
     ],
-    "lineNumber": 28,
+    "lineNumber": 29,
     "params": [
       {
         "nullable": null,
@@ -3112,7 +3112,7 @@
     "examples": [
       "const {FZPUtils} = require('fzp-js')\n\nFZPUtils.loadFZPandSVGs('core/Arduino Nano3(fix).fzp')\n.then((fzz) => {\n  console.log(fzz)\n})\n.catch((err) => {\n  console.error(err)\n})"
     ],
-    "lineNumber": 55,
+    "lineNumber": 56,
     "params": [
       {
         "nullable": null,
@@ -3158,7 +3158,7 @@
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
     "description": "parse a fzp xml string",
-    "lineNumber": 68,
+    "lineNumber": 69,
     "params": [
       {
         "nullable": null,
@@ -3194,7 +3194,7 @@
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
     "description": "Get the parsed xml object and map to a proper structure",
-    "lineNumber": 171,
+    "lineNumber": 173,
     "params": [
       {
         "nullable": null,
@@ -3230,7 +3230,7 @@
     "importPath": "fzp-js/src/utils.js",
     "importStyle": null,
     "description": "",
-    "lineNumber": 190,
+    "lineNumber": 192,
     "params": [
       {
         "nullable": null,
@@ -3269,7 +3269,7 @@
     "examples": [
       "const {marshalToXML} = require('fzp-js')\n\nconst xmlData = FZPUtils.marshalToXML(fzp)\nconsole.log(xmlData)"
     ],
-    "lineNumber": 211,
+    "lineNumber": 213,
     "params": [
       {
         "nullable": null,
@@ -3301,7 +3301,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"fzp-js\",\n  \"version\": \"0.1.1\",\n  \"description\": \"fritzing fzp javascript library\",\n  \"author\": \"Paul Vollmer\",\n  \"license\": \"MIT\",\n  \"keywords\": [\n    \"fritzing\",\n    \"fzp\"\n  ],\n  \"homepage\": \"https://github.com/paulvollmer/fzp-js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/paulvollmer/fzp-js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/paulvollmer/fzp-js/issues\"\n  },\n  \"main\": \"lib/index.js\",\n  \"scripts\": {\n    \"pretest\": \"make lint\",\n    \"test\": \"make test\",\n    \"precommit\": \"make lint\",\n    \"prepush\": \"make lint\"\n  },\n  \"jest\": {\n    \"verbose\": true,\n    \"collectCoverage\": true,\n    \"coverageReporters\": [\n      \"text\",\n      \"lcov\"\n    ]\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-plugin-add-header-comment\": \"^1.0.3\",\n    \"babel-plugin-minify-dead-code-elimination\": \"^0.3.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.18.0\",\n    \"eslint-config-google\": \"^0.9.1\",\n    \"fritzing-js\": \"github:fritzing/fritzing-js\",\n    \"husky\": \"^0.14.3\",\n    \"jest\": \"^22.0.6\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"fritzing-parts-api-client-js\": \"github:fritzing/fritzing-parts-api-client-js#v0.2.0\",\n    \"xml2js\": \"^0.4.19\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"fzp-js\",\n  \"version\": \"0.2.0\",\n  \"description\": \"fritzing fzp javascript library\",\n  \"author\": \"Paul Vollmer\",\n  \"license\": \"MIT\",\n  \"keywords\": [\n    \"fritzing\",\n    \"fzp\"\n  ],\n  \"homepage\": \"https://github.com/paulvollmer/fzp-js#readme\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/paulvollmer/fzp-js.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/paulvollmer/fzp-js/issues\"\n  },\n  \"main\": \"lib/index.js\",\n  \"scripts\": {\n    \"pretest\": \"make lint\",\n    \"test\": \"make test\",\n    \"precommit\": \"make lint\",\n    \"prepush\": \"make lint\"\n  },\n  \"jest\": {\n    \"verbose\": true,\n    \"collectCoverage\": true,\n    \"coverageReporters\": [\n      \"text\",\n      \"lcov\"\n    ]\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-plugin-add-header-comment\": \"^1.0.3\",\n    \"babel-plugin-minify-dead-code-elimination\": \"^0.3.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.18.0\",\n    \"eslint-config-google\": \"^0.9.1\",\n    \"fritzing-js\": \"github:fritzing/fritzing-js\",\n    \"husky\": \"^0.14.3\",\n    \"jest\": \"^22.0.6\"\n  },\n  \"dependencies\": {\n    \"axios\": \"^0.18.0\",\n    \"fritzing-parts-api-client-js\": \"github:fritzing/fritzing-parts-api-client-js#v0.2.0\",\n    \"xml2js\": \"^0.4.19\"\n  }\n}\n",
     "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/package.json",
     "name": "package.json",
     "static": true,
@@ -3804,7 +3804,7 @@
     "__docId__": 213,
     "kind": "testFile",
     "name": "test/utils.test.js",
-    "content": "'use strict';\n\nconst {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require('../src/utils');\nconst FZP = require('../src/fzp/fzp');\nconst fs = require('fs');\nconst {FritzingPartsAPI} = require('fritzing-parts-api-client-js');\nconst FritzingPartsAPISVGCore = FritzingPartsAPI+'/svg/core/';\n\nconst FritzingAPICoreLEDFzp = 'core/LED-generic-3mm.fzp';\n\ntest('Test parseFZP', (done) => {\n  const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');\n  parseFZP(data)\n  .then((fzp) => {\n    expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n    expect(fzp.fritzingVersion).toEqual('0.1.beta.1396');\n    expect(fzp.version).toEqual('4');\n    expect(fzp.author).toEqual('Stefan Hermann');\n    expect(fzp.title).toEqual('Red LED - 3mm');\n    expect(fzp.label).toEqual('LED');\n    expect(fzp.date).toEqual('2008-10-10');\n    expect(fzp.tags).toEqual(['LED', 'Red LED', 'indicator', 'fritzing core']);\n    expect(fzp.description).toEqual('A generic red LED (~1.8V)');\n    expect(fzp.url).toEqual('');\n    expect(fzp.taxonomy).toEqual('');\n    expect(fzp.language).toEqual('');\n    expect(fzp.family).toEqual('');\n    expect(fzp.variant).toEqual('');\n\n    expect(fzp.properties).toEqual({\n      package: {value: '3 mm [THT]'},\n      family: {value: 'LED'},\n      color: {value: 'Red (633nm)', showInLabel: 'yes'},\n      current: {showInLabel: 'yes'},\n      leg: {value: 'yes'},\n    });\n\n    // testing the views\n    expect(fzp.views.icon.image).toEqual('icon/LED-red-5mmicon.svg');\n    expect(fzp.views.icon.layerIds).toEqual(['icon']);\n\n    expect(fzp.views.breadboard.image).toEqual('breadboard/LED-3mm-red-leg.svg');\n    expect(fzp.views.breadboard.layerIds).toEqual(['breadboard']);\n\n    expect(fzp.views.pcb.image).toEqual('pcb/3mm_LED.svg');\n    expect(fzp.views.pcb.layerIds).toEqual(['copper0', 'copper1', 'keepout', 'outline', 'silkscreen', 'soldermask']);\n\n    expect(fzp.views.schematic.image).toEqual('schematic/led.svg');\n    expect(fzp.views.schematic.layerIds).toEqual(['schematic']);\n\n    // testing the connertor\n    expect(fzp.connectors['connector0'].name).toEqual('cathode');\n    expect(fzp.connectors['connector0'].type).toEqual('male');\n    expect(fzp.connectors['connector0'].description).toEqual('cathode pin');\n\n    // console.log('-------------', fzp.connectors['connector0'].views.breadboard);\n    expect(fzp.connectors['connector0'].views.breadboard.layer).toEqual('breadboard');\n    expect(fzp.connectors['connector0'].views.breadboard.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.breadboard.legId).toEqual('connector0leg');\n\n    expect(fzp.connectors['connector0'].views.schematic.layer).toEqual('schematic');\n    expect(fzp.connectors['connector0'].views.schematic.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.schematic.terminalId).toEqual('connector0terminal');\n\n    expect(fzp.connectors['connector0'].views.pcb.copper0.layer).toEqual('copper0');\n    expect(fzp.connectors['connector0'].views.pcb.copper0.svgId).toEqual('connector0pad');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.layer).toEqual('copper1');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.svgId).toEqual('connector0pad');\n\n    done();\n  })\n  .catch((err) => {\n    done(err);\n  });\n});\n\ndescribe('loadFZP', () => {\n  test('Test loadFZP', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n      // console.log(fzp);\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and loadSVG', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // load the svg of the breadboard view\n      fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)\n      .then(() => {\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and all SVGs', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      fzp.loadSVGs(FritzingPartsAPISVGCore)\n      .then(() => {\n        // check if the svg string is not empty\n        expect(fzp.views.breadboard.svg).not.toEqual('');\n        expect(fzp.views.pcb.svg).not.toEqual('');\n        expect(fzp.views.schematic.svg).not.toEqual('');\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n\ndescribe('loadFZPandSVGs', () => {\n  test('Test loadFZPandSVGs', (done) => {\n    loadFZPandSVGs(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // check if the svg string is not empty\n      expect(fzp.views.breadboard.svg).not.toEqual('');\n      expect(fzp.views.pcb.svg).not.toEqual('');\n      expect(fzp.views.schematic.svg).not.toEqual('');\n      done();\n    })\n    .catch((err) => {\n      console.log('ERROR', err);\n      done(err);\n    });\n  });\n});\n\ndescribe('marshalToXML', () => {\n  test('Test marshalToXML', () => {\n    let fzp = new FZP();\n    fzp.moduleId = 'test-moduleId';\n    fzp.fritzingVersion = 'test-fritzingVersion';\n    fzp.version = 'test-version';\n    fzp.title = 'test-title';\n    fzp.description = 'test-description';\n    fzp.author = 'test-author';\n    fzp.date = 'test-date';\n    fzp.url = 'test-url';\n    fzp.label = 'test-label';\n    fzp.taxonomy = 'test-taxonomy';\n    fzp.language = 'test-language';\n    fzp.family = 'test-family';\n    fzp.variant = 'test-variant';\n    fzp.properties = 'test-properties';\n    fzp.views.icon.image = 'test-views-icon-image';\n    fzp.views.breadboard.image = 'test-views-breadboard-image';\n    fzp.views.schematic.image = 'test-views-schematic-image';\n    fzp.views.pcb.image = 'test-views-pcb-image';\n    let xml = marshalToXML(fzp);\n\n    // check if the generated xml is not empty\n    expect(xml).not.toEqual('');\n    // console.log(xml);\n\n    // TODO: call 'parseFZP'\n    // TODO: check if data is equal to the fzp from above\n  });\n\n  test('Test marshalToXML from loaded part', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      let xml = marshalToXML(fzp);\n      expect(xml).not.toEqual('');\n      // console.log(xml);\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n",
+    "content": "'use strict';\n\nconst {parseFZP, loadFZP, loadFZPandSVGs, marshalToXML} = require('../src/utils');\nconst FZP = require('../src/fzp/fzp');\nconst fs = require('fs');\nconst {FritzingPartsAPI} = require('fritzing-parts-api-client-js');\nconst FritzingPartsAPISVGCore = FritzingPartsAPI+'/svg/core/';\n\nconst FritzingAPICoreLEDFzp = 'core/LED-generic-3mm.fzp';\n\ntest('Test parseFZP', (done) => {\n  const data = fs.readFileSync('./test/fixtures/LED-generic-3mm.fzp');\n  parseFZP(data)\n  .then((fzp) => {\n    expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n    expect(fzp.fritzingVersion).toEqual('0.1.beta.1396');\n    expect(fzp.version).toEqual('4');\n    expect(fzp.author).toEqual('Stefan Hermann');\n    expect(fzp.title).toEqual('Red LED - 3mm');\n    expect(fzp.label).toEqual('LED');\n    expect(fzp.date).toEqual('2008-10-10');\n    expect(fzp.tags).toEqual(['LED', 'Red LED', 'indicator', 'fritzing core']);\n    expect(fzp.description).toEqual('A generic red LED (~1.8V)');\n    expect(fzp.url).toEqual('');\n    expect(fzp.taxonomy).toEqual('');\n    expect(fzp.language).toEqual('');\n    expect(fzp.family).toEqual('');\n    expect(fzp.variant).toEqual('');\n\n    expect(fzp.properties).toEqual({\n      package: {value: '3 mm [THT]'},\n      family: {value: 'LED'},\n      color: {value: 'Red (633nm)', showInLabel: 'yes'},\n      current: {showInLabel: 'yes'},\n      leg: {value: 'yes'},\n    });\n\n    // testing the views\n    expect(fzp.views.icon.image).toEqual('icon/LED-red-5mmicon.svg');\n    expect(fzp.views.icon.layerIds).toEqual(['icon']);\n\n    expect(fzp.views.breadboard.image).toEqual('breadboard/LED-3mm-red-leg.svg');\n    expect(fzp.views.breadboard.layerIds).toEqual(['breadboard']);\n    expect(fzp.views.breadboard.flipHorizontal).toEqual(false);\n    expect(fzp.views.breadboard.flipVertical).toEqual(false);\n\n    expect(fzp.views.pcb.image).toEqual('pcb/3mm_LED.svg');\n    expect(fzp.views.pcb.layerIds).toEqual(['copper0', 'copper1', 'keepout', 'outline', 'silkscreen', 'soldermask']);\n\n    expect(fzp.views.schematic.image).toEqual('schematic/led.svg');\n    expect(fzp.views.schematic.layerIds).toEqual(['schematic']);\n\n    // testing the connertor\n    expect(fzp.connectors['connector0'].name).toEqual('cathode');\n    expect(fzp.connectors['connector0'].type).toEqual('male');\n    expect(fzp.connectors['connector0'].description).toEqual('cathode pin');\n\n    expect(fzp.connectors['connector0'].views.breadboard.layer).toEqual('breadboard');\n    expect(fzp.connectors['connector0'].views.breadboard.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.breadboard.legId).toEqual('connector0leg');\n\n    expect(fzp.connectors['connector0'].views.schematic.layer).toEqual('schematic');\n    expect(fzp.connectors['connector0'].views.schematic.svgId).toEqual('connector0pin');\n    expect(fzp.connectors['connector0'].views.schematic.terminalId).toEqual('connector0terminal');\n\n    expect(fzp.connectors['connector0'].views.pcb.copper0.layer).toEqual('copper0');\n    expect(fzp.connectors['connector0'].views.pcb.copper0.svgId).toEqual('connector0pad');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.layer).toEqual('copper1');\n    expect(fzp.connectors['connector0'].views.pcb.copper1.svgId).toEqual('connector0pad');\n\n    expect(fzp.buses).toEqual({});\n\n    done();\n  })\n  .catch((err) => {\n    done(err);\n  });\n});\n\ndescribe('loadFZP', () => {\n  test('Test loadFZP', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      expect(fzp.moduleId).toEqual('3mmColorLEDModuleID');\n      // console.log(fzp);\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and loadSVG', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // load the svg of the breadboard view\n      fzp.views.breadboard.loadSVG(FritzingPartsAPISVGCore)\n      .then(() => {\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n\n  test('Test loadFZP and all SVGs', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      fzp.loadSVGs(FritzingPartsAPISVGCore)\n      .then(() => {\n        // check if the svg string is not empty\n        expect(fzp.views.breadboard.svg).not.toEqual('');\n        expect(fzp.views.pcb.svg).not.toEqual('');\n        expect(fzp.views.schematic.svg).not.toEqual('');\n        done();\n      })\n      .catch((err) => {\n        done(err);\n      });\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n\ndescribe('loadFZPandSVGs', () => {\n  test('Test loadFZPandSVGs', (done) => {\n    loadFZPandSVGs(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      // check if the svg string is not empty\n      expect(fzp.views.breadboard.svg).not.toEqual('');\n      expect(fzp.views.pcb.svg).not.toEqual('');\n      expect(fzp.views.schematic.svg).not.toEqual('');\n      done();\n    })\n    .catch((err) => {\n      console.log('ERROR', err);\n      done(err);\n    });\n  });\n});\n\ndescribe('marshalToXML', () => {\n  test('Test marshalToXML', () => {\n    let fzp = new FZP();\n    fzp.moduleId = 'test-moduleId';\n    fzp.fritzingVersion = 'test-fritzingVersion';\n    fzp.version = 'test-version';\n    fzp.title = 'test-title';\n    fzp.description = 'test-description';\n    fzp.author = 'test-author';\n    fzp.date = 'test-date';\n    fzp.url = 'test-url';\n    fzp.label = 'test-label';\n    fzp.taxonomy = 'test-taxonomy';\n    fzp.language = 'test-language';\n    fzp.family = 'test-family';\n    fzp.variant = 'test-variant';\n    fzp.properties = 'test-properties';\n    fzp.views.icon.image = 'test-views-icon-image';\n    fzp.views.breadboard.image = 'test-views-breadboard-image';\n    fzp.views.schematic.image = 'test-views-schematic-image';\n    fzp.views.pcb.image = 'test-views-pcb-image';\n    let xml = marshalToXML(fzp);\n\n    // check if the generated xml is not empty\n    expect(xml).not.toEqual('');\n    // console.log(xml);\n\n    // TODO: call 'parseFZP'\n    // TODO: check if data is equal to the fzp from above\n  });\n\n  test('Test marshalToXML from loaded part', (done) => {\n    loadFZP(FritzingAPICoreLEDFzp)\n    .then((fzp) => {\n      let xml = marshalToXML(fzp);\n      expect(xml).toEqual(`<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<module moduleId=\"3mmColorLEDModuleID\" fritzingVersion=\"0.1.beta.1396\">\n  <version>4</version>\n  <title>Red LED - 3mm</title>\n  <author>Stefan Hermann</author>\n  <label>LED</label>\n  <date>2008-10-10</date>\n  <tags>\n    <tag>LED</tag>\n    <tag>Red LED</tag>\n    <tag>indicator</tag>\n    <tag>fritzing core</tag>\n  </tags>\n  <description>A generic red LED (~1.8V)</description>\n  <views/>\n  <connectors/>\n</module>`);\n\n// TODO: finish the xml marshaller\n//\n// <properties>\n//   <property name=\"package\">3 mm [THT]</property>\n//   <property name=\"family\">LED</property>\n//   <property name=\"color\" showInLabel=\"yes\">Red (633nm)</property>\n//   <property name=\"current\" showInLabel=\"yes\"></property>\n//   <property name=\"leg\" >yes</property>\n// </properties>\n// <description>A generic red LED (~1.8V)</description>\n// <views>\n//   <iconView>\n//     <layers image=\"icon/LED-red-5mmicon.svg\">\n//       <layer layerId=\"icon\"/>\n//     </layers>\n//   </iconView>\n//   <breadboardView fliphorizontal=\"true\" flipvertical=\"true\">\n//     <layers image=\"breadboard/LED-3mm-red-leg.svg\">\n//       <layer layerId=\"breadboard\"/>\n//     </layers>\n//   </breadboardView>\n//   <schematicView>\n//     <layers image=\"schematic/led.svg\">\n//       <layer layerId=\"schematic\"/>\n//     </layers>\n//   </schematicView>\n//   <pcbView>\n//     <layers image=\"pcb/3mm_LED.svg\">\n//       <layer layerId=\"copper0\"/>\n//       <layer layerId=\"copper1\"/>\n//       <layer layerId=\"keepout\"/>\n//       <layer layerId=\"outline\"/>\n//       <layer layerId=\"silkscreen\"/>\n//       <layer layerId=\"soldermask\"/>\n//     </layers>\n//   </pcbView>\n// </views>\n// <connectors>\n//   <connector id=\"connector0\" name=\"cathode\" type=\"male\">\n//     <description>cathode pin</description>\n//     <views>\n//       <breadboardView>\n//         <p layer=\"breadboard\" svgId=\"connector0pin\"  legId=\"connector0leg\"/>\n//       </breadboardView>\n//       <schematicView>\n//         <p layer=\"schematic\" svgId=\"connector0pin\" terminalId=\"connector0terminal\"/>\n//       </schematicView>\n//       <pcbView>\n//         <p layer=\"copper0\" svgId=\"connector0pad\"/>\n//         <p layer=\"copper1\" svgId=\"connector0pad\"/>\n//       </pcbView>\n//     </views>\n//   </connector>\n//   <connector id=\"connector1\" name=\"anode\" type=\"male\">\n//     <description>anode pin</description>\n//     <views>\n//       <breadboardView>\n//         <p layer=\"breadboard\" svgId=\"connector1pin\"  legId=\"connector1leg\"/>\n//       </breadboardView>\n//       <schematicView>\n//         <p layer=\"schematic\" svgId=\"connector1pin\" terminalId=\"connector1terminal\"/>\n//       </schematicView>\n//       <pcbView>\n//         <p layer=\"copper0\" svgId=\"connector1pad\"/>\n//         <p layer=\"copper1\" svgId=\"connector1pad\"/>\n//       </pcbView>\n//     </views>\n//   </connector>\n// </connectors>\n\n      done();\n    })\n    .catch((err) => {\n      done(err);\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/paul/code/src/github.com/fritzing/fzp-js/test/utils.test.js",
     "access": null,
@@ -3835,7 +3835,7 @@
     "longname": "test/utils.test.js~describe33",
     "access": null,
     "description": "loadFZP",
-    "lineNumber": 77
+    "lineNumber": 80
   },
   {
     "__docId__": 216,
@@ -3848,7 +3848,7 @@
     "longname": "test/utils.test.js~describe33.test34",
     "access": null,
     "description": "Test loadFZP",
-    "lineNumber": 78
+    "lineNumber": 81
   },
   {
     "__docId__": 217,
@@ -3861,7 +3861,7 @@
     "longname": "test/utils.test.js~describe33.test35",
     "access": null,
     "description": "Test loadFZP and loadSVG",
-    "lineNumber": 90
+    "lineNumber": 93
   },
   {
     "__docId__": 218,
@@ -3874,7 +3874,7 @@
     "longname": "test/utils.test.js~describe33.test36",
     "access": null,
     "description": "Test loadFZP and all SVGs",
-    "lineNumber": 107
+    "lineNumber": 110
   },
   {
     "__docId__": 219,
@@ -3887,7 +3887,7 @@
     "longname": "test/utils.test.js~describe37",
     "access": null,
     "description": "loadFZPandSVGs",
-    "lineNumber": 128
+    "lineNumber": 131
   },
   {
     "__docId__": 220,
@@ -3900,7 +3900,7 @@
     "longname": "test/utils.test.js~describe37.test38",
     "access": null,
     "description": "Test loadFZPandSVGs",
-    "lineNumber": 129
+    "lineNumber": 132
   },
   {
     "__docId__": 221,
@@ -3913,7 +3913,7 @@
     "longname": "test/utils.test.js~describe39",
     "access": null,
     "description": "marshalToXML",
-    "lineNumber": 145
+    "lineNumber": 148
   },
   {
     "__docId__": 222,
@@ -3926,7 +3926,7 @@
     "longname": "test/utils.test.js~describe39.test40",
     "access": null,
     "description": "Test marshalToXML",
-    "lineNumber": 146
+    "lineNumber": 149
   },
   {
     "__docId__": 223,
@@ -3939,6 +3939,6 @@
     "longname": "test/utils.test.js~describe39.test41",
     "access": null,
     "description": "Test marshalToXML from loaded part",
-    "lineNumber": 176
+    "lineNumber": 179
   }
 ]
