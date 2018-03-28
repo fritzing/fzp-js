@@ -1,4 +1,4 @@
-# fzp-js [![](https://fritzing.github.io/fzp-js/badge.svg)](https://fritzing.github.io/fzp-js/)
+# fzp-js [![Build Status](https://travis-ci.org/fritzing/fzp-js.svg?branch=master)](https://travis-ci.org/fritzing/fzp-js) [![](https://fritzing.github.io/fzp-js/badge.svg)](https://fritzing.github.io/fzp-js/)
 
 The fritzing fzp javascript library is for processing fritzing fzp xml data.  
 The Library can be used to load fzp's, parse and marshal to XML.
