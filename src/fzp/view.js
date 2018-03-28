@@ -36,13 +36,14 @@ class FZPView {
      * FZPView flip horizontal
      * @type {Boolean}
      */
-    this.flipHorizontal = flipH || false;
+    this.flipHorizontal = (flipH == 'true') || (flipH == true) || false;
+
 
     /**
      * FZPView flip vertical
      * @type {Boolean}
      */
-    this.flipVertical = flipV || false;
+    this.flipVertical = (flipV == 'true') || (flipV == true) || false;
 
     /**
      * The FZPView svg data
