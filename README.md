@@ -22,21 +22,14 @@ yarn add fritzing/fzp-js
 Let's start with a simple szenario and load a fzp file and all svg's.  
 Documentation of the library can be found [here](https://fritzing.github.io/fzp-js/)
 ```javascript
-const {FZPUtils} = require('fzp-js')
+const {FZPUtils} = require('fzp-js');
 
-const url = 'https://fritzing.github.io/fritzing-parts/core/LED-generic-3mm.fzp'
-FZPUtils.loadFZP(url).then((fzp) => {
+FZPUtils.loadFZP('core/LED-generic-3mm.fzp')
+.then((fzp) => {
   console.log('FZP', fzp);
-
-  // load the svg of the breadboard view
-  fzp.views.breadboard.loadSVG('foo').then((d) => {
-    console.log('SVG', d);
-  }).catch((err) => {
-    throw new Error(err)
-  })
-
-}).catch((e) => {
-  throw new Error(err)
+})
+.catch((err) => {
+  console.log('ERROR:', err);
 })
 ```
 
